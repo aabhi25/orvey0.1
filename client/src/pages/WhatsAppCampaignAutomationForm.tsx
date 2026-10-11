@@ -1,0 +1,1199 @@
+import { useEffect, useState } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useLocation, useSearch } from "wouter";
+import { AlertTriangle, ArrowLeft, BookOpen, Bot, CalendarClock, CheckCircle2, ChevronDown, FileSpreadsheet, KeyRound, Loader2, MapPin, Save, SlidersHorizontal, Sparkles, UserRound, XCircle } from "lucide-react";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import { extractAutomationSampleHeaders, type HeaderSource } from "@/lib/automationSampleHeaders";
+import { parseSpreadsheetDate } from "@shared/spreadsheetDate";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { useToast } from "@/hooks/use-toast";
+import { WEEKDAY_SHORT, describeScheduleDays, type CampaignAutomation } from "./WhatsAppCampaignAutomations";
+
+const COMMON_TIMEZONES = [
+  "Asia/Kolkata", "Asia/Dubai", "Asia/Singapore", "Asia/Jakarta", "Asia/Riyadh", "Asia/Karachi", "Asia/Dhaka",
+  "Asia/Kathmandu", "Asia/Colombo", "Europe/London", "Europe/Berlin", "Africa/Nairobi", "Africa/Lagos",
+  "America/New_York", "America/Chicago", "America/Los_Angeles", "Australia/Sydney", "UTC",
+];
+
+type Template = { id: string; name: string; status: string; paramCount: number; bodyText: string };
+type MappingSuggestion = { columns: string[]; confidence: "high" | "medium" | "low"; reason: string };
+type MappingSuggestions = {
+  phoneColumn: MappingSuggestion;
+  nameColumn: MappingSuggestion;
+  recordKeyColumn: MappingSuggestion;
+  dateColumn: MappingSuggestion;
+  statusColumn: MappingSuggestion;
+  templateParams: MappingSuggestion[];
+  warnings: string[];
+};
+type MappingResponse = { available: boolean; suggestions: MappingSuggestions };
+type CampaignBlueprint = {
+  id: string;
+  name: string;
+  campaignType?: "one_time" | "automation" | null;
+  status: string;
+  startedAt?: string | null;
+  templateId: string;
+  templateParams?: string[] | null;
+  aiEnabled: string;
+  aiAgentName?: string | null;
+  aiUseFaqs: string;
+  aiUseDocs: string;
+  aiUseProducts: string;
+  replyClassifications?: unknown[] | null;
+  recipientSourceType?: "ai_workbook" | "contact_groups" | null;
+  recipientWorkbookId?: string | null;
+  recipientWorkbookSheetId?: string | null;
+  groupIds?: string[] | null;
+  recipientPhoneColumn?: string | null;
+  recipientNameColumn?: string | null;
+  recipientRecordKeyColumn?: string | null;
+  recipientDateColumn?: string | null;
+  recipientDateOffsetDays?: number | null;
+  recipientStatusColumn?: string | null;
+  recipientEligibleStatuses?: string[] | null;
+  recipientAiAllowedFields?: string[] | null;
+};
+type ContactGroup = { id: string; name: string; contactCount: number };
+type GroupContact = { phone: string; name?: string | null; attributes?: Record<string, unknown> | null };
+type WorkbookSummary = {
+  id: string;
+  name: string;
+  status: string;
+  sourceCampaignId?: string | null;
+  latestVersion?: { versionNumber: number } | null;
+};
+type WorkbookDetail = {
+  id: string;
+  name: string;
+  currentVersion: {
+    id: string;
+    versionNumber: number;
+    sheets: {
+      id: string;
+      name: string;
+      columns: { key: string; label: string }[];
+      rows?: { values: Record<string, string | number | boolean | null> }[];
+    }[];
+  } | null;
+};
+
+const EMPTY = {
+  name: "",
+  sourceType: "campaign_blueprint" as "upload" | "ai_workbook" | "campaign_blueprint",
+  sourceCampaignId: "",
+  sourceWorkbookId: "",
+  sourceWorkbookSheetId: "",
+  sourceAudienceType: "ai_workbook" as "ai_workbook" | "contact_groups",
+  sourceGroupIds: [] as string[],
+  templateId: "",
+  templateParams: [] as string[],
+  phoneColumn: "phone",
+  nameColumn: "",
+  recordKeyColumn: "",
+  dateColumn: "",
+  dateOffsetDays: 0,
+  statusColumn: "",
+  eligibleStatusesText: "",
+  defaultCountryCode: "91",
+  sendMode: "review" as "review" | "automatic",
+  sendTime: "10:00",
+  timezone: "Asia/Kolkata",
+  enabled: true,
+  scheduleEnabled: false,
+  scheduleDays: [] as number[],
+};
+
+function Section({ title, icon, children }: { title: string; icon: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <Card>
+      <CardHeader className="pb-3">
+        <CardTitle className="text-base flex items-center gap-2">{icon}{title}</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">{children}</CardContent>
+    </Card>
+  );
+}
+
+function confidenceClass(confidence: MappingSuggestion["confidence"]) {
+  if (confidence === "high") return "bg-emerald-100 text-emerald-800";
+  if (confidence === "medium") return "bg-amber-100 text-amber-800";
+  return "bg-gray-100 text-gray-700";
+}
+
+function dateInTimezone(timezone: string): string {
+  try {
+    const parts = new Intl.DateTimeFormat("en-CA", {
+      timeZone: timezone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).formatToParts(new Date());
+    const value = (type: Intl.DateTimeFormatPartTypes) => parts.find(part => part.type === type)?.value || "";
+    return `${value("year")}-${value("month")}-${value("day")}`;
+  } catch {
+    return new Date().toISOString().slice(0, 10);
+  }
+}
+
+function addIsoDays(value: string, days: number): string {
+  const date = new Date(`${value}T12:00:00Z`);
+  date.setUTCDate(date.getUTCDate() + days);
+  return date.toISOString().slice(0, 10);
+}
+
+export default function WhatsAppCampaignAutomationForm({ id }: { id?: string }) {
+  const [, setLocation] = useLocation();
+  const search = useSearch();
+  const { toast } = useToast();
+  const [form, setForm] = useState(EMPTY);
+  const [sampleFileName, setSampleFileName] = useState("");
+  const [headerSources, setHeaderSources] = useState<HeaderSource[]>([]);
+  const [selectedSourceId, setSelectedSourceId] = useState("");
+  const [isExtractingHeaders, setIsExtractingHeaders] = useState(false);
+  const [isSuggestingMappings, setIsSuggestingMappings] = useState(false);
+  const [suggestions, setSuggestions] = useState<MappingResponse | null>(null);
+  const [touchedMappingFields, setTouchedMappingFields] = useState<Set<string>>(() => new Set());
+  const [advancedOpen, setAdvancedOpen] = useState(false);
+  const { data: templates = [] } = useQuery<Template[]>({ queryKey: ["/api/whatsapp/templates"] });
+  const { data: campaigns = [] } = useQuery<CampaignBlueprint[]>({ queryKey: ["/api/whatsapp/campaigns"] });
+  const { data: workbooks = [] } = useQuery<WorkbookSummary[]>({
+    queryKey: ["/api/whatsapp/ai-workbooks"],
+  });
+  const { data: contactGroups = [] } = useQuery<ContactGroup[]>({
+    queryKey: ["/api/whatsapp/contact-groups"],
+  });
+  const { data: selectedWorkbook, isLoading: isLoadingWorkbook } = useQuery<WorkbookDetail>({
+    queryKey: ["/api/whatsapp/ai-workbooks", form.sourceWorkbookId],
+    queryFn: () => {
+      return apiRequest("GET", `/api/whatsapp/ai-workbooks/${form.sourceWorkbookId}`);
+    },
+    enabled: form.sourceType !== "upload" && Boolean(form.sourceWorkbookId),
+  });
+  const { data: selectedGroupContacts = [], isLoading: isLoadingGroupContacts } = useQuery<GroupContact[]>({
+    queryKey: ["/api/whatsapp/contact-groups/automation-contacts", ...form.sourceGroupIds],
+    queryFn: async () => (await Promise.all(
+      form.sourceGroupIds.map(groupId =>
+        apiRequest<GroupContact[]>("GET", `/api/whatsapp/contact-groups/${groupId}/contacts?limit=5000`),
+      ),
+    )).flat(),
+    enabled: form.sourceType === "campaign_blueprint"
+      && form.sourceAudienceType === "contact_groups"
+      && form.sourceGroupIds.length > 0,
+  });
+  const { data: existing, isLoading } = useQuery<CampaignAutomation & Record<string, any>>({
+    queryKey: ["/api/whatsapp/campaign-automations", id],
+    queryFn: () => apiRequest("GET", `/api/whatsapp/campaign-automations/${id}`),
+    enabled: Boolean(id),
+  });
+
+  useEffect(() => {
+    if (!existing) return;
+    setForm({
+      name: existing.name,
+      sourceType: existing.sourceType === "campaign_blueprint"
+        ? "campaign_blueprint"
+        : existing.sourceType === "ai_workbook" ? "ai_workbook" : "upload",
+      sourceCampaignId: existing.sourceCampaignId || "",
+      sourceWorkbookId: existing.sourceWorkbookId || "",
+      sourceWorkbookSheetId: existing.sourceWorkbookSheetId || "",
+      sourceAudienceType: Array.isArray(existing.sourceGroupIds) && existing.sourceGroupIds.length
+        ? "contact_groups"
+        : "ai_workbook",
+      sourceGroupIds: Array.isArray(existing.sourceGroupIds) ? existing.sourceGroupIds : [],
+      templateId: existing.templateId,
+      templateParams: Array.isArray(existing.templateParams) ? existing.templateParams : [],
+      phoneColumn: existing.phoneColumn,
+      nameColumn: existing.nameColumn || "",
+      recordKeyColumn: existing.recordKeyColumn,
+      dateColumn: existing.dateColumn,
+      dateOffsetDays: existing.dateOffsetDays,
+      statusColumn: existing.statusColumn || "",
+      eligibleStatusesText: Array.isArray(existing.eligibleStatuses) ? existing.eligibleStatuses.join(", ") : "",
+      defaultCountryCode: existing.defaultCountryCode || "91",
+      sendMode: existing.sendMode,
+      sendTime: existing.sendTime,
+      timezone: existing.timezone,
+      enabled: existing.enabled,
+      scheduleEnabled: existing.scheduleEnabled === true,
+      scheduleDays: Array.isArray(existing.scheduleDays) ? existing.scheduleDays : [],
+    });
+    setTouchedMappingFields(new Set([
+      "phoneColumn", "nameColumn", "recordKeyColumn", "dateColumn", "statusColumn",
+      ...((existing.templateParams || []) as string[]).map((_, index) => `templateParam:${index}`),
+    ]));
+  }, [existing]);
+
+  useEffect(() => {
+    if (id || existing || campaigns.length === 0 || form.sourceCampaignId) return;
+    const sourceCampaignId = new URLSearchParams(search).get("campaign") || "";
+    const campaign = campaigns.find(candidate => candidate.id === sourceCampaignId);
+    if (!campaign) return;
+    setForm(current => ({
+      ...current,
+      name: current.name || `${campaign.name} automation`,
+      sourceCampaignId: campaign.id,
+      templateId: campaign.templateId,
+      templateParams: Array.isArray(campaign.templateParams) ? campaign.templateParams : [],
+      sourceWorkbookId: campaign.recipientWorkbookId || "",
+      sourceWorkbookSheetId: campaign.recipientWorkbookSheetId || "",
+      sourceAudienceType: campaign.recipientSourceType === "contact_groups" || (Array.isArray(campaign.groupIds) && campaign.groupIds.length) ? "contact_groups" : "ai_workbook",
+      sourceGroupIds: Array.isArray(campaign.groupIds) ? campaign.groupIds : [],
+      phoneColumn: campaign.recipientPhoneColumn || current.phoneColumn,
+      nameColumn: campaign.recipientNameColumn || "",
+      recordKeyColumn: campaign.recipientRecordKeyColumn || current.recordKeyColumn,
+      dateColumn: campaign.recipientDateColumn || current.dateColumn,
+      dateOffsetDays: campaign.recipientDateOffsetDays || 0,
+      statusColumn: campaign.recipientStatusColumn || "",
+      eligibleStatusesText: Array.isArray(campaign.recipientEligibleStatuses) ? campaign.recipientEligibleStatuses.join(", ") : "",
+    }));
+  }, [campaigns, existing, form.sourceCampaignId, id, search]);
+
+  const isBlueprintSource = form.sourceType === "campaign_blueprint";
+  const isLegacyAutomation = Boolean(existing && existing.sourceType !== "campaign_blueprint");
+  const eligibleBlueprints = campaigns.filter(campaign =>
+    campaign.status === "draft"
+    && !campaign.startedAt
+    && (campaign.campaignType === "automation" || campaign.id === existing?.sourceCampaignId),
+  );
+  const selectedBlueprint = campaigns.find(campaign => campaign.id === form.sourceCampaignId);
+  // New automation blueprints fully define recipients. Older blueprints intentionally retain
+  // the editor below so existing upload/direct-workbook setups remain editable.
+  const isCampaignOwnedBlueprint = isBlueprintSource
+    && ["ai_workbook", "contact_groups"].includes(selectedBlueprint?.recipientSourceType || "");
+  const blueprintAudienceType = selectedBlueprint?.recipientSourceType === "contact_groups" ? "contact_groups" : "ai_workbook";
+  const selectedTemplateId = isBlueprintSource ? selectedBlueprint?.templateId || "" : form.templateId;
+  const selectedTemplateParams = isBlueprintSource
+    ? Array.isArray(selectedBlueprint?.templateParams) ? selectedBlueprint.templateParams : []
+    : form.templateParams;
+  const selectedTemplate = templates.find(template => template.id === selectedTemplateId);
+  const approvedTemplates = templates.filter(template => template.status === "approved");
+  const update = <K extends keyof typeof form>(key: K, value: (typeof form)[K]) => setForm(current => ({ ...current, [key]: value }));
+  const updateMapping = <K extends keyof typeof form>(key: K, value: (typeof form)[K], touchedKey = String(key)) => {
+    setTouchedMappingFields(current => new Set(current).add(touchedKey));
+    update(key, value);
+  };
+  const selectedUploadSource = headerSources.find(source => source.id === selectedSourceId) || headerSources[0];
+  const selectedWorkbookSheet = selectedWorkbook?.currentVersion?.sheets.find(
+    sheet => sheet.id === form.sourceWorkbookSheetId,
+  ) || selectedWorkbook?.currentVersion?.sheets[0];
+  const groupSource: HeaderSource | undefined = isBlueprintSource && form.sourceAudienceType === "contact_groups" && selectedGroupContacts.length
+    ? {
+        id: "contact-groups",
+        label: `${form.sourceGroupIds.length} audience${form.sourceGroupIds.length === 1 ? "" : "s"}`,
+        columns: [
+          { key: "phone", label: "Phone" },
+          { key: "name", label: "Name" },
+          ...Array.from(new Set(selectedGroupContacts.flatMap(contact => Object.keys(contact.attributes || {}))))
+            .sort()
+            .map(key => ({ key: key.toLowerCase(), label: key })),
+        ],
+      }
+    : undefined;
+  const selectedSource: HeaderSource | undefined = form.sourceType !== "upload"
+    ? selectedWorkbookSheet
+      ? { id: selectedWorkbookSheet.id, label: selectedWorkbookSheet.name, columns: selectedWorkbookSheet.columns }
+      : groupSource
+    : selectedUploadSource;
+  const sampleColumnKeys = new Set(selectedSource?.columns.map(column => column.key.trim().toLowerCase()) || []);
+
+  const applySuggestion = (
+    field: "phoneColumn" | "nameColumn" | "recordKeyColumn" | "dateColumn" | "statusColumn" | "templateParams",
+    suggestion: MappingSuggestion,
+    templateIndex?: number,
+  ) => {
+    if (suggestion.columns.length === 0) return;
+    if (field === "templateParams") {
+      if (templateIndex === undefined) return;
+      const templateParams = [...form.templateParams];
+      templateParams[templateIndex] = `{{${suggestion.columns[0]}}}`;
+      updateMapping("templateParams", templateParams, `templateParam:${templateIndex}`);
+      return;
+    }
+    const value = field === "recordKeyColumn" ? suggestion.columns.join(", ") : suggestion.columns[0];
+    updateMapping(field, value);
+  };
+
+  const extractHeaders = async (file: File | undefined) => {
+    if (!file) return;
+    setIsExtractingHeaders(true);
+    setSuggestions(null);
+    try {
+      const sources = await extractAutomationSampleHeaders(file);
+      if (sources.length === 0) throw new Error("No usable header rows were found in that file");
+      setSampleFileName(file.name);
+      setHeaderSources(sources);
+      setSelectedSourceId(sources[0].id);
+      toast({
+        title: "Headers extracted",
+        description: sources.length === 1 ? `${sources[0].columns.length} columns detected.` : `${sources.length} candidate sheets or pages detected.`,
+      });
+    } catch (error: any) {
+      setSampleFileName("");
+      setHeaderSources([]);
+      setSelectedSourceId("");
+      toast({ title: "Could not read sample file", description: error.message, variant: "destructive" });
+    } finally {
+      setIsExtractingHeaders(false);
+    }
+  };
+
+  const requestSuggestions = async () => {
+    if (!selectedSource) {
+      toast({
+        title: form.sourceType !== "upload" ? "Audience columns unavailable" : "Upload a sample first",
+        description: isBlueprintSource
+          ? "Choose an AI Workbook or audiences with contacts in them."
+          : form.sourceType === "ai_workbook"
+          ? "Choose an AI Workbook so we can read its saved columns."
+          : "Choose an Excel, CSV, or table-based PDF sample so we can read its headers.",
+        variant: "destructive",
+      });
+      return;
+    }
+    setIsSuggestingMappings(true);
+    try {
+      const result = await apiRequest<MappingResponse>("POST", "/api/whatsapp/campaign-automations/suggest-mappings", {
+        columns: selectedSource.columns,
+        templateId: selectedTemplateId || undefined,
+      });
+      setSuggestions(result);
+      if (result.available) {
+        // A request for suggestions is deliberate, but it must still never replace
+        // anything an administrator has typed or a saved automation already uses.
+        const applyUntouched = (field: keyof MappingSuggestions, target: "phoneColumn" | "nameColumn" | "recordKeyColumn" | "dateColumn" | "statusColumn") => {
+          const suggestion = result.suggestions[field] as MappingSuggestion;
+          if (!touchedMappingFields.has(target) && suggestion.confidence !== "low") {
+            applySuggestion(target, suggestion);
+          }
+        };
+        applyUntouched("phoneColumn", "phoneColumn");
+        applyUntouched("nameColumn", "nameColumn");
+        applyUntouched("recordKeyColumn", "recordKeyColumn");
+        applyUntouched("dateColumn", "dateColumn");
+        applyUntouched("statusColumn", "statusColumn");
+        result.suggestions.templateParams.forEach((suggestion, index) => {
+          if (!touchedMappingFields.has(`templateParam:${index}`) && suggestion.confidence !== "low") {
+            applySuggestion("templateParams", suggestion, index);
+          }
+        });
+      }
+      toast({
+        title: result.available ? "Suggestions ready for review" : "Manual mapping is still available",
+        description: result.available
+          ? "High and medium confidence suggestions filled untouched fields. Review every field before saving."
+          : result.suggestions.warnings[0],
+      });
+    } catch (error: any) {
+      toast({ title: "Could not suggest mappings", description: error.message, variant: "destructive" });
+    } finally {
+      setIsSuggestingMappings(false);
+    }
+  };
+
+  const templateColumnReferences = selectedTemplateParams.flatMap((value, index) =>
+    Array.from(String(value || "").matchAll(/\{\{\s*([^{}]+?)\s*\}\}/g))
+      .map(match => ({ label: `Template field ${index + 1}`, column: match[1].trim().toLowerCase() }))
+      // These are recipient properties, not spreadsheet attributes.
+      .filter(reference => reference.column !== "name" && reference.column !== "phone"),
+  );
+  const templateUsesName = selectedTemplateParams.some(value =>
+    /\{\{\s*name\s*\}\}/i.test(String(value || "")),
+  );
+  const workbookSampleValues = selectedWorkbookSheet?.rows?.find(row =>
+    Object.values(row.values || {}).some(value => String(value ?? "").trim()),
+  )?.values;
+  const groupSampleContact = selectedGroupContacts.find(contact =>
+    Boolean(contact.phone || contact.name || Object.keys(contact.attributes || {}).length),
+  );
+  const sampleRow = workbookSampleValues
+    ? Object.fromEntries(Object.entries(workbookSampleValues).map(([key, value]) => [key.toLowerCase(), String(value ?? "").trim()]))
+    : groupSampleContact
+      ? {
+          phone: String(groupSampleContact.phone || "").trim(),
+          name: String(groupSampleContact.name || "").trim(),
+          ...Object.fromEntries(Object.entries(groupSampleContact.attributes || {}).map(([key, value]) => [key.toLowerCase(), String(value ?? "").trim()])),
+        }
+      : null;
+  const sampleValue = (column: string) => sampleRow?.[column.trim().toLowerCase()] || "";
+  const todayForAutomation = dateInTimezone(form.timezone);
+  const dateBeingChecked = addIsoDays(todayForAutomation, -(Number.isFinite(form.dateOffsetDays) ? form.dateOffsetDays : 0));
+  const allowedStatuses = form.eligibleStatusesText.split(",").map(value => value.trim().toLowerCase()).filter(Boolean);
+  const recordKeyColumns = form.recordKeyColumn.split(",").map(value => value.trim()).filter(Boolean);
+  const samplePhone = sampleValue(form.phoneColumn).replace(/\D/g, "");
+  const sampleRecordValues = recordKeyColumns.map(sampleValue);
+  const sampleDate = sampleValue(form.dateColumn);
+  const normalizedSampleDate = parseSpreadsheetDate(sampleDate);
+  const sampleStatus = sampleValue(form.statusColumn);
+  const sampleChecks = sampleRow
+    ? [
+        {
+          label: "Delivery number",
+          passed: samplePhone.length >= 8,
+          detail: sampleValue(form.phoneColumn) || `No value in ${form.phoneColumn || "the selected column"}`,
+        },
+        {
+          label: "Record ID",
+          passed: recordKeyColumns.length > 0 && sampleRecordValues.every(Boolean),
+          detail: sampleRecordValues.filter(Boolean).join(" · ") || "No complete record ID",
+        },
+        {
+          label: "Date rule",
+          passed: Boolean(normalizedSampleDate) && normalizedSampleDate === dateBeingChecked,
+          detail: sampleDate
+            ? normalizedSampleDate
+              ? `${sampleDate}${sampleDate === normalizedSampleDate ? "" : ` → ${normalizedSampleDate}`} ${normalizedSampleDate === dateBeingChecked ? "matches" : `does not match ${dateBeingChecked}`}`
+              : `${sampleDate} is not a recognized spreadsheet date`
+            : `No value in ${form.dateColumn || "the selected column"}`,
+        },
+        {
+          label: "Status rule",
+          passed: allowedStatuses.length === 0 || allowedStatuses.includes(sampleStatus.toLowerCase()),
+          detail: allowedStatuses.length === 0
+            ? "All statuses are allowed"
+            : sampleStatus
+              ? `${sampleStatus} ${allowedStatuses.includes(sampleStatus.toLowerCase()) ? "is allowed" : "is not allowed"}`
+              : `No value in ${form.statusColumn || "the selected column"}`,
+        },
+      ]
+    : [];
+  const sampleMatchesFilters = sampleChecks.length > 0 && sampleChecks.every(check => check.passed);
+  const sampleMappingIssues = selectedSource
+    ? [
+      ...(!form.phoneColumn.trim() ? ["Choose the column containing the WhatsApp delivery number"] : []),
+      ...(!form.recordKeyColumn.trim() ? ["Choose a record ID column (under Advanced settings) so the same invoice, order or appointment is never messaged twice"] : []),
+      ...(!form.dateColumn.trim() ? ["Choose the date column that decides when each row becomes eligible"] : []),
+      ...(templateUsesName && !form.nameColumn.trim() ? ['Name column is required because the template uses "{{name}}"'] : []),
+      ...(form.eligibleStatusesText.trim() && !form.statusColumn.trim() ? ["Choose a status column before limiting the automation to specific status values"] : []),
+      ...[
+      { label: "Phone", columns: [form.phoneColumn] },
+      { label: "Name", columns: form.nameColumn.trim() ? [form.nameColumn] : [] },
+      { label: "Record ID", columns: form.recordKeyColumn.split(",").map(value => value.trim()).filter(Boolean) },
+      { label: "Date", columns: [form.dateColumn] },
+      { label: "Status", columns: form.statusColumn.trim() ? [form.statusColumn] : [] },
+      ...templateColumnReferences.map(reference => ({ label: reference.label, columns: [reference.column] })),
+      ].flatMap(({ label, columns }) =>
+      columns.some(column => String(column).trim() && !sampleColumnKeys.has(String(column).trim().toLowerCase()))
+        ? [`${label} points to a column that is not available in this source`]
+        : [],
+      ),
+    ]
+    : [];
+  const suggestionRows: { label: string; suggestion: MappingSuggestion; onUse: () => void }[] = suggestions
+    ? [
+      { label: "Phone column", suggestion: suggestions.suggestions.phoneColumn, onUse: () => applySuggestion("phoneColumn", suggestions.suggestions.phoneColumn) },
+      { label: "Name column", suggestion: suggestions.suggestions.nameColumn, onUse: () => applySuggestion("nameColumn", suggestions.suggestions.nameColumn) },
+      { label: "Record ID", suggestion: suggestions.suggestions.recordKeyColumn, onUse: () => applySuggestion("recordKeyColumn", suggestions.suggestions.recordKeyColumn) },
+      { label: "Date column", suggestion: suggestions.suggestions.dateColumn, onUse: () => applySuggestion("dateColumn", suggestions.suggestions.dateColumn) },
+      { label: "Status column", suggestion: suggestions.suggestions.statusColumn, onUse: () => applySuggestion("statusColumn", suggestions.suggestions.statusColumn) },
+      ...(!isBlueprintSource ? suggestions.suggestions.templateParams.map((suggestion, index) => ({
+        label: `Template field ${index + 1}`,
+        suggestion,
+        onUse: () => applySuggestion("templateParams", suggestion, index),
+      })) : []),
+    ]
+    : [];
+
+  const saveMutation = useMutation({
+    mutationFn: () => {
+      const inherited = isCampaignOwnedBlueprint ? selectedBlueprint : undefined;
+      const inheritedAudienceType = inherited?.recipientSourceType === "contact_groups" ? "contact_groups" : "ai_workbook";
+      const effectiveWorkbookId = inherited ? inherited.recipientWorkbookId || "" : form.sourceWorkbookId;
+      const effectiveGroupIds = inherited && inheritedAudienceType === "contact_groups"
+        ? Array.isArray(inherited.groupIds) ? inherited.groupIds : []
+        : form.sourceGroupIds;
+      const payload = {
+        ...form,
+        sourceCampaignId: isBlueprintSource ? form.sourceCampaignId : null,
+        scheduleEnabled: form.sourceType !== "upload" && form.scheduleEnabled,
+        scheduleDays: form.scheduleDays,
+        sourceWorkbookId: form.sourceType === "ai_workbook"
+          || (isBlueprintSource && (inheritedAudienceType === "ai_workbook"))
+          ? effectiveWorkbookId || null
+          : null,
+        sourceGroupIds: isBlueprintSource && inheritedAudienceType === "contact_groups"
+          ? effectiveGroupIds
+          : [],
+        sourceWorkbookSheetId: form.sourceType !== "upload"
+          ? inherited?.recipientWorkbookSheetId || selectedWorkbookSheet?.id || form.sourceWorkbookSheetId || null
+          : null,
+        templateId: selectedTemplateId,
+        templateParams: selectedTemplateParams,
+        phoneColumn: inherited?.recipientPhoneColumn || form.phoneColumn,
+        nameColumn: form.nameColumn,
+        recordKeyColumn: form.recordKeyColumn,
+        dateColumn: form.dateColumn,
+        dateOffsetDays: form.dateOffsetDays,
+        statusColumn: form.statusColumn,
+        eligibleStatuses: form.eligibleStatusesText.split(",").map(value => value.trim()).filter(Boolean),
+      };
+      return id
+        ? apiRequest("PATCH", `/api/whatsapp/campaign-automations/${id}`, payload)
+        : apiRequest("POST", "/api/whatsapp/campaign-automations", payload);
+    },
+    onSuccess: (saved: CampaignAutomation) => {
+      queryClient.invalidateQueries({ queryKey: ["/api/whatsapp/campaign-automations"] });
+      toast({ title: id ? "Automation updated" : "Automation created" });
+      setLocation(`/admin/whatsapp-campaign-automations/${saved.id}`);
+    },
+    onError: (error: any) => toast({ title: "Could not save automation", description: error.message, variant: "destructive" }),
+  });
+
+  if (id && isLoading) return <div className="p-6 text-center text-gray-500">Loading automation...</div>;
+
+  return (
+    <div className="p-4 sm:p-6 max-w-3xl mx-auto space-y-5">
+      <Button variant="ghost" size="sm" onClick={() => setLocation(id ? `/admin/whatsapp-campaign-automations/${id}` : "/admin/whatsapp-campaign-automations")}>
+        <ArrowLeft className="h-4 w-4 mr-1" /> Back to automations
+      </Button>
+      <div>
+        <h1 className="text-2xl font-bold">{id ? "Edit WhatsApp automation" : "New WhatsApp automation"}</h1>
+        <p className="text-sm text-gray-600 mt-1">
+          Choose the campaign to repeat, then decide who is included each day and when it sends.
+        </p>
+      </div>
+
+      <Section title={isLegacyAutomation ? "Message" : "Campaign to repeat"} icon={<FileSpreadsheet className="h-4 w-4 text-emerald-600" />}>
+        <div className="space-y-2">
+          <Label htmlFor="automation-name">Automation name</Label>
+          <Input id="automation-name" value={form.name} onChange={event => update("name", event.target.value)} placeholder="Payment reminder — 3 days before due date" />
+        </div>
+        {isBlueprintSource ? (
+          <div className="space-y-3">
+            <div className="space-y-2">
+              <Label>Draft WhatsApp campaign</Label>
+              <Select
+                value={form.sourceCampaignId}
+                onValueChange={sourceCampaignId => {
+                  const campaign = campaigns.find(candidate => candidate.id === sourceCampaignId);
+                  setForm(current => ({
+                    ...current,
+                    sourceCampaignId,
+                    templateId: campaign?.templateId || "",
+                    templateParams: Array.isArray(campaign?.templateParams) ? campaign.templateParams : [],
+                    sourceAudienceType: campaign?.recipientSourceType === "contact_groups" || (Array.isArray(campaign?.groupIds) && campaign.groupIds.length) ? "contact_groups" : "ai_workbook",
+                    sourceWorkbookId: campaign?.recipientWorkbookId || "",
+                    sourceWorkbookSheetId: campaign?.recipientWorkbookSheetId || "",
+                    sourceGroupIds: Array.isArray(campaign?.groupIds) ? campaign.groupIds : [],
+                    phoneColumn: campaign?.recipientPhoneColumn || "",
+                    nameColumn: campaign?.recipientNameColumn || "",
+                    recordKeyColumn: campaign?.recipientRecordKeyColumn || "",
+                    dateColumn: campaign?.recipientDateColumn || "",
+                    dateOffsetDays: campaign?.recipientDateOffsetDays || 0,
+                    statusColumn: campaign?.recipientStatusColumn || "",
+                    eligibleStatusesText: Array.isArray(campaign?.recipientEligibleStatuses) ? campaign.recipientEligibleStatuses.join(", ") : "",
+                  }));
+                  setSuggestions(null);
+                }}
+              >
+                <SelectTrigger><SelectValue placeholder="Choose an unsent draft campaign" /></SelectTrigger>
+                <SelectContent>
+                  {eligibleBlueprints.map(campaign => (
+                    <SelectItem key={campaign.id} value={campaign.id}>{campaign.name}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {!eligibleBlueprints.length && (
+                <p className="text-xs text-amber-700">
+                  Create and save a WhatsApp campaign as a draft before creating its automation.
+                </p>
+              )}
+            </div>
+            {selectedBlueprint && (
+              <div className="rounded-md border bg-gray-50 p-3 space-y-2 text-sm">
+                <div className="flex items-center gap-2 font-medium">
+                  <Bot className="h-4 w-4 text-violet-600" />
+                  Campaign behavior inherited from {selectedBlueprint.name}
+                </div>
+                <p className="text-xs text-gray-600">
+                  Template: {selectedTemplate?.name || "Unavailable"} · AI replies: {selectedBlueprint.aiEnabled === "false" ? "Off" : `On (${selectedBlueprint.aiAgentName || "Sales Agent"})`} · Reply outcomes: {selectedBlueprint.replyClassifications?.length || 0}
+                </p>
+                <p className="text-xs text-gray-500">
+                  Template fields, persona, knowledge sources, AI limits, and reply outcomes come from this campaign and are copied into every run.
+                </p>
+              </div>
+            )}
+          </div>
+        ) : (
+          <>
+            <div className="space-y-2">
+              <Label>Approved WhatsApp template</Label>
+              <Select value={form.templateId} onValueChange={templateId => update("templateId", templateId)}>
+                <SelectTrigger><SelectValue placeholder="Choose an approved template" /></SelectTrigger>
+                <SelectContent>
+                  {approvedTemplates.map(template => <SelectItem key={template.id} value={template.id}>{template.name} · {template.paramCount} fields</SelectItem>)}
+                </SelectContent>
+              </Select>
+              {!approvedTemplates.length && <p className="text-xs text-amber-700">Add a template and wait for WhatsApp to approve it before creating an automation.</p>}
+              {selectedTemplate && <p className="text-xs text-gray-500">{selectedTemplate.bodyText}</p>}
+            </div>
+          </>
+        )}
+        {!isBlueprintSource && selectedTemplate && selectedTemplate.paramCount > 0 && (
+          <div className="rounded-md border bg-gray-50 p-3 space-y-2">
+            <p className="text-sm font-medium">Template field mappings</p>
+            <p className="text-xs text-gray-500">Use spreadsheet fields like <code>{"{{customer name}}"}</code> or static text. Field names must match the sheet headers after lowercasing.</p>
+            {Array.from({ length: selectedTemplate.paramCount }, (_, index) => (
+              <Input
+                key={index}
+                value={form.templateParams[index] || ""}
+                onChange={event => {
+                  const templateParams = [...form.templateParams];
+                  templateParams[index] = event.target.value;
+                  updateMapping("templateParams", templateParams, `templateParam:${index}`);
+                }}
+                placeholder={`Template field ${index + 1}, e.g. {{emi amount}}`}
+              />
+            ))}
+          </div>
+        )}
+      </Section>
+
+      {!isCampaignOwnedBlueprint && <Section title="Who to message" icon={<Sparkles className="h-4 w-4 text-violet-600" />}>
+        {isBlueprintSource ? (
+          <div className="space-y-4">
+            {!selectedBlueprint ? (
+              <p className="text-sm text-gray-500">Choose an automation campaign before selecting its audience.</p>
+            ) : (
+              <>
+                <div className="space-y-2">
+                  <Label>Audience source</Label>
+                  <Select
+                    value={form.sourceAudienceType}
+                    onValueChange={(sourceAudienceType: "ai_workbook" | "contact_groups") => {
+                      setForm(current => ({
+                        ...current,
+                        sourceAudienceType,
+                        sourceWorkbookId: sourceAudienceType === "ai_workbook" ? current.sourceWorkbookId : "",
+                        sourceWorkbookSheetId: "",
+                        sourceGroupIds: sourceAudienceType === "contact_groups" ? current.sourceGroupIds : [],
+                      }));
+                      setSuggestions(null);
+                    }}
+                  >
+                    <SelectTrigger><SelectValue /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="ai_workbook">AI Workbook</SelectItem>
+                      <SelectItem value="contact_groups">Audiences</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <p className="text-xs text-gray-500">
+                    The audience belongs to this automation, so the same campaign behavior can be reused with a different Workbook or fixed group selection.
+                  </p>
+                </div>
+
+                {form.sourceAudienceType === "ai_workbook" ? (
+                  <div className="space-y-2">
+                    <Label>AI Workbook</Label>
+                    <Select
+                      value={form.sourceWorkbookId}
+                      onValueChange={sourceWorkbookId => {
+                        setForm(current => ({ ...current, sourceWorkbookId, sourceWorkbookSheetId: "" }));
+                        setSuggestions(null);
+                      }}
+                    >
+                      <SelectTrigger><SelectValue placeholder="Choose an AI Workbook" /></SelectTrigger>
+                      <SelectContent>
+                        {workbooks.filter(workbook => workbook.status === "active").map(workbook => (
+                          <SelectItem key={workbook.id} value={workbook.id}>
+                            {workbook.name}{workbook.latestVersion ? ` · version ${workbook.latestVersion.versionNumber}` : ""}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    {!workbooks.some(workbook => workbook.status === "active") && (
+                      <p className="text-xs text-amber-700">Create an AI Workbook before using this audience source.</p>
+                    )}
+                    {isLoadingWorkbook && <p className="flex items-center gap-2 text-sm text-gray-600"><Loader2 className="h-4 w-4 animate-spin" /> Loading workbook columns…</p>}
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <Label>Audiences</Label>
+                    <div className="max-h-56 overflow-y-auto rounded-md border divide-y">
+                      {contactGroups.map(group => {
+                        const checked = form.sourceGroupIds.includes(group.id);
+                        return (
+                          <label key={group.id} className="flex items-center gap-3 px-3 py-2.5 text-sm hover:bg-gray-50 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={checked}
+                              disabled={group.contactCount <= 0}
+                              onChange={() => {
+                                update("sourceGroupIds", checked
+                                  ? form.sourceGroupIds.filter(groupId => groupId !== group.id)
+                                  : [...form.sourceGroupIds, group.id]);
+                                setSuggestions(null);
+                              }}
+                            />
+                            <span className="flex-1">{group.name}</span>
+                            <span className="text-xs text-gray-500">{group.contactCount} contacts</span>
+                          </label>
+                        );
+                      })}
+                      {!contactGroups.length && <p className="p-3 text-sm text-amber-700">Create an audience first (Campaigns → Audiences).</p>}
+                    </div>
+                    {isLoadingGroupContacts && <p className="flex items-center gap-2 text-sm text-gray-600"><Loader2 className="h-4 w-4 animate-spin" /> Loading contact fields…</p>}
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        ) : (
+          <>
+        <div className="space-y-2">
+          <Label>Data source</Label>
+          <Select
+            value={form.sourceType}
+            onValueChange={(sourceType: "upload" | "ai_workbook") => {
+              update("sourceType", sourceType);
+              setSuggestions(null);
+            }}
+          >
+            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectContent>
+              <SelectItem value="ai_workbook">AI Workbook (recommended)</SelectItem>
+              <SelectItem value="upload">Upload a spreadsheet for each run</SelectItem>
+            </SelectContent>
+          </Select>
+          <p className="text-xs text-gray-500">
+            {form.sourceType === "ai_workbook"
+              ? "Each run reads the workbook’s latest saved version. Existing runs keep the version they used."
+              : "Keep uploading a refreshed spreadsheet when you want to create a run."}
+          </p>
+        </div>
+
+        {form.sourceType === "ai_workbook" ? (
+          <div className="space-y-2">
+            <Label>AI Workbook</Label>
+            <Select
+              value={form.sourceWorkbookId}
+              onValueChange={sourceWorkbookId => {
+                setForm(current => ({ ...current, sourceWorkbookId, sourceWorkbookSheetId: "" }));
+                setSuggestions(null);
+              }}
+            >
+              <SelectTrigger><SelectValue placeholder="Choose an AI Workbook" /></SelectTrigger>
+              <SelectContent>
+                {workbooks.map(workbook => (
+                  <SelectItem key={workbook.id} value={workbook.id}>
+                    {workbook.name}{workbook.latestVersion ? ` · version ${workbook.latestVersion.versionNumber}` : ""}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            {!workbooks.length && (
+              <p className="text-xs text-amber-700">Create an AI Workbook before using the recommended automation source.</p>
+            )}
+            {isLoadingWorkbook && <p className="flex items-center gap-2 text-sm text-gray-600"><Loader2 className="h-4 w-4 animate-spin" /> Loading workbook columns…</p>}
+          </div>
+        ) : (
+          <div className="space-y-2">
+            <Label htmlFor="automation-sample-file">Representative file</Label>
+            <Input
+              id="automation-sample-file"
+              type="file"
+              accept=".xlsx,.xls,.xlsm,.csv,.tsv,.txt,.pdf,application/pdf"
+              disabled={isExtractingHeaders}
+              onChange={event => {
+                void extractHeaders(event.target.files?.[0]);
+                event.currentTarget.value = "";
+              }}
+            />
+            <p className="text-xs text-gray-500">
+              Upload Excel, CSV, or a table-based PDF (5 MB max). It is read locally in your browser to find headers, then discarded. Its rows are never sent to AI or saved.
+            </p>
+            {isExtractingHeaders && <p className="flex items-center gap-2 text-sm text-gray-600"><Loader2 className="h-4 w-4 animate-spin" /> Reading headers…</p>}
+          </div>
+        )}
+          </>
+        )}
+
+        {selectedSource && (
+          <div className="space-y-3 rounded-md border bg-gray-50 p-3">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-sm font-medium flex items-center gap-1.5">
+                  {form.sourceType !== "upload" && <BookOpen className="h-4 w-4 text-emerald-700" />}
+                  {form.sourceType !== "upload"
+                    ? selectedWorkbook?.name || `${form.sourceGroupIds.length} audience${form.sourceGroupIds.length === 1 ? "" : "s"}`
+                    : sampleFileName}
+                </p>
+                <p className="text-xs text-gray-500">
+                  {form.sourceType !== "upload"
+                    ? selectedWorkbook
+                      ? `${selectedSource.label} · ${selectedWorkbook.currentVersion?.versionNumber ? `version ${selectedWorkbook.currentVersion.versionNumber}` : "latest saved version"}`
+                      : `${selectedSource.label} · current contacts are snapshotted for each run`
+                    : "Choose the sheet or PDF page whose header row should be used for this automation."}
+                </p>
+              </div>
+              {form.sourceType === "upload" && headerSources.length > 1 && (
+                <Select value={selectedSource.id} onValueChange={value => { setSelectedSourceId(value); setSuggestions(null); }}>
+                  <SelectTrigger className="w-full sm:w-56"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    {headerSources.map(source => <SelectItem key={source.id} value={source.id}>{source.label}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              )}
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {selectedSource.columns.map(column => (
+                <span key={column.key} className="rounded-full border bg-white px-2 py-0.5 text-xs text-gray-700" title={column.label}>
+                  {column.key}
+                </span>
+              ))}
+            </div>
+            <Button type="button" variant="secondary" onClick={() => void requestSuggestions()} disabled={isSuggestingMappings}>
+              {isSuggestingMappings ? <Loader2 className="h-4 w-4 mr-1 animate-spin" /> : <Sparkles className="h-4 w-4 mr-1" />}
+              {isSuggestingMappings ? "Suggesting…" : "Suggest mappings with AI"}
+            </Button>
+          </div>
+        )}
+
+        {suggestions && (
+          <div className="space-y-3 rounded-md border border-violet-200 bg-violet-50/40 p-3">
+            <div className="flex items-start gap-2">
+              <Sparkles className="mt-0.5 h-4 w-4 text-violet-700" />
+              <div>
+                <p className="text-sm font-medium text-violet-950">Review AI mapping suggestions</p>
+                <p className="text-xs text-violet-900/70">Suggestions are limited to headers extracted above. Use a suggestion only after checking it matches your data.</p>
+              </div>
+            </div>
+            {suggestionRows.map(({ label, suggestion, onUse }) => (
+              <div key={label} className="flex flex-col gap-1 rounded border bg-white px-3 py-2 sm:flex-row sm:items-center sm:justify-between">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium">{label}</span>
+                    <span className={`rounded-full px-1.5 py-0.5 text-[10px] font-medium uppercase ${confidenceClass(suggestion.confidence)}`}>
+                      {suggestion.confidence}
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-600">
+                    {suggestion.columns.length ? suggestion.columns.join(", ") : "No safe match"} · {suggestion.reason}
+                  </p>
+                </div>
+                <Button type="button" size="sm" variant="outline" onClick={onUse} disabled={suggestion.columns.length === 0}>Use</Button>
+              </div>
+            ))}
+            {suggestions.suggestions.warnings.map(warning => (
+              <p key={warning} className="flex gap-2 text-xs text-amber-800"><AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0" />{warning}</p>
+            ))}
+          </div>
+        )}
+      </Section>}
+
+      {isCampaignOwnedBlueprint && <Section title="Campaign audience" icon={<BookOpen className="h-4 w-4 text-violet-600" />}>
+        <div className="rounded-md border bg-gray-50 p-3 space-y-1 text-sm">
+          <p className="font-medium">{blueprintAudienceType === "ai_workbook" ? "AI Workbook" : "Audiences"} · set in campaign {selectedBlueprint?.name}</p>
+          {blueprintAudienceType === "ai_workbook" ? (
+            <p className="text-xs text-gray-600">
+              Workbook: {workbooks.find(workbook => workbook.id === selectedBlueprint?.recipientWorkbookId)?.name || "Unavailable"} ·
+              mobile number: {selectedBlueprint?.recipientPhoneColumn || "—"}
+            </p>
+          ) : <p className="text-xs text-gray-600">{selectedBlueprint?.groupIds?.length || 0} audience(s)</p>}
+          <p className="text-xs text-gray-500">The campaign decides who can be messaged, the message and what the AI may see. Below you decide who is due each day.</p>
+        </div>
+        {selectedSource && (
+          <div className="space-y-3 rounded-md border bg-gray-50 p-3">
+            <div className="flex flex-wrap gap-1.5">
+              {selectedSource.columns.map(column => (
+                <span key={column.key} className="rounded-full border bg-white px-2 py-0.5 text-xs text-gray-700" title={column.label}>
+                  {column.key}
+                </span>
+              ))}
+            </div>
+            <Button type="button" variant="secondary" onClick={() => void requestSuggestions()} disabled={isSuggestingMappings}>
+              {isSuggestingMappings ? <Loader2 className="h-4 w-4 mr-1 animate-spin" /> : <Sparkles className="h-4 w-4 mr-1" />}
+              {isSuggestingMappings ? "Suggesting…" : "Suggest automation mappings with AI"}
+            </Button>
+          </div>
+        )}
+      </Section>}
+
+      {(!isBlueprintSource || selectedBlueprint) && <Section title="Who gets included in each run" icon={<SlidersHorizontal className="h-4 w-4 text-emerald-600" />}>
+        <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-4">
+          <p className="font-medium text-emerald-950">How this automation decides</p>
+          <p className="mt-1 text-sm text-emerald-900">
+            On each run, Chroney checks every row in this order:
+          </p>
+          <ol className="mt-3 grid gap-2 text-sm text-emerald-950 sm:grid-cols-2">
+            <li className="flex gap-2"><span className="font-semibold">1.</span><span>The row has a mobile number and a record ID.</span></li>
+            <li className="flex gap-2"><span className="font-semibold">2.</span><span>Its mapped date matches today after applying the offset.</span></li>
+            <li className="flex gap-2"><span className="font-semibold">3.</span><span>Its status is allowed, if you add a status filter.</span></li>
+            <li className="flex gap-2"><span className="font-semibold">4.</span><span>That record has not already been messaged by this automation.</span></li>
+          </ol>
+        </div>
+
+        <div className="rounded-lg border p-4 space-y-4">
+          <div className="flex gap-3">
+            <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-violet-600" />
+            <div>
+              <h3 className="font-medium">Where to send and how to personalize</h3>
+              <p className="text-xs text-gray-500">These fields identify the WhatsApp destination and the customer name used by the message template.</p>
+            </div>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label>Mobile number column</Label>
+              <Input list="automation-sample-columns" value={form.phoneColumn} disabled={isCampaignOwnedBlueprint} onChange={event => updateMapping("phoneColumn", event.target.value)} />
+              <p className="text-xs text-gray-500">{isCampaignOwnedBlueprint ? "Inherited from campaign setup. This is the WhatsApp delivery destination." : "The column containing each recipient's WhatsApp number."}</p>
+            </div>
+            <div className="space-y-2">
+              <Label>Name column {templateUsesName ? <span className="text-red-600">(required by template)</span> : "(optional)"}</Label>
+              <Input list="automation-sample-columns" value={form.nameColumn} onChange={event => updateMapping("nameColumn", event.target.value)} />
+              <p className="text-xs text-gray-500">{templateUsesName ? 'Required because the campaign message uses "{{name}}".' : "Used only for message personalization; it does not decide eligibility."}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg border p-4 space-y-4">
+          <div className="flex gap-3">
+            <CalendarClock className="mt-0.5 h-5 w-5 shrink-0 text-blue-600" />
+            <div>
+              <h3 className="font-medium">When should a row qualify?</h3>
+              <p className="text-xs text-gray-500">A row qualifies when its date plus the offset equals today in the automation timezone.</p>
+            </div>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label>Date column</Label>
+              <Input list="automation-sample-columns" value={form.dateColumn} onChange={event => updateMapping("dateColumn", event.target.value)} placeholder="e.g. due_date" />
+              <p className="text-xs text-gray-500">YYYY-MM-DD is recommended. Day-first dates and Excel date cells are normalized before matching.</p>
+            </div>
+            <div className="space-y-2">
+              <Label>Send relative to that date</Label>
+              <Input type="number" min={-366} max={366} value={form.dateOffsetDays} onChange={event => update("dateOffsetDays", Number(event.target.value))} />
+              <div className="grid grid-cols-3 gap-1 text-center text-[11px]">
+                <span className={`rounded border px-1.5 py-1 ${form.dateOffsetDays < 0 ? "border-blue-300 bg-blue-50 text-blue-800" : "text-gray-500"}`}>−3 = before</span>
+                <span className={`rounded border px-1.5 py-1 ${form.dateOffsetDays === 0 ? "border-blue-300 bg-blue-50 text-blue-800" : "text-gray-500"}`}>0 = on date</span>
+                <span className={`rounded border px-1.5 py-1 ${form.dateOffsetDays > 0 ? "border-blue-300 bg-blue-50 text-blue-800" : "text-gray-500"}`}>+1 = after</span>
+              </div>
+            </div>
+          </div>
+          <div className="rounded-md bg-blue-50 px-3 py-2 text-sm text-blue-950">
+            <span className="font-medium">For today, {todayForAutomation}:</span>{" "}
+            this run checks for <span className="font-mono font-semibold">{dateBeingChecked}</span> in{" "}
+            <span className="font-mono font-semibold">{form.dateColumn || "your date column"}</span>.
+            {form.dateOffsetDays < 0 && ` That is ${Math.abs(form.dateOffsetDays)} day${Math.abs(form.dateOffsetDays) === 1 ? "" : "s"} before the row's date.`}
+            {form.dateOffsetDays > 0 && ` That is ${form.dateOffsetDays} day${form.dateOffsetDays === 1 ? "" : "s"} after the row's date.`}
+          </div>
+        </div>
+
+        <div className="rounded-lg border p-4 space-y-4">
+          <div className="flex gap-3">
+            <UserRound className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
+            <div>
+              <h3 className="font-medium">Should status limit the matching rows?</h3>
+              <p className="text-xs text-gray-500">Use this only when records should send in selected states, such as pending or overdue.</p>
+            </div>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label>Status column (optional)</Label>
+              <Input list="automation-sample-columns" value={form.statusColumn} onChange={event => updateMapping("statusColumn", event.target.value)} placeholder="e.g. payment_status" />
+              <p className="text-xs text-gray-500">The column containing the current state of each record.</p>
+            </div>
+            <div className="space-y-2">
+              <Label>Statuses that are allowed to send</Label>
+              <Input value={form.eligibleStatusesText} onChange={event => update("eligibleStatusesText", event.target.value)} placeholder="pending, overdue" />
+              <p className="text-xs text-gray-500">Comma-separated; leading/trailing spaces and letter case are ignored, but values must otherwise match exactly. Leave blank to allow every status.</p>
+            </div>
+          </div>
+        </div>
+
+        <Collapsible open={advancedOpen || !form.recordKeyColumn.trim()} onOpenChange={setAdvancedOpen}>
+          <div className="rounded-lg border">
+            <CollapsibleTrigger asChild>
+              <button type="button" className="w-full flex items-center justify-between gap-2 px-4 py-3 text-left" data-testid="button-automation-advanced">
+                <span>
+                  <span className="font-medium text-sm">Advanced settings</span>
+                  <span className="block text-xs text-gray-500">Repeat protection and phone number format</span>
+                </span>
+                <ChevronDown className={`h-4 w-4 text-gray-500 transition-transform ${advancedOpen || !form.recordKeyColumn.trim() ? "rotate-180" : ""}`} />
+              </button>
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <div className="border-t p-4 space-y-5">
+                <div className="space-y-3">
+                  <div className="flex gap-3">
+                    <KeyRound className="mt-0.5 h-5 w-5 shrink-0 text-rose-600" />
+                    <div>
+                      <h3 className="font-medium">How should repeat messages be prevented?</h3>
+                      <p className="text-xs text-gray-500">Choose the column holding a unique ID for each record — not the phone number, because one customer can have several records.</p>
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Record ID column(s)</Label>
+                    <Input list="automation-sample-columns" value={form.recordKeyColumn} onChange={event => updateMapping("recordKeyColumn", event.target.value)} placeholder="e.g. invoice_id, or order_id, item_id" />
+                    <p className="text-xs text-gray-500">
+                      Examples: invoice ID, order ID or appointment ID. To combine columns, separate them with commas, such as <span className="font-mono">order_id, item_id</span>. Once a record has been messaged by this automation, later runs skip it.
+                    </p>
+                  </div>
+                </div>
+                <div className="space-y-2 sm:max-w-xs">
+                  <Label>Default country calling code</Label>
+                  <Input value={form.defaultCountryCode} onChange={event => update("defaultCountryCode", event.target.value)} placeholder="91" />
+                  <p className="text-xs text-gray-500">Added to phone numbers written without one, e.g. 91 for India.</p>
+                </div>
+              </div>
+            </CollapsibleContent>
+          </div>
+        </Collapsible>
+
+        {selectedSource && <datalist id="automation-sample-columns">{selectedSource.columns.map(column => <option key={column.key} value={column.key}>{column.label}</option>)}</datalist>}
+
+        {sampleMappingIssues.length > 0 && (
+          <div className="rounded-lg border border-amber-200 bg-amber-50 p-3">
+            <p className="flex gap-2 text-sm font-medium text-amber-950"><AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />Complete these settings</p>
+            <ul className="mt-2 space-y-1 pl-6 text-xs text-amber-900">
+              {sampleMappingIssues.map(issue => <li key={issue} className="list-disc">{issue}.</li>)}
+            </ul>
+          </div>
+        )}
+
+        <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <h3 className="font-medium text-slate-950">{sampleRow ? "First source row: filter preview" : "Current rule in plain language"}</h3>
+              <p className="mt-1 text-xs text-slate-600">
+                {sampleRow
+                  ? "This previews filter matching only. Records already messaged are still skipped at run time."
+                  : "Choose valid column mappings to preview the first available source row here."}
+              </p>
+            </div>
+            {sampleRow && (
+              <span className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-medium ${sampleMappingIssues.length > 0 ? "bg-amber-100 text-amber-800" : sampleMatchesFilters ? "bg-emerald-100 text-emerald-800" : "bg-rose-100 text-rose-800"}`}>
+                {sampleMappingIssues.length > 0 ? "Finish setup" : sampleMatchesFilters ? "Matches filters" : "Excluded"}
+              </span>
+            )}
+          </div>
+          {sampleRow ? (
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              {sampleChecks.map(check => (
+                <div key={check.label} className="flex gap-2 rounded-md border bg-white p-2.5">
+                  {check.passed ? <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" /> : <XCircle className="mt-0.5 h-4 w-4 shrink-0 text-rose-600" />}
+                  <div className="min-w-0">
+                    <p className="text-xs font-medium text-slate-900">{check.label}</p>
+                    <p className="break-words text-xs text-slate-600">{check.detail}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="mt-3 rounded-md border bg-white p-3 text-sm text-slate-700">
+              Include a row when <span className="font-mono">{form.dateColumn || "date column"}</span> is{" "}
+              <span className="font-mono font-medium">{dateBeingChecked}</span>
+              {allowedStatuses.length > 0 ? <> and <span className="font-mono">{form.statusColumn || "status column"}</span> is one of <span className="font-medium">{allowedStatuses.join(", ")}</span></> : ", regardless of status"}.
+              Then skip it if that record was already messaged.
+            </p>
+          )}
+        </div>
+      </Section>}
+
+      <Section title="When to send" icon={<CalendarClock className="h-4 w-4 text-emerald-600" />}>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="space-y-2"><Label>Send time</Label><Input type="time" value={form.sendTime} onChange={event => update("sendTime", event.target.value)} /></div>
+          <div className="space-y-2"><Label>Timezone</Label>
+            <Select value={form.timezone} onValueChange={timezone => update("timezone", timezone)}>
+              <SelectTrigger data-testid="select-automation-timezone"><SelectValue /></SelectTrigger>
+              <SelectContent>
+                {Array.from(new Set([form.timezone, ...COMMON_TIMEZONES])).map(zone => <SelectItem key={zone} value={zone}>{zone.replace(/_/g, " ")}</SelectItem>)}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2 sm:col-span-2"><Label>When people are due</Label>
+            <Select value={form.sendMode} onValueChange={(sendMode: "review" | "automatic") => update("sendMode", sendMode)}>
+              <SelectTrigger><SelectValue /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="review">Wait for my approval before sending</SelectItem>
+                <SelectItem value="automatic">Send automatically at the send time</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        <div className="border-t pt-4 space-y-3">
+          <div className="flex items-start gap-3">
+            <Switch
+              checked={form.scheduleEnabled && form.sourceType !== "upload"}
+              disabled={form.sourceType === "upload"}
+              onCheckedChange={scheduleEnabled => update("scheduleEnabled", scheduleEnabled)}
+              id="automation-schedule"
+              data-testid="switch-form-automation-schedule"
+            />
+            <div>
+              <Label htmlFor="automation-schedule">Run by itself every day</Label>
+              <p className="text-xs text-gray-500">
+                {form.sourceType === "upload"
+                  ? "Not available when you upload a file for each run — the automation needs a saved audience or AI Workbook to check by itself."
+                  : form.sendMode === "automatic"
+                    ? `At ${form.sendTime || "the send time"} it checks who is due and messages them, with no clicks needed.`
+                    : `At ${form.sendTime || "the send time"} it checks who is due and prepares a run for your approval.`}
+              </p>
+            </div>
+          </div>
+          {form.scheduleEnabled && form.sourceType !== "upload" && (
+            <div className="space-y-1.5 pl-0 sm:pl-12">
+              <div className="flex flex-wrap gap-1.5">
+                {WEEKDAY_SHORT.map((label, day) => {
+                  const active = form.scheduleDays.length === 0 || form.scheduleDays.includes(day);
+                  return (
+                    <button
+                      key={label}
+                      type="button"
+                      aria-pressed={active}
+                      onClick={() => {
+                        const current = form.scheduleDays.length ? form.scheduleDays : [0, 1, 2, 3, 4, 5, 6];
+                        const next = current.includes(day) ? current.filter(d => d !== day) : [...current, day].sort();
+                        if (next.length) update("scheduleDays", next.length === 7 ? [] : next);
+                      }}
+                      className={`h-8 min-w-[44px] rounded-full border px-2.5 text-xs ${active ? "border-emerald-500 bg-emerald-50 text-emerald-800 font-medium" : "border-gray-200 text-gray-500"}`}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
+              </div>
+              <p className="text-xs text-gray-500">{describeScheduleDays(form.scheduleDays)}</p>
+            </div>
+          )}
+        </div>
+        <div className="flex items-center gap-3 border-t pt-4">
+          <Switch checked={form.enabled} onCheckedChange={enabled => update("enabled", enabled)} id="automation-enabled" />
+          <div><Label htmlFor="automation-enabled">Automation is on</Label><p className="text-xs text-gray-500">When off, it keeps its history but creates no new runs.</p></div>
+        </div>
+      </Section>
+
+      <div className="flex justify-end gap-2 pb-6">
+        <Button variant="outline" onClick={() => setLocation("/admin/whatsapp-campaign-automations")}>Cancel</Button>
+        <Button
+          disabled={
+            saveMutation.isPending
+            || !form.name
+            || !selectedTemplateId
+             || !form.phoneColumn.trim()
+             || !form.recordKeyColumn.trim()
+             || !form.dateColumn.trim()
+             || (form.eligibleStatusesText.trim().length > 0 && !form.statusColumn.trim())
+            || sampleMappingIssues.length > 0
+            || (isBlueprintSource && (
+              !form.sourceCampaignId
+              || !selectedSource
+              || (form.sourceAudienceType === "ai_workbook" && !form.sourceWorkbookId)
+              || (form.sourceAudienceType === "contact_groups" && form.sourceGroupIds.length === 0)
+            ))
+            || (form.sourceType === "ai_workbook" && (!form.sourceWorkbookId || !selectedSource))
+          }
+          onClick={() => saveMutation.mutate()}
+          data-testid="button-save-campaign-automation"
+        >
+          <Save className="h-4 w-4 mr-1" /> {saveMutation.isPending ? "Saving..." : id ? "Save changes" : "Create automation"}
+        </Button>
+      </div>
+    </div>
+  );
+}

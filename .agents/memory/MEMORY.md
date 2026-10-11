@@ -1,0 +1,27 @@
+# Agent Memory — AI Chroney
+
+- [AI usage accounting](ai-usage-accounting.md) — pricing re-seeds from code constants every boot, so DB-only rate edits silently revert; audio tokens are ~17x text.
+- [OpenAI Realtime API](openai-realtime-api.md) — the `OpenAI-Beta: realtime=v1` header is now rejected outright; GA endpoint takes auth only.
+- [TopScholar launch identity](topscholar-launch-identity.md) — signed tokens outrank URL scope; voice needs one and chat doesn't; a refused WS upgrade is invisible to the browser.
+- [Voice/chat parity](voice-chat-parity.md) — unpassed retrieval scope silently means "whole account"; anything the voice model can see, it will read aloud, so media goes around it — and then nothing is left choosing it.
+- [Multi-job structured prompts](structured-output-prompts.md) — JSON key order decides what the model can condition on; a job-1 short-circuit output silently skips job 2.
+- [Voice karaoke highlight](voice-karaoke-highlight.md) — clock highlights off audio scheduling, key to the bubble not the response, and tear down on every terminal path or the highlight sticks.
+- [WhatsApp campaign engine](whatsapp-campaign-engine.md) — list and count must share one filter predicate; recording an inbound reply silently inherits the AI-enabled gate.
+- [Spreadsheet contact import](spreadsheet-import.md) — Excel exports what it displays, so long numbers reach CSV pre-corrupted; a preview and the write it promises must share one routine.
+- [Environment quirks](environment-quirks.md) — pgvector must exist before `db:push`; `.replit` is edited through the verify-and-replace flow, never directly.
+- [Mongo/pgvector reader parity](mongo-pgvector-viewer-parity.md) — aggregation expressions treat missing ≠ null; `$ifNull`-normalize before sorting, and never spawn a second MongoClient cache.
+- [TopScholar media relevance](topscholar-media-relevance.md) — images need source-bound lesson metadata and the shared exact-token gate; uncertainty or a missing placement marker means no image.
+- [TopScholar Plan sync durability](topscholar-plan-sync-durability.md) — full Plan embedding is a leased, cancellable CP queue; never recreate unbounded direct workers from bulk actions.
+- [TopScholar embedding input limits](topscholar-embedding-input-limits.md) — direct and Batch API token-overflow failures use different wording but both require content splitting, never a retry.
+- [Spreadsheet campaign dispatch reservations](spreadsheet-campaign-dispatch-reservations.md) — reserve a business record key only when a run is scheduled; cancelled review runs must remain eligible.
+- [Tester client-store filters](topscholar-tester-client-store-filters.md) — Tester options may use stored client content, but preview must prove it matches live scope mapping until production authority migrates.
+- [Campaign sample parsing](campaign-sample-parsing.md) — parse Excel/PDF samples only in the browser; the mapping endpoint accepts headers, never file bytes or rows.
+- [Automation deletion safety](automation-deletion-safety.md) — deactivate definitions only after locking their pending work; otherwise a delete can race a scheduled campaign into sending.
+- [TopScholar subject labels](topscholar-subject-labels.md) — the configured client embedding store has subject IDs but not clean subject names; its subject field can be a full CP label.
+- [Portable npm lockfiles](portable-npm-lockfiles.md) — registry hostnames persist in npm locks, and local-file overrides can make a clean `npm ci` reject the lock entirely.
+- [AI workbook single-sheet model](ai-workbook-single-sheet-model.md) — workbooks expose one consolidated sheet; keep history and campaign links internal, not as user-facing tabs.
+- [Development campaign fixtures](development-campaign-fixtures.md) — simulated campaigns must be tenant-locked, historical, and use non-dispatchable templates so fixtures can never reach a provider.
+- [Workbook automation source locking](workbook-automation-source-locking.md) — bind runs to version ID + revision, and serialize source changes on the workbook row.
+- [Campaign blueprint execution lifecycle](campaign-blueprint-execution-lifecycle.md) — protect referenced drafts, freeze generated executions, and let only the due-time scheduler send them.
+- [Voice session accounting](voice-session-accounting.md) — measure socket intervals, not chat lifetime; serialize reconnect rotation and bound restart recovery before accepting new rows.
+- [Lead phone privacy boundary](lead-phone-privacy-boundary.md) — masking must cover nested CRM payloads and phone-bearing form/journey answers, not only the lead phone column.

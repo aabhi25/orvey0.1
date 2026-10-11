@@ -1,0 +1,1101 @@
+import { fetchWithTimeout } from "../lib/fetchWithTimeout";
+import { z } from 'zod';
+import { LeadsquaredFieldMapping } from '@shared/schema';
+
+export interface LeadSquaredConfig {
+  accessKey: string;
+  secretKey: string;
+  region: 'india' | 'us' | 'other';
+  customHost?: string;
+  /**
+   * When set, leads go to the client's Universal Data Sync (UDS) webhook instead of
+   * the Lead.Capture API. The payload is the same mapped fields, as flat JSON
+   * ({ "FirstName": "...", "mx_Utm_Source": "..." }); the client's UDS flow maps
+   * them onto LeadSquared fields. The API keys are not used in this mode.
+   */
+  uds?: {
+    webhookUrl: string;
+    key?: string; // ickey; optional when already present in the webhook URL
+  };
+}
+
+export interface LeadSquaredLeadData {
+  fullName?: string;
+  email?: string;
+  phone?: string;
+  city?: string;
+  createdAt?: string;
+  businessAccountName?: string;
+  businessUrl?: string;
+  source?: string;
+  sourceCampaign?: string;
+}
+
+// Dynamic data context for building attributes from field mappings
+export interface LeadDataContext {
+  lead: {
+    name?: string | null;
+    email?: string | null;
+    phone?: string | null;
+    whatsapp?: string | null;
+    createdAt?: Date | null;
+    sourceUrl?: string | null;
+    // CAPTCHA verification outcome for this lead's conversation:
+    // 'verified' | 'unverified'. Mappable to a CRM field.
+    captchaStatus?: string | null;
+    // Where the lead came from: 'Website' (default when unset) | 'Instagram' | 'Facebook'.
+    // Mappable as lead.channel.
+    channel?: string | null;
+  };
+  session: {
+    city?: string | null;
+    utmCampaign?: string | null;
+    utmSource?: string | null;
+    utmMedium?: string | null;
+    pageUrl?: string | null;
+  };
+  business: {
+    name?: string | null;
+    website?: string | null;
+  };
+  urlExtraction?: {
+    university?: string | null;
+    product?: string | null;
+  };
+  // Answers captured from conversational-journey steps, keyed by the step's
+  // configured CRM field key. Referenced in mappings as journey.<key>.
+  journey?: Record<string, string | null>;
+  // AI-generated conversation summary + topic keywords for this lead's
+  // conversation. Referenced in mappings as conversation.summary /
+  // conversation.topics. Populated asynchronously after summarization.
+  conversation?: {
+    summary?: string | null;
+    topics?: string | null;
+  };
+}
+
+// Helper function to extract utm_campaign from URL
+export function extractUtmCampaign(url: string | null | undefined): string | undefined {
+  if (!url) return undefined;
+  try {
+    const urlObj = new URL(url);
+    const utmCampaign = urlObj.searchParams.get('utm_campaign');
+    return utmCampaign || undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+export function extractUtmSource(url: string | null | undefined): string | undefined {
+  if (!url) return undefined;
+  try {
+    const urlObj = new URL(url);
+    const utmSource = urlObj.searchParams.get('utm_source');
+    return utmSource || undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+export function extractUtmMedium(url: string | null | undefined): string | undefined {
+  if (!url) return undefined;
+  try {
+    const urlObj = new URL(url);
+    const utmMedium = urlObj.searchParams.get('utm_medium');
+    return utmMedium || undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+interface LeadSquaredAttribute {
+  Attribute: string;
+  Value: string;
+}
+
+// LeadSquared field value limit - trim values exceeding this limit
+const LEADSQUARED_FIELD_MAX_LENGTH = 200;
+
+function trimToMaxLength(value: string | undefined | null): string {
+  if (!value) return '';
+  return value.length > LEADSQUARED_FIELD_MAX_LENGTH 
+    ? value.substring(0, LEADSQUARED_FIELD_MAX_LENGTH) 
+    : value;
+}
+
+export interface LeadSquaredResponse {
+  Status: string;
+  Message?: {
+    Id?: string;
+    AffectedRows?: number;
+  };
+  ExceptionType?: string;
+  ExceptionMessage?: string;
+}
+
+/**
+ * Detects LeadSquared's "this lead already exists" rejection. LeadSquared enforces
+ * uniqueness (commonly on phone or email) at the account level; when a create hits
+ * an existing record it returns an MXDuplicateEntryException ("A Lead with same
+ * Phone Number already exists."). The lead is already in the CRM, so callers treat
+ * this as a successful sync rather than a failure (no retry, not flagged as error).
+ */
+function isDuplicateLeadError(exceptionType?: string, message?: string): boolean {
+  if (exceptionType && /MXDuplicateEntryException/i.test(exceptionType)) return true;
+  if (message && /already exists/i.test(message)) return true;
+  return false;
+}
+
+export class LeadSquaredService {
+  private config: LeadSquaredConfig;
+  private baseUrl: string;
+
+  constructor(config: LeadSquaredConfig) {
+    this.config = config;
+    this.baseUrl = this.getBaseUrl();
+  }
+
+  private getBaseUrl(): string {
+    if (this.config.region === 'india') {
+      return 'https://api-in21.leadsquared.com';
+    } else if (this.config.region === 'us') {
+      return 'https://api-us.leadsquared.com';
+    } else if (this.config.customHost) {
+      return this.config.customHost;
+    }
+    return 'https://api.leadsquared.com';
+  }
+
+  isUds(): boolean {
+    return !!this.config.uds;
+  }
+
+  /**
+   * POST mapped fields to the UDS webhook as flat JSON. UDS accepts the ickey in
+   * the URL or as an "ickey" / "x-access-token" header; we send the header so the
+   * key never appears in URLs or access logs. Any 2xx counts as delivered: UDS may
+   * not return a LeadSquared lead ID, and failures inside the client's flow show
+   * up in their UDS logs rather than here.
+   */
+  async sendToUds(
+    attributeArray: LeadSquaredAttribute[],
+    event: 'create' | 'update' | 'test',
+  ): Promise<{ success: boolean; leadId?: string; message: string; syncPayload?: Record<string, string> }> {
+    const uds = this.config.uds!;
+    if (attributeArray.length === 0) {
+      return { success: false, message: 'No field mappings configured or no data available for sync' };
+    }
+
+    const syncPayload: Record<string, string> = {};
+    for (const attr of attributeArray) {
+      syncPayload[attr.Attribute] = attr.Value;
+    }
+
+    try {
+      console.log(`[LeadSquared UDS] Sending lead (${event}) - Fields:`, Object.keys(syncPayload).join(', '));
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache',
+      };
+      if (uds.key) headers['x-access-token'] = uds.key;
+
+      const response = await fetch(uds.webhookUrl, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(syncPayload),
+        signal: AbortSignal.timeout(30_000),
+      });
+      const text = await response.text();
+      console.log('[LeadSquared UDS] Response status:', response.status);
+
+      if (!response.ok) {
+        let detail = `UDS webhook returned ${response.status} ${response.statusText}`;
+        try {
+          const json = JSON.parse(text);
+          const msg = json.ExceptionMessage || json.Message || json.message || json.error;
+          if (typeof msg === 'string' && msg) detail = `${detail}: ${msg}`;
+        } catch {
+          if (text && text.length < 300) detail = `${detail} — ${text}`;
+        }
+        if (response.status === 401 || response.status === 403) {
+          detail += ' (check the UDS webhook key / ickey)';
+        }
+        return { success: false, message: detail };
+      }
+
+      // Pick up a LeadSquared lead ID if the flow happens to return one.
+      let leadId: string | undefined;
+      try {
+        const json = JSON.parse(text);
+        const candidate = json?.Message?.Id ?? json?.LeadId ?? json?.leadId ?? json?.ProspectId;
+        if (typeof candidate === 'string' && candidate) leadId = candidate;
+      } catch { /* non-JSON acknowledgement is fine */ }
+
+      return {
+        success: true,
+        leadId,
+        message: event === 'test' ? 'Test lead delivered to UDS webhook' : 'Lead delivered to LeadSquared UDS',
+        syncPayload,
+      };
+    } catch (error: any) {
+      const message = error?.name === 'TimeoutError' ? 'UDS webhook timed out after 30s' : (error.message || 'Failed to reach UDS webhook');
+      console.error('[LeadSquared UDS] Send failed:', message);
+      return { success: false, message };
+    }
+  }
+
+  async testConnection(): Promise<{ success: boolean; message: string; userDetails?: any }> {
+    try {
+      // Mask credentials for logging (server-side only)
+      const maskedAccessKey = this.config.accessKey ? `${this.config.accessKey.slice(0, 8)}...` : 'missing';
+      const maskedSecretKey = this.config.secretKey ? `${this.config.secretKey.slice(0, 4)}...` : 'missing';
+      
+      console.log(`[LeadSquared] Testing connection to: ${this.baseUrl}`);
+      console.log(`[LeadSquared] Region: ${this.config.region}, Custom Host: ${this.config.customHost || 'none'}`);
+      console.log(`[LeadSquared] Access Key: ${maskedAccessKey}, Secret Key: ${maskedSecretKey}`);
+      
+      const url = `${this.baseUrl}/v2/Authentication.svc/UserByAccessKey.Get?accessKey=${encodeURIComponent(this.config.accessKey)}&secretKey=${encodeURIComponent(this.config.secretKey)}`;
+      
+      console.log(`[LeadSquared] Request URL: ${this.baseUrl}/v2/Authentication.svc/UserByAccessKey.Get?accessKey=***&secretKey=***`);
+      
+      const response = await fetchWithTimeout(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache',
+        },
+      }, 30_000);
+
+      console.log(`[LeadSquared] Response status: ${response.status} ${response.statusText}`);
+      
+      // Get response text first to see what LeadSquared returns (server-side logging only)
+      const responseText = await response.text();
+      console.log(`[LeadSquared] Raw response: ${responseText.slice(0, 500)}`);
+      
+      let data: any;
+      try {
+        data = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error('[LeadSquared] Failed to parse response as JSON:', responseText.slice(0, 200));
+        return {
+          success: false,
+          message: `Invalid response from LeadSquared (status ${response.status}). Check server logs for details.`,
+        };
+      }
+
+      if (!response.ok) {
+        console.error(`[LeadSquared] API error:`, data);
+        return {
+          success: false,
+          message: data.ExceptionMessage || `Connection failed: ${response.status} ${response.statusText}`,
+        };
+      }
+      
+      // Check for successful response - API may return UserDetails wrapper OR direct user data with Id/Name
+      if (data.Status === 'Success' || data.UserDetails || (data.Id && data.Name)) {
+        console.log('[LeadSquared] Connection successful!');
+        return {
+          success: true,
+          message: 'Connected successfully to LeadSquared',
+          userDetails: data.UserDetails || data,
+        };
+      } else {
+        console.error('[LeadSquared] Unexpected response format:', data);
+        return {
+          success: false,
+          message: data.ExceptionMessage || 'Invalid credentials or unexpected response. Check server logs for details.',
+        };
+      }
+    } catch (error: any) {
+      console.error('[LeadSquared] Connection test failed:', error);
+      return {
+        success: false,
+        message: error.message || 'Failed to connect to LeadSquared',
+      };
+    }
+  }
+
+  private buildAttributeArray(leadData: LeadSquaredLeadData): LeadSquaredAttribute[] {
+    const attributes: LeadSquaredAttribute[] = [];
+    
+    if (leadData.fullName) {
+      attributes.push({ Attribute: 'FirstName', Value: trimToMaxLength(leadData.fullName) });
+    }
+    if (leadData.email) {
+      attributes.push({ Attribute: 'EmailAddress', Value: trimToMaxLength(leadData.email) });
+    }
+    if (leadData.phone) {
+      attributes.push({ Attribute: 'Phone', Value: trimToMaxLength(leadData.phone) });
+    }
+    if (leadData.city) {
+      attributes.push({ Attribute: 'mx_City', Value: trimToMaxLength(leadData.city) });
+    }
+    if (leadData.createdAt) {
+      attributes.push({ Attribute: 'mx_CreatedAt', Value: trimToMaxLength(leadData.createdAt) });
+    }
+    if (leadData.businessAccountName) {
+      attributes.push({ Attribute: 'Mx_Business_Account', Value: trimToMaxLength(leadData.businessAccountName) });
+    }
+    if (leadData.businessUrl) {
+      attributes.push({ Attribute: 'Mx_Website_Campaign', Value: trimToMaxLength(leadData.businessUrl) });
+    }
+    if (leadData.sourceCampaign) {
+      attributes.push({ Attribute: 'mx_Source_Campaign', Value: trimToMaxLength(leadData.sourceCampaign) });
+    }
+    attributes.push({ Attribute: 'Source', Value: trimToMaxLength(leadData.source || 'AI Chroney') });
+    attributes.push({ Attribute: 'mx_Secondary_Lead_Source', Value: trimToMaxLength('AI Chroney') });
+    
+    return attributes;
+  }
+
+  // Build attributes from dynamic field mappings
+  buildAttributesFromMappings(mappings: LeadsquaredFieldMapping[], context: LeadDataContext): LeadSquaredAttribute[] {
+    const attributes: LeadSquaredAttribute[] = [];
+    
+    for (const mapping of mappings) {
+      // Skip disabled mappings
+      if (mapping.isEnabled !== 'true') continue;
+      
+      let value: string | undefined;
+      
+      if (mapping.sourceType === 'custom') {
+        value = mapping.customValue || undefined;
+      } else if (mapping.sourceType === 'dynamic' && mapping.sourceField) {
+        value = this.extractValueFromContext(mapping.sourceField, context);
+        if (value) {
+          // When configured, send a fixed static value whenever the dynamic
+          // source resolves to a non-empty value (e.g. "PRChat" whenever a UTM
+          // source is present) instead of the raw source value.
+          if (mapping.valueWhenPresent) {
+            value = mapping.valueWhenPresent;
+          }
+        } else if (mapping.fallbackValue) {
+          value = mapping.fallbackValue;
+        }
+      }
+      
+      if (value) {
+        attributes.push({
+          Attribute: mapping.leadsquaredField,
+          Value: trimToMaxLength(value)
+        });
+      }
+    }
+    
+    return attributes;
+  }
+
+  private extractValueFromContext(sourceField: string, context: LeadDataContext): string | undefined {
+    const [category, ...fieldParts] = sourceField.split('.');
+    const field = fieldParts.join('.'); // CRM field keys may contain dots; preserve the full remainder
+    
+    if (category === 'lead') {
+      const lead = context.lead;
+      switch (field) {
+        case 'name': return lead.name || undefined;
+        case 'email': return lead.email || undefined;
+        case 'phone': return lead.phone || undefined;
+        case 'whatsapp': return lead.whatsapp || undefined;
+        case 'createdAt': return lead.createdAt ? lead.createdAt.toISOString() : undefined;
+        case 'sourceUrl': return lead.sourceUrl || undefined;
+        case 'captchaStatus': return lead.captchaStatus || undefined;
+        case 'channel': return lead.channel || 'Website';
+      }
+    } else if (category === 'session') {
+      const session = context.session;
+      switch (field) {
+        case 'city': return session.city || undefined;
+        case 'utmCampaign': return session.utmCampaign || extractUtmCampaign(session.pageUrl);
+        case 'utmSource': return session.utmSource || undefined;
+        case 'utmMedium': return session.utmMedium || undefined;
+        case 'pageUrl': return session.pageUrl || undefined;
+      }
+    } else if (category === 'business') {
+      const business = context.business;
+      switch (field) {
+        case 'name': return business.name || undefined;
+        case 'website': return business.website || undefined;
+      }
+    } else if (category === 'urlLookup') {
+      const extraction = context.urlExtraction;
+      switch (field) {
+        case 'university': return extraction?.university || undefined;
+        case 'product': return extraction?.product || undefined;
+      }
+    } else if (category === 'journey') {
+      return context.journey?.[field] || undefined;
+    } else if (category === 'conversation') {
+      const conversation = context.conversation;
+      switch (field) {
+        case 'summary': return conversation?.summary || undefined;
+        case 'topics': return conversation?.topics || undefined;
+      }
+    }
+    
+    return undefined;
+  }
+
+  // Create lead using dynamic mappings
+  async createLeadWithMappings(
+    mappings: LeadsquaredFieldMapping[],
+    context: LeadDataContext
+  ): Promise<{ success: boolean; leadId?: string; message: string; syncPayload?: Record<string, string>; alreadyExists?: boolean }> {
+    if (this.config.uds) {
+      return this.sendToUds(this.buildAttributesFromMappings(mappings, context), 'create');
+    }
+    try {
+      const url = `${this.baseUrl}/v2/LeadManagement.svc/Lead.Capture?accessKey=${this.config.accessKey}&secretKey=${this.config.secretKey}`;
+      
+      const attributeArray = this.buildAttributesFromMappings(mappings, context);
+      
+      console.log('[LeadSquared] Creating lead with dynamic mappings - Host:', this.baseUrl);
+      console.log('[LeadSquared] Creating lead - Fields count:', attributeArray.length, '- Fields:', attributeArray.map(a => a.Attribute).join(', '));
+      
+      if (attributeArray.length === 0) {
+        return {
+          success: false,
+          message: 'No field mappings configured or no data available for sync',
+        };
+      }
+      
+      // Build a simple key-value payload for debugging/display
+      const syncPayload: Record<string, string> = {};
+      for (const attr of attributeArray) {
+        syncPayload[attr.Attribute] = attr.Value;
+      }
+      
+      const response = await fetchWithTimeout(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache',
+        },
+        body: JSON.stringify(attributeArray),
+      }, 30_000);
+
+      console.log('[LeadSquared] Creating lead - Response status:', response.status, response.statusText);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('[LeadSquared] Creating lead - Error response:', errorText);
+        let detailedError = `Failed to create lead: ${response.status} ${response.statusText}`;
+        let exceptionType: string | undefined;
+        try {
+          const errorJson = JSON.parse(errorText);
+          exceptionType = errorJson.ExceptionType;
+          if (errorJson.ExceptionMessage) detailedError = errorJson.ExceptionMessage;
+          else if (errorJson.Message) detailedError = errorJson.Message;
+          else if (errorJson.message) detailedError = errorJson.message;
+        } catch { 
+          if (errorText && errorText.length < 500) detailedError += ` — ${errorText}`;
+        }
+        // The lead already exists in LeadSquared — update it with these details (treated as synced).
+        if (isDuplicateLeadError(exceptionType, detailedError)) {
+          console.log('[LeadSquared] Creating lead - Already exists:', detailedError);
+          return this.updateExistingDuplicate(mappings, context, syncPayload);
+        }
+        return {
+          success: false,
+          message: detailedError,
+        };
+      }
+
+      const data: LeadSquaredResponse = await response.json();
+      console.log('[LeadSquared] Creating lead - Response status:', data.Status, '- Lead ID:', data.Message?.Id || 'N/A');
+      
+      if (data.Status === 'Success' && data.Message?.Id) {
+        return {
+          success: true,
+          leadId: data.Message.Id,
+          message: 'Lead created successfully in LeadSquared',
+          syncPayload,
+        };
+      } else if (isDuplicateLeadError(data.ExceptionType, data.ExceptionMessage)) {
+        // Some clusters return the duplicate signal as HTTP 200 with Status=Error.
+        console.log('[LeadSquared] Creating lead - Already exists:', data.ExceptionMessage);
+        return this.updateExistingDuplicate(mappings, context, syncPayload);
+      } else {
+        console.error('[LeadSquared] Creating lead - Failed:', data.ExceptionMessage || 'Unknown error');
+        return {
+          success: false,
+          message: data.ExceptionMessage || 'Failed to create lead',
+        };
+      }
+    } catch (error: any) {
+      console.error('[LeadSquared] Create lead with mappings failed:', error);
+      return {
+        success: false,
+        message: error.message || 'Failed to push lead to LeadSquared',
+      };
+    }
+  }
+
+  /**
+   * Finds an existing LeadSquared lead by phone, then email (Lead.Capture refused a duplicate).
+   * Returns its ProspectID, or null when it can't be found / the lookup fails.
+   */
+  async findExistingLeadId(phone?: string | null, email?: string | null): Promise<string | null> {
+    const auth = `accessKey=${this.config.accessKey}&secretKey=${this.config.secretKey}`;
+    const lookups: string[] = [];
+    const phoneRaw = (phone || '').trim();
+    const phoneDigits = phoneRaw.replace(/\D/g, '');
+    if (phoneRaw) lookups.push(`${this.baseUrl}/v2/LeadManagement.svc/RetrieveLeadByPhoneNumber?${auth}&phone=${encodeURIComponent(phoneRaw)}`);
+    if (phoneDigits.length > 10) lookups.push(`${this.baseUrl}/v2/LeadManagement.svc/RetrieveLeadByPhoneNumber?${auth}&phone=${encodeURIComponent(phoneDigits.slice(-10))}`);
+    if (email?.trim()) lookups.push(`${this.baseUrl}/v2/LeadManagement.svc/Leads.GetByEmailaddress?${auth}&emailaddress=${encodeURIComponent(email.trim())}`);
+    for (const url of lookups) {
+      try {
+        const response = await fetchWithTimeout(url, { method: 'GET', headers: { 'Cache-Control': 'no-cache' } }, 15_000);
+        if (!response.ok) continue;
+        const data = await response.json().catch(() => null);
+        const first = Array.isArray(data) ? data[0] : null;
+        const id = first?.ProspectID || first?.ProspectId || first?.Id;
+        if (typeof id === 'string' && id) return id;
+      } catch (error: any) {
+        console.warn('[LeadSquared] Existing-lead lookup failed:', error?.message || error);
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Lead.Capture said the lead already exists (same phone / email — e.g. the same person came in
+   * on another channel): find it and update it with this lead's details instead of dropping them.
+   * Falls back to the previous behaviour (treated as synced, nothing updated) when it can't be found.
+   */
+  private async updateExistingDuplicate(
+    mappings: LeadsquaredFieldMapping[],
+    context: LeadDataContext,
+    syncPayload: Record<string, string>,
+  ): Promise<{ success: boolean; leadId?: string; message: string; syncPayload?: Record<string, string>; alreadyExists?: boolean }> {
+    const existingId = await this.findExistingLeadId(context.lead.phone, context.lead.email);
+    if (!existingId) {
+      console.log('[LeadSquared] Duplicate lead not found by phone/email — treating as synced');
+      return { success: true, alreadyExists: true, message: 'Lead already exists in LeadSquared (treated as synced).', syncPayload };
+    }
+    const updated = await this.updateLeadWithMappings(existingId, mappings, context, ['name', 'email', 'phone', 'city', 'sourceUrl']);
+    if (updated.success) {
+      console.log('[LeadSquared] Duplicate lead updated with the new details:', existingId);
+      return { success: true, alreadyExists: true, leadId: existingId, message: 'Lead already existed in LeadSquared — updated it with the new details.', syncPayload: updated.syncPayload || syncPayload };
+    }
+    console.warn('[LeadSquared] Duplicate lead found but the update failed:', existingId, updated.message);
+    return { success: true, alreadyExists: true, leadId: existingId, message: `Lead already exists in LeadSquared (treated as synced; update failed: ${updated.message}).`, syncPayload };
+  }
+
+  // Update lead using dynamic mappings
+  // changedFields: optional array of database field names that changed (e.g., ['name', 'phone'])
+  // If provided, only mappings for those fields are sent (avoids mx_ field not found errors)
+  async updateLeadWithMappings(
+    leadId: string,
+    mappings: LeadsquaredFieldMapping[],
+    context: LeadDataContext,
+    changedFields?: string[]
+  ): Promise<{ success: boolean; message: string; syncPayload?: Record<string, string> }> {
+    if (this.config.uds) {
+      // UDS has no update-by-ID call: resend the full mapped lead and let the
+      // flow's lead capture (search by phone/email) update the existing record.
+      // Sending every field (not just changedFields) keeps the search key present.
+      return this.sendToUds(this.buildAttributesFromMappings(mappings, context), 'update');
+    }
+    try {
+      const url = `${this.baseUrl}/v2/LeadManagement.svc/Lead.Update?accessKey=${this.config.accessKey}&secretKey=${this.config.secretKey}&leadId=${leadId}`;
+      
+      // If changedFields provided, filter mappings to only include relevant ones
+      let filteredMappings = mappings;
+      if (changedFields && changedFields.length > 0) {
+        // Map database field names to source field paths
+        const fieldToSourceMap: Record<string, string[]> = {
+          'name': ['lead.name'],
+          'email': ['lead.email'],
+          'phone': ['lead.phone', 'lead.whatsapp'],
+          'city': ['session.city'],
+          'sourceUrl': ['lead.sourceUrl', 'session.pageUrl'],
+        };
+        
+        // Build list of source fields that changed
+        const changedSources = new Set<string>();
+        for (const field of changedFields) {
+          const sources = fieldToSourceMap[field];
+          if (sources) {
+            sources.forEach(s => changedSources.add(s));
+          }
+        }
+        
+        // Filter mappings: only include dynamic mappings for changed fields, or custom (static) values
+        filteredMappings = mappings.filter(m => {
+          if (m.sourceType === 'custom') {
+            // Custom/static values - only include on create, skip on update
+            // This avoids issues with mx_ fields not existing yet
+            return false;
+          }
+          // Dynamic mappings - include if the source field changed.
+          // Journey answers (journey.*) are also included whenever a value is
+          // present, since they are captured asynchronously during the chat and
+          // are not represented in the lead-level changedFields list.
+          if (!m.sourceField) return false;
+          if (changedSources.has(m.sourceField)) return true;
+          if (m.sourceField.startsWith('journey.')) {
+            const key = m.sourceField.slice('journey.'.length);
+            return !!context.journey?.[key];
+          }
+          // Conversation summary/topics (conversation.*) are generated
+          // asynchronously after the chat and are not represented in the
+          // lead-level changedFields list, so include whenever a value exists.
+          if (m.sourceField.startsWith('conversation.')) {
+            const key = m.sourceField.slice('conversation.'.length);
+            if (key === 'summary') return !!context.conversation?.summary;
+            if (key === 'topics') return !!context.conversation?.topics;
+            return false;
+          }
+          return false;
+        });
+        
+        console.log('[LeadSquared] Update filtering - Changed fields:', changedFields.join(', '), '- Filtered mappings:', filteredMappings.length);
+      }
+      
+      const attributeArray = this.buildAttributesFromMappings(filteredMappings, context);
+      
+      console.log('[LeadSquared] Updating lead with dynamic mappings - Host:', this.baseUrl, '- Lead ID:', leadId);
+      console.log('[LeadSquared] Updating lead - Fields count:', attributeArray.length, '- Fields:', attributeArray.map(a => a.Attribute).join(', '));
+      
+      if (attributeArray.length === 0) {
+        return {
+          success: false,
+          message: 'No fields to sync - all field mappings are disabled or have no data',
+        };
+      }
+      
+      // Build a simple key-value payload for debugging/display
+      const syncPayload: Record<string, string> = {};
+      for (const attr of attributeArray) {
+        syncPayload[attr.Attribute] = attr.Value;
+      }
+
+      const response = await fetchWithTimeout(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache',
+        },
+        body: JSON.stringify(attributeArray),
+      }, 30_000);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('[LeadSquared] Updating lead - Error response:', errorText);
+        let detailedError = `Failed to update lead: ${response.status} ${response.statusText}`;
+        try {
+          const errorJson = JSON.parse(errorText);
+          if (errorJson.ExceptionMessage) detailedError = errorJson.ExceptionMessage;
+          else if (errorJson.Message) detailedError = errorJson.Message;
+          else if (errorJson.message) detailedError = errorJson.message;
+        } catch { 
+          if (errorText && errorText.length < 500) detailedError += ` — ${errorText}`;
+        }
+        return {
+          success: false,
+          message: detailedError,
+        };
+      }
+
+      const data: LeadSquaredResponse = await response.json();
+      
+      if (data.Status === 'Success') {
+        return {
+          success: true,
+          message: 'Lead updated successfully in LeadSquared',
+          syncPayload,
+        };
+      } else {
+        console.error('[LeadSquared] Updating lead - Failed:', data.ExceptionMessage || 'Unknown error');
+        return {
+          success: false,
+          message: data.ExceptionMessage || 'Failed to update lead',
+        };
+      }
+    } catch (error: any) {
+      console.error('[LeadSquared] Update lead with mappings failed:', error);
+      return {
+        success: false,
+        message: error.message || 'Failed to update lead in LeadSquared',
+      };
+    }
+  }
+
+  async createLead(leadData: LeadSquaredLeadData): Promise<{ success: boolean; leadId?: string; message: string; alreadyExists?: boolean }> {
+    try {
+      const url = `${this.baseUrl}/v2/LeadManagement.svc/Lead.Capture?accessKey=${this.config.accessKey}&secretKey=${this.config.secretKey}`;
+      
+      const attributeArray = this.buildAttributeArray(leadData);
+      
+      // Detailed logging for debugging (sanitized - no credentials or PII)
+      console.log('[LeadSquared] Creating lead - Host:', this.baseUrl);
+      console.log('[LeadSquared] Creating lead - Fields count:', attributeArray.length, '- Fields:', attributeArray.map(a => a.Attribute).join(', '));
+      
+      const response = await fetchWithTimeout(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache',
+        },
+        body: JSON.stringify(attributeArray),
+      }, 30_000);
+
+      console.log('[LeadSquared] Creating lead - Response status:', response.status, response.statusText);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('[LeadSquared] Creating lead - Error response:', errorText);
+        let detailedError = `Failed to create lead: ${response.status} ${response.statusText}`;
+        let exceptionType: string | undefined;
+        try {
+          const errorJson = JSON.parse(errorText);
+          exceptionType = errorJson.ExceptionType;
+          if (errorJson.ExceptionMessage) detailedError = errorJson.ExceptionMessage;
+          else if (errorJson.Message) detailedError = errorJson.Message;
+          else if (errorJson.message) detailedError = errorJson.message;
+        } catch { 
+          if (errorText && errorText.length < 500) detailedError += ` — ${errorText}`;
+        }
+        // The lead already exists in LeadSquared — treat as a successful sync.
+        if (isDuplicateLeadError(exceptionType, detailedError)) {
+          console.log('[LeadSquared] Creating lead - Already exists, treating as synced:', detailedError);
+          return {
+            success: true,
+            alreadyExists: true,
+            message: 'Lead already exists in LeadSquared (treated as synced).',
+          };
+        }
+        return {
+          success: false,
+          message: detailedError,
+        };
+      }
+
+      const data: LeadSquaredResponse = await response.json();
+      console.log('[LeadSquared] Creating lead - Response status:', data.Status, '- Lead ID:', data.Message?.Id || 'N/A');
+      
+      if (data.Status === 'Success' && data.Message?.Id) {
+        return {
+          success: true,
+          leadId: data.Message.Id,
+          message: 'Lead created successfully in LeadSquared',
+        };
+      } else if (isDuplicateLeadError(data.ExceptionType, data.ExceptionMessage)) {
+        // Some clusters return the duplicate signal as HTTP 200 with Status=Error.
+        console.log('[LeadSquared] Creating lead - Already exists, treating as synced:', data.ExceptionMessage);
+        return {
+          success: true,
+          alreadyExists: true,
+          message: 'Lead already exists in LeadSquared (treated as synced).',
+        };
+      } else {
+        console.error('[LeadSquared] Creating lead - Failed:', data.ExceptionMessage || 'Unknown error');
+        return {
+          success: false,
+          message: data.ExceptionMessage || 'Failed to create lead',
+        };
+      }
+    } catch (error: any) {
+      console.error('[LeadSquared] Create lead failed:', error);
+      return {
+        success: false,
+        message: error.message || 'Failed to push lead to LeadSquared',
+      };
+    }
+  }
+
+  async updateLead(leadId: string, leadData: Partial<LeadSquaredLeadData>): Promise<{ success: boolean; message: string }> {
+    try {
+      const url = `${this.baseUrl}/v2/LeadManagement.svc/Lead.Update?accessKey=${this.config.accessKey}&secretKey=${this.config.secretKey}&leadId=${leadId}`;
+      
+      const attributeArray = this.buildAttributeArray(leadData as LeadSquaredLeadData);
+      
+      const response = await fetchWithTimeout(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache',
+        },
+        body: JSON.stringify(attributeArray),
+      }, 30_000);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        let detailedError = `Failed to update lead: ${response.status} ${response.statusText}`;
+        try {
+          const errorJson = JSON.parse(errorText);
+          if (errorJson.ExceptionMessage) detailedError = errorJson.ExceptionMessage;
+          else if (errorJson.Message) detailedError = errorJson.Message;
+          else if (errorJson.message) detailedError = errorJson.message;
+        } catch { 
+          if (errorText && errorText.length < 500) detailedError += ` — ${errorText}`;
+        }
+        return {
+          success: false,
+          message: detailedError,
+        };
+      }
+
+      const data: LeadSquaredResponse = await response.json();
+      
+      if (data.Status === 'Success') {
+        return {
+          success: true,
+          message: 'Lead updated successfully in LeadSquared',
+        };
+      } else {
+        return {
+          success: false,
+          message: data.ExceptionMessage || 'Failed to update lead',
+        };
+      }
+    } catch (error: any) {
+      console.error('[LeadSquared] Update lead failed:', error);
+      return {
+        success: false,
+        message: error.message || 'Failed to update lead in LeadSquared',
+      };
+    }
+  }
+}
+
+/**
+ * Build the journey answer context for a conversation, keyed by each step's
+ * configured CRM field key. Used to populate `LeadDataContext.journey` so that
+ * field mappings referencing `journey.<key>` resolve to the visitor's answer.
+ * Best-effort: returns an empty object on any failure.
+ */
+export async function buildJourneyCrmContext(conversationId: string | null | undefined): Promise<Record<string, string>> {
+  if (!conversationId) return {};
+  try {
+    const { db } = await import('../db');
+    const { journeyResponses, journeySteps } = await import('../../shared/schema');
+    const { eq, and, isNotNull, asc } = await import('drizzle-orm');
+
+    // Ordered oldest → newest so that, for a key reused across steps or
+    // re-answered within the same conversation, the most recent answer
+    // deterministically overwrites earlier ones (latest-per-key wins).
+    const rows = await db
+      .select({
+        crmFieldKey: journeySteps.crmFieldKey,
+        response: journeyResponses.response,
+      })
+      .from(journeyResponses)
+      .innerJoin(journeySteps, eq(journeyResponses.stepId, journeySteps.id))
+      .where(and(
+        eq(journeyResponses.conversationId, conversationId),
+        isNotNull(journeySteps.crmFieldKey),
+      ))
+      .orderBy(asc(journeyResponses.createdAt));
+
+    const map: Record<string, string> = {};
+    for (const row of rows) {
+      const key = (row.crmFieldKey || '').trim();
+      const value = row.response != null ? String(row.response).trim() : '';
+      // Latest answer wins (rows are ordered ascending by createdAt).
+      if (key && value) map[key] = value;
+    }
+    return map;
+  } catch (err) {
+    console.error('[LeadSquared] buildJourneyCrmContext failed (continuing):', err);
+    return {};
+  }
+}
+
+/**
+ * Build the conversation summary context for a conversation. Reads the
+ * AI-generated summary and topic keywords stored on the conversation and
+ * returns them shaped for `LeadDataContext.conversation` so that field mappings
+ * referencing `conversation.summary` / `conversation.topics` resolve correctly.
+ * Topic keywords are stored as a JSON array and joined into a comma-separated
+ * string. Best-effort: returns an empty object on any failure.
+ */
+export async function buildConversationCrmContext(
+  conversationId: string | null | undefined,
+): Promise<{ summary?: string | null; topics?: string | null }> {
+  if (!conversationId) return {};
+  try {
+    const { db } = await import('../db');
+    const { conversations } = await import('../../shared/schema');
+    const { eq } = await import('drizzle-orm');
+
+    const rows = await db
+      .select({
+        summary: conversations.summary,
+        topicKeywords: conversations.topicKeywords,
+      })
+      .from(conversations)
+      .where(eq(conversations.id, conversationId))
+      .limit(1);
+
+    const row = rows[0];
+    if (!row) return {};
+
+    const summary = row.summary != null ? String(row.summary).trim() : '';
+
+    // topicKeywords is stored as a JSON array string. Parse and comma-join;
+    // gracefully fall back to the raw trimmed value if it isn't valid JSON.
+    let topics = '';
+    const raw = row.topicKeywords != null ? String(row.topicKeywords).trim() : '';
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          topics = parsed
+            .map((t) => (t != null ? String(t).trim() : ''))
+            .filter((t) => t.length > 0)
+            .join(', ');
+        } else {
+          topics = raw;
+        }
+      } catch {
+        topics = raw;
+      }
+    }
+
+    return {
+      summary: summary || null,
+      topics: topics || null,
+    };
+  } catch (err) {
+    console.error('[LeadSquared] buildConversationCrmContext failed (continuing):', err);
+    return {};
+  }
+}
+
+export async function createLeadSquaredService(config: LeadSquaredConfig): Promise<LeadSquaredService> {
+  return new LeadSquaredService(config);
+}
+
+/** The LeadSquared columns shared by widget_settings and account_group_training. */
+export interface LeadSquaredSettingsLike {
+  leadsquaredConnectionType?: string | null;
+  leadsquaredUdsWebhookUrl?: string | null;
+  leadsquaredUdsKey?: string | null;
+  leadsquaredAccessKey?: string | null;
+  leadsquaredSecretKey?: string | null;
+  leadsquaredRegion?: string | null;
+  leadsquaredCustomHost?: string | null;
+}
+
+export function isLeadSquaredUds(settings: LeadSquaredSettingsLike | null | undefined): boolean {
+  return settings?.leadsquaredConnectionType === 'uds';
+}
+
+/**
+ * Whether the settings hold what the chosen connection type needs: a UDS webhook
+ * URL, or API access + secret keys (plus a region when requireRegion is set, to
+ * keep the stricter call sites' existing behaviour).
+ */
+export function hasLeadSquaredCredentials(
+  settings: LeadSquaredSettingsLike | null | undefined,
+  options: { requireRegion?: boolean } = {},
+): boolean {
+  if (!settings) return false;
+  if (isLeadSquaredUds(settings)) return !!settings.leadsquaredUdsWebhookUrl;
+  return !!settings.leadsquaredAccessKey
+    && !!settings.leadsquaredSecretKey
+    && (!options.requireRegion || !!settings.leadsquaredRegion);
+}
+
+/** Builds a LeadSquared client for either connection type, or null if credentials are missing. */
+export async function createLeadSquaredServiceFromSettings(
+  settings: LeadSquaredSettingsLike | null | undefined,
+): Promise<LeadSquaredService | null> {
+  if (!settings || !hasLeadSquaredCredentials(settings)) return null;
+  const { decrypt } = await import('./encryptionService');
+
+  if (isLeadSquaredUds(settings)) {
+    return new LeadSquaredService({
+      accessKey: '',
+      secretKey: '',
+      region: 'other',
+      uds: {
+        webhookUrl: settings.leadsquaredUdsWebhookUrl!,
+        key: settings.leadsquaredUdsKey ? decrypt(settings.leadsquaredUdsKey) : undefined,
+      },
+    });
+  }
+
+  return new LeadSquaredService({
+    accessKey: settings.leadsquaredAccessKey!,
+    secretKey: decrypt(settings.leadsquaredSecretKey!),
+    region: (settings.leadsquaredRegion as 'india' | 'us' | 'other') || 'other',
+    customHost: settings.leadsquaredCustomHost || undefined,
+  });
+}
+
+/**
+ * Obviously-fake lead data for previewing / testing a UDS payload. Every enabled
+ * mapping source gets a value so the preview shows the full field list.
+ */
+export function buildSampleLeadContext(
+  mappings: LeadsquaredFieldMapping[],
+  business: { name?: string | null; website?: string | null },
+): LeadDataContext {
+  const journey: Record<string, string> = {};
+  for (const m of mappings) {
+    if (m.isEnabled === 'true' && m.sourceType === 'dynamic' && m.sourceField?.startsWith('journey.')) {
+      journey[m.sourceField.slice('journey.'.length)] = 'Sample answer';
+    }
+  }
+  const pageUrl = `${business.website || 'https://example.com'}/?utm_source=sample_source&utm_medium=sample_medium&utm_campaign=sample_campaign`;
+  return {
+    lead: {
+      name: 'AI Chroney Test Lead',
+      email: 'test.lead@example.com',
+      phone: '9000000000',
+      whatsapp: '9000000000',
+      createdAt: new Date(),
+      sourceUrl: pageUrl,
+      captchaStatus: 'verified',
+    },
+    session: {
+      city: 'Mumbai',
+      utmSource: 'sample_source',
+      utmMedium: 'sample_medium',
+      utmCampaign: 'sample_campaign',
+      pageUrl,
+    },
+    business: { name: business.name || null, website: business.website || null },
+    urlExtraction: { university: 'Sample University', product: 'Sample Product' },
+    journey,
+    conversation: { summary: 'Sample conversation summary', topics: 'sample, topics' },
+  };
+}
+
+/**
+ * Errors retrying cannot fix (bad credentials, unknown field, no mappings, CRM
+ * turned off) are 'permanent': the lead goes to 'needs_attention' straight away
+ * instead of burning retries. Anything else (timeouts, 5xx, 429, network) is
+ * 'transient' and retried. Unknown errors default to transient.
+ */
+export function classifyLeadsquaredError(message: string | null | undefined): 'transient' | 'permanent' {
+  const m = message || '';
+  const permanent = [
+    /no field mappings configured/i,
+    /credentials not configured|integration is not enabled|leadsquared is off/i,
+    /invalid\s*(access|secret)\s*key|access\s*key|secret\s*key|unauthori[sz]ed|authentication failed|access denied|\bickey\b/i,
+    /returned 40[13]\b|:\s*40[013]\s/i,
+    /(attribute|field|schema\s*name)\b.{0,60}\b(not found|does not exist|doesn't exist|is invalid|invalid)/i,
+    /invalid\s+(lead\s+)?(attribute|field|schema)/i,
+    /MXInvalid|MXUnAuthorized|MXAccessDenied/i,
+    /not qualified/i,
+    /decrypt/i,
+  ];
+  if (/\b(429|5\d\d)\b|timed out|timeout|ECONN|ETIMEDOUT|ENOTFOUND|EAI_AGAIN|fetch failed|socket hang up|network/i.test(m)) {
+    return 'transient';
+  }
+  return permanent.some(re => re.test(m)) ? 'permanent' : 'transient';
+}
+
+/** UDS webhooks must be HTTPS; returns an error message or null. */
+export function validateUdsWebhookUrl(url: string): string | null {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'https:') return 'UDS webhook URL must start with https://';
+    return null;
+  } catch {
+    return 'UDS webhook URL is not a valid URL';
+  }
+}
