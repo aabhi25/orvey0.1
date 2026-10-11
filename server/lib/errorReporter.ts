@@ -219,7 +219,7 @@ export class ErrorReporter {
         JSON.stringify(event) + "\n";
       const headers = {
         "Content-Type": "application/x-sentry-envelope",
-        "X-Sentry-Auth": `Sentry sentry_version=7, sentry_key=${this.dsn.publicKey}, sentry_client=chroney-reporter/1.0`,
+        "X-Sentry-Auth": `Sentry sentry_version=7, sentry_key=${this.dsn.publicKey}, sentry_client=orvey-reporter/1.0`,
       };
       const p = this.transport(this.dsn.envelopeUrl, body, headers)
         .then((res) => {

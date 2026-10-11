@@ -65,7 +65,7 @@ export function createAnamProvider(options: AnamOptions = {}): AvatarProvider {
         personaConfig.avatarModel = opts.avatarModel;
       }
       const body: Record<string, unknown> = {
-        clientLabel: `chroney-${input.sessionLabel}`.slice(0, 64),
+        clientLabel: `orvey-${input.sessionLabel}`.slice(0, 64),
         personaConfig,
         // Privacy: no session replay recordings — the provider only needs the audio.
         // UNVERIFIED: nested shape sessionOptions.sessionReplay.enableSessionReplay (docs summary).
