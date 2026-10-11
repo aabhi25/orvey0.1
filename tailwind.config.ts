@@ -114,6 +114,7 @@ export default {
         sans: ["var(--font-sans)"],
         serif: ["var(--font-serif)"],
         mono: ["var(--font-mono)"],
+        display: ["'Instrument Serif'", "Georgia", "serif"],
       },
       keyframes: {
         "accordion-down": {

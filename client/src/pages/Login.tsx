@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Sparkles, Mail, Lock, Shield, Zap, AlertCircle } from "lucide-react";
+import { ArrowRight, Mail, Lock, Shield, Zap, AlertCircle } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -112,186 +112,174 @@ export default function Login({ onLogin }: { onLogin: (user: any) => void }) {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#11234a] via-[#070b16] to-[#020306]">
-        <div className="absolute inset-0 opacity-40">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-600 rounded-full filter blur-3xl animate-blob"></div>
-          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-brand-800 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-ink-500 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
-        </div>
+    <div className="fixed inset-0 overflow-y-auto bg-[#f6f8fc]">
+      {/* Soft light canvas: faint navy glow and orbit rings that echo the Orvey mark */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div className="absolute -top-40 -left-40 h-[36rem] w-[36rem] rounded-full bg-brand-100/70 blur-3xl" />
+        <div className="absolute -bottom-48 -right-32 h-[32rem] w-[32rem] rounded-full bg-ink-100/80 blur-3xl" />
+        <div className="absolute left-1/2 top-1/2 h-[46rem] w-[46rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-brand-200/50" />
+        <div className="absolute left-1/2 top-1/2 h-[64rem] w-[64rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-brand-200/30" />
+        <div className="absolute left-[calc(50%+16rem)] top-[calc(50%-17rem)] h-3 w-3 rounded-full bg-brand-300/70" />
       </div>
 
-      <div className="relative w-full h-full flex items-center justify-center">
-        <div className="w-full flex items-center justify-center p-4 lg:p-8">
-          <div className="w-full max-w-md">
-            <div className="relative bg-white/[0.06] backdrop-blur-2xl rounded-3xl p-8 shadow-2xl shadow-black/50 border border-white/10">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-12 h-12 flex items-center justify-center">
-                  <img src="/orvey-logo.svg" className="w-12 h-12 object-contain" alt="Orvey" />
+      <div className="relative flex min-h-full flex-col items-center justify-center px-4 py-10">
+        <div className="w-full max-w-[420px]">
+          <div className="rounded-2xl border border-ink-100 bg-white/95 p-8 shadow-[0_24px_60px_-24px_rgba(17,35,74,0.22)] backdrop-blur sm:p-10">
+            <div className="flex items-center justify-center gap-2.5">
+              <img src="/orvey-logo.svg" className="h-10 w-10" alt="" />
+              <span className="text-xl font-semibold tracking-wide text-ink-700">Orvey</span>
+            </div>
+
+            <div className="mt-8 text-center">
+              <h1 className="font-display text-[2.6rem] leading-none text-ink-800">Welcome back</h1>
+              <p className="mt-3 text-sm text-ink-400">Sign in to your AI workspace</p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+              <div>
+                <Label htmlFor="username" className="text-[13px] font-medium text-ink-600">
+                  Email or username
+                </Label>
+                <div className="relative mt-1.5">
+                  <Mail className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-300" />
+                  <Input
+                    id="username"
+                    type="text"
+                    placeholder="you@company.com"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                    autoFocus
+                    data-testid="input-username"
+                    className="h-11 border-ink-200 bg-white pl-10 text-ink-800 placeholder:text-ink-300 focus-visible:border-brand-600 focus-visible:ring-2 focus-visible:ring-brand-600/15 focus-visible:ring-offset-0"
+                  />
                 </div>
-                <h2 className="text-2xl font-semibold tracking-wide text-white">
-                  Orvey
-                </h2>
               </div>
 
-              <div className="mb-8">
-                <h1 className="text-2xl font-bold text-white leading-tight text-center">Welcome back to your AI Workspace</h1>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <Label htmlFor="username" className="text-sm font-medium text-white/90">
-                    Email / Username
-                  </Label>
-                  <div className="relative mt-2">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/70" />
-                    <Input
-                      id="username"
-                      type="text"
-                      placeholder="Enter your email or username"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      required
-                      autoFocus
-                      data-testid="input-username"
-                      className="pl-11 bg-white/20 border-white/30 text-white placeholder:text-white/60 focus:bg-white/25 focus:border-white/50 focus:ring-2 focus:ring-brand-400/50 transition-all h-12 shadow-lg"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <Label htmlFor="password" className="text-sm font-medium text-white/90">
+              <div>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password" className="text-[13px] font-medium text-ink-600">
                     Password
                   </Label>
-                  <div className="relative mt-2">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/70" />
-                    <Input
-                      id="password"
-                      type="password"
-                      placeholder="Enter your password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      data-testid="input-password"
-                      className="pl-11 bg-white/20 border-white/30 text-white placeholder:text-white/60 focus:bg-white/25 focus:border-white/50 focus:ring-2 focus:ring-brand-400/50 transition-all h-12 shadow-lg"
-                    />
-                  </div>
+                  <Dialog open={isForgotPasswordOpen} onOpenChange={setIsForgotPasswordOpen}>
+                    <DialogTrigger asChild>
+                      <button
+                        type="button"
+                        className="text-[13px] font-medium text-brand-600 transition-colors hover:text-brand-800"
+                      >
+                        Forgot password?
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-md">
+                      <DialogHeader>
+                        <DialogTitle className="flex items-center gap-2 text-ink-800">
+                          <Mail className="h-5 w-5 text-brand-600" />
+                          Reset your password
+                        </DialogTitle>
+                        <DialogDescription>
+                          Enter your email address and we'll send you a link to reset your password.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <form onSubmit={handleForgotPassword} className="mt-4 space-y-4">
+                        <div>
+                          <Label htmlFor="forgot-email" className="text-[13px] font-medium text-ink-600">
+                            Email address
+                          </Label>
+                          <Input
+                            id="forgot-email"
+                            type="email"
+                            placeholder="you@company.com"
+                            value={forgotPasswordEmail}
+                            onChange={(e) => setForgotPasswordEmail(e.target.value)}
+                            required
+                            className="mt-1.5 h-11 border-ink-200 bg-white"
+                          />
+                        </div>
+                        <div className="flex gap-3">
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => {
+                              setIsForgotPasswordOpen(false);
+                              setForgotPasswordEmail("");
+                            }}
+                            className="h-11 flex-1"
+                          >
+                            Cancel
+                          </Button>
+                          <Button
+                            type="submit"
+                            className="h-11 flex-1 bg-gradient-to-r from-brand-700 to-ink-800 text-white hover:from-brand-800 hover:to-ink-900"
+                            disabled={forgotPasswordMutation.isPending}
+                          >
+                            {forgotPasswordMutation.isPending ? (
+                              <span className="flex items-center gap-2">
+                                <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                                Sending...
+                              </span>
+                            ) : (
+                              "Send reset link"
+                            )}
+                          </Button>
+                        </div>
+                      </form>
+                    </DialogContent>
+                  </Dialog>
                 </div>
+                <div className="relative mt-1.5">
+                  <Lock className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-300" />
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    data-testid="input-password"
+                    className="h-11 border-ink-200 bg-white pl-10 text-ink-800 placeholder:text-ink-300 focus-visible:border-brand-600 focus-visible:ring-2 focus-visible:ring-brand-600/15 focus-visible:ring-offset-0"
+                  />
+                </div>
+              </div>
 
-                {loginError && (
-                  <div className="flex items-start gap-3 p-4 rounded-xl bg-red-500/20 border border-red-400/30 backdrop-blur-sm">
-                    <AlertCircle className="w-5 h-5 text-red-300 flex-shrink-0 mt-0.5" />
-                    <p className="text-sm text-red-100 leading-relaxed">{loginError}</p>
-                  </div>
+              {loginError && (
+                <div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-3.5">
+                  <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-500" />
+                  <p className="text-sm leading-relaxed text-red-700">{loginError}</p>
+                </div>
+              )}
+
+              <Button
+                type="submit"
+                className="group mt-2 h-11 w-full bg-gradient-to-r from-brand-700 to-ink-800 text-[15px] font-medium text-white shadow-md shadow-brand-900/20 transition-all hover:from-brand-800 hover:to-ink-900 hover:shadow-lg"
+                disabled={loginMutation.isPending}
+                data-testid="button-login"
+              >
+                {loginMutation.isPending ? (
+                  <span className="flex items-center gap-2">
+                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                    Signing in...
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-2">
+                    Sign in
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </span>
                 )}
-
-                <Button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-brand-500 via-brand-700 to-brand-900 hover:from-brand-600 hover:via-brand-800 hover:to-brand-950 text-white border border-white/10 shadow-xl h-12 text-base font-semibold mt-6 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-500/50 hover:scale-[1.02] active:scale-[0.98]"
-                  disabled={loginMutation.isPending}
-                  data-testid="button-login"
-                >
-                  {loginMutation.isPending ? (
-                    <span className="flex items-center gap-2">
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      Signing in...
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-2">
-                      Sign In
-                      <Sparkles className="w-4 h-4" />
-                    </span>
-                  )}
-                </Button>
-              </form>
-
-              <div className="mt-5 text-center">
-                <Dialog open={isForgotPasswordOpen} onOpenChange={setIsForgotPasswordOpen}>
-                  <DialogTrigger asChild>
-                    <button
-                      type="button"
-                      className="text-sm text-white/80 hover:text-white font-medium hover:underline transition-colors"
-                    >
-                      Forgot Password?
-                    </button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-md bg-slate-900 border-white/10">
-                    <DialogHeader>
-                      <DialogTitle className="flex items-center gap-2 text-white">
-                        <Mail className="w-5 h-5 text-brand-400" />
-                        Reset Your Password
-                      </DialogTitle>
-                      <DialogDescription className="text-white/70">
-                        Enter your email address and we'll send you a link to reset your password.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <form onSubmit={handleForgotPassword} className="space-y-4 mt-4">
-                      <div>
-                        <Label htmlFor="forgot-email" className="text-sm font-medium text-white/90">
-                          Email Address
-                        </Label>
-                        <Input
-                          id="forgot-email"
-                          type="email"
-                          placeholder="Enter your email"
-                          value={forgotPasswordEmail}
-                          onChange={(e) => setForgotPasswordEmail(e.target.value)}
-                          required
-                          className="mt-1.5 bg-white/5 border-white/10 text-white placeholder:text-white/40"
-                        />
-                      </div>
-                      <div className="flex gap-3">
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={() => {
-                            setIsForgotPasswordOpen(false);
-                            setForgotPasswordEmail("");
-                          }}
-                          className="flex-1 bg-white/5 border-white/10 text-white hover:bg-white/10"
-                        >
-                          Cancel
-                        </Button>
-                        <Button
-                          type="submit"
-                          className="flex-1 bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700 text-white"
-                          disabled={forgotPasswordMutation.isPending}
-                        >
-                          {forgotPasswordMutation.isPending ? (
-                            <span className="flex items-center gap-2">
-                              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                              Sending...
-                            </span>
-                          ) : (
-                            "Send Reset Link"
-                          )}
-                        </Button>
-                      </div>
-                    </form>
-                  </DialogContent>
-                </Dialog>
-              </div>
-
-              <div className="mt-8 space-y-3">
-                <div className="flex items-center gap-6 text-xs text-white/60">
-                  <div className="flex items-center gap-2">
-                    <Shield className="w-4 h-4" />
-                    <span>Data encrypted & GDPR-ready</span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-white/60">
-                  <Zap className="w-4 h-4" />
-                  <span>Integrated with Shopify, WooCommerce & more</span>
-                </div>
-              </div>
-
-              <div className="mt-6 pt-6 border-t border-white/10 text-center">
-                <p className="text-xs text-white/50">
-                  Powered by <span className="font-semibold text-white/70">KnightLabs AI</span>
-                </p>
-              </div>
-            </div>
+              </Button>
+            </form>
           </div>
+
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-ink-400">
+            <span className="flex items-center gap-1.5">
+              <Shield className="h-3.5 w-3.5" />
+              Encrypted & GDPR-ready
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Zap className="h-3.5 w-3.5" />
+              Works with Shopify, WooCommerce & more
+            </span>
+          </div>
+          <p className="mt-3 text-center text-xs text-ink-300">© {new Date().getFullYear()} Orvey</p>
         </div>
       </div>
     </div>
