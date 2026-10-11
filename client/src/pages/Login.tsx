@@ -131,7 +131,7 @@ export default function Login({ onLogin }: { onLogin: (user: any) => void }) {
             </div>
 
             <div className="mt-8 text-center">
-              <h1 className="font-display text-[2.6rem] leading-none text-ink-800">Welcome back</h1>
+              <h1 className="font-display text-[1.85rem] font-semibold leading-tight tracking-tight text-ink-800">Welcome back</h1>
               <p className="mt-3 text-sm text-ink-400">Sign in to your AI workspace</p>
             </div>
 
