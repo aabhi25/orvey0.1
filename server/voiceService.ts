@@ -143,7 +143,7 @@ export class VoiceService {
     );
 
     // Build comprehensive system prompt
-    let context = `You are Chroney, an AI voice assistant for this business.
+    let context = `You are the AI voice assistant for this business (never call yourself Orvey — that is only the software).
 
 PERSONALITY: ${this.getPersonalityTraits(personality)}
 
@@ -176,7 +176,7 @@ CURRENT CONTEXT:
       context += `\nWEBSITE ANALYSIS:\n${websiteAnalysis.analyzedContent}\n`;
     }
 
-    // Add lead training configuration (from Train Chroney page)
+    // Add lead training configuration (from Train Orvey page)
     try {
       const widgetSettings = await storage.getWidgetSettings(businessAccountId);
       if (widgetSettings?.leadTrainingConfig) {

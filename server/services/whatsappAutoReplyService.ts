@@ -68,11 +68,11 @@ export interface WhatsappContextStats {
 interface WhatsappBrainOptions {
   model?: string;
   answerStyle?: { personality: string; responseLength: string; personalityFromWhatsapp: boolean };
-  /** Train Chroney instructions formatted for WhatsApp (persona mode: the secondary block). */
+  /** Train Orvey instructions formatted for WhatsApp (persona mode: the secondary block). */
   websiteInstructions?: string;
   /** Conditional instructions whose keywords appear in this message. */
   turnInstructions?: string;
-  /** Business-written fallback reply (Train Chroney 'fallback' instruction), placeholders resolved. */
+  /** Business-written fallback reply (Train Orvey 'fallback' instruction), placeholders resolved. */
   fallbackReply?: string;
   appointmentsEnabled?: boolean;
   ordersEnabled?: boolean;
@@ -189,7 +189,7 @@ function looksLikeSlotPick(userMessage: string, history: Array<{ role: string; c
   return !!lastAssistant && /\b1\.\s.*\d{1,2}:\d{2}\s*(am|pm)/i.test(lastAssistant.content);
 }
 
-/** Conditional Train Chroney instructions triggered by this message (keywords), for the final note. */
+/** Conditional Train Orvey instructions triggered by this message (keywords), for the final note. */
 function matchedConditionalInstructions(raw: string | null, userMessage: string): string {
   const { matchedConditional } = selectInstructionsForMessage(raw, userMessage, "whatsapp");
   return matchedConditional.map(i => `- ${i.text}`).join("\n");
@@ -482,8 +482,8 @@ export class WhatsappAutoReplyService {
         console.error("[WhatsApp Auto-Reply] Flow context fetch error (non-fatal):", err);
       }
 
-      // Train Chroney instructions, parsed exactly like the website (always-on / conditional /
-      // fallback; WhatsApp-tagged or untagged only). Off when "Use Train Chroney instructions" is
+      // Train Orvey instructions, parsed exactly like the website (always-on / conditional /
+      // fallback; WhatsApp-tagged or untagged only). Off when "Use Train Orvey instructions" is
       // off or the WhatsApp-only instructions are set to replace them.
       const applyWebsiteInstructions = websiteInstructionsApply(settings);
       const instructionsBlock = applyWebsiteInstructions
@@ -1407,7 +1407,7 @@ export class WhatsappAutoReplyService {
         // explicit factual asks (pricing/policy/hours/specs) whose answer is not in KB/FAQs/docs.
         // If customPrompt also contains widget/master training (combinedInstructions), include it
         // as secondary CUSTOM BUSINESS INSTRUCTIONS below the persona block.
-        // Train Chroney instructions only (the persona is already the PRIMARY DIRECTIVE above).
+        // Train Orvey instructions only (the persona is already the PRIMARY DIRECTIVE above).
         const extraCustomInstructions = opts.websiteInstructions !== undefined
           ? opts.websiteInstructions
           : (customPrompt && customPrompt.trim() !== personaPrompt!.trim())

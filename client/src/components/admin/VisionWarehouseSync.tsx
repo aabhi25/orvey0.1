@@ -41,9 +41,9 @@ const SYNC_CONFIG = {
     title: 'Vista Image Sync',
     description: "Sync products for visual search with Vista AI",
     icon: 'blue',
-    gradient: 'from-blue-500 to-indigo-600',
-    buttonGradient: 'from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700',
-    bgGradient: 'from-blue-50/50 to-indigo-50/50 dark:from-blue-900/20 dark:to-indigo-900/20',
+    gradient: 'from-blue-500 to-brand-600',
+    buttonGradient: 'from-blue-600 to-brand-600 hover:from-blue-700 hover:to-brand-700',
+    bgGradient: 'from-blue-50/50 to-brand-50/50 dark:from-blue-900/20 dark:to-brand-900/20',
     borderColor: 'border-blue-200 dark:border-blue-800',
   },
 };

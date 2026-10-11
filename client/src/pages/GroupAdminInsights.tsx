@@ -307,12 +307,12 @@ export default function GroupAdminInsights() {
   const dynamicColorPalette = [
     { bg: "bg-blue-100", text: "text-blue-700", bar: "bg-blue-200" },
     { bg: "bg-green-100", text: "text-green-700", bar: "bg-green-200" },
-    { bg: "bg-purple-100", text: "text-purple-700", bar: "bg-purple-200" },
+    { bg: "bg-brand-100", text: "text-brand-700", bar: "bg-brand-200" },
     { bg: "bg-orange-100", text: "text-orange-700", bar: "bg-orange-200" },
     { bg: "bg-pink-100", text: "text-pink-700", bar: "bg-pink-200" },
     { bg: "bg-cyan-100", text: "text-cyan-700", bar: "bg-cyan-200" },
     { bg: "bg-yellow-100", text: "text-yellow-700", bar: "bg-yellow-200" },
-    { bg: "bg-indigo-100", text: "text-indigo-700", bar: "bg-indigo-200" },
+    { bg: "bg-brand-100", text: "text-brand-700", bar: "bg-brand-200" },
     { bg: "bg-teal-100", text: "text-teal-700", bar: "bg-teal-200" },
     { bg: "bg-rose-100", text: "text-rose-700", bar: "bg-rose-200" },
     { bg: "bg-red-100", text: "text-red-700", bar: "bg-red-200" },
@@ -332,7 +332,7 @@ export default function GroupAdminInsights() {
           <div className="flex items-center gap-3">
             <SidebarTrigger />
             <div className="flex items-center gap-2">
-              <Lightbulb className="w-6 h-6 text-purple-600" />
+              <Lightbulb className="w-6 h-6 text-brand-600" />
               <div>
                 <h1 className="text-xl font-semibold">Account Insights</h1>
                 <p className="text-sm text-gray-500">Detailed analytics for linked accounts</p>
@@ -551,8 +551,8 @@ export default function GroupAdminInsights() {
               <Card>
                 <CardContent className="p-4">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-purple-50 rounded-lg">
-                      <MessageSquare className="w-5 h-5 text-purple-600" />
+                    <div className="p-2 bg-brand-50 rounded-lg">
+                      <MessageSquare className="w-5 h-5 text-brand-600" />
                     </div>
                     <div>
                       <p className="text-2xl font-bold">{isStatsLoading ? '-' : accountStats?.conversations || 0}</p>
@@ -596,7 +596,7 @@ export default function GroupAdminInsights() {
               <CardHeader className="pb-3">
                 <div>
                   <CardTitle className="flex items-center gap-2 text-lg">
-                    <Eye className="w-4 h-4 text-indigo-600" />
+                    <Eye className="w-4 h-4 text-brand-600" />
                     Visitor Insights
                   </CardTitle>
                   <CardDescription className="text-xs">
@@ -621,12 +621,12 @@ export default function GroupAdminInsights() {
                   <>
                     {/* Visitor Stats Grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-4">
-                      <div className="p-3 bg-indigo-50 rounded-lg">
+                      <div className="p-3 bg-brand-50 rounded-lg">
                         <div className="flex items-center gap-2 mb-1">
-                          <Eye className="w-4 h-4 text-indigo-600" />
+                          <Eye className="w-4 h-4 text-brand-600" />
                           <span className="text-xs font-medium text-gray-700">Opened Chat</span>
                         </div>
-                        <p className="text-2xl font-bold text-indigo-600">{visitorStats.totalVisitors}</p>
+                        <p className="text-2xl font-bold text-brand-600">{visitorStats.totalVisitors}</p>
                       </div>
                       
                       <div className="p-3 bg-green-50 rounded-lg">
@@ -637,12 +637,12 @@ export default function GroupAdminInsights() {
                         <p className="text-2xl font-bold text-green-600">{visitorStats.engagedVisitors}</p>
                       </div>
                       
-                      <div className="p-3 bg-purple-50 rounded-lg">
+                      <div className="p-3 bg-brand-50 rounded-lg">
                         <div className="flex items-center gap-2 mb-1">
-                          <Users className="w-4 h-4 text-purple-600" />
+                          <Users className="w-4 h-4 text-brand-600" />
                           <span className="text-xs font-medium text-gray-700">Leads Generated</span>
                         </div>
-                        <p className="text-2xl font-bold text-purple-600">{visitorStats.leadsGenerated}</p>
+                        <p className="text-2xl font-bold text-brand-600">{visitorStats.leadsGenerated}</p>
                       </div>
                     </div>
 
@@ -854,7 +854,7 @@ export default function GroupAdminInsights() {
               <CardHeader className="pb-3">
                 <div>
                   <CardTitle className="flex items-center gap-2 text-lg">
-                    <Users className="w-4 h-4 text-indigo-600" />
+                    <Users className="w-4 h-4 text-brand-600" />
                     Lead Breakdown
                   </CardTitle>
                   <CardDescription className="text-xs">
@@ -893,7 +893,7 @@ export default function GroupAdminInsights() {
                     {leadBreakdown.captureMethodBreakdown.length > 0 && (
                       <div>
                         <div className="flex items-center gap-2 mb-2 text-sm font-semibold text-gray-700">
-                          <MessageSquare className="w-3.5 h-3.5 text-indigo-500" />
+                          <MessageSquare className="w-3.5 h-3.5 text-brand-500" />
                           Capture Method
                         </div>
                         <div className="space-y-1">
@@ -926,7 +926,7 @@ export default function GroupAdminInsights() {
                     {leadBreakdown.topicsBreakdown.length > 0 && (
                       <div>
                         <div className="flex items-center gap-2 mb-2 text-sm font-semibold text-gray-700">
-                          <Tag className="w-3.5 h-3.5 text-indigo-500" />
+                          <Tag className="w-3.5 h-3.5 text-brand-500" />
                           Topics of Interest
                         </div>
                         <div className="space-y-1">
@@ -965,7 +965,7 @@ export default function GroupAdminInsights() {
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="flex items-center gap-2 text-lg">
-                      <Brain className="w-4 h-4 text-purple-600" />
+                      <Brain className="w-4 h-4 text-brand-600" />
                       Weekly AI Report
                     </CardTitle>
                     <CardDescription className="text-xs mt-1">
@@ -992,7 +992,7 @@ export default function GroupAdminInsights() {
               <CardContent className="pt-0">
                 {(isAnalysisLoading || isRefreshingReport) ? (
                   <div className="text-center py-8">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto mb-3"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-600 mx-auto mb-3"></div>
                     <p className="text-sm text-gray-600">
                       {isRefreshingReport ? 'Generating fresh AI report...' : 'Loading cached report...'}
                     </p>
@@ -1008,9 +1008,9 @@ export default function GroupAdminInsights() {
                   <div className="space-y-3">
                     {/* Summary */}
                     {conversationAnalysis.summary && (
-                      <div className="p-3 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-200">
+                      <div className="p-3 bg-gradient-to-r from-brand-50 to-ink-50 rounded-lg border border-brand-200">
                         <div className="flex items-start gap-2">
-                          <Sparkles className="w-4 h-4 text-purple-600 mt-0.5 flex-shrink-0" />
+                          <Sparkles className="w-4 h-4 text-brand-600 mt-0.5 flex-shrink-0" />
                           <p className="text-sm text-gray-800 leading-relaxed">{conversationAnalysis.summary}</p>
                         </div>
                       </div>
@@ -1126,16 +1126,16 @@ export default function GroupAdminInsights() {
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                       {/* Common Patterns */}
-                      <div className="p-3 bg-purple-50 rounded-lg">
+                      <div className="p-3 bg-brand-50 rounded-lg">
                         <div className="flex items-center gap-1.5 mb-2">
-                          <MessageSquare className="w-4 h-4 text-purple-600" />
+                          <MessageSquare className="w-4 h-4 text-brand-600" />
                           <h3 className="text-sm font-semibold text-gray-900">Common Patterns</h3>
                         </div>
                         {conversationAnalysis.commonPatterns?.length > 0 ? (
                           <ul className="space-y-1">
                             {conversationAnalysis.commonPatterns.map((pattern, index) => (
                               <li key={index} className="flex items-start gap-1.5 text-xs text-gray-800">
-                                <span className="text-purple-600 mt-0.5">•</span>
+                                <span className="text-brand-600 mt-0.5">•</span>
                                 <span>{pattern}</span>
                               </li>
                             ))}

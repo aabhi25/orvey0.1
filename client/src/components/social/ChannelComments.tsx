@@ -218,8 +218,8 @@ export default function ChannelComments({ channel }: { channel: SocialChannel })
                         </div>
                       )}
                       {comment.dmStatus && (
-                        <div className={`rounded-lg p-3 ml-4 border-l-2 ${comment.dmStatus === "sent" ? "bg-purple-50 border-purple-300" : "bg-red-50 border-red-300"}`}>
-                          <p className={`text-xs font-medium mb-1 ${comment.dmStatus === "sent" ? "text-purple-700" : "text-red-700"}`}>
+                        <div className={`rounded-lg p-3 ml-4 border-l-2 ${comment.dmStatus === "sent" ? "bg-brand-50 border-brand-300" : "bg-red-50 border-red-300"}`}>
+                          <p className={`text-xs font-medium mb-1 ${comment.dmStatus === "sent" ? "text-brand-700" : "text-red-700"}`}>
                             {comment.dmStatus === "sent" ? "DM Sent:" : "DM Failed"}
                           </p>
                           {comment.dmText && <p className="text-sm text-gray-800">{comment.dmText}</p>}

@@ -44,7 +44,7 @@ interface AiSetupSettings {
   personality: WaPersonality | null;
   /** null = same as the website widget. */
   responseLength: WaResponseLength | null;
-  /** How the WhatsApp-only instructions combine with Train Chroney instructions. */
+  /** How the WhatsApp-only instructions combine with Train Orvey instructions. */
   instructionsMode: InstructionsMode;
   /** Kept in sync with instructionsMode by the server (add = true, replace = false). */
   useMasterTraining: boolean;
@@ -242,7 +242,7 @@ export default function WhatsAppAISetup() {
       <div className="flex items-center gap-3">
         <div>
           <h1 className="text-xl font-semibold flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-purple-600" />
+            <Sparkles className="h-5 w-5 text-brand-600" />
             AI Setup
           </h1>
           <p className="text-sm text-muted-foreground">
@@ -331,7 +331,7 @@ export default function WhatsAppAISetup() {
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-purple-600" />
+            <Sparkles className="h-5 w-5 text-brand-600" />
             <CardTitle>WhatsApp-only instructions</CardTitle>
           </div>
           <CardDescription>
@@ -347,7 +347,7 @@ export default function WhatsAppAISetup() {
                   key={tpl.label}
                   type="button"
                   onClick={() => setCustomPrompt(tpl.prompt)}
-                  className="text-left p-3 border rounded-md hover:border-purple-400 hover:bg-purple-50 transition-colors"
+                  className="text-left p-3 border rounded-md hover:border-brand-400 hover:bg-brand-50 transition-colors"
                   data-testid={`button-template-${tpl.label.toLowerCase().replace(/\s+/g, "-")}`}
                 >
                   <div className="flex items-center gap-2 mb-1">
@@ -395,7 +395,7 @@ export default function WhatsAppAISetup() {
           </div>
 
           <div className="space-y-3 pt-2 border-t">
-            <Label className="text-sm">How should these work with your Train Chroney instructions?</Label>
+            <Label className="text-sm">How should these work with your Train Orvey instructions?</Label>
             <RadioGroup
               value={instructionsMode}
               onValueChange={(v) => handleInstructionsMode(v as InstructionsMode)}
@@ -411,7 +411,7 @@ export default function WhatsAppAISetup() {
                 <Label htmlFor="instructions-mode-add" className="font-normal cursor-pointer">
                   <span className="block text-sm font-medium text-gray-900">Add to my main instructions</span>
                   <span className="block text-xs text-muted-foreground">
-                    Train Chroney instructions and these both apply
+                    Train Orvey instructions and these both apply
                   </span>
                 </Label>
               </div>
@@ -425,7 +425,7 @@ export default function WhatsAppAISetup() {
                 <Label htmlFor="instructions-mode-replace" className="font-normal cursor-pointer">
                   <span className="block text-sm font-medium text-gray-900">Use instead of my main instructions</span>
                   <span className="block text-xs text-muted-foreground">
-                    Train Chroney instructions are not used on WhatsApp
+                    Train Orvey instructions are not used on WhatsApp
                   </span>
                 </Label>
               </div>
@@ -435,9 +435,9 @@ export default function WhatsAppAISetup() {
           <div className="space-y-1 pt-2 border-t">
             <div className="flex items-center justify-between gap-4 py-2">
               <div>
-                <div className="font-medium text-sm text-gray-900">Use Train Chroney instructions</div>
+                <div className="font-medium text-sm text-gray-900">Use Train Orvey instructions</div>
                 <div className="text-sm text-muted-foreground">
-                  Apply the instructions from Train Chroney to WhatsApp replies.
+                  Apply the instructions from Train Orvey to WhatsApp replies.
                 </div>
               </div>
               <Switch

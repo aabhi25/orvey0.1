@@ -25,7 +25,7 @@ const STATUS_TONE: Record<CallStatus, string> = {
 
 const OUTCOME_TONE: Partial<Record<CallOutcome, string>> = {
   interested: "border-emerald-200 bg-emerald-50 text-emerald-700",
-  callback_requested: "border-violet-200 bg-violet-50 text-violet-700",
+  callback_requested: "border-brand-200 bg-brand-50 text-brand-700",
   not_interested: "border-gray-200 bg-gray-50 text-gray-600",
   wrong_number: "border-gray-200 bg-gray-50 text-gray-600",
   do_not_call: "border-red-200 bg-red-50 text-red-700",
@@ -57,6 +57,6 @@ export function DirectionIcon({ direction, className = "h-4 w-4" }: { direction:
   return direction === "inbound" ? (
     <PhoneIncoming className={`${className} text-sky-600`} aria-label="Incoming call" />
   ) : (
-    <PhoneOutgoing className={`${className} text-violet-600`} aria-label="Outgoing call" />
+    <PhoneOutgoing className={`${className} text-brand-600`} aria-label="Outgoing call" />
   );
 }

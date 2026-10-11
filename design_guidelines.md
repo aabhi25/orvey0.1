@@ -1,15 +1,32 @@
-# Design Guidelines: AI Chroney Chat Application
+# Design Guidelines: Orvey
+
+## Brand & Theme (current)
+
+Orvey uses a classy **dark blue → black** look for the app chrome and a **light background** for the main working areas.
+
+- **Brand scale (`brand-*`, tailwind.config.ts):** navy blue. `brand-600` (#1f4596) is the main accent (buttons, links, active states).
+- **Ink scale (`ink-*`):** blue-black. Brand gradients run `from-brand-* to-ink-*` (navy → black).
+- **Sidebar:** deep navy fading to blue-black (`.sidebar-orvey` in index.css), white/soft-blue text, one brand style for every nav icon.
+- **Page header bars:** `from-brand-800 via-ink-700 to-ink-900`.
+- **Main sections:** light background (`--background` 220 33% 97%) with white cards.
+- **Status colors stay semantic:** green = success, amber/orange = warning, red = error.
+- Don't use Tailwind's purple/violet/indigo/fuchsia in new code; use `brand-*` / `ink-*`.
+- Logo: `client/public/orvey-logo.svg` (favicons generated from it).
+- Widget defaults: chat color #1f4596 → #0a1530, header text "Orvey".
+
+> The sections below are the original chat-layout notes; their color values are superseded by the brand section above.
+
 
 ## Design Approach
 
-**Reference-Based Approach**: AI Chroney Interface
+**Reference-Based Approach**: Orvey Interface
 This application features a clean, card-based design with a friendly, approachable aesthetic. The design emphasizes clarity through white card messages, consistent avatars, and a warm color palette centered on red/pink and purple gradients.
 
 ## Core Design Principles
 
 1. **Card-Based Clarity**: All messages appear in clean white cards with subtle shadows
 2. **Consistent Avatar System**: Both user and AI messages display avatars on the left
-3. **Friendly Branding**: "Hi Chroney" header with active status indicator
+3. **Friendly Branding**: "Orvey" header with active status indicator
 4. **Clean White Space**: Light gray background with ample spacing between elements
 5. **Vibrant Accents**: Red/pink gradient header, purple gradient action buttons
 
@@ -90,7 +107,7 @@ Use Tailwind units: **2, 3, 4, 6, 8, 12, 16** for consistent rhythm
 - Fixed position at top, full-width
 - Red/pink gradient background
 - Left side: Circular logo/icon
-- Center: "Hi Chroney" title with "AI Assistant Active" subtitle
+- Center: "Orvey" title with "AI Assistant Active" subtitle
 - Right side: Action icons (expand, close, etc.)
 - Height: 60px
 - Padding: px-4, py-3
@@ -98,7 +115,7 @@ Use Tailwind units: **2, 3, 4, 6, 8, 12, 16** for consistent rhythm
 
 **Elements**:
 - Logo: Small circular icon on left
-- Title: "Hi Chroney" - text-base, font-semibold
+- Title: "Orvey" - text-base, font-semibold
 - Subtitle: "AI Assistant Active" - text-xs, opacity-80
 - Icons: Right-aligned utility icons
 
@@ -140,7 +157,7 @@ Use Tailwind units: **2, 3, 4, 6, 8, 12, 16** for consistent rhythm
 - Border: 1px gray border
 - Padding: px-4, py-3
 - Background: white
-- Placeholder: "Ask Hi Chroney anything... (e.g., 'Generate timetable', 'Check attendance')"
+- Placeholder: "Ask Orvey anything... (e.g., 'Generate timetable', 'Check attendance')"
 - Min-height: 44px
 
 **Send Button**:
@@ -261,7 +278,7 @@ All icons: Standard sizes with consistent styling
 2. **Consistent Avatars**: All messages show avatars on left side
 3. **Warm Color Palette**: Red/pink header, purple accents
 4. **Clean Hierarchy**: White cards on light gray background
-5. **Friendly Branding**: "Hi Chroney" with active status
+5. **Friendly Branding**: "Orvey" with active status
 6. **Simple Input**: Clean text input with purple gradient send button
 7. **Subtle Shadows**: Cards use shadow-sm for depth without distraction
 

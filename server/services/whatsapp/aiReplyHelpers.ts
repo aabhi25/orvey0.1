@@ -152,7 +152,7 @@ export function toWhatsAppText(text: string): string {
 }
 
 /**
- * A Train Chroney fallback template for WhatsApp: the phone is always known there, name and email
+ * A Train Orvey fallback template for WhatsApp: the phone is always known there, name and email
  * are treated as not yet known ({{if_missing_name}}…{{/if_missing_name}} kept).
  */
 export function processWhatsappFallbackTemplate(template: string): string {

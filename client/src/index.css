@@ -14,33 +14,33 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
 
-  --background: 210 20% 98%;
+  --background: 220 33% 97%;
 
-  --foreground: 216 12% 16%;
+  --foreground: 222 30% 12%;
 
-  --border: 214 32% 91%;
+  --border: 220 22% 90%;
 
   --card: 0 0% 100%;
 
-  --card-foreground: 216 12% 16%;
+  --card-foreground: 222 30% 12%;
 
-  --card-border: 214 32% 91%;
+  --card-border: 220 22% 90%;
 
-  --sidebar: 240 5% 96%;
+  --sidebar: 222 45% 8%;
 
-  --sidebar-foreground: 240 5% 12%;
+  --sidebar-foreground: 220 20% 82%;
 
-  --sidebar-border: 240 5% 90%;
+  --sidebar-border: 222 30% 16%;
 
-  --sidebar-primary: 262 83% 58%;
+  --sidebar-primary: 220 51% 47%;
 
   --sidebar-primary-foreground: 0 0% 100%;
 
-  --sidebar-accent: 240 6% 92%;
+  --sidebar-accent: 222 35% 16%;
 
-  --sidebar-accent-foreground: 240 5% 12%;
+  --sidebar-accent-foreground: 0 0% 100%;
 
-  --sidebar-ring: 262 83% 58%;
+  --sidebar-ring: 220 51% 47%;
 
   --popover: 240 5% 94%;
 
@@ -48,12 +48,12 @@
 
   --popover-border: 240 5% 88%;
 
-  --primary: 271 91% 65%;
+  --primary: 221 66% 35%;
 
   --primary-foreground: 0 0% 100%;
 
-  --gradient-start: 0 74% 60%;
-  --gradient-end: 330 79% 63%;
+  --gradient-start: 221 66% 35%;
+  --gradient-end: 222 40% 8%;
 
   --secondary: 240 6% 90%;
 
@@ -72,12 +72,12 @@
   --destructive-foreground: 0 0% 100%;
 
   --input: 240 6% 75%;
-  --ring: 262 83% 58%;
-  --chart-1: 262 83% 58%;
-  --chart-2: 221 83% 53%;
-  --chart-3: 340 82% 52%;
-  --chart-4: 291 64% 42%;
-  --chart-5: 199 89% 48%;
+  --ring: 221 66% 35%;
+  --chart-1: 221 60% 40%;
+  --chart-2: 199 89% 48%;
+  --chart-3: 160 60% 40%;
+  --chart-4: 38 92% 50%;
+  --chart-5: 222 30% 25%;
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-serif: Georgia, serif;
@@ -135,56 +135,56 @@
   --elevate-1: rgba(255,255,255, .04);
   --elevate-2: rgba(255,255,255, .09);
 
-  --background: 240 6% 10%;
+  --background: 222 40% 6%;
 
   --foreground: 0 0% 98%;
 
-  --border: 240 5% 20%;
+  --border: 222 25% 18%;
 
-  --card: 240 5% 12%;
+  --card: 222 35% 9%;
 
   --card-foreground: 0 0% 98%;
 
-  --card-border: 240 5% 18%;
+  --card-border: 222 25% 16%;
 
-  --sidebar: 240 5% 14%;
+  --sidebar: 222 45% 5%;
 
   --sidebar-foreground: 0 0% 98%;
 
-  --sidebar-border: 240 5% 20%;
+  --sidebar-border: 222 30% 14%;
 
-  --sidebar-primary: 262 83% 58%;
+  --sidebar-primary: 220 50% 59%;
 
   --sidebar-primary-foreground: 0 0% 100%;
 
-  --sidebar-accent: 240 5% 18%;
+  --sidebar-accent: 222 35% 14%;
 
   --sidebar-accent-foreground: 0 0% 98%;
 
-  --sidebar-ring: 262 83% 58%;
+  --sidebar-ring: 220 50% 59%;
 
-  --popover: 240 5% 16%;
+  --popover: 222 35% 11%;
 
   --popover-foreground: 0 0% 98%;
 
-  --popover-border: 240 5% 22%;
+  --popover-border: 222 25% 20%;
 
-  --primary: 271 91% 65%;
+  --primary: 220 50% 59%;
 
   --primary-foreground: 0 0% 100%;
 
-  --gradient-start: 0 74% 60%;
-  --gradient-end: 330 79% 63%;
+  --gradient-start: 221 66% 35%;
+  --gradient-end: 222 40% 6%;
 
-  --secondary: 240 5% 20%;
+  --secondary: 222 25% 17%;
 
   --secondary-foreground: 0 0% 98%;
 
-  --muted: 240 5% 17%;
+  --muted: 222 25% 14%;
 
   --muted-foreground: 240 4% 65%;
 
-  --accent: 240 6% 18%;
+  --accent: 222 25% 16%;
 
   --accent-foreground: 0 0% 98%;
 
@@ -192,13 +192,13 @@
 
   --destructive-foreground: 0 0% 100%;
 
-  --input: 240 5% 35%;
-  --ring: 262 83% 58%;
-  --chart-1: 262 83% 68%;
-  --chart-2: 221 83% 63%;
-  --chart-3: 340 82% 62%;
-  --chart-4: 291 64% 55%;
-  --chart-5: 199 89% 58%;
+  --input: 222 20% 30%;
+  --ring: 220 50% 59%;
+  --chart-1: 220 50% 59%;
+  --chart-2: 199 89% 58%;
+  --chart-3: 160 60% 50%;
+  --chart-4: 38 92% 60%;
+  --chart-5: 220 20% 70%;
 
   --shadow-2xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.25);
   --shadow-xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.35);
@@ -504,89 +504,22 @@
   }
 }
 
-@keyframes sidebarOceanFlow {
-  0% {
-    background-position: 0% 0%;
-  }
-  50% {
-    background-position: 100% 100%;
-  }
-  100% {
-    background-position: 0% 0%;
-  }
-}
-
-@keyframes sidebarWaveShimmer {
-  0% {
-    opacity: 0;
-    transform: translateY(100%) scaleX(1.5);
-  }
-  30% {
-    opacity: 1;
-  }
-  70% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-100%) scaleX(1.5);
-  }
-}
-
-.sidebar-ocean [data-sidebar="sidebar"] {
+/* Orvey sidebar: deep navy fading into blue-black, with a soft glow at the top */
+.sidebar-orvey [data-sidebar="sidebar"] {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(248, 245, 255, 1) 25%,
-    rgba(238, 242, 255, 1) 50%,
-    rgba(245, 243, 255, 1) 75%,
-    rgba(255, 255, 255, 1) 100%
-  ) !important;
-  background-size: 200% 400% !important;
-  animation: sidebarOceanFlow 10s ease-in-out infinite;
+  background:
+    radial-gradient(120% 45% at 0% 0%, rgba(58, 99, 181, 0.28) 0%, transparent 70%),
+    linear-gradient(180deg, #11234a 0%, #0a1530 38%, #070b16 72%, #05070d 100%) !important;
+  color: hsl(var(--sidebar-foreground));
+  /* Tokens used by components rendered inside the dark sidebar (account switcher, menus) */
+  --muted-foreground: 220 18% 66%;
+  --accent: 222 35% 16%;
+  --accent-foreground: 0 0% 100%;
+  --foreground: 220 20% 92%;
 }
 
-.sidebar-ocean [data-sidebar="sidebar"]::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    160deg,
-    transparent 0%,
-    rgba(168, 139, 250, 0.07) 15%,
-    rgba(129, 140, 248, 0.1) 30%,
-    rgba(236, 72, 153, 0.05) 45%,
-    rgba(99, 102, 241, 0.08) 60%,
-    rgba(139, 92, 246, 0.06) 75%,
-    transparent 100%
-  );
-  background-size: 100% 400%;
-  animation: sidebarOceanFlow 7s ease-in-out infinite reverse;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.sidebar-ocean [data-sidebar="sidebar"]::after {
-  content: '';
-  position: absolute;
-  left: -30%;
-  width: 160%;
-  height: 50%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(139, 92, 246, 0.06) 0%,
-    rgba(99, 102, 241, 0.05) 25%,
-    rgba(236, 72, 153, 0.03) 50%,
-    transparent 75%
-  );
-  animation: sidebarWaveShimmer 12s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.sidebar-ocean [data-sidebar="sidebar"] > * {
+.sidebar-orvey [data-sidebar="sidebar"] > * {
   position: relative;
   z-index: 1;
 }

@@ -173,7 +173,7 @@ export function CallDetailSheet({ callId, onClose }: { callId: string | null; on
                 {call.summary && <p className="text-sm leading-relaxed text-gray-800 whitespace-pre-line">{call.summary}</p>}
                 {call.outcomeNote && <p className="text-sm text-gray-600">{call.outcomeNote}</p>}
                 {call.callbackAt && (
-                  <p className="flex items-center gap-1.5 rounded bg-violet-50 px-2 py-1.5 text-sm text-violet-800">
+                  <p className="flex items-center gap-1.5 rounded bg-brand-50 px-2 py-1.5 text-sm text-brand-800">
                     <CalendarClock className="h-4 w-4" /> Call back {formatDateTime(call.callbackAt)}
                   </p>
                 )}
@@ -218,7 +218,7 @@ export function CallDetailSheet({ callId, onClose }: { callId: string | null; on
                     const ai = line.role === "assistant";
                     return (
                       <div key={i} className={`flex gap-2 ${ai ? "" : "flex-row-reverse"}`}>
-                        <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${ai ? "bg-purple-100 text-purple-700" : "bg-sky-100 text-sky-700"}`}>
+                        <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full ${ai ? "bg-brand-100 text-brand-700" : "bg-sky-100 text-sky-700"}`}>
                           {ai ? <Bot className="h-3.5 w-3.5" /> : <User className="h-3.5 w-3.5" />}
                         </div>
                         <div className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm ${ai ? "bg-white border text-gray-800 rounded-tl-sm" : "bg-sky-600 text-white rounded-tr-sm"}`}>

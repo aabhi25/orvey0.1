@@ -35,7 +35,7 @@ export function CampaignFunnelCard({ campaignId, isLive }: { campaignId: string;
     { key: "delivered", label: "Delivered", value: data.delivered, prev: { label: "sent", value: data.sent }, color: "bg-teal-500" },
     { key: "read", label: "Read", value: data.read, prev: { label: "delivered", value: data.delivered }, color: "bg-sky-500" },
     { key: "replied", label: "Replied", value: data.replied, prev: { label: "read", value: data.read }, color: "bg-blue-600" },
-    { key: "interested", label: "Interested", value: data.interested, prev: { label: "replied", value: data.replied }, color: "bg-violet-600" },
+    { key: "interested", label: "Interested", value: data.interested, prev: { label: "replied", value: data.replied }, color: "bg-brand-600" },
   ] : [];
   const noPositiveOutcome = !!data && data.interestedLabels.length === 0;
 

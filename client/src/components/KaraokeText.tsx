@@ -17,7 +17,7 @@ export function KaraokeText({
   text,
   offset,
   fontSize,
-  highlightColor = "#9333ea",
+  highlightColor = "#1f4596",
 }: {
   text: string;
   /** Characters spoken so far (word-snapped by the caller). */

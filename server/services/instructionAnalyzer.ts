@@ -102,7 +102,7 @@ Your task is to:
    - Flag: Rules that force AI to ask for info already mentioned
 
 2. **Skip Best Practices Suggestions**: 
-   DO NOT suggest any best practices to add. Core conversation best practices (checking history, extracting contact info, acknowledging shared information, flexible collection, context awareness) are now built into Chroney's system prompt and always followed automatically.
+   DO NOT suggest any best practices to add. Core conversation best practices (checking history, extracting contact info, acknowledging shared information, flexible collection, context awareness) are now built into Orvey's system prompt and always followed automatically.
    
    ALWAYS return an empty bestPractices array: []
 
@@ -158,7 +158,7 @@ Return your analysis in this exact JSON format:
 }
 
 CRITICAL RULES TO FOLLOW:
-1. **Always Return Empty Best Practices**: Core conversation best practices are now built into Chroney's system. ALWAYS return bestPractices: []
+1. **Always Return Empty Best Practices**: Core conversation best practices are now built into Orvey's system. ALWAYS return bestPractices: []
 2. **Refinements Only for Problems**: Don't suggest refinements for instructions that are already well-written
 3. **Honest Scoring**: If no conflicts are found, score should be 90-100
 4. **100% is Achievable**: A perfect score (100) means zero conflicts detected and well-written instructions
@@ -169,7 +169,7 @@ CRITICAL RULES TO FOLLOW:
     // Ensure all required fields exist
     const validated: AnalysisResult = {
       conflicts: Array.isArray(result.conflicts) ? result.conflicts : [],
-      bestPractices: [], // ALWAYS empty - best practices are now built into Chroney's system prompt
+      bestPractices: [], // ALWAYS empty - best practices are now built into Orvey's system prompt
       refinements: Array.isArray(result.refinements) ? result.refinements : [],
       qualityScore: typeof result.qualityScore === 'number' ? Math.max(0, Math.min(100, result.qualityScore)) : 50,
       summary: typeof result.summary === 'string' ? result.summary : 'Analysis completed.'

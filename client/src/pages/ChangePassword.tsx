@@ -89,7 +89,7 @@ export default function ChangePassword() {
       <div className="w-full max-w-md px-4">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-brand-600 to-ink-600 mb-4">
             <KeyRound className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900">Change Password</h1>
@@ -145,7 +145,7 @@ export default function ChangePassword() {
               <Button
                 type="submit"
                 disabled={changePasswordMutation.isPending}
-                className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 h-11"
+                className="flex-1 bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700 h-11"
                 data-testid="button-submit-change-password"
               >
                 {changePasswordMutation.isPending ? "Changing Password..." : "Change Password"}

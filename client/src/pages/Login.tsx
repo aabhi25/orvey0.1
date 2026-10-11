@@ -113,24 +113,24 @@ export default function Login({ onLogin }: { onLogin: (user: any) => void }) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0B0F1A] via-[#1e3a8a] to-[#7c3aed] animate-gradient-shift">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
-          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-[#11234a] via-[#070b16] to-[#020306]">
+        <div className="absolute inset-0 opacity-40">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-600 rounded-full filter blur-3xl animate-blob"></div>
+          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-brand-800 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
+          <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-ink-500 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
         </div>
       </div>
 
       <div className="relative w-full h-full flex items-center justify-center">
         <div className="w-full flex items-center justify-center p-4 lg:p-8">
           <div className="w-full max-w-md">
-            <div className="relative bg-white/10 backdrop-blur-2xl rounded-3xl p-8 shadow-2xl border border-white/20">
+            <div className="relative bg-white/[0.06] backdrop-blur-2xl rounded-3xl p-8 shadow-2xl shadow-black/50 border border-white/10">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-16 h-16 flex items-center justify-center overflow-hidden">
-                  <img src="/c_logo.png" className="w-24 h-24 object-contain scale-150" alt="AI Chroney" style={{ mixBlendMode: 'screen' }} />
+                <div className="w-12 h-12 flex items-center justify-center">
+                  <img src="/orvey-logo.svg" className="w-12 h-12 object-contain" alt="Orvey" />
                 </div>
-                <h2 className="text-2xl font-bold text-white">
-                  AI Chroney
+                <h2 className="text-2xl font-semibold tracking-wide text-white">
+                  Orvey
                 </h2>
               </div>
 
@@ -154,7 +154,7 @@ export default function Login({ onLogin }: { onLogin: (user: any) => void }) {
                       required
                       autoFocus
                       data-testid="input-username"
-                      className="pl-11 bg-white/20 border-white/30 text-white placeholder:text-white/60 focus:bg-white/25 focus:border-white/50 focus:ring-2 focus:ring-purple-400/50 transition-all h-12 shadow-lg"
+                      className="pl-11 bg-white/20 border-white/30 text-white placeholder:text-white/60 focus:bg-white/25 focus:border-white/50 focus:ring-2 focus:ring-brand-400/50 transition-all h-12 shadow-lg"
                     />
                   </div>
                 </div>
@@ -173,7 +173,7 @@ export default function Login({ onLogin }: { onLogin: (user: any) => void }) {
                       onChange={(e) => setPassword(e.target.value)}
                       required
                       data-testid="input-password"
-                      className="pl-11 bg-white/20 border-white/30 text-white placeholder:text-white/60 focus:bg-white/25 focus:border-white/50 focus:ring-2 focus:ring-purple-400/50 transition-all h-12 shadow-lg"
+                      className="pl-11 bg-white/20 border-white/30 text-white placeholder:text-white/60 focus:bg-white/25 focus:border-white/50 focus:ring-2 focus:ring-brand-400/50 transition-all h-12 shadow-lg"
                     />
                   </div>
                 </div>
@@ -187,7 +187,7 @@ export default function Login({ onLogin }: { onLogin: (user: any) => void }) {
 
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 hover:from-purple-700 hover:via-pink-700 hover:to-purple-800 text-white border-0 shadow-xl h-12 text-base font-semibold mt-6 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50 hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full bg-gradient-to-r from-brand-500 via-brand-700 to-brand-900 hover:from-brand-600 hover:via-brand-800 hover:to-brand-950 text-white border border-white/10 shadow-xl h-12 text-base font-semibold mt-6 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-500/50 hover:scale-[1.02] active:scale-[0.98]"
                   disabled={loginMutation.isPending}
                   data-testid="button-login"
                 >
@@ -218,7 +218,7 @@ export default function Login({ onLogin }: { onLogin: (user: any) => void }) {
                   <DialogContent className="sm:max-w-md bg-slate-900 border-white/10">
                     <DialogHeader>
                       <DialogTitle className="flex items-center gap-2 text-white">
-                        <Mail className="w-5 h-5 text-purple-400" />
+                        <Mail className="w-5 h-5 text-brand-400" />
                         Reset Your Password
                       </DialogTitle>
                       <DialogDescription className="text-white/70">
@@ -254,7 +254,7 @@ export default function Login({ onLogin }: { onLogin: (user: any) => void }) {
                         </Button>
                         <Button
                           type="submit"
-                          className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                          className="flex-1 bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700 text-white"
                           disabled={forgotPasswordMutation.isPending}
                         >
                           {forgotPasswordMutation.isPending ? (

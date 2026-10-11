@@ -185,7 +185,7 @@ export default function WAInsights() {
           </CardContent>
         </Card>
 
-        <Card className="border-l-4 border-l-purple-500">
+        <Card className="border-l-4 border-l-brand-500">
           <CardContent className="p-5">
             <div className="flex items-center justify-between">
               <div>
@@ -193,8 +193,8 @@ export default function WAInsights() {
                 <p className="text-3xl font-bold text-gray-900 mt-1">{stats.documents.total}</p>
                 <p className="text-xs text-gray-400 mt-1">{stats.documents.byType.length} types</p>
               </div>
-              <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center">
-                <FileText className="w-6 h-6 text-purple-500" />
+              <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center">
+                <FileText className="w-6 h-6 text-brand-500" />
               </div>
             </div>
           </CardContent>
@@ -236,8 +236,8 @@ export default function WAInsights() {
               <p className="text-2xl font-bold text-gray-900">{stats.leads.totalOutgoing}</p>
               <p className="text-xs text-gray-500 mt-1">Messages Sent</p>
             </div>
-            <div className="text-center p-4 bg-purple-50 rounded-xl">
-              <Route className="w-5 h-5 text-purple-500 mx-auto mb-2" />
+            <div className="text-center p-4 bg-brand-50 rounded-xl">
+              <Route className="w-5 h-5 text-brand-500 mx-auto mb-2" />
               <p className="text-2xl font-bold text-gray-900">{stats.sessions.total}</p>
               <p className="text-xs text-gray-500 mt-1">Total Journeys</p>
             </div>
@@ -323,8 +323,8 @@ function RecentActivityCard() {
       abandoned: "Journey abandoned",
     };
     return {
-      icon: <Route className="w-4 h-4 text-purple-500" />,
-      bg: "bg-purple-50",
+      icon: <Route className="w-4 h-4 text-brand-500" />,
+      bg: "bg-brand-50",
       text: `${statusMap[item.description] || "Journey"} for ${item.metadata}`,
     };
   };

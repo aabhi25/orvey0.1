@@ -209,7 +209,7 @@ export default function QuestionBank() {
                   </TooltipTrigger>
                   <TooltipContent className="max-w-xs">
                     <p className="text-sm">
-                      This feature automatically captures questions that Chroney couldn't answer confidently. 
+                      This feature automatically captures questions that Orvey couldn't answer confidently. 
                       Review these questions to improve your chatbot by adding relevant FAQs or training data.
                     </p>
                   </TooltipContent>
@@ -265,7 +265,7 @@ export default function QuestionBank() {
               <ClipboardList className="w-12 h-12 mb-3 text-gray-400" />
               <p className="text-sm text-center">No unanswered questions yet</p>
               <p className="text-xs text-center text-gray-400 mt-1">
-                Questions that Chroney can't answer will appear here
+                Questions that Orvey can't answer will appear here
               </p>
             </div>
           ) : (

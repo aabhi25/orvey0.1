@@ -58,7 +58,7 @@ export const businessAccounts = pgTable("business_accounts", {
   whatsappEnabled: text("whatsapp_enabled").notNull().default("false"), // 'true' | 'false' - SuperAdmin toggle for WhatsApp AI Agent feature (default OFF)
   instagramEnabled: text("instagram_enabled").notNull().default("false"), // 'true' | 'false' - SuperAdmin toggle for Instagram AI Agent feature (default OFF)
   facebookEnabled: text("facebook_enabled").notNull().default("false"), // 'true' | 'false' - SuperAdmin toggle for Facebook AI Agent feature (default OFF)
-  chroneyEnabled: text("chroney_enabled").notNull().default("true"), // 'true' | 'false' - SuperAdmin toggle for Chroney Chat feature (default ON)
+  chroneyEnabled: text("chroney_enabled").notNull().default("true"), // 'true' | 'false' - SuperAdmin toggle for Orvey Chat feature (default ON)
   k12EducationEnabled: text("k12_education_enabled").notNull().default("false"), // 'true' | 'false' - SuperAdmin toggle for K12 Education feature (default OFF)
   k12ImageUploadEnabled: text("k12_image_upload_enabled").notNull().default("false"), // 'true' | 'false' - Business user toggle for K12 photo-upload-a-question feature (default OFF)
   k12ContentOnlyMode: text("k12_content_only_mode").notNull().default("false"), // 'true' | 'false' - When ON, AI answers only from uploaded content (FAQs, docs, K12 topics) and refuses to use general knowledge
@@ -636,16 +636,16 @@ export const questionBankEntries = pgTable("question_bank_entries", {
 export const widgetSettings = pgTable("widget_settings", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   businessAccountId: varchar("business_account_id").notNull().unique().references(() => businessAccounts.id, { onDelete: "cascade" }),
-  chatColor: text("chat_color").notNull().default("#9333ea"), // Start color for gradient
-  chatColorEnd: text("chat_color_end").notNull().default("#3b82f6"), // End color for gradient
-  widgetHeaderText: text("widget_header_text").notNull().default("Hi Chroney"), // Customizable header text
+  chatColor: text("chat_color").notNull().default("#1f4596"), // Start color for gradient
+  chatColorEnd: text("chat_color_end").notNull().default("#0a1530"), // End color for gradient
+  widgetHeaderText: text("widget_header_text").notNull().default("Orvey"), // Customizable header text
   welcomeMessageType: text("welcome_message_type").notNull().default("custom"), // 'custom' | 'ai_generated'
   welcomeMessage: text("welcome_message").notNull().default("Hi! How can I help you today?"),
   buttonStyle: text("button_style").notNull().default("circular"), // 'circular' | 'rounded' | 'pill' | 'minimal'
   buttonAnimation: text("button_animation").notNull().default("pulse"), // 'pulse' | 'bounce' | 'glow' | 'none'
   personality: text("personality").notNull().default("friendly"), // 'friendly' | 'professional' | 'funny' | 'polite' | 'casual'
   currency: text("currency").notNull().default("USD"),
-  customInstructions: text("custom_instructions"), // Natural language instructions for customizing Chroney's behavior
+  customInstructions: text("custom_instructions"), // Natural language instructions for customizing Orvey's behavior
   cachedIntro: text("cached_intro"), // Cached AI-generated intro message to avoid regenerating on every page load
   appointmentBookingEnabled: text("appointment_booking_enabled").notNull().default("true"), // 'true' | 'false' - Master toggle for appointment booking feature
   appointmentSuggestRules: jsonb("appointment_suggest_rules"), // Array of trigger rules: [{id, keywords: string[], prompt: string, enabled: boolean}] - when keywords detected, AI uses prompt to suggest booking
@@ -685,7 +685,7 @@ export const widgetSettings = pgTable("widget_settings", {
   openingSoundEnabled: text("opening_sound_enabled").notNull().default("true"), // 'true' | 'false' - Play AI activation sound when chat opens
   openingSoundStyle: text("opening_sound_style").notNull().default("chime"), // 'chime' | 'bell' | 'pop' - Sound style for AI activation
   
-  // Lead training configuration (for Train Chroney page)
+  // Lead training configuration (for Train Orvey page)
   leadTrainingConfig: jsonb("lead_training_config"), // Smart lead capture configuration: {fields: [{id, enabled, required, priority, captureStrategy}]} - each field has own timing strategy: 'smart'|'start'|'end'
 
   // CAPTCHA (reCAPTCHA v2) secret key, AES-256-GCM encrypted (iv:authTag:cipher).
@@ -736,8 +736,8 @@ export const widgetSettings = pgTable("widget_settings", {
   centerBannerButtonText: text("center_banner_button_text").notNull().default("Start Chat"), // CTA button text
   centerBannerShowOnce: text("center_banner_show_once").notNull().default("true"), // 'true' | 'false' - Show only once per session vs every page load
   centerBannerBackgroundStyle: text("center_banner_background_style").notNull().default("gradient"), // 'gradient' | 'image'
-  centerBannerStartColor: text("center_banner_start_color").notNull().default("#9333ea"), // Gradient start color
-  centerBannerEndColor: text("center_banner_end_color").notNull().default("#3b82f6"), // Gradient end color
+  centerBannerStartColor: text("center_banner_start_color").notNull().default("#1f4596"), // Gradient start color
+  centerBannerEndColor: text("center_banner_end_color").notNull().default("#0a1530"), // Gradient end color
   centerBannerTextColor: text("center_banner_text_color").notNull().default("white"), // 'white' | 'black' - Text color for readability
   centerBannerImageUrl: text("center_banner_image_url"), // Optional background image URL (for 'image' style)
   
@@ -796,7 +796,7 @@ export const widgetSettings = pgTable("widget_settings", {
   
   // Jewelry Showcase Customization
   showcaseLogo: text("showcase_logo"), // Custom brand logo URL for Jewelry Showcase
-  showcaseThemeColor: text("showcase_theme_color").notNull().default("#9333ea"), // Primary theme color for Jewelry Showcase
+  showcaseThemeColor: text("showcase_theme_color").notNull().default("#1f4596"), // Primary theme color for Jewelry Showcase
   showcaseThemePreset: text("showcase_theme_preset").notNull().default("noir_luxe"), // 'noir_luxe' | 'champagne_glow' | 'amethyst_aurora' | 'custom'
   
   // Background Removal for Visual Search
@@ -1463,7 +1463,7 @@ export const accountGroupLeadsquaredFieldMappings = pgTable("account_group_leads
   leadsquaredField: text("leadsquared_field").notNull(), // LeadSquared attribute name, e.g., "FirstName", "mx_City"
   sourceType: text("source_type").notNull(), // 'dynamic' | 'custom'
   sourceField: text("source_field"), // For dynamic: 'lead.name', 'session.city', 'business.name', etc.
-  customValue: text("custom_value"), // For custom: static value like "AI Chroney"
+  customValue: text("custom_value"), // For custom: static value like "Orvey"
   fallbackValue: text("fallback_value"), // For dynamic: value to use when dynamic data is empty
   displayName: text("display_name").notNull(), // Friendly name shown in UI, e.g., "Full Name", "City"
   isEnabled: text("is_enabled").notNull().default("true"), // 'true' | 'false'
@@ -2645,7 +2645,7 @@ export const leadsquaredFieldMappings = pgTable("leadsquared_field_mappings", {
   leadsquaredField: text("leadsquared_field").notNull(), // LeadSquared attribute name, e.g., "FirstName", "mx_City"
   sourceType: text("source_type").notNull(), // 'dynamic' | 'custom'
   sourceField: text("source_field"), // For dynamic: 'lead.name', 'session.city', 'business.name', etc.
-  customValue: text("custom_value"), // For custom: static value like "AI Chroney"
+  customValue: text("custom_value"), // For custom: static value like "Orvey"
   fallbackValue: text("fallback_value"), // For dynamic: value to use when dynamic data is empty
   valueWhenPresent: text("value_when_present"), // For dynamic: when set, emit this static value instead of the raw source value whenever the dynamic source resolves to a non-empty value (e.g. send "PRChat" whenever a UTM source is present). Null = legacy behavior (emit the raw source value).
   displayName: text("display_name").notNull(), // Friendly name shown in UI, e.g., "Full Name", "City"
@@ -2989,7 +2989,7 @@ export const whatsappSettings = pgTable("whatsapp_settings", {
   // WhatsApp answer style. NULL = inherit the website widget's personality / response length.
   personality: text("personality"), // 'friendly' | 'professional' | 'funny' | 'polite' | 'casual'
   responseLength: text("response_length"), // 'concise' | 'balanced' | 'detailed'
-  // WhatsApp-only instructions (customPrompt): 'add' = on top of the Train Chroney instructions,
+  // WhatsApp-only instructions (customPrompt): 'add' = on top of the Train Orvey instructions,
   // 'replace' = instead of them (website instructions not applied on WhatsApp).
   instructionsMode: text("instructions_mode").notNull().default("add"),
   createdAt: timestamp("created_at").notNull().defaultNow(),

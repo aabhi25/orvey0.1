@@ -223,7 +223,7 @@ export default function WhatsAppCampaignHome() {
         </Card>
         <Card className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => setLocation("/admin/whatsapp-ai-workbooks")}>
           <CardContent className="p-4 flex items-start gap-3">
-            <Table2 className="h-5 w-5 text-violet-600 mt-0.5 shrink-0" />
+            <Table2 className="h-5 w-5 text-brand-600 mt-0.5 shrink-0" />
             <div className="min-w-0">
               <h3 className="font-medium text-sm">AI Workbooks</h3>
               <p className="text-xs text-gray-500 mt-0.5">Review campaign recipients and what the AI found out, in one sheet.</p>

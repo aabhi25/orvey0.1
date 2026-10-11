@@ -5,7 +5,7 @@ import { Link2, Sparkles, ClipboardList, Percent, Lightbulb, LayoutGrid, MoreHor
 const tabs = [
   { label: "More Features", path: "/admin/more", icon: MoreHorizontal },
   { label: "CRM", path: integrationPath(), icon: Link2, matchPaths: [integrationPath()] },
-  { label: "Chroney IQ", path: "/ai-insights", icon: Sparkles },
+  { label: "Orvey IQ", path: "/ai-insights", icon: Sparkles },
   { label: "Gaps", path: "/question-bank", icon: ClipboardList },
   { label: "Smart Discounts", path: "/admin/smart-discounts", icon: Percent },
   { label: "Guidance", path: "/guidance-campaigns", icon: Lightbulb },
@@ -28,11 +28,11 @@ export default function MoreFeaturesNavTabs() {
             onClick={() => setLocation(tab.path)}
             className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
               isActive
-                ? "bg-purple-50 text-purple-700 shadow-sm"
+                ? "bg-brand-50 text-brand-700 shadow-sm"
                 : "text-gray-500 hover:text-gray-700 hover:bg-gray-50"
             }`}
           >
-            <Icon className={`w-4 h-4 ${isActive ? "text-purple-600" : "text-gray-400"}`} />
+            <Icon className={`w-4 h-4 ${isActive ? "text-brand-600" : "text-gray-400"}`} />
             {tab.label}
           </button>
         );

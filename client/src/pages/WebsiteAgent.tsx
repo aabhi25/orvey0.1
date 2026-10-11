@@ -85,13 +85,13 @@ export default function WebsiteAgent() {
   return (
     <div className="min-h-screen bg-gray-50 relative overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
-        <Globe className="w-[400px] h-[400px] text-purple-500/[0.04]" strokeWidth={1} />
+        <Globe className="w-[400px] h-[400px] text-brand-500/[0.04]" strokeWidth={1} />
       </div>
 
       <header className="bg-white border-b px-4 py-3 flex items-center gap-4 relative z-10">
         <SidebarTrigger />
         <div className="flex items-center gap-2">
-          <div className="p-1 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600">
+          <div className="p-1 rounded-lg bg-gradient-to-br from-brand-500 to-ink-600">
             <Globe className="w-4 h-4 text-white" />
           </div>
           <h1 className="text-lg font-semibold">Website</h1>

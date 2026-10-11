@@ -15,7 +15,7 @@ import type { MeResponseDto } from "@shared/dto";
 /**
  * Data retention (auto-delete) for the current / viewed-as business account.
  *
- * Business users see the effective policy read-only — the policy is set by AI Chroney
+ * Business users see the effective policy read-only — the policy is set by Orvey
  * (super admin), either on the account or on its account group. A super admin viewing the
  * account can open the existing policy editor and monthly report.
  */
@@ -100,7 +100,7 @@ export default function DataRetentionSettings({ user }: { user: MeResponseDto | 
 
           {!isSuperAdminImpersonating && !isLoading && !isError && (
             <p className="text-xs text-muted-foreground mt-4">
-              This policy is managed by your AI Chroney administrator.
+              This policy is managed by your Orvey administrator.
             </p>
           )}
 

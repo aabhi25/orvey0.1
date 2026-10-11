@@ -56,7 +56,7 @@ export default function CallingTry() {
 
       <div className="grid gap-4 md:grid-cols-2">
         <Card className="overflow-hidden">
-          <div className="bg-gradient-to-br from-sky-500 to-indigo-600 px-5 py-6 text-white">
+          <div className="bg-gradient-to-br from-sky-500 to-brand-600 px-5 py-6 text-white">
             <PhoneIncoming className="h-7 w-7" />
             <h2 className="mt-3 text-lg font-semibold">Test an incoming call</h2>
             <p className="text-sm text-white/80">Call your business as a customer. The AI answers with your greeting and knows everything you've trained it on.</p>
@@ -76,7 +76,7 @@ export default function CallingTry() {
         </Card>
 
         <Card className="overflow-hidden">
-          <div className="bg-gradient-to-br from-violet-500 to-purple-700 px-5 py-6 text-white">
+          <div className="bg-gradient-to-br from-brand-500 to-ink-700 px-5 py-6 text-white">
             <PhoneOutgoing className="h-7 w-7" />
             <h2 className="mt-3 text-lg font-semibold">Test the AI calling a lead</h2>
             <p className="text-sm text-white/80">Pick a lead (or make one up). The AI phones them — and your portal rings instead of their phone. You play the lead.</p>

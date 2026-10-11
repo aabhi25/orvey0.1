@@ -255,7 +255,7 @@ export default function InstagramLeads({ embeddedPage }: { embeddedPage?: "lead-
       <div className={embeddedPage ? "" : "p-6"}>
         {currentPage === "leads" && (
           <Card className="shadow-lg border-0 rounded-xl overflow-hidden">
-            <CardHeader className="flex flex-row items-center justify-between pb-4 bg-gradient-to-r from-pink-50 via-purple-50 to-indigo-50 border-b">
+            <CardHeader className="flex flex-row items-center justify-between pb-4 bg-gradient-to-r from-ink-50 via-brand-50 to-brand-50 border-b">
               <div className="space-y-1">
                 <div className="flex items-center gap-3">
                   <CardTitle className="text-xl font-semibold tracking-tight">Instagram Leads</CardTitle>

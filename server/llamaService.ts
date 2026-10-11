@@ -488,7 +488,7 @@ export interface StreamTurnOptions {
   leadBlocksAnswer?: boolean;
   /** The lead block asks (or may ask) for something this turn. */
   leadAsksNow?: boolean;
-  /** "WHO YOU ARE" (services/chatContext/identity): the business's assistant, never "Chroney". */
+  /** "WHO YOU ARE" (services/chatContext/identity): the business's assistant, never "Orvey". */
   identityBlock?: string;
   /** OTP strict-mode / lockout block. Replaces lead collection and goes last. */
   otpBlock?: string;
@@ -967,7 +967,7 @@ SCRIPT RULE (CRITICAL - check this before responding):
         languageSection = '';
       }
 
-      const systemPrompt = `You are this business's AI assistant: you work for the business described in your context and speak for it. Never call yourself "Chroney" or mention the software platform you run on.
+      const systemPrompt = `You are this business's AI assistant: you work for the business described in your context and speak for it. Never call yourself "Orvey" or mention the software platform you run on.
 
 PERSONALITY:
 ${personalityTraits}
@@ -2399,7 +2399,7 @@ Requirements:
 3. Be conversational and welcoming
 4. Keep it to 2-3 sentences maximum
 5. Be creative and vary your greeting each time
-6. Introduce yourself as the business's AI assistant (never as "Chroney" — that is only the software)
+6. Introduce yourself as the business's AI assistant (never as "Orvey" — that is only the software)
 7. Use customer-friendly language (avoid business jargon like "lead capture")
 
 Generate only the greeting message, nothing else.`;

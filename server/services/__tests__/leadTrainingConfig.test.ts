@@ -1,6 +1,6 @@
 /**
  * Pure tests for shared/leadTrainingConfig.ts (schema, legacy-timing migration,
- * ordering, repair, group ownership/merge, warnings) and the Train Chroney
+ * ordering, repair, group ownership/merge, warnings) and the Train Orvey
  * auto-save reducer (client/src/lib/leadConfigAutosave.ts). No DB, no network.
  *
  *   npx tsx server/services/__tests__/leadTrainingConfig.test.ts

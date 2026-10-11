@@ -1,5 +1,5 @@
 /**
- * Train Chroney custom instructions — one parser for every channel.
+ * Train Orvey custom instructions — one parser for every channel.
  *
  * Stored in widget_settings.custom_instructions as either
  *   - a JSON list: [{ id, text, type: 'always' | 'conditional' | 'fallback', keywords?: string[], channels?: string[] }]

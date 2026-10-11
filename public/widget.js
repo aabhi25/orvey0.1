@@ -2,7 +2,7 @@
 (function() {
   'use strict';
   
-  console.log('[Hi Chroney Widget] Version 3.4 - Mobile opens as 70% bottom sheet! 📱');
+  console.log('[Orvey Widget] Version 3.4 - Mobile opens as 70% bottom sheet! 📱');
   
   // CRITICAL FIX: Detect if any ancestor has CSS transforms that cause touch target misalignment
   // On mobile, transformed ancestors cause touch coordinates to not match visual positions
@@ -15,11 +15,11 @@
       
       // Check for non-identity transforms
       if (transform && transform !== 'none') {
-        console.log('[Hi Chroney] Found transformed ancestor:', parent, 'transform:', transform);
+        console.log('[Orvey] Found transformed ancestor:', parent, 'transform:', transform);
         return true;
       }
       if (perspective && perspective !== 'none') {
-        console.log('[Hi Chroney] Found perspective ancestor:', parent, 'perspective:', perspective);
+        console.log('[Orvey] Found perspective ancestor:', parent, 'perspective:', perspective);
         return true;
       }
       parent = parent.parentElement;
@@ -32,7 +32,7 @@
     if (window.innerWidth > 480) return; // Only needed on mobile
     
     if (hasTransformedAncestor(container)) {
-      console.log('[Hi Chroney] Reparenting widget to document.body to fix touch coordinates');
+      console.log('[Orvey] Reparenting widget to document.body to fix touch coordinates');
       // Store original parent for cleanup
       container._originalParent = container.parentElement;
       container._originalNextSibling = container.nextSibling;
@@ -94,7 +94,7 @@
         const containerStyle = getComputedStyle(container);
         
         if (containerStyle.display === 'none' || containerStyle.visibility === 'hidden') {
-          console.log('[Hi Chroney] Container was hidden by host, re-enforcing visibility');
+          console.log('[Orvey] Container was hidden by host, re-enforcing visibility');
           container.style.setProperty('display', 'block', 'important');
           container.style.setProperty('visibility', 'visible', 'important');
         }
@@ -103,7 +103,7 @@
         if (button.dataset.forceHidden !== 'true') {
           const buttonStyle = getComputedStyle(button);
           if (buttonStyle.display === 'none' || buttonStyle.visibility === 'hidden') {
-            console.log('[Hi Chroney] Button was hidden by host, re-enforcing visibility');
+            console.log('[Orvey] Button was hidden by host, re-enforcing visibility');
             button.style.setProperty('display', 'flex', 'important');
             button.style.setProperty('visibility', 'visible', 'important');
           }
@@ -128,7 +128,7 @@
     button.style.removeProperty('clip');
     button.style.removeProperty('clip-path');
     button.style.removeProperty('overflow');
-    console.log('[Hi Chroney] Button hidden completely');
+    console.log('[Orvey] Button hidden completely');
   }
   
   // Show button and reset state
@@ -136,7 +136,7 @@
     button.dataset.forceHidden = 'false';
     button.classList.remove('pill--hidden');
     button.classList.add('pill--visible');
-    console.log('[Hi Chroney] Button shown');
+    console.log('[Orvey] Button shown');
   }
   
   // Sound style functions for AI activation
@@ -301,7 +301,7 @@
           break;
       }
       
-      console.log('[Hi Chroney] AI opening sound played:', style);
+      console.log('[Orvey] AI opening sound played:', style);
       
       // Clean up audio context after sounds finish
       setTimeout(() => {
@@ -309,7 +309,7 @@
       }, 1000);
       
     } catch (e) {
-      console.log('[Hi Chroney] Could not play opening sound:', e.message);
+      console.log('[Orvey] Could not play opening sound:', e.message);
     }
   }
   
@@ -378,7 +378,7 @@
       
       if (data) {
         this.productData = data;
-        console.log('[Hi Chroney] Product page detected:', data.platform, data.name);
+        console.log('[Orvey] Product page detected:', data.platform, data.name);
         return data;
       }
       
@@ -388,7 +388,7 @@
         data = this.extractFromPage();
         if (data) {
           this.productData = data;
-          console.log('[Hi Chroney] Product page detected from page content:', data.name);
+          console.log('[Orvey] Product page detected from page content:', data.name);
           return data;
         }
       }
@@ -444,7 +444,7 @@
           };
         }
       } catch (e) {
-        console.log('[Hi Chroney] Shopify detection failed:', e.message);
+        console.log('[Orvey] Shopify detection failed:', e.message);
       }
       return null;
     },
@@ -470,7 +470,7 @@
           }
         }
       } catch (e) {
-        console.log('[Hi Chroney] WooCommerce detection failed:', e.message);
+        console.log('[Orvey] WooCommerce detection failed:', e.message);
       }
       return null;
     },
@@ -492,7 +492,7 @@
           };
         }
       } catch (e) {
-        console.log('[Hi Chroney] Magento detection failed:', e.message);
+        console.log('[Orvey] Magento detection failed:', e.message);
       }
       return null;
     },
@@ -514,7 +514,7 @@
           };
         }
       } catch (e) {
-        console.log('[Hi Chroney] BigCommerce detection failed:', e.message);
+        console.log('[Orvey] BigCommerce detection failed:', e.message);
       }
       return null;
     },
@@ -547,7 +547,7 @@
           }
         }
       } catch (e) {
-        console.log('[Hi Chroney] JSON-LD detection failed:', e.message);
+        console.log('[Orvey] JSON-LD detection failed:', e.message);
       }
       return null;
     },
@@ -569,7 +569,7 @@
           };
         }
       } catch (e) {
-        console.log('[Hi Chroney] OpenGraph detection failed:', e.message);
+        console.log('[Orvey] OpenGraph detection failed:', e.message);
       }
       return null;
     },
@@ -662,13 +662,13 @@
       }
 
       this._pendingOpen = true;
-      console.log('[Hi Chroney] Open request queued until the widget is ready');
+      console.log('[Orvey] Open request queued until the widget is ready');
       return false;
     },
     
     init: async function(config) {
       if (!config || !config.businessAccountId) {
-        console.error('[Hi Chroney] businessAccountId is required');
+        console.error('[Orvey] businessAccountId is required');
         return;
       }
 
@@ -689,9 +689,9 @@
             ...deviceInfo
           })
         }).then(() => {
-          console.log('[Hi Chroney] Page visit tracked');
+          console.log('[Orvey] Page visit tracked');
         }).catch(err => {
-          console.log('[Hi Chroney] Page visit tracking failed (non-critical):', err.message);
+          console.log('[Orvey] Page visit tracking failed (non-critical):', err.message);
         });
       } catch (e) {
         // Silent fail - tracking is non-critical
@@ -702,7 +702,7 @@
         const response = await fetch(`${baseUrl}/api/widget-settings/public?businessAccountId=${encodeURIComponent(config.businessAccountId)}`);
         if (response.ok) {
           const settings = await response.json();
-          console.log('[Hi Chroney] Loaded settings:', settings);
+          console.log('[Orvey] Loaded settings:', settings);
           // Parse conversationStarters if it's a JSON string
           let parsedStarters = [];
           if (settings.conversationStarters) {
@@ -710,7 +710,7 @@
               try {
                 parsedStarters = JSON.parse(settings.conversationStarters);
               } catch (e) {
-                console.warn('[Hi Chroney] Failed to parse conversationStarters:', e);
+                console.warn('[Orvey] Failed to parse conversationStarters:', e);
                 parsedStarters = [];
               }
             } else if (Array.isArray(settings.conversationStarters)) {
@@ -731,12 +731,12 @@
             mode: config.mode || null,
             container: config.container || null,
             k12EducationEnabled: settings.k12EducationEnabled === true || settings.k12EducationEnabled === 'true',
-            chatColor: settings.chatColor || '#9333ea',
-            chatColorEnd: settings.chatColorEnd || '#3b82f6',
+            chatColor: settings.chatColor || '#1f4596',
+            chatColorEnd: settings.chatColorEnd || '#0a1530',
             buttonStyle: settings.buttonStyle || 'circular',
             buttonAnimation: settings.buttonAnimation || 'bounce',
             welcomeMessageType: settings.welcomeMessageType || 'ai_generated',
-            widgetHeaderText: settings.widgetHeaderText || 'Hi Chroney',
+            widgetHeaderText: settings.widgetHeaderText || 'Orvey',
             widgetWidth: settings.widgetWidth || '400',
             widgetHeight: settings.widgetHeight || '600',
             widgetPosition: settings.widgetPosition || 'bottom-right',
@@ -769,8 +769,8 @@
             centerBannerButtonText: settings.centerBannerButtonText || 'Start Chat',
             centerBannerShowOnce: settings.centerBannerShowOnce || 'true',
             centerBannerBackgroundStyle: settings.centerBannerBackgroundStyle || 'gradient',
-            centerBannerStartColor: settings.centerBannerStartColor || '#9333ea',
-            centerBannerEndColor: settings.centerBannerEndColor || '#3b82f6',
+            centerBannerStartColor: settings.centerBannerStartColor || '#1f4596',
+            centerBannerEndColor: settings.centerBannerEndColor || '#0a1530',
             centerBannerTextColor: settings.centerBannerTextColor || 'white',
             centerBannerImageUrl: settings.centerBannerImageUrl || null,
             reengagementBannerEnabled: settings.reengagementBannerEnabled || 'false',
@@ -791,12 +791,12 @@
             whatsappWidgetColor: settings.whatsappWidgetColor || '#25D366',
             whatsappWidgetPosition: settings.whatsappWidgetPosition || null
           };
-          console.log('[Hi Chroney] Button will use colors:', this.config.chatColor, this.config.chatColorEnd);
-          console.log('[Hi Chroney] Widget size:', this.config.widgetWidth, 'x', this.config.widgetHeight);
-          console.log('[Hi Chroney] Avatar settings:', this.config.avatarType, this.config.avatarUrl);
-          console.log('[Hi Chroney] Chat mode:', this.config.chatMode, 'Voice enabled:', this.config.voiceModeEnabled);
-          console.log('[Hi Chroney] Conversation starters:', this.config.conversationStarters);
-          console.log('[Hi Chroney] Center banner:', {
+          console.log('[Orvey] Button will use colors:', this.config.chatColor, this.config.chatColorEnd);
+          console.log('[Orvey] Widget size:', this.config.widgetWidth, 'x', this.config.widgetHeight);
+          console.log('[Orvey] Avatar settings:', this.config.avatarType, this.config.avatarUrl);
+          console.log('[Orvey] Chat mode:', this.config.chatMode, 'Voice enabled:', this.config.voiceModeEnabled);
+          console.log('[Orvey] Conversation starters:', this.config.conversationStarters);
+          console.log('[Orvey] Center banner:', {
             enabled: this.config.centerBannerEnabled,
             delay: this.config.centerBannerDelay,
             title: this.config.centerBannerTitle,
@@ -821,8 +821,8 @@
             mode: config.mode || null,
             container: config.container || null,
             k12EducationEnabled: false,
-            chatColor: config.chatColor || '#9333ea',
-            chatColorEnd: config.chatColorEnd || '#3b82f6',
+            chatColor: config.chatColor || '#1f4596',
+            chatColorEnd: config.chatColorEnd || '#0a1530',
             buttonStyle: config.buttonStyle || 'circular',
             buttonAnimation: config.buttonAnimation || 'bounce',
             welcomeMessageType: config.welcomeMessageType || 'ai_generated',
@@ -839,7 +839,7 @@
           };
         }
       } catch (error) {
-        console.warn('[Hi Chroney] Failed to fetch settings, using defaults:', error);
+        console.warn('[Orvey] Failed to fetch settings, using defaults:', error);
         this.config = {
           businessAccountId: config.businessAccountId,
           topscholarToken: config.topscholarToken || null,
@@ -853,8 +853,8 @@
           mode: config.mode || null,
           container: config.container || null,
           k12EducationEnabled: false,
-          chatColor: config.chatColor || '#9333ea',
-          chatColorEnd: config.chatColorEnd || '#3b82f6',
+          chatColor: config.chatColor || '#1f4596',
+          chatColorEnd: config.chatColorEnd || '#0a1530',
           buttonStyle: config.buttonStyle || 'circular',
           buttonAnimation: config.buttonAnimation || 'bounce',
           welcomeMessageType: config.welcomeMessageType || 'ai_generated',
@@ -945,7 +945,7 @@
             const url = new URL(src);
             return `${url.protocol}//${url.host}`;
           } catch (e) {
-            console.error('[Hi Chroney] Failed to parse script URL:', e);
+            console.error('[Orvey] Failed to parse script URL:', e);
           }
         }
       }
@@ -961,25 +961,25 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ businessAccountId })
       }).then(() => {
-        console.log('[Hi Chroney] Server-side AI context cache warmed');
+        console.log('[Orvey] Server-side AI context cache warmed');
       }).catch(error => {
         // Silently fail - this is a performance optimization, not critical
-        console.log('[Hi Chroney] Cache prewarm failed (non-critical):', error.message);
+        console.log('[Orvey] Cache prewarm failed (non-critical):', error.message);
       });
     },
     
     // Product Page AI Mode - shows AI assistant card when on a product page
     initProductPageMode: async function(baseUrl) {
-      console.log('[Hi Chroney] Checking for product page...');
+      console.log('[Orvey] Checking for product page...');
       
       // Detect if we're on a product page
       const productData = ProductPageDetector.detect();
       if (!productData) {
-        console.log('[Hi Chroney] Not a product page, skipping AI mode');
+        console.log('[Orvey] Not a product page, skipping AI mode');
         return;
       }
       
-      console.log('[Hi Chroney] Product page detected, initializing AI assistant', productData);
+      console.log('[Orvey] Product page detected, initializing AI assistant', productData);
       
       // Store product data for chat context
       this.currentProductData = productData;
@@ -1031,7 +1031,7 @@
         }
         
         .hichroney-ai-card-header {
-          background: linear-gradient(135deg, ${config.chatColor || '#9333ea'}, ${config.chatColorEnd || '#3b82f6'});
+          background: linear-gradient(135deg, ${config.chatColor || '#1f4596'}, ${config.chatColorEnd || '#0a1530'});
           padding: 12px 16px;
           display: flex;
           align-items: center;
@@ -1094,7 +1094,7 @@
         }
         
         .hichroney-ai-trivia {
-          background: linear-gradient(135deg, ${config.chatColor || '#9333ea'}15, ${config.chatColorEnd || '#3b82f6'}15);
+          background: linear-gradient(135deg, ${config.chatColor || '#1f4596'}15, ${config.chatColorEnd || '#0a1530'}15);
           border-radius: 12px;
           padding: 12px;
           margin-bottom: 12px;
@@ -1107,7 +1107,7 @@
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          color: ${config.chatColor || '#9333ea'};
+          color: ${config.chatColor || '#1f4596'};
           font-weight: 600;
           font-size: 11px;
           text-transform: uppercase;
@@ -1144,8 +1144,8 @@
         }
         
         .hichroney-ai-question-btn:hover {
-          background: linear-gradient(135deg, ${config.chatColor || '#9333ea'}20, ${config.chatColorEnd || '#3b82f6'}20);
-          color: ${config.chatColor || '#9333ea'};
+          background: linear-gradient(135deg, ${config.chatColor || '#1f4596'}20, ${config.chatColorEnd || '#0a1530'}20);
+          color: ${config.chatColor || '#1f4596'};
         }
         
         .hichroney-ai-question-btn:last-child {
@@ -1205,11 +1205,11 @@
         }
         
         .hichroney-ai-ask-input input:focus {
-          border-color: ${config.chatColor || '#9333ea'};
+          border-color: ${config.chatColor || '#1f4596'};
         }
         
         .hichroney-ai-ask-input button {
-          background: linear-gradient(135deg, ${config.chatColor || '#9333ea'}, ${config.chatColorEnd || '#3b82f6'});
+          background: linear-gradient(135deg, ${config.chatColor || '#1f4596'}, ${config.chatColorEnd || '#0a1530'});
           color: white;
           border: none;
           border-radius: 50%;
@@ -1236,7 +1236,7 @@
           width: 8px;
           height: 8px;
           border-radius: 50%;
-          background: ${config.chatColor || '#9333ea'};
+          background: ${config.chatColor || '#1f4596'};
           animation: hichroney-dot-bounce 1.4s infinite ease-in-out both;
         }
         
@@ -1516,7 +1516,7 @@
     },
 
     createVoiceOnlyWidget: function() {
-      console.log('[Hi Chroney] Creating voice-only widget');
+      console.log('[Orvey] Creating voice-only widget');
       const baseUrl = this.getBaseUrl();
       const position = this.config.widgetPosition || 'bottom-right';
       const [verticalPos, horizontalPos] = position.split('-');
@@ -1970,7 +1970,7 @@
       
       // Handle click - open voice mode iframe
       orb.addEventListener('click', () => {
-        console.log('[Hi Chroney] Opening voice mode');
+        console.log('[Orvey] Opening voice mode');
         // Create fullscreen iframe for voice mode
         const iframe = document.createElement('iframe');
         iframe.id = 'hichroney-voice-iframe';
@@ -2121,7 +2121,7 @@
       });
 
       document.body.appendChild(el);
-      console.log('[Hi Chroney] WhatsApp launcher rendered (' + (aiAlsoShown ? 'both' : 'whatsapp-only') + ' mode)');
+      console.log('[Orvey] WhatsApp launcher rendered (' + (aiAlsoShown ? 'both' : 'whatsapp-only') + ' mode)');
     },
 
     createWidget: function() {
@@ -2796,7 +2796,7 @@
         if (isOpen) {
           // For proactive guidance pages, don't close on overlay click
           if (HiChroneyWidget.config.proactiveGuidanceActive === true) {
-            console.log('[Hi Chroney] Proactive guidance active - ignoring overlay click');
+            console.log('[Orvey] Proactive guidance active - ignoring overlay click');
             return;
           }
           // Trigger close via button click simulation
@@ -2830,10 +2830,10 @@
       window.addEventListener('message', (event) => {
         // Debug logging for all messages
         if (event.data && event.data.type === 'EMBED_READY') {
-          console.log('[Hi Chroney Widget] 📩 Received EMBED_READY signal');
-          console.log('[Hi Chroney Widget] event.source:', event.source);
-          console.log('[Hi Chroney Widget] iframe.contentWindow:', iframe.contentWindow);
-          console.log('[Hi Chroney Widget] Are they equal?', event.source === iframe.contentWindow);
+          console.log('[Orvey Widget] 📩 Received EMBED_READY signal');
+          console.log('[Orvey Widget] event.source:', event.source);
+          console.log('[Orvey Widget] iframe.contentWindow:', iframe.contentWindow);
+          console.log('[Orvey Widget] Are they equal?', event.source === iframe.contentWindow);
         }
         
         // Verify message is from our iframe to prevent spoofing
@@ -2857,12 +2857,12 @@
         }
 
         if (event.data && event.data.type === 'EMBED_READY') {
-          console.log('[Hi Chroney Widget] ✅ Iframe is ready to receive messages');
+          console.log('[Orvey Widget] ✅ Iframe is ready to receive messages');
           isIframeReady = true;
           HiChroneyWidget._iframeReady = true;
           
           if (window.VisitorSession && window.VisitorSession.sessionId) {
-            console.log('[Hi Chroney Widget] Sending visitor session ID to iframe:', window.VisitorSession.sessionId);
+            console.log('[Orvey Widget] Sending visitor session ID to iframe:', window.VisitorSession.sessionId);
             iframe.contentWindow.postMessage({
               type: 'SESSION_INIT',
               visitorSessionId: window.VisitorSession.sessionId
@@ -2871,17 +2871,17 @@
           
           // Send parent page URL to iframe for lead source tracking (LeadSquared integration)
           // This is critical because document.referrer is unreliable in iframes
-          console.log('[Hi Chroney Widget] Sending parent page URL to iframe:', window.location.href);
+          console.log('[Orvey Widget] Sending parent page URL to iframe:', window.location.href);
           iframe.contentWindow.postMessage({
             type: 'PARENT_URL',
             pageUrl: window.location.href
           }, '*');
           
           // Process any queued messages
-          console.log(`[Hi Chroney Widget] Processing ${messageQueue.length} queued message(s)`);
+          console.log(`[Orvey Widget] Processing ${messageQueue.length} queued message(s)`);
           while (messageQueue.length > 0) {
             const queuedMessage = messageQueue.shift();
-            console.log('[Hi Chroney Widget] ✅ Sending queued message:', queuedMessage);
+            console.log('[Orvey Widget] ✅ Sending queued message:', queuedMessage);
             iframe.contentWindow.postMessage(queuedMessage, '*');
           }
           
@@ -2890,7 +2890,7 @@
           const businessAccountId = HiChroneyWidget.config.businessAccountId;
           
           const processGuidanceRules = function(rules) {
-            console.log('[Hi Chroney Widget] Processing', rules?.length || 0, 'guidance rules');
+            console.log('[Orvey Widget] Processing', rules?.length || 0, 'guidance rules');
             if (!rules || rules.length === 0) return;
             
             // Find matching rule using same logic as URL change handler
@@ -2924,12 +2924,12 @@
             }
             
             if (matchingRule && matchingRule.message) {
-              console.log('[Hi Chroney Widget] Found matching guidance rule:', matchingRule.name);
+              console.log('[Orvey Widget] Found matching guidance rule:', matchingRule.name);
               
               // CRITICAL: Set proactiveGuidanceActive flag when rule matches
               // This enables assistant mode: no overlay, prevents closing
               HiChroneyWidget.config.proactiveGuidanceActive = true;
-              console.log('[Hi Chroney Widget] ✅ Proactive guidance mode ACTIVATED');
+              console.log('[Orvey Widget] ✅ Proactive guidance mode ACTIVATED');
               
               // Hide any existing overlay for assistant mode (no blocking overlay)
               if (chatOverlay) {
@@ -2957,28 +2957,28 @@
                     : matchingRule.conversationStarters;
                   if (Array.isArray(ruleFaqs)) {
                     guidancePayload.conversationStarters = ruleFaqs;
-                    console.log('[Hi Chroney Widget] Including FAQs:', ruleFaqs.length);
+                    console.log('[Orvey Widget] Including FAQs:', ruleFaqs.length);
                   }
                 } catch (e) {
-                  console.warn('[Hi Chroney Widget] Failed to parse FAQs:', e);
+                  console.warn('[Orvey Widget] Failed to parse FAQs:', e);
                 }
               }
               
               // Send to iframe
               iframe.contentWindow.postMessage(guidancePayload, '*');
-              console.log('[Hi Chroney Widget] Sent PROACTIVE_GUIDANCE message');
+              console.log('[Orvey Widget] Sent PROACTIVE_GUIDANCE message');
             } else {
-              console.log('[Hi Chroney Widget] No matching guidance rule for URL:', currentUrl);
+              console.log('[Orvey Widget] No matching guidance rule for URL:', currentUrl);
             }
           };
           
           // Fetch guidance rules and process
-          console.log('[Hi Chroney Widget] Fetching proactive guidance rules for URL:', currentUrl);
+          console.log('[Orvey Widget] Fetching proactive guidance rules for URL:', currentUrl);
           fetch(HiChroneyWidget.getBaseUrl() + '/api/public/proactive-guidance-rules/' + encodeURIComponent(businessAccountId))
             .then(function(r) { return r.json(); })
             .then(processGuidanceRules)
             .catch(function(err) {
-              console.log('[Hi Chroney Widget] Failed to fetch guidance rules:', err);
+              console.log('[Orvey Widget] Failed to fetch guidance rules:', err);
             });
         }
       });
@@ -3055,24 +3055,24 @@
             }
           };
 
-          console.log('[Hi Chroney Widget] Inline mode active — mounted into #' + containerId);
+          console.log('[Orvey Widget] Inline mode active — mounted into #' + containerId);
           return;
         }
-        console.warn('[Hi Chroney Widget] Inline mode requested but container #' + containerId + ' not found; falling back to floating widget.');
+        console.warn('[Orvey Widget] Inline mode requested but container #' + containerId + ' not found; falling back to floating widget.');
       }
       // ────────────────────────────────────────────────────────────────────────
 
       // NOTE: Iframe stays hidden (display:none in CSS) until user opens chat
       // The prewarmCache function handles preloading settings/intro via HTTP cache
-      console.log('[Hi Chroney Widget] Iframe created, will load when displayed');
+      console.log('[Orvey Widget] Iframe created, will load when displayed');
       
       // Helper function to send messages to iframe with queuing
       const sendMessageToIframe = (messageData) => {
         if (isIframeReady) {
-          console.log('[Hi Chroney Widget] Sending message immediately:', messageData);
+          console.log('[Orvey Widget] Sending message immediately:', messageData);
           iframe.contentWindow.postMessage(messageData, '*');
         } else {
-          console.log('[Hi Chroney Widget] Iframe not ready, queuing message:', messageData);
+          console.log('[Orvey Widget] Iframe not ready, queuing message:', messageData);
           messageQueue.push(messageData);
         }
       };
@@ -3150,7 +3150,7 @@
           animationStyle = '';
       }
       
-      console.log('[Hi Chroney Widget] Button style:', buttonStyle, 'Animation:', buttonAnimation);
+      console.log('[Orvey Widget] Button style:', buttonStyle, 'Animation:', buttonAnimation);
       
       // For pill buttons, let CSS handle layout (don't apply center alignment)
       if (buttonStyle === 'pill') {
@@ -3271,20 +3271,20 @@
       };
 
       const handlePillSendMessage = () => {
-        console.log('[Hi Chroney Pill] Button clicked! isOpen:', isOpen);
+        console.log('[Orvey Pill] Button clicked! isOpen:', isOpen);
         
         const pillInput = document.getElementById('hichroney-pill-input');
         if (!pillInput) {
-          console.log('[Hi Chroney Pill] No input found!');
+          console.log('[Orvey Pill] No input found!');
           return;
         }
         
         const message = pillInput.value.trim();
-        console.log('[Hi Chroney Pill] Message:', message);
+        console.log('[Orvey Pill] Message:', message);
         
         // Always open chat when button is clicked - even if already "open" in partial mode
         if (!isOpen || isPartialMode) {
-          console.log('[Hi Chroney Pill] Opening full chat view... (was open:', isOpen, 'partial:', isPartialMode, ')');
+          console.log('[Orvey Pill] Opening full chat view... (was open:', isOpen, 'partial:', isPartialMode, ')');
           isOpen = true;
           iframe.style.display = 'block';
           
@@ -3326,7 +3326,7 @@
           
           // Hide button completely when chat opens (mobile and desktop)
           hideButtonCompletely(button);
-          console.log('[Hi Chroney Pill] Chat opened - pill hidden');
+          console.log('[Orvey Pill] Chat opened - pill hidden');
           
           if (isMobile) {
             // On mobile: Lock body scroll and go fullscreen
@@ -3335,7 +3335,7 @@
             // CRITICAL: Ensure iframe is a direct child of body to avoid transform inheritance
             // Host page transforms cause touch target misalignment on mobile
             if (iframe.parentElement !== document.body) {
-              console.log('[Hi Chroney] Moving iframe to body for proper mobile touch handling');
+              console.log('[Orvey] Moving iframe to body for proper mobile touch handling');
               document.body.appendChild(iframe);
             }
             // Also ensure container is direct child of body
@@ -3370,12 +3370,12 @@
             }
           }
         } else {
-          console.log('[Hi Chroney Pill] Chat already fully open');
+          console.log('[Orvey Pill] Chat already fully open');
         }
         
         // Only send message if there's content
         if (message) {
-          console.log('[Hi Chroney Pill] Sending message:', message);
+          console.log('[Orvey Pill] Sending message:', message);
           
           sendMessageToIframe({
             type: 'SEND_MESSAGE',
@@ -3484,7 +3484,7 @@
                   pillInput.style.cursor = 'pointer';
                   // Mark that form journey is active so click handler knows to open chat
                   pillInput.dataset.formJourneyActive = 'true';
-                  console.log('[Hi Chroney Pill] Form journey active - input disabled');
+                  console.log('[Orvey Pill] Form journey active - input disabled');
                   
                   // Hide the send button since input is disabled
                   const sendBtn = document.getElementById('hichroney-pill-send-btn');
@@ -3508,7 +3508,7 @@
               }
             }
           } catch (err) {
-            console.log('[Hi Chroney Pill] Error checking form journey:', err);
+            console.log('[Orvey Pill] Error checking form journey:', err);
           }
         };
         
@@ -3520,14 +3520,14 @@
         
         // Use event delegation on the button container (persists through innerHTML updates)
         button.addEventListener('click', (e) => {
-          console.log('[Hi Chroney] Click event on:', e.target.id || e.target.tagName);
+          console.log('[Orvey] Click event on:', e.target.id || e.target.tagName);
           
           // Check if click is on send button or its children (SVG/path)
           const target = e.target;
           const sendBtn = target.closest('#hichroney-pill-send-btn');
           
           if (sendBtn || target.id === 'hichroney-pill-send-btn') {
-            console.log('[Hi Chroney] Send button detected!');
+            console.log('[Orvey] Send button detected!');
             e.stopPropagation();
             e.preventDefault();
             handlePillSendMessage();
@@ -3540,7 +3540,7 @@
             const pillInput = document.getElementById('hichroney-pill-input');
             // If form journey is active, don't stop propagation - let click open the chat
             if (pillInput && pillInput.dataset.formJourneyActive === 'true') {
-              console.log('[Hi Chroney] Form journey active - letting click open chat');
+              console.log('[Orvey] Form journey active - letting click open chat');
               // Don't return or stop propagation - let handlePillAvatarClick handle it
             } else {
               e.stopPropagation();
@@ -3561,7 +3561,7 @@
               return;
             } else {
               // Enter alone: Submit message
-              console.log('[Hi Chroney] Enter key pressed in input');
+              console.log('[Orvey] Enter key pressed in input');
               e.preventDefault();
               e.stopPropagation();
               handlePillSendMessage();
@@ -3704,7 +3704,7 @@
       // - In both cases: If user closed it this session, keep it closed (unless proactive guidance)
       if (shouldAutoOpen && autoOpenFrequency === 'once' && wasAlreadyOpened) {
         shouldAutoOpen = false;
-        console.log('[Hi Chroney] Skipping auto-open - already opened once for this visitor');
+        console.log('[Orvey] Skipping auto-open - already opened once for this visitor');
       }
       
       // For proactive guidance pages, always auto-open regardless of user close preference
@@ -3712,7 +3712,7 @@
       let isOpen = isProactiveGuidance ? shouldAutoOpen : (wasClosed ? false : shouldAutoOpen);
       
       if (isProactiveGuidance && shouldAutoOpen) {
-        console.log('[Hi Chroney] Proactive guidance active - forcing auto-open');
+        console.log('[Orvey] Proactive guidance active - forcing auto-open');
       }
       
       // Mark as opened once if we're auto-opening
@@ -3720,7 +3720,7 @@
         localStorage.setItem(openedOnceKey, 'true');
       }
       
-      console.log('[Hi Chroney] Auto-open setting:', autoOpenSetting, 'frequency:', autoOpenFrequency, 'isMobile:', isMobile, 'shouldAutoOpen:', shouldAutoOpen, 'isOpen:', isOpen);
+      console.log('[Orvey] Auto-open setting:', autoOpenSetting, 'frequency:', autoOpenFrequency, 'isMobile:', isMobile, 'shouldAutoOpen:', shouldAutoOpen, 'isOpen:', isOpen);
       
       // No partial mode - always open in full mode
       let isPartialMode = false;
@@ -3741,9 +3741,9 @@
         if (isMobile) {
           iframe.classList.add('mobile-open');
           lockBodyScroll(true);
-          console.log('[Hi Chroney] Auto-opened on mobile - fullscreen mode');
+          console.log('[Orvey] Auto-opened on mobile - fullscreen mode');
         } else {
-          console.log('[Hi Chroney] Auto-opened on desktop - full mode (button hidden)');
+          console.log('[Orvey] Auto-opened on desktop - full mode (button hidden)');
         }
       }
       
@@ -3761,9 +3761,9 @@
             // Ensure button stays hidden (it was already hidden by hideButtonCompletely)
             // No need to call hideButtonCompletely again since forceHidden is already set
             lockBodyScroll(true);
-            console.log('[Hi Chroney] Expanded to fullscreen on mobile');
+            console.log('[Orvey] Expanded to fullscreen on mobile');
           } else {
-            console.log('[Hi Chroney] Expanded chat to full height');
+            console.log('[Orvey] Expanded chat to full height');
           }
         }
       };
@@ -3772,7 +3772,7 @@
       const openWidget = () => {
         if (isOpen) return; // Already open
         
-        console.log('[Hi Chroney] Opening widget fully...');
+        console.log('[Orvey] Opening widget fully...');
         isOpen = true;
         iframe.style.display = 'block';
         iframe.classList.remove('partial-mode');
@@ -3813,16 +3813,16 @@
         // Only hide button completely for pill style - non-pill keeps icon visible
         if (buttonStyle === 'pill') {
           hideButtonCompletely(button);
-          console.log('[Hi Chroney] Chat opened - pill hidden');
+          console.log('[Orvey] Chat opened - pill hidden');
         }
         
         const isMobile = window.innerWidth <= 480;
         if (isMobile) {
           iframe.classList.add('mobile-open');
           lockBodyScroll(true);
-          console.log('[Hi Chroney] Opened on mobile - fullscreen mode');
+          console.log('[Orvey] Opened on mobile - fullscreen mode');
         } else {
-          console.log('[Hi Chroney] Opened on desktop');
+          console.log('[Orvey] Opened on desktop');
         }
         
         // Remove session storage flag (user didn't close it)
@@ -3875,7 +3875,7 @@
           if (isOpen) {
             // For proactive guidance pages, don't allow closing via button
             if (HiChroneyWidget.config.proactiveGuidanceActive === true) {
-              console.log('[Hi Chroney] Proactive guidance active - ignoring button close');
+              console.log('[Orvey] Proactive guidance active - ignoring button close');
               return;
             }
             isOpen = false;
@@ -3901,7 +3901,7 @@
             // Show button again and force visibility (both mobile and desktop)
             showButtonCompletely(button);
             forceWidgetVisibility(container, button);
-            console.log('[Hi Chroney] Chat closed - pill shown');
+            console.log('[Orvey] Chat closed - pill shown');
             
             if (isMobile) {
               iframe.classList.remove('mobile-open', 'mobile-partial-open', 'partial-mode');
@@ -3913,7 +3913,7 @@
             const pillInput = document.getElementById('hichroney-pill-input');
             if (pillInput && pillInput.dataset.formJourneyActive === 'true') {
               // Form journey active - open chat on any click
-              console.log('[Hi Chroney Pill] Form journey active - opening chat on click');
+              console.log('[Orvey Pill] Form journey active - opening chat on click');
               handlePillSendMessage(); // This opens the chat (and won't send message since input is empty)
             }
             // Otherwise do nothing - user should type and send to open
@@ -3924,7 +3924,7 @@
         // For non-pill styles, keep original toggle behavior
         // But for proactive guidance, prevent closing (only allow opening)
         if (isOpen && HiChroneyWidget.config.proactiveGuidanceActive === true) {
-          console.log('[Hi Chroney] Proactive guidance active - ignoring button close');
+          console.log('[Orvey] Proactive guidance active - ignoring button close');
           return;
         }
         isOpen = !isOpen;
@@ -3962,7 +3962,7 @@
             // CRITICAL: Ensure iframe is a direct child of body to avoid transform inheritance
             // Host page transforms cause touch target misalignment on mobile
             if (iframe.parentElement !== document.body) {
-              console.log('[Hi Chroney] Moving iframe to body for proper mobile touch handling');
+              console.log('[Orvey] Moving iframe to body for proper mobile touch handling');
               document.body.appendChild(iframe);
             }
             // Also ensure container is direct child of body
@@ -4018,7 +4018,7 @@
                             event.source === iframe.contentWindow;
         
         if (!isSameOrigin) {
-          console.log('[Hi Chroney Widget] Ignoring message from different origin:', event.origin);
+          console.log('[Orvey Widget] Ignoring message from different origin:', event.origin);
           return;
         }
         
@@ -4028,7 +4028,7 @@
         }
 
         if (event.data === 'CLOSE_WIDGET') {
-          console.log('[Hi Chroney Widget] Closing widget via X button');
+          console.log('[Orvey Widget] Closing widget via X button');
           // Direct close (bypasses proactive guidance block on button)
           if (isOpen) {
             isOpen = false;
@@ -4062,7 +4062,7 @@
               lockBodyScroll(false);
             }
             
-            console.log('[Hi Chroney] Chat closed via header X button');
+            console.log('[Orvey] Chat closed via header X button');
           }
         }
         
@@ -4096,21 +4096,21 @@
           const currentUrl = window.location.pathname + window.location.search;
           if (currentUrl === lastUrl) return;
           
-          console.log('[Hi Chroney] URL changed:', lastUrl, '->', currentUrl);
+          console.log('[Orvey] URL changed:', lastUrl, '->', currentUrl);
           lastUrl = currentUrl;
           
           // Fetch proactive guidance rules and find matching rule
           fetch(`${HiChroneyWidget.getBaseUrl()}/api/public/proactive-guidance-rules/${encodeURIComponent(businessAccountId)}`)
             .then(r => r.json())
             .then(rules => {
-              console.log('[Hi Chroney] Fetched', rules?.length || 0, 'guidance rules for URL:', currentUrl);
+              console.log('[Orvey] Fetched', rules?.length || 0, 'guidance rules for URL:', currentUrl);
               if (!rules || rules.length === 0) return;
               
               // Find matching rule (same logic as EmbedChat)
               let matchingRule = null;
               for (const rule of rules) {
                 const pattern = rule.urlPattern;
-                console.log('[Hi Chroney] Checking pattern:', pattern, 'against URL:', currentUrl, 'exact:', pattern === currentUrl);
+                console.log('[Orvey] Checking pattern:', pattern, 'against URL:', currentUrl, 'exact:', pattern === currentUrl);
                 
                 // Exact match
                 if (pattern === currentUrl) {
@@ -4139,12 +4139,12 @@
               }
               
               if (matchingRule && matchingRule.message) {
-                console.log('[Hi Chroney] Found guidance for new URL:', matchingRule.name);
+                console.log('[Orvey] Found guidance for new URL:', matchingRule.name);
                 
                 // CRITICAL: Set proactiveGuidanceActive flag when rule matches
                 // This enables assistant mode: no overlay, prevents closing
                 HiChroneyWidget.config.proactiveGuidanceActive = true;
-                console.log('[Hi Chroney] ✅ Proactive guidance mode ACTIVATED for URL change');
+                console.log('[Orvey] ✅ Proactive guidance mode ACTIVATED for URL change');
                 
                 // Hide any existing overlay for assistant mode (no blocking overlay)
                 hideOverlay();
@@ -4171,26 +4171,26 @@
                       : matchingRule.conversationStarters;
                     if (Array.isArray(ruleStarters)) {
                       guidancePayload.conversationStarters = ruleStarters;
-                      console.log('[Hi Chroney] Including rule starters:', ruleStarters.length);
+                      console.log('[Orvey] Including rule starters:', ruleStarters.length);
                     }
                   } catch (e) {
-                    console.warn('[Hi Chroney] Failed to parse rule conversationStarters:', e);
+                    console.warn('[Orvey] Failed to parse rule conversationStarters:', e);
                   }
                 }
                 
                 // Send new guidance message to iframe
                 iframe.contentWindow.postMessage(guidancePayload, '*');
-                console.log('[Hi Chroney] Sent PROACTIVE_GUIDANCE message');
+                console.log('[Orvey] Sent PROACTIVE_GUIDANCE message');
               } else {
                 // If no rule matches on new URL, deactivate proactive guidance mode
                 if (HiChroneyWidget.config.proactiveGuidanceActive) {
                   HiChroneyWidget.config.proactiveGuidanceActive = false;
-                  console.log('[Hi Chroney] Proactive guidance mode deactivated - no matching rule');
+                  console.log('[Orvey] Proactive guidance mode deactivated - no matching rule');
                 }
-                console.log('[Hi Chroney] No matching guidance rule found for URL:', currentUrl);
+                console.log('[Orvey] No matching guidance rule found for URL:', currentUrl);
               }
             })
-            .catch(err => console.log('[Hi Chroney] Failed to fetch guidance rules:', err));
+            .catch(err => console.log('[Orvey] Failed to fetch guidance rules:', err));
         };
         
         // Listen for popstate (back/forward buttons)
@@ -4210,7 +4210,7 @@
           setTimeout(checkUrlAndUpdateGuidance, 50);
         };
         
-        console.log('[Hi Chroney] URL change detection enabled for proactive guidance');
+        console.log('[Orvey] URL change detection enabled for proactive guidance');
       }
       
       // Create Conversation Starters Container (colored chips above pill)
@@ -4333,7 +4333,7 @@
         allNudgeMessages.push(...this.config.proactiveNudgeMessages);
       }
       
-      console.log('[Hi Chroney] Proactive nudge sequence:', allNudgeMessages.length, 'messages');
+      console.log('[Orvey] Proactive nudge sequence:', allNudgeMessages.length, 'messages');
       
       // Check if nudge was already shown this session (skip if repeat is enabled)
       if (!shouldRepeatNudge && sessionStorage.getItem(proactiveNudgeSessionKey) === 'true') {
@@ -4489,7 +4489,7 @@
           e.stopPropagation();
           // Mark the current message as closed (won't show again until page refresh)
           closedMessageIndices.add(currentMessageIndex);
-          console.log('[Hi Chroney] Message', currentMessageIndex + 1, 'closed by user, won\'t show again');
+          console.log('[Orvey] Message', currentMessageIndex + 1, 'closed by user, won\'t show again');
           
           // DON'T clear timers - allow next messages in sequence to show
           // Just hide the current popup
@@ -4543,7 +4543,7 @@
           // Check if all messages have been closed
           const remainingMessages = allNudgeMessages.filter((_, idx) => !closedMessageIndices.has(idx));
           if (remainingMessages.length === 0) {
-            console.log('[Hi Chroney] All messages closed by user, stopping sequence');
+            console.log('[Orvey] All messages closed by user, stopping sequence');
             return;
           }
           
@@ -4561,7 +4561,7 @@
               
               // Skip if this message was closed by user
               if (closedMessageIndices.has(index)) {
-                console.log('[Hi Chroney] Skipping message', index + 1, '(closed by user)');
+                console.log('[Orvey] Skipping message', index + 1, '(closed by user)');
                 return;
               }
               
@@ -4573,15 +4573,15 @@
                 proactiveNudgeShown = true;
                 sessionStorage.setItem(proactiveNudgeSessionKey, 'true');
                 showNudgePopup(msg.message, chatColor, chatColorEnd);
-                console.log('[Hi Chroney] Proactive nudge message 1 shown');
+                console.log('[Orvey] Proactive nudge message 1 shown');
               } else {
                 // Subsequent messages or repeat cycles
                 if (!proactiveNudgePopup) {
                   showNudgePopup(msg.message, chatColor, chatColorEnd);
-                  console.log('[Hi Chroney] Proactive nudge message', index + 1, 'shown (created)');
+                  console.log('[Orvey] Proactive nudge message', index + 1, 'shown (created)');
                 } else {
                   updateNudgeMessage(msg.message);
-                  console.log('[Hi Chroney] Proactive nudge message', index + 1, 'shown (updated)');
+                  console.log('[Orvey] Proactive nudge message', index + 1, 'shown (updated)');
                 }
               }
               
@@ -4593,7 +4593,7 @@
                   const restartDelay = firstAvailableMsg.delay * 1000;
                   const restartTimer = setTimeout(() => {
                     if (!nudgeSequenceStopped && !isOpen) {
-                      console.log('[Hi Chroney] Restarting nudge sequence');
+                      console.log('[Orvey] Restarting nudge sequence');
                       scheduleNudgeSequence(0, 0);
                     }
                   }, restartDelay);
@@ -4607,7 +4607,7 @@
         
         // Start the initial sequence
         scheduleNudgeSequence(0, 0);
-        console.log('[Hi Chroney] Scheduled', allNudgeMessages.length, 'nudge messages with repeat');
+        console.log('[Orvey] Scheduled', allNudgeMessages.length, 'nudge messages with repeat');
       }
       
       // Hide proactive nudge when chat opens - stops entire sequence
@@ -4644,8 +4644,8 @@
       const centerBannerDescription = this.config.centerBannerDescription || "Let me help you find exactly what you're looking for.";
       const centerBannerButtonText = this.config.centerBannerButtonText || "Start Chat";
       const centerBannerBackgroundStyle = this.config.centerBannerBackgroundStyle || "gradient";
-      const centerBannerStartColor = this.config.centerBannerStartColor || "#9333ea";
-      const centerBannerEndColor = this.config.centerBannerEndColor || "#3b82f6";
+      const centerBannerStartColor = this.config.centerBannerStartColor || "#1f4596";
+      const centerBannerEndColor = this.config.centerBannerEndColor || "#0a1530";
       const centerBannerTextColor = this.config.centerBannerTextColor || "white";
       const centerBannerImageUrl = this.config.centerBannerImageUrl || null;
       
@@ -4658,7 +4658,7 @@
       let reengagementBannerShown = false;
       let reengagementTimerId = null;
       
-      const chatColor = this.config.chatColor || "#9333ea"; // For CTA button text color
+      const chatColor = this.config.chatColor || "#1f4596"; // For CTA button text color
       const avatarType = this.config.avatarType || 'none';
       const avatarUrl = this.config.avatarUrl || null;
       const bannerBaseUrl = this.getBaseUrl(); // Use different name to avoid conflict
@@ -4684,7 +4684,7 @@
           sessionStorage.setItem(centerBannerSessionKey, 'true');
         }
         
-        console.log('[Hi Chroney] Showing center banner');
+        console.log('[Orvey] Showing center banner');
         
         // Create overlay
         const overlay = document.createElement('div');
@@ -4904,7 +4904,7 @@
           
           // Schedule re-engagement banner if enabled and user dismissed (not clicked CTA)
           if (triggeredByUser && reengagementBannerEnabled && !reengagementBannerShown && !isOpen) {
-            console.log('[Hi Chroney] Scheduling re-engagement banner in', reengagementBannerDelay, 'seconds');
+            console.log('[Orvey] Scheduling re-engagement banner in', reengagementBannerDelay, 'seconds');
             reengagementTimerId = setTimeout(() => {
               if (!isOpen && !reengagementBannerShown) {
                 showReengagementBanner();
@@ -4925,13 +4925,13 @@
         });
         closeBtn.addEventListener('click', (e) => {
           e.stopPropagation();
-          console.log('[Hi Chroney] Center banner closed by user');
+          console.log('[Orvey] Center banner closed by user');
           closeBanner();
         });
         
         // Overlay click closes banner
         overlay.addEventListener('click', () => {
-          console.log('[Hi Chroney] Center banner closed via overlay');
+          console.log('[Orvey] Center banner closed via overlay');
           closeBanner();
         });
         
@@ -4947,7 +4947,7 @@
         });
         ctaBtn.addEventListener('click', (e) => {
           e.stopPropagation();
-          console.log('[Hi Chroney] Center banner CTA clicked - opening chat');
+          console.log('[Orvey] Center banner CTA clicked - opening chat');
           closeBanner(false); // false = don't schedule re-engagement (user clicked CTA)
           // Clear any scheduled re-engagement timer
           if (reengagementTimerId) {
@@ -4972,7 +4972,7 @@
               iframe.classList.add('mobile-open');
               lockBodyScroll(true);
               hideButtonCompletely(button);
-              console.log('[Hi Chroney] Chat opened from center banner - mobile fullscreen');
+              console.log('[Orvey] Chat opened from center banner - mobile fullscreen');
             } else {
               // Hide button properly for both pill and non-pill styles
               if (buttonStyle === 'pill') {
@@ -4980,7 +4980,7 @@
               } else {
                 button.style.display = 'none';
               }
-              console.log('[Hi Chroney] Chat opened from center banner - desktop');
+              console.log('[Orvey] Chat opened from center banner - desktop');
             }
             
             if (widgetStartersContainer) {
@@ -4997,12 +4997,12 @@
       // Re-engagement Banner function (shows after first banner is dismissed)
       const showReengagementBanner = () => {
         if (isOpen || reengagementBannerShown) {
-          console.log('[Hi Chroney] Re-engagement banner skipped - chat is open or already shown');
+          console.log('[Orvey] Re-engagement banner skipped - chat is open or already shown');
           return;
         }
         
         reengagementBannerShown = true;
-        console.log('[Hi Chroney] Showing re-engagement banner');
+        console.log('[Orvey] Showing re-engagement banner');
         
         // Create overlay
         const reOverlay = document.createElement('div');
@@ -5161,13 +5161,13 @@
         const reCloseBtn = rePopup.querySelector('#hichroney-reengagement-close');
         reCloseBtn.addEventListener('click', (e) => {
           e.stopPropagation();
-          console.log('[Hi Chroney] Re-engagement banner closed');
+          console.log('[Orvey] Re-engagement banner closed');
           closeReengagement();
         });
         
         // Overlay click
         reOverlay.addEventListener('click', () => {
-          console.log('[Hi Chroney] Re-engagement banner closed via overlay');
+          console.log('[Orvey] Re-engagement banner closed via overlay');
           closeReengagement();
         });
         
@@ -5183,7 +5183,7 @@
         });
         reCtaBtn.addEventListener('click', (e) => {
           e.stopPropagation();
-          console.log('[Hi Chroney] Re-engagement CTA clicked - opening chat');
+          console.log('[Orvey] Re-engagement CTA clicked - opening chat');
           closeReengagement();
           if (!isOpen) {
             isOpen = true;
@@ -5202,7 +5202,7 @@
               iframe.classList.add('mobile-open');
               lockBodyScroll(true);
               hideButtonCompletely(button);
-              console.log('[Hi Chroney] Chat opened from re-engagement banner - mobile fullscreen');
+              console.log('[Orvey] Chat opened from re-engagement banner - mobile fullscreen');
             } else {
               // Hide button properly for both pill and non-pill styles
               if (buttonStyle === 'pill') {
@@ -5210,7 +5210,7 @@
               } else {
                 button.style.display = 'none';
               }
-              console.log('[Hi Chroney] Chat opened from re-engagement banner - desktop');
+              console.log('[Orvey] Chat opened from re-engagement banner - desktop');
             }
             
             if (widgetStartersContainer) {
@@ -5224,7 +5224,7 @@
       };
       
       // Schedule center banner display
-      console.log('[Hi Chroney] Center banner check:', {
+      console.log('[Orvey] Center banner check:', {
         enabled: centerBannerEnabled,
         configValue: this.config.centerBannerEnabled,
         alreadyShown: centerBannerShown,
@@ -5236,12 +5236,12 @@
       });
       
       if (centerBannerEnabled && !centerBannerShown && !isOpen) {
-        console.log('[Hi Chroney] Center banner scheduled in', centerBannerDelay, 'seconds');
+        console.log('[Orvey] Center banner scheduled in', centerBannerDelay, 'seconds');
         setTimeout(() => {
           showCenterBanner();
         }, centerBannerDelay * 1000);
       } else {
-        console.log('[Hi Chroney] Center banner NOT scheduled. Reason:', 
+        console.log('[Orvey] Center banner NOT scheduled. Reason:', 
           !centerBannerEnabled ? 'disabled' : 
           centerBannerShown ? 'already shown' : 
           isOpen ? 'chat is open' : 'unknown');
@@ -5261,7 +5261,7 @@
         // Chat is closed, button should be visible
         button.dataset.forceHidden = 'false';
         forceWidgetVisibility(container, button);
-        console.log('[Hi Chroney] Initial visibility enforcement applied');
+        console.log('[Orvey] Initial visibility enforcement applied');
       }
       
       // Set up recurring visibility enforcement for host websites that dynamically apply CSS
@@ -5272,7 +5272,7 @@
           const buttonStyle = getComputedStyle(button);
           // Only enforce if button is actually hidden by host CSS
           if (buttonStyle.display === 'none' || buttonStyle.visibility === 'hidden' || parseFloat(buttonStyle.opacity) === 0) {
-            console.log('[Hi Chroney] Periodic visibility enforcement - button was hidden by host');
+            console.log('[Orvey] Periodic visibility enforcement - button was hidden by host');
             forceWidgetVisibility(container, button);
           }
         }
@@ -6149,7 +6149,7 @@
         const config = JSON.parse(script.getAttribute('data-config'));
         HiChroneyWidget.init(config);
       } catch (e) {
-        console.error('[Hi Chroney] Failed to parse widget config:', e);
+        console.error('[Orvey] Failed to parse widget config:', e);
       }
     }
   });

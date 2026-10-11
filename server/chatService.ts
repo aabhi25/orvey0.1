@@ -4755,7 +4755,7 @@ Do NOT mention tracking, delivery status, estimated arrival, or shipment updates
         
         // Include system context in messages so continueToolConversation has proper
         // persona/instructions (e.g. K12 tutor prompt). Without this, the generic
-        // "Chroney business chatbot" prompt is injected, which declines educational questions.
+        // "Orvey business chatbot" prompt is injected, which declines educational questions.
         const messagesWithSystem = [
           { role: 'system' as const, content: systemContext },
           ...messages
@@ -5659,7 +5659,7 @@ Do NOT mention tracking, delivery status, estimated arrival, or shipment updates
         enrichedContext += `When users ask for brochure/catalog/download, provide the EXACT URL above as a clickable markdown link like [${brochureLinks[0].label}](${brochureLinks[0].url})\n\n`;
       }
 
-      // Lead training (Train Chroney) is NOT part of this cached context any more: each turn gets
+      // Lead training (Train Orvey) is NOT part of this cached context any more: each turn gets
       // one "LEAD COLLECTION (THIS TURN)" block from services/leadCapture in the final rules, so
       // static and per-turn lead instructions can't contradict each other.
 

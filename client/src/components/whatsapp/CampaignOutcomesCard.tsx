@@ -56,7 +56,7 @@ export function CampaignOutcomesCard({
       <Card data-testid="card-outcomes-unconfigured">
         <CardHeader className="pb-2">
           <CardTitle className="text-base flex items-center gap-2">
-            <Tags className="h-4 w-4 text-violet-600" /> Reply outcomes
+            <Tags className="h-4 w-4 text-brand-600" /> Reply outcomes
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -75,7 +75,7 @@ export function CampaignOutcomesCard({
     <Card data-testid="card-outcomes">
       <CardHeader className="pb-2 flex-row items-center justify-between space-y-0">
         <CardTitle className="text-base flex items-center gap-2">
-          <Tags className="h-4 w-4 text-violet-600" /> Reply outcomes
+          <Tags className="h-4 w-4 text-brand-600" /> Reply outcomes
         </CardTitle>
         <Button
           variant="outline"
@@ -104,7 +104,7 @@ export function CampaignOutcomesCard({
                 onClick={() => onSelectClassification?.(null)}
                 className={`text-left rounded-lg border p-2.5 transition-colors ${
                   activeClassification === null || activeClassification === undefined
-                    ? "border-violet-300 bg-violet-50"
+                    ? "border-brand-300 bg-brand-50"
                     : "hover:bg-gray-50"
                 }`}
                 data-testid="tile-replied"
@@ -153,7 +153,7 @@ export function CampaignOutcomesCard({
                       type="button"
                       onClick={() => onSelectClassification?.(isActive ? null : row.key)}
                       className={`w-full text-left px-2.5 py-2 rounded-lg border transition-colors ${
-                        isActive ? "border-violet-300 bg-violet-50" : "border-transparent hover:bg-gray-50"
+                        isActive ? "border-brand-300 bg-brand-50" : "border-transparent hover:bg-gray-50"
                       }`}
                       data-testid={`row-outcome-${row.key}`}
                     >
@@ -181,7 +181,7 @@ export function CampaignOutcomesCard({
                       </div>
                       <div className="mt-1.5 h-1 bg-gray-100 rounded-full overflow-hidden">
                         <div
-                          className="h-full bg-violet-400 rounded-full transition-all"
+                          className="h-full bg-brand-400 rounded-full transition-all"
                           style={{ width: `${(row.count / maxCount) * 100}%` }}
                         />
                       </div>

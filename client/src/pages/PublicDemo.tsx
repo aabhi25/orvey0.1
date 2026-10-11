@@ -129,7 +129,7 @@ export default function PublicDemo() {
     return (
       <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 p-4">
         <div className="text-center w-full max-w-md mx-auto">
-          <div className="w-16 h-16 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-16 h-16 border-4 border-brand-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-muted-foreground text-base">Loading demo...</p>
         </div>
       </div>
@@ -178,7 +178,7 @@ export default function PublicDemo() {
                     href={data.businessAccount.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-purple-600 transition-colors break-all"
+                    className="hover:text-brand-600 transition-colors break-all"
                   >
                     {data.businessAccount.website}
                   </a>
@@ -215,7 +215,7 @@ export default function PublicDemo() {
                 <ul className="space-y-2 sm:space-y-3">
                   {content.mainProducts.map((product: string, i: number) => (
                     <li key={i} className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-purple-600 mt-1 flex-shrink-0 text-sm sm:text-base">•</span>
+                      <span className="text-brand-600 mt-1 flex-shrink-0 text-sm sm:text-base">•</span>
                       <span className="text-sm sm:text-base">{product}</span>
                     </li>
                   ))}
@@ -236,7 +236,7 @@ export default function PublicDemo() {
                 <ul className="space-y-2 sm:space-y-3">
                   {content.keyFeatures.map((feature: string, i: number) => (
                     <li key={i} className="flex items-start gap-2 sm:gap-3">
-                      <span className="text-purple-600 mt-1 flex-shrink-0 text-sm sm:text-base">✓</span>
+                      <span className="text-brand-600 mt-1 flex-shrink-0 text-sm sm:text-base">✓</span>
                       <span className="text-sm sm:text-base">{feature}</span>
                     </li>
                   ))}
@@ -245,7 +245,7 @@ export default function PublicDemo() {
             </Card>
           )}
 
-          <Card className="w-full bg-gradient-to-br from-purple-50 to-blue-50 border-purple-200">
+          <Card className="w-full bg-gradient-to-br from-brand-50 to-ink-50 border-brand-200">
             <CardHeader>
               <CardTitle className="text-lg sm:text-xl">Try the AI Assistant</CardTitle>
               <CardDescription className="text-sm sm:text-base">
@@ -258,7 +258,7 @@ export default function PublicDemo() {
 
         <footer className="mt-8 sm:mt-12 text-center text-xs sm:text-sm text-muted-foreground pb-6 sm:pb-8 w-full">
           <Separator className="mb-4" />
-          <p>Powered by AI Chroney - Intelligent Business Chat Platform</p>
+          <p>Powered by Orvey - Intelligent Business Chat Platform</p>
         </footer>
       </div>
     </div>

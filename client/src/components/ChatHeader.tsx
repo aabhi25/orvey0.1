@@ -12,7 +12,7 @@ export function ChatHeader({ onNewChat }: ChatHeaderProps) {
         <div className="flex items-center gap-2">
           <Sparkles className="w-5 h-5 text-white" data-testid="icon-sparkles" />
           <h1 className="text-lg font-semibold text-white" data-testid="text-header-title">
-            AI Chroney
+            Orvey
           </h1>
         </div>
         <Button

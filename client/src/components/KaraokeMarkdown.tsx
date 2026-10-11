@@ -197,7 +197,7 @@ export function KaraokeMarkdown({
   markdown,
   rawTextLength,
   offset,
-  highlightColor = "#9333ea",
+  highlightColor = "#1f4596",
   renderBlock,
   renderInline,
 }: {

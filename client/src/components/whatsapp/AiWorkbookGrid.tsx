@@ -231,7 +231,7 @@ export function AiWorkbookGrid({
                   <th key={col.key} className="group min-w-[160px] max-w-[260px] border-r border-b px-3 py-2 text-left whitespace-nowrap">
                   <div className="flex items-center gap-1.5">
                     {col.source === "ai"
-                      ? <Sparkles className="h-3.5 w-3.5 text-violet-500" />
+                      ? <Sparkles className="h-3.5 w-3.5 text-brand-500" />
                       : col.source === "operator"
                         ? <UserRound className="h-3.5 w-3.5 text-blue-500" />
                         : null}
@@ -251,7 +251,7 @@ export function AiWorkbookGrid({
                         type="button"
                         variant="ghost"
                         size="icon"
-                        className={`h-5 w-5 text-gray-400 hover:text-violet-600 ${col.campaignMapping ? "text-emerald-500" : "opacity-0 group-hover:opacity-100 focus:opacity-100"}`}
+                        className={`h-5 w-5 text-gray-400 hover:text-brand-600 ${col.campaignMapping ? "text-emerald-500" : "opacity-0 group-hover:opacity-100 focus:opacity-100"}`}
                         title={col.campaignMapping ? `Change what feeds ${col.label}` : `Map ${col.label} to a campaign field`}
                         aria-label={col.campaignMapping ? `Change mapping for ${col.label} column` : `Map ${col.label} column to a campaign field`}
                         onClick={() => onMapColumn(col)}
@@ -282,7 +282,7 @@ export function AiWorkbookGrid({
             {visibleRows.map((row, offset) => {
               const index = windowStart + offset;
               return (
-              <tr key={row.id} data-row="" style={virtual ? { height: ROW_HEIGHT } : undefined} className={selectedRows.has(row.id) ? "bg-violet-50/70" : "hover:bg-slate-50"}>
+              <tr key={row.id} data-row="" style={virtual ? { height: ROW_HEIGHT } : undefined} className={selectedRows.has(row.id) ? "bg-brand-50/70" : "hover:bg-slate-50"}>
                 <td className="sticky left-0 z-10 bg-inherit border-r border-b px-3 py-2">
                   <Checkbox
                     disabled={readOnly}
@@ -312,7 +312,7 @@ export function AiWorkbookGrid({
                             type={col.type === "date" ? "date" : col.type === "number" ? "number" : "text"}
                             value={value == null ? "" : String(value).slice(0, col.type === "date" ? 10 : undefined)}
                             onChange={e => updateCell(row.id, col.key, e.target.value)}
-                            className="w-full min-w-[160px] bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-inset focus:ring-violet-400"
+                            className="w-full min-w-[160px] bg-transparent px-3 py-2 outline-none focus:ring-2 focus:ring-inset focus:ring-brand-400"
                           />
                         )
                       ) : (

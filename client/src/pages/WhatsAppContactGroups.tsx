@@ -226,7 +226,7 @@ export default function WhatsAppContactGroups() {
                   <button type="button" className="flex-1 min-w-0 text-left" onClick={() => setLocation(`/admin/whatsapp-contact-groups/${g.id}`)}>
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="font-semibold truncate">{g.name}</span>
-                      {dynamic && <Badge variant="outline" className="border-violet-200 bg-violet-50 text-violet-700"><Sparkles className="h-3 w-3 mr-1" />Self-updating</Badge>}
+                      {dynamic && <Badge variant="outline" className="border-brand-200 bg-brand-50 text-brand-700"><Sparkles className="h-3 w-3 mr-1" />Self-updating</Badge>}
                       {fromLeads && <Badge variant="outline" className="border-teal-200 bg-teal-50 text-teal-700">From leads</Badge>}
                     </div>
                     {(dynamic || fromLeads) && g.rules

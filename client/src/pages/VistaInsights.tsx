@@ -157,7 +157,7 @@ export default function VistaInsights() {
                 <ArrowLeft className="w-5 h-5" />
               </Button>
             </Link>
-            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-indigo-500 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-br from-brand-500 to-ink-500 rounded-lg flex items-center justify-center">
               <BarChart3 className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -199,7 +199,7 @@ export default function VistaInsights() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Perfect Matches</CardTitle>
-              <Target className="h-4 w-4 text-purple-500" />
+              <Target className="h-4 w-4 text-brand-500" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{summary.exactMatchRate}%</div>
@@ -227,7 +227,7 @@ export default function VistaInsights() {
           <Card className="overflow-hidden">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <PieChart className="w-5 h-5 text-purple-500" />
+                <PieChart className="w-5 h-5 text-brand-500" />
                 Category Distribution
               </CardTitle>
               <CardDescription>
@@ -374,7 +374,7 @@ export default function VistaInsights() {
                             style={{ backgroundColor: COLORS[index % COLORS.length] }}
                             whileHover={{ scale: 1.2 }}
                           />
-                          <span className="text-sm capitalize group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors" title={item.name}>
+                          <span className="text-sm capitalize group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors" title={item.name}>
                             {item.name}
                           </span>
                           <span className="text-sm font-semibold text-muted-foreground ml-auto">
@@ -467,7 +467,7 @@ export default function VistaInsights() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Package className="w-5 h-5 text-indigo-500" />
+                <Package className="w-5 h-5 text-brand-500" />
                 Top Matched Products
               </CardTitle>
               <CardDescription>

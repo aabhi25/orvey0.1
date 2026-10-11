@@ -889,7 +889,7 @@ export default function GroupAdminDashboard() {
   if (loadingGroups) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-8 h-8 border-4 border-purple-600 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-brand-600 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -1039,8 +1039,8 @@ export default function GroupAdminDashboard() {
           {!selectedGroup?.canViewLeads ? (
             <Card className="border-0 shadow-sm">
               <CardContent className="py-16 text-center">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple-50 to-violet-100 flex items-center justify-center">
-                  <Contact className="w-8 h-8 text-purple-400" />
+                <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-brand-50 to-ink-100 flex items-center justify-center">
+                  <Contact className="w-8 h-8 text-brand-400" />
                 </div>
                 <h2 className="text-lg font-semibold mb-2 text-gray-800">No Permission</h2>
                 <p className="text-sm text-gray-500 max-w-sm mx-auto">You don't have permission to view leads for this group. Contact your administrator for access.</p>
@@ -1048,16 +1048,16 @@ export default function GroupAdminDashboard() {
             </Card>
           ) : (
             <div className="flex flex-col h-[calc(100vh-48px)] bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-              <div className="relative px-6 py-5 border-b border-gray-100 bg-gradient-to-r from-slate-50 via-purple-50/30 to-violet-50/40">
+              <div className="relative px-6 py-5 border-b border-gray-100 bg-gradient-to-r from-slate-50 via-brand-50/30 to-brand-50/40">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="w-11 h-11 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl flex items-center justify-center shadow-md shadow-purple-200/50">
+                    <div className="w-11 h-11 bg-gradient-to-br from-brand-500 to-ink-600 rounded-xl flex items-center justify-center shadow-md shadow-brand-200/50">
                       <Contact className="w-5 h-5 text-white" />
                     </div>
                     <div>
                       <div className="flex items-center gap-3">
                         <h1 className="text-xl font-bold text-gray-900 tracking-tight">Leads Management</h1>
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-100 text-purple-700 tabular-nums">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-brand-100 text-brand-700 tabular-nums">
                           {leadsTotal?.toLocaleString() || 0} total
                         </span>
                         {leadsUniqueLeads !== null && (
@@ -1085,7 +1085,7 @@ export default function GroupAdminDashboard() {
                         onClick={downloadLeadsPDF}
                         disabled={isExportingLeadsPDF}
                         variant="outline"
-                        className="border-purple-200 text-purple-700 hover:bg-purple-50 hover:border-purple-300 transition-all duration-200 shadow-sm"
+                        className="border-brand-200 text-brand-700 hover:bg-brand-50 hover:border-brand-300 transition-all duration-200 shadow-sm"
                       >
                         {isExportingLeadsPDF ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <FileText className="w-4 h-4 mr-2" />}
                         Download PDF
@@ -1096,7 +1096,7 @@ export default function GroupAdminDashboard() {
                         onClick={exportLeadsToExcel}
                         disabled={isExportingLeads}
                         variant="outline"
-                        className="border-purple-200 text-purple-700 hover:bg-purple-50 hover:border-purple-300 transition-all duration-200 shadow-sm"
+                        className="border-brand-200 text-brand-700 hover:bg-brand-50 hover:border-brand-300 transition-all duration-200 shadow-sm"
                       >
                         {isExportingLeads ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Download className="w-4 h-4 mr-2" />}
                         Export to Excel
@@ -1107,9 +1107,9 @@ export default function GroupAdminDashboard() {
               </div>
 
               <RetentionBanner policies={retentionPolicies} totalAccounts={retentionAccountCount} onViewReport={() => setRetentionReportOpen(true)} />
-              <div className="px-6 py-3 border-b border-gray-100 bg-gradient-to-r from-violet-50/50 to-transparent">
+              <div className="px-6 py-3 border-b border-gray-100 bg-gradient-to-r from-brand-50/50 to-transparent">
                 <div className="flex items-center gap-2">
-                  <Users className="w-4 h-4 text-purple-500" />
+                  <Users className="w-4 h-4 text-brand-500" />
                   <span className="text-sm font-medium text-gray-700">
                     {leadsTotal?.toLocaleString() || 0} leads captured
                   </span>
@@ -1163,12 +1163,12 @@ export default function GroupAdminDashboard() {
               <div className="px-6 py-4 border-b border-gray-100 bg-white">
                 <div className="flex flex-wrap items-center gap-3">
                   <div className="relative flex-1 max-w-sm group">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 transition-colors group-focus-within:text-purple-500" />
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 transition-colors group-focus-within:text-brand-500" />
                     <Input
                       placeholder="Search by name, email, phone..."
                       value={leadsSearch}
                       onChange={(e) => setLeadsSearch(e.target.value)}
-                      className="pl-10 bg-gray-50/80 border-gray-200 rounded-lg h-9 text-sm transition-all duration-200 focus:bg-white focus:ring-2 focus:ring-purple-100 focus:border-purple-300"
+                      className="pl-10 bg-gray-50/80 border-gray-200 rounded-lg h-9 text-sm transition-all duration-200 focus:bg-white focus:ring-2 focus:ring-brand-100 focus:border-brand-300"
                     />
                     {leadsSearch && (
                       <button onClick={() => setLeadsSearch("")} className="absolute right-3 top-1/2 -translate-y-1/2">
@@ -1192,7 +1192,7 @@ export default function GroupAdminDashboard() {
                         onClick={() => setLeadsDatePreset(key)}
                         className={`px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 ${
                           leadsDatePreset === key
-                            ? 'bg-purple-100 text-purple-700 ring-1 ring-purple-200 shadow-sm'
+                            ? 'bg-brand-100 text-brand-700 ring-1 ring-brand-200 shadow-sm'
                             : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
                         }`}
                       >
@@ -1205,8 +1205,8 @@ export default function GroupAdminDashboard() {
                     <div className="flex items-center gap-2">
                       <Popover>
                         <PopoverTrigger asChild>
-                          <Button variant="outline" size="sm" className="h-8 text-xs border-gray-200 hover:border-purple-300">
-                            <Calendar className="w-3.5 h-3.5 mr-1.5 text-purple-500" />
+                          <Button variant="outline" size="sm" className="h-8 text-xs border-gray-200 hover:border-brand-300">
+                            <Calendar className="w-3.5 h-3.5 mr-1.5 text-brand-500" />
                             {leadsFromDate ? format(leadsFromDate, "MMM d, yyyy") : "Start date"}
                           </Button>
                         </PopoverTrigger>
@@ -1217,8 +1217,8 @@ export default function GroupAdminDashboard() {
                       <span className="text-xs text-gray-400">→</span>
                       <Popover>
                         <PopoverTrigger asChild>
-                          <Button variant="outline" size="sm" className="h-8 text-xs border-gray-200 hover:border-purple-300">
-                            <Calendar className="w-3.5 h-3.5 mr-1.5 text-purple-500" />
+                          <Button variant="outline" size="sm" className="h-8 text-xs border-gray-200 hover:border-brand-300">
+                            <Calendar className="w-3.5 h-3.5 mr-1.5 text-brand-500" />
                             {leadsToDate ? format(leadsToDate, "MMM d, yyyy") : "End date"}
                           </Button>
                         </PopoverTrigger>
@@ -1230,7 +1230,7 @@ export default function GroupAdminDashboard() {
                   )}
 
                   <Select value={leadsAccountFilter} onValueChange={setLeadsAccountFilter}>
-                    <SelectTrigger className="w-[170px] h-9 text-sm border-gray-200 bg-gray-50/80 rounded-lg hover:border-purple-300 transition-colors">
+                    <SelectTrigger className="w-[170px] h-9 text-sm border-gray-200 bg-gray-50/80 rounded-lg hover:border-brand-300 transition-colors">
                       <Building2 className="w-3.5 h-3.5 mr-1.5 text-gray-400" />
                       <SelectValue placeholder="All Accounts" />
                     </SelectTrigger>
@@ -1247,13 +1247,13 @@ export default function GroupAdminDashboard() {
               <div className="flex-1 overflow-auto">
                 {loadingLeads ? (
                   <div className="flex flex-col items-center justify-center py-20">
-                    <div className="w-10 h-10 border-2 border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+                    <div className="w-10 h-10 border-2 border-brand-200 border-t-brand-600 rounded-full animate-spin" />
                     <p className="text-sm text-gray-400 mt-4">Loading leads...</p>
                   </div>
                 ) : allLeads.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-20 px-6">
-                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-gray-50 to-purple-50 flex items-center justify-center mb-5">
-                      <Contact className="w-10 h-10 text-purple-300" />
+                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-gray-50 to-brand-50 flex items-center justify-center mb-5">
+                      <Contact className="w-10 h-10 text-brand-300" />
                     </div>
                     <h3 className="text-base font-semibold text-gray-700 mb-1.5">No leads found</h3>
                     <p className="text-sm text-gray-400 text-center max-w-xs">
@@ -1265,7 +1265,7 @@ export default function GroupAdminDashboard() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="mt-4 text-purple-600 hover:text-purple-700 hover:bg-purple-50"
+                        className="mt-4 text-brand-600 hover:text-brand-700 hover:bg-brand-50"
                         onClick={() => { setLeadsSearch(""); setLeadsDatePreset("all"); setLeadsAccountFilter("all"); }}
                       >
                         <X className="w-3.5 h-3.5 mr-1.5" /> Clear all filters
@@ -1276,13 +1276,13 @@ export default function GroupAdminDashboard() {
                   <div className="divide-y divide-gray-50 flex-1">
                     {allLeads.map((lead, index) => {
                       const avatarColors = [
-                        'from-violet-400 to-purple-500',
-                        'from-blue-400 to-indigo-500',
+                        'from-brand-400 to-ink-500',
+                        'from-blue-400 to-brand-500',
                         'from-emerald-400 to-teal-500',
                         'from-amber-400 to-orange-500',
                         'from-rose-400 to-pink-500',
                         'from-cyan-400 to-sky-500',
-                        'from-fuchsia-400 to-purple-500',
+                        'from-brand-400 to-ink-500',
                         'from-lime-400 to-green-500',
                       ];
                       const firstChar = lead.name ? lead.name.charAt(0).toUpperCase() : '';
@@ -1292,7 +1292,7 @@ export default function GroupAdminDashboard() {
                       return (
                         <div
                           key={lead.id}
-                          className={`group flex items-center gap-4 px-6 py-3.5 transition-all duration-150 hover:bg-purple-50/40 border-l-3 border-l-transparent hover:border-l-purple-400 cursor-default ${selectedLeadIds.has(lead.id) ? 'bg-red-50/40' : index % 2 === 0 ? 'bg-white' : 'bg-gray-50/30'}`}
+                          className={`group flex items-center gap-4 px-6 py-3.5 transition-all duration-150 hover:bg-brand-50/40 border-l-3 border-l-transparent hover:border-l-brand-400 cursor-default ${selectedLeadIds.has(lead.id) ? 'bg-red-50/40' : index % 2 === 0 ? 'bg-white' : 'bg-gray-50/30'}`}
                         >
                           {canDeleteLeads && (
                             <Checkbox
@@ -1321,7 +1321,7 @@ export default function GroupAdminDashboard() {
 
                             <div className="min-w-0">
                               {lead.email ? (
-                                <a href={`mailto:${lead.email}`} className="text-sm text-gray-600 hover:text-purple-600 truncate block transition-colors flex items-center gap-1.5">
+                                <a href={`mailto:${lead.email}`} className="text-sm text-gray-600 hover:text-brand-600 truncate block transition-colors flex items-center gap-1.5">
                                   <Mail className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" />
                                   <span className="truncate">{lead.email}</span>
                                 </a>
@@ -1332,7 +1332,7 @@ export default function GroupAdminDashboard() {
 
                             <div className="min-w-0">
                               {lead.phone ? (
-                                <a href={`tel:${lead.phone}`} className="text-sm text-gray-600 hover:text-purple-600 transition-colors flex items-center gap-1.5">
+                                <a href={`tel:${lead.phone}`} className="text-sm text-gray-600 hover:text-brand-600 transition-colors flex items-center gap-1.5">
                                   <Phone className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" />
                                   <span className="break-all">{lead.phone}</span>
                                 </a>
@@ -1363,7 +1363,7 @@ export default function GroupAdminDashboard() {
                                 <div className="flex flex-wrap gap-1">
                                   {(lead.topicsOfInterest as string[]).slice(0, 3).map((topic: string, i: number) => {
                                     const colors = [
-                                      'bg-purple-100 text-purple-700',
+                                      'bg-brand-100 text-brand-700',
                                       'bg-blue-100 text-blue-700',
                                       'bg-green-100 text-green-700',
                                       'bg-orange-100 text-orange-700'
@@ -1482,7 +1482,7 @@ export default function GroupAdminDashboard() {
                                           }}
                                           className="cursor-pointer"
                                         >
-                                          <Eye className="h-4 w-4 mr-2 text-purple-600" />
+                                          <Eye className="h-4 w-4 mr-2 text-brand-600" />
                                           View Chat
                                         </DropdownMenuItem>
                                       );
@@ -1519,7 +1519,7 @@ export default function GroupAdminDashboard() {
                     <div ref={leadsEndRef} className="h-4" />
                     {isFetchingNextPage && (
                       <div className="flex items-center justify-center py-4">
-                        <div className="w-6 h-6 border-2 border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+                        <div className="w-6 h-6 border-2 border-brand-200 border-t-brand-600 rounded-full animate-spin" />
                       </div>
                     )}
                   </div>
@@ -1533,7 +1533,7 @@ export default function GroupAdminDashboard() {
                       Showing <span className="font-medium text-gray-700">{allLeads.length.toLocaleString()}</span> of <span className="font-medium text-gray-700">{leadsTotal?.toLocaleString() || 0}</span> leads
                     </span>
                     {isFetchingNextPage && (
-                      <div className="flex items-center gap-2 text-sm text-purple-600">
+                      <div className="flex items-center gap-2 text-sm text-brand-600">
                         <Loader2 className="w-3.5 h-3.5 animate-spin" />
                         Loading more...
                       </div>
@@ -1587,7 +1587,7 @@ export default function GroupAdminDashboard() {
                       <SlidersHorizontal className="w-3.5 h-3.5" />
                       <span>Filters</span>
                       {convoDatePreset !== 'all' && (
-                        <span className="px-1.5 py-0.5 text-[10px] font-medium rounded-full bg-purple-100 text-purple-700 normal-case">
+                        <span className="px-1.5 py-0.5 text-[10px] font-medium rounded-full bg-brand-100 text-brand-700 normal-case">
                           {convoDatePreset === 'today' ? 'Today' : convoDatePreset === 'yesterday' ? 'Yesterday' : convoDatePreset === 'last7' ? '7d' : convoDatePreset === 'currentMonth' ? 'Month' : convoDatePreset === 'lastMonth' ? 'Last Mo' : 'Custom'}
                         </span>
                       )}
@@ -1607,8 +1607,8 @@ export default function GroupAdminDashboard() {
                             onClick={() => setConvoDatePreset('all')}
                             className={`px-3 py-2 text-xs font-medium rounded-lg transition-all duration-200 ${
                               convoDatePreset === 'all'
-                                ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md shadow-purple-200'
-                                : 'bg-white text-gray-700 border border-gray-200 hover:border-purple-300 hover:shadow-sm'
+                                ? 'bg-gradient-to-r from-brand-600 to-ink-600 text-white shadow-md shadow-brand-200'
+                                : 'bg-white text-gray-700 border border-gray-200 hover:border-brand-300 hover:shadow-sm'
                             }`}
                           >
                             All Time
@@ -1617,8 +1617,8 @@ export default function GroupAdminDashboard() {
                             onClick={() => setConvoDatePreset('today')}
                             className={`px-3 py-2 text-xs font-medium rounded-lg transition-all duration-200 ${
                               convoDatePreset === 'today'
-                                ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md shadow-purple-200'
-                                : 'bg-white text-gray-700 border border-gray-200 hover:border-purple-300 hover:shadow-sm'
+                                ? 'bg-gradient-to-r from-brand-600 to-ink-600 text-white shadow-md shadow-brand-200'
+                                : 'bg-white text-gray-700 border border-gray-200 hover:border-brand-300 hover:shadow-sm'
                             }`}
                           >
                             Today
@@ -1627,8 +1627,8 @@ export default function GroupAdminDashboard() {
                             onClick={() => setConvoDatePreset('yesterday')}
                             className={`px-3 py-2 text-xs font-medium rounded-lg transition-all duration-200 ${
                               convoDatePreset === 'yesterday'
-                                ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md shadow-purple-200'
-                                : 'bg-white text-gray-700 border border-gray-200 hover:border-purple-300 hover:shadow-sm'
+                                ? 'bg-gradient-to-r from-brand-600 to-ink-600 text-white shadow-md shadow-brand-200'
+                                : 'bg-white text-gray-700 border border-gray-200 hover:border-brand-300 hover:shadow-sm'
                             }`}
                           >
                             Yesterday
@@ -1637,8 +1637,8 @@ export default function GroupAdminDashboard() {
                             onClick={() => setConvoDatePreset('last7')}
                             className={`px-3 py-2 text-xs font-medium rounded-lg transition-all duration-200 ${
                               convoDatePreset === 'last7'
-                                ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md shadow-purple-200'
-                                : 'bg-white text-gray-700 border border-gray-200 hover:border-purple-300 hover:shadow-sm'
+                                ? 'bg-gradient-to-r from-brand-600 to-ink-600 text-white shadow-md shadow-brand-200'
+                                : 'bg-white text-gray-700 border border-gray-200 hover:border-brand-300 hover:shadow-sm'
                             }`}
                           >
                             Last 7 Days
@@ -1647,8 +1647,8 @@ export default function GroupAdminDashboard() {
                             onClick={() => setConvoDatePreset('currentMonth')}
                             className={`px-3 py-2 text-xs font-medium rounded-lg transition-all duration-200 ${
                               convoDatePreset === 'currentMonth'
-                                ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md shadow-purple-200'
-                                : 'bg-white text-gray-700 border border-gray-200 hover:border-purple-300 hover:shadow-sm'
+                                ? 'bg-gradient-to-r from-brand-600 to-ink-600 text-white shadow-md shadow-brand-200'
+                                : 'bg-white text-gray-700 border border-gray-200 hover:border-brand-300 hover:shadow-sm'
                             }`}
                           >
                             Current Month
@@ -1657,8 +1657,8 @@ export default function GroupAdminDashboard() {
                             onClick={() => setConvoDatePreset('lastMonth')}
                             className={`px-3 py-2 text-xs font-medium rounded-lg transition-all duration-200 ${
                               convoDatePreset === 'lastMonth'
-                                ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md shadow-purple-200'
-                                : 'bg-white text-gray-700 border border-gray-200 hover:border-purple-300 hover:shadow-sm'
+                                ? 'bg-gradient-to-r from-brand-600 to-ink-600 text-white shadow-md shadow-brand-200'
+                                : 'bg-white text-gray-700 border border-gray-200 hover:border-brand-300 hover:shadow-sm'
                             }`}
                           >
                             Last Month
@@ -1671,8 +1671,8 @@ export default function GroupAdminDashboard() {
                           <button
                             className={`w-full px-3 py-2.5 text-xs font-medium rounded-lg transition-all duration-200 flex items-center justify-center gap-2 ${
                               convoDatePreset === 'custom'
-                                ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md shadow-purple-200'
-                                : 'bg-white text-gray-700 border border-gray-200 hover:border-purple-300 hover:shadow-sm'
+                                ? 'bg-gradient-to-r from-brand-600 to-ink-600 text-white shadow-md shadow-brand-200'
+                                : 'bg-white text-gray-700 border border-gray-200 hover:border-brand-300 hover:shadow-sm'
                             }`}
                           >
                             <Calendar className="w-3.5 h-3.5" />
@@ -1758,7 +1758,7 @@ export default function GroupAdminDashboard() {
                       onClick={() => setConvoTypeFilter(key)}
                       className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium transition-all ${
                         convoTypeFilter === key
-                          ? 'bg-purple-600 text-white shadow-sm'
+                          ? 'bg-brand-600 text-white shadow-sm'
                           : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                       }`}
                     >
@@ -1810,7 +1810,7 @@ export default function GroupAdminDashboard() {
                 <div className="flex-1 overflow-y-auto overscroll-contain">
                   {loadingConversations ? (
                     <div className="flex justify-center py-8">
-                      <div className="w-6 h-6 border-2 border-purple-600 border-t-transparent rounded-full animate-spin" />
+                      <div className="w-6 h-6 border-2 border-brand-600 border-t-transparent rounded-full animate-spin" />
                     </div>
                   ) : filteredConversations.length === 0 ? (
                     <div className="flex flex-col items-center justify-center h-full p-4 text-center">
@@ -1844,10 +1844,10 @@ export default function GroupAdminDashboard() {
                             )}
                             <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
                               conversation.viaJourney
-                                ? 'bg-gradient-to-br from-violet-500 to-purple-600'
+                                ? 'bg-gradient-to-br from-brand-500 to-ink-600'
                                 : conversation.viaForm
                                   ? 'bg-gradient-to-br from-green-500 to-emerald-600'
-                                  : 'bg-gradient-to-br from-purple-500 to-blue-600'
+                                  : 'bg-gradient-to-br from-brand-500 to-ink-600'
                             }`}>
                               {conversation.viaJourney
                                 ? <GitBranch className="w-5 h-5 text-white" />
@@ -1864,14 +1864,14 @@ export default function GroupAdminDashboard() {
                               </div>
                               <div className="flex items-center justify-between text-xs text-gray-500">
                                 <span className="truncate">{formatConvoDate(conversation.createdAt)}</span>
-                                <span className="ml-2 px-2 py-0.5 bg-purple-100 text-purple-700 rounded-full font-medium">
+                                <span className="ml-2 px-2 py-0.5 bg-brand-100 text-brand-700 rounded-full font-medium">
                                   {conversation.messageCount || 0}
                                 </span>
                               </div>
                               {(conversation.viaJourney || conversation.viaForm || conversation.hasLead || conversation.visitorCity) && (
                                 <div className="flex items-center gap-1 mt-1 flex-wrap">
                                   {conversation.viaJourney && (
-                                    <span className="inline-flex items-center gap-0.5 text-[10px] px-1.5 py-0.5 rounded-full font-medium bg-violet-50 text-violet-600 border border-violet-200" title="Via Journey">
+                                    <span className="inline-flex items-center gap-0.5 text-[10px] px-1.5 py-0.5 rounded-full font-medium bg-brand-50 text-brand-600 border border-brand-200" title="Via Journey">
                                       <GitBranch className="w-2.5 h-2.5" />
                                       Journey
                                     </span>
@@ -1937,10 +1937,10 @@ export default function GroupAdminDashboard() {
                         </button>
                         <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
                           selectedConversation.viaJourney
-                            ? 'bg-gradient-to-br from-violet-500 to-purple-600'
+                            ? 'bg-gradient-to-br from-brand-500 to-ink-600'
                             : selectedConversation.viaForm
                               ? 'bg-gradient-to-br from-green-500 to-emerald-600'
-                              : 'bg-gradient-to-br from-purple-500 to-blue-600'
+                              : 'bg-gradient-to-br from-brand-500 to-ink-600'
                         }`}>
                           {selectedConversation.viaJourney
                             ? <GitBranch className="w-5 h-5 text-white" />
@@ -1957,7 +1957,7 @@ export default function GroupAdminDashboard() {
                           {(selectedConversation.viaJourney || selectedConversation.viaForm || selectedConversation.hasLead || selectedConversation.visitorCity) && (
                             <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
                               {selectedConversation.viaJourney && (
-                                <span className="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full font-medium bg-violet-50 text-violet-600 border border-violet-200">
+                                <span className="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full font-medium bg-brand-50 text-brand-600 border border-brand-200">
                                   <GitBranch className="w-3 h-3" />
                                   Journey
                                 </span>
@@ -1991,9 +1991,9 @@ export default function GroupAdminDashboard() {
                     </div>
 
                     {selectedConversation.summary && (
-                      <div className="bg-gradient-to-r from-purple-50 to-blue-50 border-b border-purple-100 px-4 py-3">
+                      <div className="bg-gradient-to-r from-brand-50 to-ink-50 border-b border-brand-100 px-4 py-3">
                         <div className="flex items-start gap-2">
-                          <Sparkles className="w-4 h-4 text-purple-500 mt-0.5 flex-shrink-0" />
+                          <Sparkles className="w-4 h-4 text-brand-500 mt-0.5 flex-shrink-0" />
                           <div className="flex-1 min-w-0">
                             <p className="text-sm text-gray-700 leading-relaxed">{selectedConversation.summary}</p>
                             {selectedConversation.topicKeywords && (() => {
@@ -2003,7 +2003,7 @@ export default function GroupAdminDashboard() {
                                   return (
                                     <div className="mt-2 flex flex-wrap gap-1.5">
                                       {keywords.map((kw: string, i: number) => (
-                                        <span key={i} className="px-2 py-0.5 text-xs font-medium rounded-full bg-white text-purple-700 border border-purple-200">
+                                        <span key={i} className="px-2 py-0.5 text-xs font-medium rounded-full bg-white text-brand-700 border border-brand-200">
                                           {kw}
                                         </span>
                                       ))}
@@ -2021,14 +2021,14 @@ export default function GroupAdminDashboard() {
                     <div className="flex-1 overflow-y-auto overscroll-contain p-4 space-y-4">
                       {loadingMessages ? (
                         <div className="flex justify-center py-8">
-                          <div className="w-6 h-6 border-2 border-purple-600 border-t-transparent rounded-full animate-spin" />
+                          <div className="w-6 h-6 border-2 border-brand-600 border-t-transparent rounded-full animate-spin" />
                         </div>
                       ) : (
                         messagesData.map((message) => (
                           <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                             {message.role === 'assistant' && (
                               <div className="flex items-start gap-3 max-w-[85%]">
-                                <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                <div className="w-8 h-8 bg-gradient-to-br from-brand-500 to-ink-600 rounded-full flex items-center justify-center flex-shrink-0">
                                   <Bot className="w-5 h-5 text-white" />
                                 </div>
                                 <div>
@@ -2112,7 +2112,7 @@ export default function GroupAdminDashboard() {
             <div className="p-6 pb-4">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-purple-200">
+                  <div className="w-12 h-12 bg-gradient-to-br from-brand-500 to-ink-600 rounded-xl flex items-center justify-center shadow-lg shadow-brand-200">
                     <BarChart3 className="w-6 h-6 text-white" />
                   </div>
                   <div>
@@ -2148,8 +2148,8 @@ export default function GroupAdminDashboard() {
                     onClick={() => setAnalyticsDatePreset(key)}
                     className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
                       analyticsDatePreset === key
-                        ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-200'
-                        : 'bg-white text-gray-600 border border-gray-200 hover:border-purple-300 hover:text-purple-600 hover:shadow-sm'
+                        ? 'bg-gradient-to-r from-brand-600 to-ink-600 text-white shadow-md shadow-brand-200'
+                        : 'bg-white text-gray-600 border border-gray-200 hover:border-brand-300 hover:text-brand-600 hover:shadow-sm'
                     }`}
                   >
                     {label}
@@ -2194,9 +2194,9 @@ export default function GroupAdminDashboard() {
                 {(() => {
                   const { from, to } = getDateRange(analyticsDatePreset, analyticsFromDate, analyticsToDate);
                   if (from && to) {
-                    return <span className="text-purple-600 font-medium">{format(from, "MMMM d, yyyy")} to {format(to, "MMMM d, yyyy")}</span>;
+                    return <span className="text-brand-600 font-medium">{format(from, "MMMM d, yyyy")} to {format(to, "MMMM d, yyyy")}</span>;
                   }
-                  return <span className="text-purple-600 font-medium">all time</span>;
+                  return <span className="text-brand-600 font-medium">all time</span>;
                 })()}
               </p>
             </div>
@@ -2205,7 +2205,7 @@ export default function GroupAdminDashboard() {
           {loadingAnalytics ? (
             <div className="flex justify-center py-16">
               <div className="flex flex-col items-center gap-3">
-                <div className="w-10 h-10 border-3 border-purple-600 border-t-transparent rounded-full animate-spin" />
+                <div className="w-10 h-10 border-3 border-brand-600 border-t-transparent rounded-full animate-spin" />
                 <p className="text-sm text-gray-500">Loading analytics...</p>
               </div>
             </div>
@@ -2235,7 +2235,7 @@ export default function GroupAdminDashboard() {
                 
                 <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-violet-400 to-violet-600 rounded-xl flex items-center justify-center">
+                    <div className="w-10 h-10 bg-gradient-to-br from-brand-400 to-ink-600 rounded-xl flex items-center justify-center">
                       <TrendingUp className="w-5 h-5 text-white" />
                     </div>
                     <span className="text-sm font-medium text-gray-500">Conversion Rate</span>
@@ -2269,8 +2269,8 @@ export default function GroupAdminDashboard() {
                         <TableRow key={account.businessAccountId} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50/30'}>
                           <TableCell>
                             <div className="flex items-center gap-3">
-                              <div className="w-8 h-8 bg-gradient-to-br from-purple-100 to-indigo-100 rounded-lg flex items-center justify-center">
-                                <Building2 className="w-4 h-4 text-purple-600" />
+                              <div className="w-8 h-8 bg-gradient-to-br from-brand-100 to-ink-100 rounded-lg flex items-center justify-center">
+                                <Building2 className="w-4 h-4 text-brand-600" />
                               </div>
                               <span className="font-medium text-gray-900">{account.businessName || "Unknown"}</span>
                             </div>
@@ -2291,7 +2291,7 @@ export default function GroupAdminDashboard() {
                           </TableCell>
                           <TableCell className="text-center">
                             <span className={`inline-flex items-center justify-center min-w-[40px] px-2 py-1 rounded-full text-sm font-medium ${
-                              (account.conversations || 0) > 0 && (account.leads || 0) > 0 ? 'bg-violet-100 text-violet-700' : 'text-gray-400'
+                              (account.conversations || 0) > 0 && (account.leads || 0) > 0 ? 'bg-brand-100 text-brand-700' : 'text-gray-400'
                             }`}>
                               {(account.conversations || 0) > 0 
                                 ? ((account.leads || 0) / (account.conversations || 1) * 100).toFixed(1)
@@ -2332,7 +2332,7 @@ export default function GroupAdminDashboard() {
             </DialogTitle>
             <DialogDescription>
               {deleteTarget === 'leads'
-                ? "The selected leads are permanently removed from AI Chroney. Their conversations are kept, and leads already sent to LeadSquared or Salesforce stay in the CRM."
+                ? "The selected leads are permanently removed from Orvey. Their conversations are kept, and leads already sent to LeadSquared or Salesforce stay in the CRM."
                 : "The selected conversations and all their messages, journey answers and form data are permanently removed. Leads captured in them are kept but lose their chat link."}
               {" "}This cannot be undone.
             </DialogDescription>
@@ -2710,7 +2710,7 @@ export default function GroupAdminDashboard() {
         <DialogContent className="max-w-2xl w-full max-h-[85vh] flex flex-col p-0 gap-0">
           <DialogHeader className="px-5 pt-5 pb-3 border-b border-gray-100 flex-shrink-0">
             <DialogTitle className="flex items-center gap-2 text-base">
-              <Bot className="w-4 h-4 text-purple-600" />
+              <Bot className="w-4 h-4 text-brand-600" />
               {loadingChatDialogConversation ? (
                 <span className="text-gray-400">Loading conversation...</span>
               ) : chatDialogConversation ? (
@@ -2733,14 +2733,14 @@ export default function GroupAdminDashboard() {
           <div className="flex-1 overflow-y-auto min-h-0">
             {(loadingChatDialogConversation || loadingChatDialogMessages) ? (
               <div className="flex justify-center items-center py-16">
-                <div className="w-7 h-7 border-2 border-purple-600 border-t-transparent rounded-full animate-spin" />
+                <div className="w-7 h-7 border-2 border-brand-600 border-t-transparent rounded-full animate-spin" />
               </div>
             ) : (
               <>
                 {chatDialogConversation?.summary && (
-                  <div className="bg-gradient-to-r from-purple-50 to-blue-50 border-b border-purple-100 px-5 py-4">
+                  <div className="bg-gradient-to-r from-brand-50 to-ink-50 border-b border-brand-100 px-5 py-4">
                     <div className="flex items-start gap-2">
-                      <Sparkles className="w-4 h-4 text-purple-500 mt-0.5 flex-shrink-0" />
+                      <Sparkles className="w-4 h-4 text-brand-500 mt-0.5 flex-shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm text-gray-700 leading-relaxed">{chatDialogConversation.summary}</p>
                         {chatDialogConversation.topicKeywords && (() => {
@@ -2750,7 +2750,7 @@ export default function GroupAdminDashboard() {
                               return (
                                 <div className="mt-2 flex flex-wrap gap-1.5">
                                   {keywords.map((kw: string, i: number) => (
-                                    <span key={i} className="px-2 py-0.5 text-xs font-medium rounded-full bg-white text-purple-700 border border-purple-200">
+                                    <span key={i} className="px-2 py-0.5 text-xs font-medium rounded-full bg-white text-brand-700 border border-brand-200">
                                       {kw}
                                     </span>
                                   ))}
@@ -2773,7 +2773,7 @@ export default function GroupAdminDashboard() {
                       <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                         {message.role === 'assistant' && (
                           <div className="flex items-start gap-3 max-w-[85%]">
-                            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                            <div className="w-8 h-8 bg-gradient-to-br from-brand-500 to-ink-600 rounded-full flex items-center justify-center flex-shrink-0">
                               <Bot className="w-5 h-5 text-white" />
                             </div>
                             <div>

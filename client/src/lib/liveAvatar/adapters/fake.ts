@@ -44,7 +44,7 @@ export function createFakeAdapter(): AvatarClientAdapter & { onServerEvent(event
     const w = canvas.width, h = canvas.height;
     const grad = g.createLinearGradient(0, 0, 0, h);
     grad.addColorStop(0, "#312e81");
-    grad.addColorStop(1, "#7c3aed");
+    grad.addColorStop(1, "#1a3878");
     g.fillStyle = grad;
     g.fillRect(0, 0, w, h);
     const cx = w / 2, cy = h * 0.46 + Math.sin(t * 1.3) * 4;

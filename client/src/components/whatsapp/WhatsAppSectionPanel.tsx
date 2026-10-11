@@ -93,11 +93,11 @@ export function WhatsAppSectionPanel({
                   data-testid={`wa-panel-${item.key}`}
                   className={`w-full flex items-start gap-2.5 rounded-lg px-2.5 py-2 text-left transition-colors ${
                     isActive
-                      ? "bg-purple-50 text-purple-800 font-medium"
+                      ? "bg-brand-50 text-brand-800 font-medium"
                       : "text-gray-700 hover:bg-gray-50"
                   }`}
                 >
-                  <Icon className={`w-4 h-4 mt-0.5 shrink-0 ${isActive ? "text-purple-600" : "text-gray-400"}`} />
+                  <Icon className={`w-4 h-4 mt-0.5 shrink-0 ${isActive ? "text-brand-600" : "text-gray-400"}`} />
                   <span className="min-w-0">
                     <span className="block text-[13px] leading-tight">{item.label}</span>
                     {blockedReason && (
@@ -127,7 +127,7 @@ export function WhatsAppSectionPanel({
                 type="button"
                 onClick={() => setLocation(item.href)}
                 className={`shrink-0 rounded-full px-3 py-1 text-xs transition-colors ${
-                  isActive ? "bg-purple-100 text-purple-800 font-medium" : "bg-gray-100 text-gray-600"
+                  isActive ? "bg-brand-100 text-brand-800 font-medium" : "bg-gray-100 text-gray-600"
                 }`}
               >
                 {item.label}

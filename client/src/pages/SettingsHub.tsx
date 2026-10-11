@@ -64,10 +64,10 @@ function NavList({ groups, activeKey, onNavigate }: { groups: SettingsGroup[]; a
                       aria-current={active ? "page" : undefined}
                       data-testid={`settings-nav-${item.key}`}
                       className={`w-full flex items-center gap-2 rounded-md px-3 py-1.5 text-left text-[13px] transition-colors ${
-                        active ? "bg-purple-50 text-purple-700 font-medium" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                        active ? "bg-brand-50 text-brand-700 font-medium" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                       } ${item.subgroup ? "pl-5" : ""}`}
                     >
-                      <Icon className={`w-3.5 h-3.5 shrink-0 ${active ? "text-purple-600" : "text-gray-400"}`} />
+                      <Icon className={`w-3.5 h-3.5 shrink-0 ${active ? "text-brand-600" : "text-gray-400"}`} />
                       <span className="truncate">{item.label}</span>
                       {item.href && <ExternalLink className="w-3 h-3 ml-auto text-gray-300" />}
                     </button>
@@ -131,12 +131,12 @@ function Overview({ groups, onNavigate }: { groups: SettingsGroup[]; onNavigate:
                   tabIndex={0}
                   onClick={() => onNavigate(itemTarget(item))}
                   onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onNavigate(itemTarget(item)); } }}
-                  className="cursor-pointer transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+                  className="cursor-pointer transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
                   data-testid={`settings-card-${item.key}`}
                 >
                   <CardContent className="p-4 flex items-start gap-3">
-                    <div className="rounded-lg bg-purple-50 p-2 shrink-0">
-                      <Icon className="w-4 h-4 text-purple-600" />
+                    <div className="rounded-lg bg-brand-50 p-2 shrink-0">
+                      <Icon className="w-4 h-4 text-brand-600" />
                     </div>
                     <div className="min-w-0">
                       <p className="font-medium text-sm text-gray-900 flex items-center gap-1">
@@ -172,7 +172,7 @@ export default function SettingsHub({ user }: { user: MeResponseDto | null }) {
     <header className="hidden lg:flex items-center h-14 px-6 border-b bg-white shrink-0">
       <SidebarTrigger className="-ml-1 mr-2" />
       <h1 className="text-[15px] font-semibold text-gray-900 flex items-center gap-2">
-        <Settings2 className="w-4 h-4 text-purple-600" />
+        <Settings2 className="w-4 h-4 text-brand-600" />
         Settings
       </h1>
     </header>
@@ -249,7 +249,7 @@ export default function SettingsHub({ user }: { user: MeResponseDto | null }) {
               <button
                 type="button"
                 onClick={() => setLocation(SETTINGS_PATHS.root)}
-                className={`w-full mb-4 rounded-md px-3 py-1.5 text-left text-[13px] ${isOverview ? "bg-purple-50 text-purple-700 font-medium" : "text-gray-600 hover:bg-gray-100"}`}
+                className={`w-full mb-4 rounded-md px-3 py-1.5 text-left text-[13px] ${isOverview ? "bg-brand-50 text-brand-700 font-medium" : "text-gray-600 hover:bg-gray-100"}`}
                 data-testid="settings-nav-overview"
               >
                 All settings

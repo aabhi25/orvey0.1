@@ -225,7 +225,7 @@ export default function WhatsAppContactGroupDetail() {
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
             <h1 className="text-2xl font-bold truncate">{group?.name || "Loading…"}</h1>
-            {dynamic && <Badge variant="outline" className="border-violet-200 bg-violet-50 text-violet-700"><Sparkles className="h-3 w-3 mr-1" />Self-updating</Badge>}
+            {dynamic && <Badge variant="outline" className="border-brand-200 bg-brand-50 text-brand-700"><Sparkles className="h-3 w-3 mr-1" />Self-updating</Badge>}
             {fromLeads && <Badge variant="outline" className="border-teal-200 bg-teal-50 text-teal-700">From leads</Badge>}
           </div>
           {group?.description && <p className="text-sm text-gray-600 mt-1">{group.description}</p>}
@@ -270,7 +270,7 @@ export default function WhatsAppContactGroupDetail() {
       )}
 
       {(dynamic || fromLeads) && group?.rules && (
-        <Card className="mb-4 border-violet-100">
+        <Card className="mb-4 border-brand-100">
           <CardContent className="p-4 text-sm">
             <div className="font-medium text-gray-800">{dynamic ? "Who is in this audience" : "Built from"}</div>
             <div className="text-gray-600 mt-0.5">{describeRules(group.rules, groupNames)}</div>

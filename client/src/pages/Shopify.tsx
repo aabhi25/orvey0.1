@@ -480,7 +480,7 @@ export default function Shopify() {
       {/* Page Header */}
       <div className="mb-6">
         <h1 className="text-2xl font-bold flex items-center gap-2">
-          <ShoppingBag className="w-6 h-6 text-purple-600" />
+          <ShoppingBag className="w-6 h-6 text-brand-600" />
           Shopify Integration
         </h1>
         <p className="text-muted-foreground mt-1">
@@ -489,16 +489,16 @@ export default function Shopify() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-3 bg-gradient-to-r from-purple-50 to-white backdrop-blur-sm shadow-md h-auto p-1 rounded-xl">
-          <TabsTrigger value="overview" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+        <TabsList className="grid w-full grid-cols-3 bg-gradient-to-r from-brand-50 to-white backdrop-blur-sm shadow-md h-auto p-1 rounded-xl">
+          <TabsTrigger value="overview" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
             <Package className="w-4 h-4 mr-2" />
             Overview
           </TabsTrigger>
-          <TabsTrigger value="products" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+          <TabsTrigger value="products" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
             <ShoppingBag className="w-4 h-4 mr-2" />
             Products
           </TabsTrigger>
-          <TabsTrigger value="settings" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+          <TabsTrigger value="settings" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
             <Settings2 className="w-4 h-4 mr-2" />
             Settings
           </TabsTrigger>
@@ -508,9 +508,9 @@ export default function Shopify() {
         <TabsContent value="overview" className="mt-6 space-y-6">
           {/* Sync Status Card */}
           <Card className="shadow-lg border-gray-200">
-            <CardHeader className="border-b bg-gradient-to-r from-purple-50 to-pink-50 py-4">
+            <CardHeader className="border-b bg-gradient-to-r from-brand-50 to-ink-50 py-4">
               <CardTitle className="text-base flex items-center gap-2">
-                <RefreshCw className="w-4 h-4 text-purple-600" />
+                <RefreshCw className="w-4 h-4 text-brand-600" />
                 Sync Status
               </CardTitle>
               <CardDescription>Current synchronization status with your Shopify store</CardDescription>
@@ -627,14 +627,14 @@ export default function Shopify() {
           </div>
 
           {/* Benefits Alert */}
-          <Alert className="border-purple-200 bg-purple-50 dark:bg-purple-950 dark:border-purple-800">
-            <InfoIcon className="h-4 w-4 text-purple-600" />
-            <AlertDescription className="text-sm text-purple-900 dark:text-purple-100">
+          <Alert className="border-brand-200 bg-brand-50 dark:bg-brand-950 dark:border-brand-800">
+            <InfoIcon className="h-4 w-4 text-brand-600" />
+            <AlertDescription className="text-sm text-brand-900 dark:text-brand-100">
               <strong>Shopify Integration Benefits:</strong>
               <ul className="list-disc list-inside mt-2 space-y-1">
                 <li>Automatically sync products from your Shopify store</li>
                 <li>Keep product information up-to-date with scheduled syncing</li>
-                <li>Chroney can answer customer questions about your Shopify products</li>
+                <li>Orvey can answer customer questions about your Shopify products</li>
                 <li>No manual product entry required</li>
               </ul>
             </AlertDescription>
@@ -644,11 +644,11 @@ export default function Shopify() {
         {/* Products Tab */}
         <TabsContent value="products" className="mt-6">
           <Card className="shadow-lg border-gray-200">
-            <CardHeader className="border-b bg-gradient-to-r from-purple-50 to-pink-50 py-4">
+            <CardHeader className="border-b bg-gradient-to-r from-brand-50 to-ink-50 py-4">
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-base flex items-center gap-2">
-                    <ShoppingBag className="w-4 h-4 text-purple-600" />
+                    <ShoppingBag className="w-4 h-4 text-brand-600" />
                     Shopify Products
                   </CardTitle>
                   <CardDescription className="mt-1">
@@ -661,7 +661,7 @@ export default function Shopify() {
             <CardContent className="pt-6">
               {productsLoading ? (
                 <div className="flex items-center justify-center py-8">
-                  <Loader2 className="w-6 h-6 animate-spin text-purple-600" />
+                  <Loader2 className="w-6 h-6 animate-spin text-brand-600" />
                   <span className="ml-2 text-muted-foreground">Loading products...</span>
                 </div>
               ) : shopifyProducts.length === 0 ? (
@@ -756,11 +756,11 @@ export default function Shopify() {
         <TabsContent value="settings" className="mt-6 space-y-6">
           {/* Shopify Credentials Card */}
           <Card className="shadow-lg border-gray-200">
-            <CardHeader className="border-b bg-gradient-to-r from-purple-50 to-pink-50 py-4">
+            <CardHeader className="border-b bg-gradient-to-r from-brand-50 to-ink-50 py-4">
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-base flex items-center gap-2">
-                    <ShoppingBag className="w-4 h-4 text-purple-600" />
+                    <ShoppingBag className="w-4 h-4 text-brand-600" />
                     Shopify Store Credentials
                   </CardTitle>
                   <CardDescription className="mt-1">
@@ -942,11 +942,11 @@ export default function Shopify() {
 
           {/* Auto-Sync Settings Card */}
           <Card className="shadow-lg border-gray-200">
-            <CardHeader className="border-b bg-gradient-to-r from-purple-50 to-pink-50 py-4">
+            <CardHeader className="border-b bg-gradient-to-r from-brand-50 to-ink-50 py-4">
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-base flex items-center gap-2">
-                    <RefreshCw className="w-4 h-4 text-purple-600" />
+                    <RefreshCw className="w-4 h-4 text-brand-600" />
                     Auto-Sync Configuration
                   </CardTitle>
                   <CardDescription className="mt-1">
@@ -1073,7 +1073,7 @@ export default function Shopify() {
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-xl">
-              <ShoppingBag className="w-5 h-5 text-purple-600" />
+              <ShoppingBag className="w-5 h-5 text-brand-600" />
               Product Details
             </DialogTitle>
             <DialogDescription>
@@ -1111,7 +1111,7 @@ export default function Shopify() {
               {/* Price */}
               <div>
                 <Label className="text-sm font-semibold text-muted-foreground">Price</Label>
-                <p className="text-2xl font-bold text-purple-600 mt-1">
+                <p className="text-2xl font-bold text-brand-600 mt-1">
                   {selectedProduct.price ? `${currencySymbol}${selectedProduct.price}` : "Not set"}
                 </p>
               </div>

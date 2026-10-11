@@ -1,6 +1,6 @@
 /**
  * Smart Lead Training configuration — ONE definition shared by the account
- * screen (Train Chroney), the group editor, the lead-config / group-training
+ * screen (Train Orvey), the group editor, the lead-config / group-training
  * API handlers and group publish (server/storage.ts).
  *
  * Kept free of server/client-only imports so both bundles can use it.
@@ -564,7 +564,7 @@ export function mergeGroupLeadConfigIntoAccount(accountRaw: unknown, groupRaw: u
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Admin-facing warnings (shared by Train Chroney and the group editor)
+// Admin-facing warnings (shared by Train Orvey and the group editor)
 // ─────────────────────────────────────────────────────────────────────────────
 
 export interface LeadConfigWarning {
@@ -620,14 +620,14 @@ export function getLeadConfigWarnings(
     });
   }
   if (enabled.length === 0) {
-    out.push({ level: "info", code: "no_fields", message: "No fields are turned on, so Chroney won't ask visitors for any contact details." });
+    out.push({ level: "info", code: "no_fields", message: "No fields are turned on, so Orvey won't ask visitors for any contact details." });
   }
   if (enabled.some((f) => f.id === "mobile") && enabled.some((f) => f.id === "whatsapp")) {
     out.push({
       level: "info",
       code: "mobile_and_whatsapp",
       message:
-        "Mobile and WhatsApp are both on: Chroney asks for the mobile number first, then asks once whether that number is on WhatsApp instead of collecting the same number twice.",
+        "Mobile and WhatsApp are both on: Orvey asks for the mobile number first, then asks once whether that number is on WhatsApp instead of collecting the same number twice.",
     });
   }
   return out;

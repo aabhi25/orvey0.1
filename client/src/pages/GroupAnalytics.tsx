@@ -150,8 +150,8 @@ const OUTCOME_COLORS: Record<string, string> = {
 };
 
 const CATEGORY_BAR_COLORS = [
-  '#8b5cf6', '#6366f1', '#a855f7', '#7c3aed', '#c084fc',
-  '#818cf8', '#a78bfa', '#6d28d9',
+  '#8b5cf6', '#6366f1', '#3a63b5', '#1a3878', '#6286cb',
+  '#818cf8', '#a78bfa', '#162e60',
 ];
 
 const DATE_PRESETS: { key: DatePreset; label: string }[] = [
@@ -227,7 +227,7 @@ export default function GroupAnalytics() {
   if (loadingGroups) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
+        <Loader2 className="w-8 h-8 animate-spin text-brand-500" />
       </div>
     );
   }
@@ -299,7 +299,7 @@ export default function GroupAnalytics() {
         <div className="flex items-center gap-4">
           <SidebarTrigger className="text-gray-500 hover:text-gray-700" />
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl flex items-center justify-center shadow-md">
+            <div className="w-10 h-10 bg-gradient-to-br from-brand-500 to-ink-600 rounded-xl flex items-center justify-center shadow-md">
               <TrendingUp className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -314,7 +314,7 @@ export default function GroupAnalytics() {
               <select
                 value={activeGroup.groupId}
                 onChange={e => setSelectedGroupId(e.target.value)}
-                className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-400"
               >
                 {groups.map(g => (
                   <option key={g.groupId} value={g.groupId}>{g.groupName}</option>
@@ -334,7 +334,7 @@ export default function GroupAnalytics() {
               onClick={() => setDatePreset(key)}
               className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
                 datePreset === key
-                  ? 'bg-purple-600 text-white shadow-sm'
+                  ? 'bg-brand-600 text-white shadow-sm'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             >
@@ -347,7 +347,7 @@ export default function GroupAnalytics() {
                 onClick={() => setDatePreset('custom')}
                 className={`flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium transition-all ${
                   datePreset === 'custom'
-                    ? 'bg-purple-600 text-white shadow-sm'
+                    ? 'bg-brand-600 text-white shadow-sm'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
@@ -386,14 +386,14 @@ export default function GroupAnalytics() {
       <div className="flex-1 overflow-y-auto p-6 space-y-6">
         {isLoading ? (
           <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
+            <Loader2 className="w-8 h-8 animate-spin text-brand-500" />
           </div>
         ) : (
           <>
             {/* Section 1: Conversation Funnel */}
             <div>
               <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-3 flex items-center gap-2">
-                <BarChart3 className="w-4 h-4 text-purple-500" />
+                <BarChart3 className="w-4 h-4 text-brand-500" />
                 Conversation Funnel
               </h2>
               <div className="flex flex-col md:flex-row items-stretch gap-3">
@@ -438,18 +438,18 @@ export default function GroupAnalytics() {
                 </div>
 
                 {/* Conversion Rate */}
-                <Card className="border-0 shadow-sm bg-gradient-to-br from-purple-50 to-pink-50 flex-1">
+                <Card className="border-0 shadow-sm bg-gradient-to-br from-brand-50 to-ink-50 flex-1">
                   <CardContent className="p-5">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="w-9 h-9 bg-purple-100 rounded-lg flex items-center justify-center">
-                        <Percent className="w-5 h-5 text-purple-600" />
+                      <div className="w-9 h-9 bg-brand-100 rounded-lg flex items-center justify-center">
+                        <Percent className="w-5 h-5 text-brand-600" />
                       </div>
                       <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Conversion Rate</span>
                     </div>
-                    <p className="text-3xl font-bold text-purple-700">{funnel?.conversionRate ?? 0}%</p>
+                    <p className="text-3xl font-bold text-brand-700">{funnel?.conversionRate ?? 0}%</p>
                     <div className="mt-2 bg-white/60 rounded-full h-1.5">
                       <div
-                        className="bg-purple-500 h-1.5 rounded-full transition-all"
+                        className="bg-brand-500 h-1.5 rounded-full transition-all"
                         style={{ width: `${Math.min(funnel?.conversionRate ?? 0, 100)}%` }}
                       />
                     </div>
@@ -464,8 +464,8 @@ export default function GroupAnalytics() {
               <Card className="border border-gray-100 shadow-sm bg-white overflow-hidden">
                 <CardHeader className="pb-2">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <MessageSquare className="w-4.5 h-4.5 text-purple-600" />
+                    <div className="w-9 h-9 bg-brand-100 rounded-lg flex items-center justify-center">
+                      <MessageSquare className="w-4.5 h-4.5 text-brand-600" />
                     </div>
                     <div>
                       <CardTitle className="text-sm font-semibold text-gray-800 uppercase tracking-wide">Conversations</CardTitle>
@@ -480,7 +480,7 @@ export default function GroupAnalytics() {
                         <PieChart margin={{ top: 10, right: 40, bottom: 10, left: 40 }}>
                           <defs>
                             <filter id="shadow3dConv" x="-20%" y="-20%" width="140%" height="140%">
-                              <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#7c3aed" floodOpacity="0.15" />
+                              <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#1a3878" floodOpacity="0.15" />
                             </filter>
                           </defs>
                           <Pie
@@ -524,12 +524,12 @@ export default function GroupAnalytics() {
 
                       <div className="w-full grid grid-cols-2 gap-2 mt-2">
                         {[
-                          { label: 'Journey', value: convBreakdown.journey, pctVal: pct(convBreakdown.journey, convBreakdown.total), dot: 'bg-violet-500' },
+                          { label: 'Journey', value: convBreakdown.journey, pctVal: pct(convBreakdown.journey, convBreakdown.total), dot: 'bg-brand-500' },
                           { label: 'Via Form', value: convBreakdown.form, pctVal: pct(convBreakdown.form, convBreakdown.total), dot: 'bg-emerald-500' },
                           { label: 'Chat', value: convBreakdown.chat, pctVal: pct(convBreakdown.chat, convBreakdown.total), dot: 'bg-blue-500' },
                           { label: 'Discount', value: convBreakdown.discountAvailed, pctVal: pct(convBreakdown.discountAvailed, convBreakdown.total), dot: 'bg-orange-500' },
                         ].map(({ label, value, pctVal, dot }) => (
-                          <div key={label} className="flex items-center justify-between px-3 py-2 bg-gray-50 rounded-lg border border-gray-100 hover:bg-purple-50/50 transition-colors">
+                          <div key={label} className="flex items-center justify-between px-3 py-2 bg-gray-50 rounded-lg border border-gray-100 hover:bg-brand-50/50 transition-colors">
                             <div className="flex items-center gap-2 min-w-0">
                               <div className={`w-2.5 h-2.5 rounded-full ${dot} flex-shrink-0`} />
                               <span className="text-xs text-gray-600 truncate">{label}</span>
@@ -555,8 +555,8 @@ export default function GroupAnalytics() {
               <Card className="border border-gray-100 shadow-sm bg-white overflow-hidden">
                 <CardHeader className="pb-2">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <FileText className="w-4.5 h-4.5 text-purple-600" />
+                    <div className="w-9 h-9 bg-brand-100 rounded-lg flex items-center justify-center">
+                      <FileText className="w-4.5 h-4.5 text-brand-600" />
                     </div>
                     <div>
                       <CardTitle className="text-sm font-semibold text-gray-800 uppercase tracking-wide">Lead Sources</CardTitle>
@@ -571,7 +571,7 @@ export default function GroupAnalytics() {
                         <PieChart margin={{ top: 10, right: 40, bottom: 10, left: 40 }}>
                           <defs>
                             <filter id="shadow3d" x="-20%" y="-20%" width="140%" height="140%">
-                              <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#7c3aed" floodOpacity="0.15" />
+                              <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#1a3878" floodOpacity="0.15" />
                             </filter>
                           </defs>
                           <Pie
@@ -616,11 +616,11 @@ export default function GroupAnalytics() {
                       <div className="w-full grid grid-cols-2 gap-2 mt-2">
                         {[
                           { label: 'Via Form', value: sources.form, pctVal: pct(sources.form, sources.total), dot: 'bg-emerald-500' },
-                          { label: 'Via Journey', value: sources.journey, pctVal: pct(sources.journey, sources.total), dot: 'bg-violet-500' },
+                          { label: 'Via Journey', value: sources.journey, pctVal: pct(sources.journey, sources.total), dot: 'bg-brand-500' },
                           { label: 'Chat', value: sources.chat, pctVal: pct(sources.chat, sources.total), dot: 'bg-blue-500' },
                           { label: 'Discount Availed', value: sources.discountAvailed, pctVal: pct(sources.discountAvailed, sources.total), dot: 'bg-orange-500' },
                         ].map(({ label, value, pctVal, dot }) => (
-                          <div key={label} className="flex items-center justify-between px-3 py-2 bg-gray-50 rounded-lg border border-gray-100 hover:bg-purple-50/50 transition-colors">
+                          <div key={label} className="flex items-center justify-between px-3 py-2 bg-gray-50 rounded-lg border border-gray-100 hover:bg-brand-50/50 transition-colors">
                             <div className="flex items-center gap-2 min-w-0">
                               <div className={`w-2.5 h-2.5 rounded-full ${dot} flex-shrink-0`} />
                               <span className="text-xs text-gray-600 truncate">{label}</span>
@@ -735,8 +735,8 @@ export default function GroupAnalytics() {
               <Card className="border border-gray-100 shadow-sm bg-white overflow-hidden">
                 <CardHeader className="pb-2">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <MapPin className="w-4.5 h-4.5 text-purple-600" />
+                    <div className="w-9 h-9 bg-brand-100 rounded-lg flex items-center justify-center">
+                      <MapPin className="w-4.5 h-4.5 text-brand-600" />
                     </div>
                     <div>
                       <CardTitle className="text-sm font-semibold text-gray-800 uppercase tracking-wide">Visitor Cities</CardTitle>
@@ -751,7 +751,7 @@ export default function GroupAnalytics() {
                         <PieChart margin={{ top: 10, right: 40, bottom: 10, left: 40 }}>
                           <defs>
                             <filter id="shadow3dCities" x="-20%" y="-20%" width="140%" height="140%">
-                              <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#7c3aed" floodOpacity="0.15" />
+                              <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#1a3878" floodOpacity="0.15" />
                             </filter>
                           </defs>
                           <Pie
@@ -795,7 +795,7 @@ export default function GroupAnalytics() {
 
                       <div className="w-full grid grid-cols-2 gap-2 mt-2">
                         {cityPieData.map((entry, index) => (
-                          <div key={entry.key} className="grid px-3 py-2 bg-gray-50 rounded-lg border border-gray-100 hover:bg-purple-50/50 transition-colors" style={{ gridTemplateColumns: 'auto 1fr auto' , alignItems: 'start', gap: '8px' }}>
+                          <div key={entry.key} className="grid px-3 py-2 bg-gray-50 rounded-lg border border-gray-100 hover:bg-brand-50/50 transition-colors" style={{ gridTemplateColumns: 'auto 1fr auto' , alignItems: 'start', gap: '8px' }}>
                             <div className="w-2.5 h-2.5 rounded-full mt-0.5" style={{ backgroundColor: CITY_PIE_COLORS[index % CITY_PIE_COLORS.length] }} />
                             <span className="text-xs text-gray-600 leading-snug" style={{ overflowWrap: 'anywhere', wordBreak: 'break-word' }}>{entry.name}</span>
                             <div className="flex items-center gap-2 whitespace-nowrap">
@@ -819,7 +819,7 @@ export default function GroupAnalytics() {
             {/* Section 3: Conversation Insights */}
             <div>
               <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-3 flex items-center gap-2">
-                <MessagesSquare className="w-4 h-4 text-purple-500" />
+                <MessagesSquare className="w-4 h-4 text-brand-500" />
                 Conversation Insights
               </h2>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -1006,8 +1006,8 @@ export default function GroupAnalytics() {
                 <Card className="border border-gray-100 shadow-sm bg-white overflow-hidden">
                   <CardHeader className="pb-2">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 bg-purple-100 rounded-lg flex items-center justify-center">
-                        <BarChart3 className="w-4.5 h-4.5 text-purple-600" />
+                      <div className="w-9 h-9 bg-brand-100 rounded-lg flex items-center justify-center">
+                        <BarChart3 className="w-4.5 h-4.5 text-brand-600" />
                       </div>
                       <div>
                         <CardTitle className="text-sm font-semibold text-gray-800 uppercase tracking-wide">Top Categories</CardTitle>
@@ -1069,7 +1069,7 @@ export default function GroupAnalytics() {
                         <th rowSpan={2} className="text-center px-3 py-2.5 text-[11px] font-semibold text-blue-700 uppercase tracking-wide bg-blue-50/60 border-b border-blue-100 border-r-2 border-r-gray-300">Conversations</th>
                         <th colSpan={5} className="text-center px-2 py-2 text-[11px] font-semibold text-emerald-700 uppercase tracking-wide bg-emerald-50/60 border-b border-emerald-100 border-r-2 border-r-gray-300">Leads</th>
                         <th colSpan={2} className="text-center px-2 py-2 text-[11px] font-semibold text-amber-700 uppercase tracking-wide bg-amber-50/60 border-b border-amber-100 border-r-2 border-r-gray-300">Traffic</th>
-                        <th rowSpan={2} className="text-center px-3 py-2.5 text-[11px] font-semibold text-purple-600 uppercase tracking-wide bg-purple-50/60 border-b border-purple-100">Conv.<br/>Rate</th>
+                        <th rowSpan={2} className="text-center px-3 py-2.5 text-[11px] font-semibold text-brand-600 uppercase tracking-wide bg-brand-50/60 border-b border-brand-100">Conv.<br/>Rate</th>
                       </tr>
                       <tr className="border-b border-gray-200">
                         <th className="text-right px-3 py-2 text-[10px] font-medium text-emerald-600 uppercase tracking-wide bg-emerald-50/30">Total</th>
@@ -1094,10 +1094,10 @@ export default function GroupAnalytics() {
                             ? Math.round((row.leads / row.conversations) * 1000) / 10
                             : 0;
                           return (
-                            <tr key={row.accountId} className={`${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'} hover:bg-purple-50/30 transition-colors`}>
+                            <tr key={row.accountId} className={`${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'} hover:bg-brand-50/30 transition-colors`}>
                               <td className="px-4 py-3 font-medium text-gray-900 border-r-2 border-r-gray-300 sticky left-0 z-10" style={{ background: 'inherit' }}>
                                 <div className="flex items-center gap-2">
-                                  <div className="w-6 h-6 bg-gradient-to-br from-purple-500 to-pink-600 rounded-md flex items-center justify-center flex-shrink-0">
+                                  <div className="w-6 h-6 bg-gradient-to-br from-brand-500 to-ink-600 rounded-md flex items-center justify-center flex-shrink-0">
                                     <Building2 className="w-3 h-3 text-white" />
                                   </div>
                                   <span className="break-words whitespace-normal max-w-[180px]">{row.accountName}</span>
@@ -1109,7 +1109,7 @@ export default function GroupAnalytics() {
                                 <span className="px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-medium tabular-nums">{row.form}</span>
                               </td>
                               <td className="px-3 py-3 text-right">
-                                <span className="px-2 py-0.5 bg-violet-100 text-violet-700 rounded-full text-xs font-medium tabular-nums">{row.journey}</span>
+                                <span className="px-2 py-0.5 bg-brand-100 text-brand-700 rounded-full text-xs font-medium tabular-nums">{row.journey}</span>
                               </td>
                               <td className="px-3 py-3 text-right">
                                 <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full text-xs font-medium tabular-nums">{row.chat}</span>
@@ -1123,7 +1123,7 @@ export default function GroupAnalytics() {
                               <td className="px-3 py-3 text-right border-r-2 border-r-gray-300">
                                 <span className="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded-full text-xs font-medium tabular-nums">{row.organic}</span>
                               </td>
-                              <td className="px-3 py-3 text-center font-semibold text-purple-700 tabular-nums">{cr}%</td>
+                              <td className="px-3 py-3 text-center font-semibold text-brand-700 tabular-nums">{cr}%</td>
                             </tr>
                           );
                         })

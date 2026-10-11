@@ -25,7 +25,7 @@ export function effectiveUseCaseMode(settings: UseCaseFields | null | undefined)
   return "direct_sales";
 }
 
-/** Train Chroney (website) custom instructions apply on WhatsApp. */
+/** Train Orvey (website) custom instructions apply on WhatsApp. */
 export function websiteInstructionsApply(settings: InstructionFields | null | undefined): boolean {
   return settings?.useMasterTraining !== "false" && settings?.instructionsMode !== "replace";
 }

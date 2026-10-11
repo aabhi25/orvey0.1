@@ -373,7 +373,7 @@ export default function JobPortalJobs() {
   const typeBadge = (type: string) => {
     const colors: Record<string, string> = {
       "full-time": "bg-blue-100 text-blue-700",
-      "part-time": "bg-purple-100 text-purple-700",
+      "part-time": "bg-brand-100 text-brand-700",
       contract: "bg-orange-100 text-orange-700",
       internship: "bg-cyan-100 text-cyan-700",
       freelance: "bg-amber-100 text-amber-700",
@@ -457,7 +457,7 @@ export default function JobPortalJobs() {
                     {statusBadge(job.status)}
                     {typeBadge(job.jobType)}
                     {job.source === "import" && (
-                      <Badge variant="outline" className="bg-indigo-50 text-indigo-600 text-xs">Imported</Badge>
+                      <Badge variant="outline" className="bg-brand-50 text-brand-600 text-xs">Imported</Badge>
                     )}
                   </div>
                   <div className="flex items-center gap-4 text-sm text-gray-500 mt-1">
@@ -608,12 +608,12 @@ export default function JobPortalJobs() {
         <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Download className="w-5 h-5 text-indigo-600" />
+              <Download className="w-5 h-5 text-brand-600" />
               Import Jobs from External API
             </DialogTitle>
           </DialogHeader>
           <div className="space-y-5">
-            <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-3 text-sm text-indigo-700">
+            <div className="bg-brand-50 border border-brand-200 rounded-lg p-3 text-sm text-brand-700">
               Connect to any REST API that returns job listings as JSON. Configure the endpoint and map response fields to your job schema.
             </div>
 
@@ -739,7 +739,7 @@ export default function JobPortalJobs() {
                 <Button
                   onClick={() => syncMutation.mutate()}
                   disabled={!importConfig?.apiUrl || syncMutation.isPending || syncStatusData?.lastSyncStatus === "syncing"}
-                  className="bg-gradient-to-r from-indigo-600 to-purple-600"
+                  className="bg-gradient-to-r from-brand-600 to-ink-600"
                 >
                   {syncMutation.isPending || syncStatusData?.lastSyncStatus === "syncing" ? (
                     <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Syncing...</>

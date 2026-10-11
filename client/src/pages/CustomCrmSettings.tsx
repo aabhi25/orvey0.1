@@ -742,22 +742,22 @@ export default function CustomCrmSettings({ embedded = false }: { embedded?: boo
       {!activeSection && (
         <div className="space-y-4">
         <Card
-          className="cursor-pointer transition-all hover:shadow-lg border-violet-200 dark:border-violet-800 bg-gradient-to-r from-violet-50 to-fuchsia-50 dark:from-violet-950/40 dark:to-fuchsia-950/30 hover:-translate-y-0.5"
+          className="cursor-pointer transition-all hover:shadow-lg border-brand-200 dark:border-brand-800 bg-gradient-to-r from-brand-50 to-ink-50 dark:from-brand-950/40 dark:to-ink-950/30 hover:-translate-y-0.5"
           onClick={() => setMasterUploadOpen(true)}
         >
           <CardHeader>
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3">
-                <div className="rounded-xl bg-violet-100 dark:bg-violet-900 p-2.5"><Sparkles className="h-5 w-5 text-violet-600 dark:text-violet-400" /></div>
+                <div className="rounded-xl bg-brand-100 dark:bg-brand-900 p-2.5"><Sparkles className="h-5 w-5 text-brand-600 dark:text-brand-400" /></div>
                 <div>
                   <CardTitle className="text-lg flex items-center gap-2">
                     Master Bulk Upload
-                    <Badge variant="outline" className="text-violet-600 border-violet-300 bg-violet-50 dark:bg-violet-950">New</Badge>
+                    <Badge variant="outline" className="text-brand-600 border-brand-300 bg-brand-50 dark:bg-brand-950">New</Badge>
                   </CardTitle>
                   <CardDescription>Upload one Excel to populate dealer/city/store dropdowns <span className="font-medium">and</span> store credentials at once</CardDescription>
                 </div>
               </div>
-              <Button className="bg-violet-600 hover:bg-violet-700 text-white shrink-0" onClick={(e) => { e.stopPropagation(); setMasterUploadOpen(true); }}>
+              <Button className="bg-brand-600 hover:bg-brand-700 text-white shrink-0" onClick={(e) => { e.stopPropagation(); setMasterUploadOpen(true); }}>
                 <Upload className="h-4 w-4 mr-2" />Start Upload
               </Button>
             </div>
@@ -799,10 +799,10 @@ export default function CustomCrmSettings({ embedded = false }: { embedded?: boo
             </CardContent>
           </Card>
 
-          <Card className="cursor-pointer transition-all hover:shadow-lg hover:border-purple-300 hover:-translate-y-0.5" onClick={() => setActiveSection('sync')}>
+          <Card className="cursor-pointer transition-all hover:shadow-lg hover:border-brand-300 hover:-translate-y-0.5" onClick={() => setActiveSection('sync')}>
             <CardHeader>
               <div className="flex items-center gap-3">
-                <div className="rounded-xl bg-purple-100 dark:bg-purple-900 p-2.5"><Zap className="h-5 w-5 text-purple-600 dark:text-purple-400" /></div>
+                <div className="rounded-xl bg-brand-100 dark:bg-brand-900 p-2.5"><Zap className="h-5 w-5 text-brand-600 dark:text-brand-400" /></div>
                 <div>
                   <CardTitle className="text-lg">Auto-Sync</CardTitle>
                   <CardDescription>Auto-push leads on WhatsApp flow completion</CardDescription>

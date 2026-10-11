@@ -128,7 +128,7 @@ function DocumentTypesSection() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-8">
-        <Loader2 className="w-5 h-5 animate-spin text-purple-500" />
+        <Loader2 className="w-5 h-5 animate-spin text-brand-500" />
       </div>
     );
   }
@@ -144,7 +144,7 @@ function DocumentTypesSection() {
             }}
           >
             <div className="flex items-center gap-3">
-              <FileText className="h-4 w-4 text-purple-500" />
+              <FileText className="h-4 w-4 text-brand-500" />
               <div>
                 <span className="font-medium text-sm">{dt.name}</span>
                 <span className="text-xs text-gray-400 ml-2">({dt.key})</span>
@@ -187,7 +187,7 @@ function DocumentTypesSection() {
                       key={f.key}
                       className={`text-xs px-2 py-1 rounded ${
                         f.required
-                          ? "bg-purple-100 text-purple-700 border border-purple-200"
+                          ? "bg-brand-100 text-brand-700 border border-brand-200"
                           : "bg-gray-100 text-gray-600 border border-gray-200"
                       }`}
                       title={f.formatDescription ? `Format: ${f.formatDescription}` : f.formatRegex ? `Regex: ${f.formatRegex}` : undefined}
@@ -348,7 +348,7 @@ export default function WhatsAppFlowSettings() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
+        <Loader2 className="w-8 h-8 animate-spin text-brand-500" />
       </div>
     );
   }
@@ -358,7 +358,7 @@ export default function WhatsAppFlowSettings() {
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
-            <Settings className="h-5 w-5 text-purple-600" />
+            <Settings className="h-5 w-5 text-brand-600" />
             <CardTitle>Flow Settings</CardTitle>
           </div>
           <p className="text-sm text-gray-500">Configure global settings for conversation flows</p>
@@ -402,7 +402,7 @@ export default function WhatsAppFlowSettings() {
             <div>
               <Label>Use Master Training Instructions</Label>
               <p className="text-sm text-gray-500">
-                Apply custom AI instructions (from Train Chroney) in WhatsApp flow responses
+                Apply custom AI instructions (from Train Orvey) in WhatsApp flow responses
               </p>
             </div>
             <Switch
@@ -472,7 +472,7 @@ export default function WhatsAppFlowSettings() {
             </div>
 
             {docConfirmationEnabled && (
-              <div className="space-y-4 pl-4 border-l-2 border-purple-200">
+              <div className="space-y-4 pl-4 border-l-2 border-brand-200">
                 <div className="space-y-2">
                   <Label>Confirmation Mode</Label>
                   <select
@@ -522,10 +522,10 @@ export default function WhatsAppFlowSettings() {
         </CardContent>
       </Card>
 
-      <Card className="border-purple-200 bg-gradient-to-r from-purple-50 to-indigo-50">
+      <Card className="border-brand-200 bg-gradient-to-r from-brand-50 to-ink-50">
         <CardContent className="pt-6 flex items-center gap-4">
-          <div className="p-3 rounded-xl bg-purple-100">
-            <Sparkles className="h-6 w-6 text-purple-600" />
+          <div className="p-3 rounded-xl bg-brand-100">
+            <Sparkles className="h-6 w-6 text-brand-600" />
           </div>
           <div className="flex-1">
             <h3 className="font-semibold text-base">AI Personality & Knowledge moved to AI Setup</h3>
@@ -545,7 +545,7 @@ export default function WhatsAppFlowSettings() {
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
-            <FileText className="h-5 w-5 text-purple-600" />
+            <FileText className="h-5 w-5 text-brand-600" />
             <CardTitle>Document Types</CardTitle>
           </div>
           <p className="text-sm text-gray-500">

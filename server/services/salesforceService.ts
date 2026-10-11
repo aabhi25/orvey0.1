@@ -258,6 +258,6 @@ export const DEFAULT_SALESFORCE_FIELD_MAPPINGS = [
   { salesforceField: 'Email',       sourceType: 'dynamic', sourceField: 'lead.email',      displayName: 'Email',        sortOrder: 2 },
   { salesforceField: 'Phone',       sourceType: 'dynamic', sourceField: 'lead.phone',      displayName: 'Phone',        sortOrder: 3 },
   { salesforceField: 'Company',     sourceType: 'custom',  customValue: 'Unknown',         displayName: 'Company',      sortOrder: 4 },
-  { salesforceField: 'LeadSource',  sourceType: 'custom',  customValue: 'Chroney Chat',    displayName: 'Lead Source',  sortOrder: 5 },
+  { salesforceField: 'LeadSource',  sourceType: 'custom',  customValue: 'Orvey Chat',    displayName: 'Lead Source',  sortOrder: 5 },
   { salesforceField: 'City',        sourceType: 'dynamic', sourceField: 'session.city',    displayName: 'City',         sortOrder: 6 },
 ];

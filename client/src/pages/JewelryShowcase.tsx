@@ -230,20 +230,20 @@ const LUXE_THEMES: Record<ThemePreset, ThemeColors> = {
     shimmer: "linear-gradient(90deg, transparent 0%, rgba(196, 163, 90, 0.4) 50%, transparent 100%)"
   },
   amethyst_aurora: {
-    primary: "#7c3aed",
-    secondary: "#a855f7",
-    accent: "#e9d5ff",
-    priceColor: "#7c3aed",
-    bg: "#faf5ff",
-    bgGradient: "linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #faf5ff 100%)",
+    primary: "#1a3878",
+    secondary: "#3a63b5",
+    accent: "#c3d2ee",
+    priceColor: "#1a3878",
+    bg: "#f0f4fb",
+    bgGradient: "linear-gradient(135deg, #f0f4fb 0%, #dfe7f6 50%, #f0f4fb 100%)",
     text: "#1e1b4b",
     textMuted: "rgba(30, 27, 75, 0.6)",
     cardBg: "rgba(255, 255, 255, 0.9)",
     cardBorder: "rgba(124, 58, 237, 0.2)",
     glassBg: "rgba(255, 255, 255, 0.8)",
     glassBorder: "rgba(124, 58, 237, 0.15)",
-    buttonGradient: "linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%)",
-    buttonHover: "linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)",
+    buttonGradient: "linear-gradient(135deg, #1a3878 0%, #162e60 100%)",
+    buttonHover: "linear-gradient(135deg, #8b5cf6 0%, #1a3878 100%)",
     shimmer: "linear-gradient(90deg, transparent 0%, rgba(124, 58, 237, 0.3) 50%, transparent 100%)"
   }
 };

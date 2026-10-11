@@ -45,7 +45,7 @@ interface ResumeUploadProgressProps {
   chatColor?: string;
 }
 
-export function ResumeUploadProgress({ stage, chatColor = '#9333ea' }: ResumeUploadProgressProps) {
+export function ResumeUploadProgress({ stage, chatColor = '#1f4596' }: ResumeUploadProgressProps) {
   const [displayIndex, setDisplayIndex] = useState(0);
   const [fadeIn, setFadeIn] = useState(true);
   const lastTransitionRef = useRef(Date.now());

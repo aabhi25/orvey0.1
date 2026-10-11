@@ -1199,12 +1199,12 @@ export default function TrainChroney() {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center shadow-lg">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-600 to-ink-600 flex items-center justify-center shadow-lg">
                 <GraduationCap className="w-6 h-6 text-white" />
               </div>
               <div>
                 <h1 className="text-3xl font-bold text-foreground">
-                  Train Chroney
+                  Train Orvey
                 </h1>
                 <p className="text-sm text-muted-foreground mt-0.5">
                   Teach your AI assistant how to respond to customers
@@ -1235,7 +1235,7 @@ export default function TrainChroney() {
                 <Button
                   onClick={handleAnalyzeInstructions}
                   disabled={isAnalyzing}
-                  className="gap-2 bg-gradient-to-r from-purple-600 via-purple-700 to-red-600 hover:from-purple-700 hover:via-purple-800 hover:to-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed px-5 py-2.5 rounded-xl"
+                  className="gap-2 bg-gradient-to-r from-brand-600 via-ink-700 to-red-600 hover:from-brand-700 hover:via-ink-800 hover:to-red-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed px-5 py-2.5 rounded-xl"
                 >
                   {isAnalyzing ? (
                     <>
@@ -1299,21 +1299,21 @@ export default function TrainChroney() {
             <TabsList className="w-full h-auto p-0 bg-transparent border-b border-gray-200 dark:border-gray-800 rounded-none gap-0 justify-start mb-6">
               <TabsTrigger 
                 value="instructions" 
-                className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-purple-600 data-[state=active]:bg-purple-50 dark:data-[state=active]:bg-purple-950/30 data-[state=active]:text-purple-700 dark:data-[state=active]:text-purple-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
+                className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-brand-600 data-[state=active]:bg-brand-50 dark:data-[state=active]:bg-brand-950/30 data-[state=active]:text-brand-700 dark:data-[state=active]:text-brand-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
               >
                 <Brain className="w-4 h-4" />
                 Instructions
               </TabsTrigger>
               <TabsTrigger 
                 value="lead-training" 
-                className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-purple-600 data-[state=active]:bg-purple-50 dark:data-[state=active]:bg-purple-950/30 data-[state=active]:text-purple-700 dark:data-[state=active]:text-purple-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
+                className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-brand-600 data-[state=active]:bg-brand-50 dark:data-[state=active]:bg-brand-950/30 data-[state=active]:text-brand-700 dark:data-[state=active]:text-brand-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
               >
                 <UserCheck className="w-4 h-4" />
                 Lead Training
               </TabsTrigger>
               <TabsTrigger
                 value="language"
-                className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-purple-600 data-[state=active]:bg-purple-50 dark:data-[state=active]:bg-purple-950/30 data-[state=active]:text-purple-700 dark:data-[state=active]:text-purple-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
+                className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-brand-600 data-[state=active]:bg-brand-50 dark:data-[state=active]:bg-brand-950/30 data-[state=active]:text-brand-700 dark:data-[state=active]:text-brand-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
                 data-testid="tab-language"
               >
                 <Globe2 className="w-4 h-4" />
@@ -1363,7 +1363,7 @@ export default function TrainChroney() {
                           setNewKeywords([]);
                           setKeywordInput("");
                         }}
-                        className={`gap-1.5 ${newInstructionType === 'fallback' ? 'bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600' : ''}`}
+                        className={`gap-1.5 ${newInstructionType === 'fallback' ? 'bg-gradient-to-r from-blue-500 to-brand-500 hover:from-blue-600 hover:to-brand-600' : ''}`}
                       >
                         <AlertCircle className="w-3.5 h-3.5" />
                         Fallback
@@ -1628,7 +1628,7 @@ export default function TrainChroney() {
                           onClick={handleAddInstruction}
                           disabled={!newInstruction.trim() || (newInstructionType === 'conditional' && newKeywords.length === 0)}
                           size="sm"
-                          className="gap-1.5 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
+                          className="gap-1.5 bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700 text-white"
                         >
                           <Plus className="w-3.5 h-3.5" />
                           {newInstructionType === 'fallback' ? 'Add Template' : 'Add Instruction'}
@@ -1646,12 +1646,12 @@ export default function TrainChroney() {
                 <Card className="border-dashed">
                   <CardContent className="py-12">
                     <div className="text-center">
-                      <div className="w-16 h-16 rounded-full bg-purple-50 dark:bg-purple-950/30 flex items-center justify-center mx-auto mb-4">
-                        <Brain className="w-8 h-8 text-purple-400" />
+                      <div className="w-16 h-16 rounded-full bg-brand-50 dark:bg-brand-950/30 flex items-center justify-center mx-auto mb-4">
+                        <Brain className="w-8 h-8 text-brand-400" />
                       </div>
                       <h3 className="text-sm font-medium text-foreground mb-1">No instructions yet</h3>
                       <p className="text-sm text-muted-foreground">
-                        Add your first instruction above to start training Chroney
+                        Add your first instruction above to start training Orvey
                       </p>
                     </div>
                   </CardContent>
@@ -1689,7 +1689,7 @@ export default function TrainChroney() {
                             instruction.type === 'conditional'
                               ? 'bg-gradient-to-br from-amber-500 to-orange-500'
                               : instruction.type === 'fallback'
-                              ? 'bg-gradient-to-br from-blue-500 to-indigo-500'
+                              ? 'bg-gradient-to-br from-blue-500 to-brand-500'
                               : 'bg-gradient-to-br from-green-600 to-emerald-600'
                           }`}>
                             {index + 1}
@@ -1738,7 +1738,7 @@ export default function TrainChroney() {
                                     size="sm"
                                     variant="ghost"
                                     onClick={() => handleRefineExistingInstruction(instruction)}
-                                    className="h-8 w-8 p-0 hover:bg-purple-50 dark:hover:bg-purple-950/20 hover:text-purple-600"
+                                    className="h-8 w-8 p-0 hover:bg-brand-50 dark:hover:bg-brand-950/20 hover:text-brand-600"
                                   >
                                     <Sparkles className="w-3.5 h-3.5" />
                                   </Button>
@@ -1802,27 +1802,27 @@ export default function TrainChroney() {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-purple-50/50 dark:bg-purple-950/20 border-purple-100 dark:border-purple-900/30">
+                <Card className="bg-brand-50/50 dark:bg-brand-950/20 border-brand-100 dark:border-brand-900/30">
                   <CardContent className="pt-5 pb-5">
-                    <h3 className="text-sm font-semibold text-purple-900 dark:text-purple-200 mb-3 flex items-center gap-2">
+                    <h3 className="text-sm font-semibold text-brand-900 dark:text-brand-200 mb-3 flex items-center gap-2">
                       <span className="text-lg">✨</span>
                       Example Instructions
                     </h3>
-                    <ul className="text-xs text-purple-800 dark:text-purple-300 space-y-2">
+                    <ul className="text-xs text-brand-800 dark:text-brand-300 space-y-2">
                       <li className="flex gap-2">
-                        <span className="text-purple-400">→</span>
+                        <span className="text-brand-400">→</span>
                         <span>"Mention our 30-day return policy when asked"</span>
                       </li>
                       <li className="flex gap-2">
-                        <span className="text-purple-400">→</span>
+                        <span className="text-brand-400">→</span>
                         <span>"For wholesale inquiries, collect company details"</span>
                       </li>
                       <li className="flex gap-2">
-                        <span className="text-purple-400">→</span>
+                        <span className="text-brand-400">→</span>
                         <span>"Always be friendly and professional"</span>
                       </li>
                       <li className="flex gap-2">
-                        <span className="text-purple-400">→</span>
+                        <span className="text-brand-400">→</span>
                         <span>"Offer live chat support for urgent issues"</span>
                       </li>
                     </ul>
@@ -1842,7 +1842,7 @@ export default function TrainChroney() {
                   <div className="flex-1 min-w-[12rem]">
                     <CardTitle className="text-xl">Smart Lead Training</CardTitle>
                     <CardDescription className="mt-1">
-                      Configure which contact information Chroney should collect
+                      Configure which contact information Orvey should collect
                     </CardDescription>
                   </div>
                   {/* Auto-save status: Saving… / Saved / Not saved — retry */}
@@ -1889,7 +1889,7 @@ export default function TrainChroney() {
                 {/* Nothing saved yet: these are defaults the chat is not using. */}
                 {leadConfigMeta?.source === 'default' && !hasUnsavedChanges(leadAutosave) && (
                   <div className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-blue-200 bg-blue-50 dark:border-blue-900/50 dark:bg-blue-950/20 px-3 py-2 text-xs text-blue-900 dark:text-blue-200" data-testid="lead-config-defaults-info">
-                    <span>Lead capture isn't set up yet — these are the suggested defaults. Chroney starts using them once you save or change a setting.</span>
+                    <span>Lead capture isn't set up yet — these are the suggested defaults. Orvey starts using them once you save or change a setting.</span>
                     <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => { markLeadConfigEdited(); setLeadConfig((prev) => ({ ...prev })); }} data-testid="button-lead-save-defaults">
                       Save these settings
                     </Button>
@@ -1989,7 +1989,7 @@ export default function TrainChroney() {
                                 data-testid={`button-mandatory-${field.id}`}
                                 className={`flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-md transition-all duration-200 ${
                                   field.required
-                                    ? 'bg-purple-600 text-white shadow-sm'
+                                    ? 'bg-brand-600 text-white shadow-sm'
                                     : 'bg-transparent text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
                                 }`}
                               >
@@ -2053,17 +2053,17 @@ export default function TrainChroney() {
                         return (
                         <div
                           data-testid={`otp-controls-${field.id}`}
-                          className="mx-3 mb-3 rounded-md border border-purple-200/60 dark:border-purple-900/40 bg-purple-50/40 dark:bg-purple-950/10"
+                          className="mx-3 mb-3 rounded-md border border-brand-200/60 dark:border-brand-900/40 bg-brand-50/40 dark:bg-brand-950/10"
                         >
-                          <div className="flex items-center justify-between gap-2 px-3 py-2 border-b border-purple-200/40 dark:border-purple-900/30">
+                          <div className="flex items-center justify-between gap-2 px-3 py-2 border-b border-brand-200/40 dark:border-brand-900/30">
                             <div className="flex items-center gap-2 min-w-0 flex-wrap">
-                              <ShieldCheck className="w-3.5 h-3.5 text-purple-600 shrink-0" />
-                              <span className="text-xs font-medium text-purple-900 dark:text-purple-200">Verification</span>
+                              <ShieldCheck className="w-3.5 h-3.5 text-brand-600 shrink-0" />
+                              <span className="text-xs font-medium text-brand-900 dark:text-brand-200">Verification</span>
                             </div>
                             <Link
                               href={SETTINGS_PATHS.otp}
                               data-testid={`link-otp-settings-${field.id}`}
-                              className="text-[11px] inline-flex items-center gap-1 text-purple-700 dark:text-purple-300 hover:underline shrink-0"
+                              className="text-[11px] inline-flex items-center gap-1 text-brand-700 dark:text-brand-300 hover:underline shrink-0"
                             >
                               <Settings2 className="w-3 h-3" />
                               OTP settings
@@ -2072,7 +2072,7 @@ export default function TrainChroney() {
                           </div>
 
                           {/* Method picker */}
-                          <div className="px-3 py-2.5 border-b border-purple-200/40 dark:border-purple-900/30">
+                          <div className="px-3 py-2.5 border-b border-brand-200/40 dark:border-brand-900/30">
                             <Label className="text-xs font-medium">Verification method</Label>
                             <p className="text-[11px] text-muted-foreground mt-0.5 leading-snug mb-2" data-testid="text-verification-help">
                               Checks the mobile number on the website chat (not on WhatsApp, Instagram or Facebook).
@@ -2147,7 +2147,7 @@ export default function TrainChroney() {
                           {/* OTP sub-section */}
                           {verificationMethod === 'otp' && (
                             <>
-                              <div className="flex items-center justify-between gap-2 px-3 py-2 border-b border-purple-200/40 dark:border-purple-900/30">
+                              <div className="flex items-center justify-between gap-2 px-3 py-2 border-b border-brand-200/40 dark:border-brand-900/30">
                                 <div className="flex items-center gap-2 min-w-0 flex-wrap">
                                   <span
                                     data-testid={`pill-otp-sms-${field.id}`}
@@ -2183,13 +2183,13 @@ export default function TrainChroney() {
                               ) : (
                                 <div className="px-3 py-2.5">
                                   <p className="text-[11px] text-muted-foreground leading-snug">
-                                    Chroney sends a 6-digit code to confirm the mobile number before saving the lead to your CRM. Choose SMS, WhatsApp, or both in the OTP settings.
+                                    Orvey sends a 6-digit code to confirm the mobile number before saving the lead to your CRM. Choose SMS, WhatsApp, or both in the OTP settings.
                                   </p>
                                 </div>
                               )}
                               {/* "Only count verified leads" — depends on OTP being effectively available (real provider OR demo mode). */}
                               {(msg91Configured || field.otpDemoMode) && field.captureStrategy === 'start' && (
-                                <div className="flex items-start justify-between gap-3 px-3 py-2.5 border-t border-purple-200/40 dark:border-purple-900/30">
+                                <div className="flex items-start justify-between gap-3 px-3 py-2.5 border-t border-brand-200/40 dark:border-brand-900/30">
                                   <div className="min-w-0">
                                     <Label
                                       htmlFor={`switch-otp-count-${field.id}`}
@@ -2215,7 +2215,7 @@ export default function TrainChroney() {
                           {/* CAPTCHA sub-section */}
                           {verificationMethod === 'captcha' && (
                             <>
-                              <div className="px-3 py-2.5 border-b border-purple-200/40 dark:border-purple-900/30 space-y-2.5">
+                              <div className="px-3 py-2.5 border-b border-brand-200/40 dark:border-brand-900/30 space-y-2.5">
                                 <div>
                                   <Label htmlFor={`captcha-site-key-${field.id}`} className="text-xs font-medium">
                                     reCAPTCHA v2 site key
@@ -2483,7 +2483,7 @@ export default function TrainChroney() {
               <Button 
                 onClick={handleSaveEdit}
                 disabled={!editText.trim()}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
               >
                 Save Changes
               </Button>
@@ -2496,7 +2496,7 @@ export default function TrainChroney() {
           <DialogContent className="max-w-2xl">
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-purple-600" />
+                <Sparkles className="w-5 h-5 text-brand-600" />
                 AI-Refined Instruction
               </DialogTitle>
               <DialogDescription>
@@ -2512,7 +2512,7 @@ export default function TrainChroney() {
               </div>
               <div>
                 <label className="text-xs font-medium text-muted-foreground mb-2 block">Refined</label>
-                <div className="p-3 bg-purple-50/50 dark:bg-purple-950/20 rounded-lg text-sm border border-purple-100 dark:border-purple-900/30">
+                <div className="p-3 bg-brand-50/50 dark:bg-brand-950/20 rounded-lg text-sm border border-brand-100 dark:border-brand-900/30">
                   {refinedInstruction}
                 </div>
               </div>
@@ -2523,7 +2523,7 @@ export default function TrainChroney() {
               </Button>
               <Button 
                 onClick={handleApplyRefinedInstruction}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
               >
                 <Check className="w-4 h-4 mr-1" />
                 Use Refined Version
@@ -2537,7 +2537,7 @@ export default function TrainChroney() {
           <DialogContent className="max-w-5xl max-h-[85vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-purple-600" />
+                <ShieldCheck className="w-5 h-5 text-brand-600" />
                 AI Instruction Analysis
               </DialogTitle>
               <DialogDescription>
@@ -2547,14 +2547,14 @@ export default function TrainChroney() {
             
             {isAnalyzing ? (
               <div className="flex flex-col items-center justify-center py-12">
-                <Loader2 className="w-12 h-12 animate-spin text-purple-600 mb-4" />
+                <Loader2 className="w-12 h-12 animate-spin text-brand-600 mb-4" />
                 <p className="text-sm text-muted-foreground">Analyzing your instructions...</p>
               </div>
             ) : analysisResult && (
               <div className="space-y-6 py-4">
                 {/* Quality Score Header */}
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between p-4 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-950/30 dark:to-blue-950/30 rounded-lg border">
+                  <div className="flex items-center justify-between p-4 bg-gradient-to-r from-brand-50 to-ink-50 dark:from-brand-950/30 dark:to-ink-950/30 rounded-lg border">
                     <div>
                       <h3 className="font-semibold text-lg mb-1">Quality Score</h3>
                       <p className="text-sm text-muted-foreground">{analysisResult.summary}</p>
@@ -2631,12 +2631,12 @@ export default function TrainChroney() {
                 {analysisResult.refinements && analysisResult.refinements.length > 0 && (
                   <div>
                     <h3 className="font-semibold text-lg mb-3 flex items-center gap-2">
-                      <Sparkles className="w-5 h-5 text-purple-600" />
+                      <Sparkles className="w-5 h-5 text-brand-600" />
                       Suggested Refinements ({selectedRefinements.size} selected)
                     </h3>
                     <div className="space-y-3">
                       {analysisResult.refinements.map((refinement: any) => (
-                        <div key={refinement.instructionId} className="p-4 rounded-lg border bg-purple-50/50 dark:bg-purple-950/20 border-purple-200 dark:border-purple-900/30">
+                        <div key={refinement.instructionId} className="p-4 rounded-lg border bg-brand-50/50 dark:bg-brand-950/20 border-brand-200 dark:border-brand-900/30">
                           <div className="flex items-start gap-3">
                             <input
                               type="checkbox"
@@ -2650,7 +2650,7 @@ export default function TrainChroney() {
                                 }
                                 setSelectedRefinements(newSet);
                               }}
-                              className="mt-1 w-4 h-4 rounded border-purple-300"
+                              className="mt-1 w-4 h-4 rounded border-brand-300"
                             />
                             <div className="flex-1 space-y-3">
                               <div>
@@ -2660,8 +2660,8 @@ export default function TrainChroney() {
                                 </div>
                               </div>
                               <div>
-                                <label className="text-xs font-semibold text-purple-600 dark:text-purple-400 mb-1 block">Refined</label>
-                                <div className="p-2 bg-purple-100/50 dark:bg-purple-900/30 rounded text-sm border border-purple-200 dark:border-purple-800">
+                                <label className="text-xs font-semibold text-brand-600 dark:text-brand-400 mb-1 block">Refined</label>
+                                <div className="p-2 bg-brand-100/50 dark:bg-brand-900/30 rounded text-sm border border-brand-200 dark:border-brand-800">
                                   {refinement.refinedText}
                                 </div>
                               </div>
@@ -2688,7 +2688,7 @@ export default function TrainChroney() {
                       Your instructions look great. No conflicts or improvements detected.
                     </p>
                     <p className="text-xs text-muted-foreground mt-2">
-                      Note: Core conversation best practices (checking history, extracting contact info, acknowledging shared information) are built into Chroney and always followed automatically.
+                      Note: Core conversation best practices (checking history, extracting contact info, acknowledging shared information) are built into Orvey and always followed automatically.
                     </p>
                   </div>
                 )}
@@ -2726,7 +2726,7 @@ export default function TrainChroney() {
                       {selectedRefinements.size > 0 && (
                         <Button 
                           onClick={handleApplyAnalysis}
-                          className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                          className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                         >
                           <Check className="w-4 h-4 mr-1" />
                           Apply Selected ({selectedRefinements.size})

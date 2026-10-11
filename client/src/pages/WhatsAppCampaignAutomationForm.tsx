@@ -608,7 +608,7 @@ export default function WhatsAppCampaignAutomationForm({ id }: { id?: string }) 
             {selectedBlueprint && (
               <div className="rounded-md border bg-gray-50 p-3 space-y-2 text-sm">
                 <div className="flex items-center gap-2 font-medium">
-                  <Bot className="h-4 w-4 text-violet-600" />
+                  <Bot className="h-4 w-4 text-brand-600" />
                   Campaign behavior inherited from {selectedBlueprint.name}
                 </div>
                 <p className="text-xs text-gray-600">
@@ -655,7 +655,7 @@ export default function WhatsAppCampaignAutomationForm({ id }: { id?: string }) 
         )}
       </Section>
 
-      {!isCampaignOwnedBlueprint && <Section title="Who to message" icon={<Sparkles className="h-4 w-4 text-violet-600" />}>
+      {!isCampaignOwnedBlueprint && <Section title="Who to message" icon={<Sparkles className="h-4 w-4 text-brand-600" />}>
         {isBlueprintSource ? (
           <div className="space-y-4">
             {!selectedBlueprint ? (
@@ -856,12 +856,12 @@ export default function WhatsAppCampaignAutomationForm({ id }: { id?: string }) 
         )}
 
         {suggestions && (
-          <div className="space-y-3 rounded-md border border-violet-200 bg-violet-50/40 p-3">
+          <div className="space-y-3 rounded-md border border-brand-200 bg-brand-50/40 p-3">
             <div className="flex items-start gap-2">
-              <Sparkles className="mt-0.5 h-4 w-4 text-violet-700" />
+              <Sparkles className="mt-0.5 h-4 w-4 text-brand-700" />
               <div>
-                <p className="text-sm font-medium text-violet-950">Review AI mapping suggestions</p>
-                <p className="text-xs text-violet-900/70">Suggestions are limited to headers extracted above. Use a suggestion only after checking it matches your data.</p>
+                <p className="text-sm font-medium text-brand-950">Review AI mapping suggestions</p>
+                <p className="text-xs text-brand-900/70">Suggestions are limited to headers extracted above. Use a suggestion only after checking it matches your data.</p>
               </div>
             </div>
             {suggestionRows.map(({ label, suggestion, onUse }) => (
@@ -887,7 +887,7 @@ export default function WhatsAppCampaignAutomationForm({ id }: { id?: string }) 
         )}
       </Section>}
 
-      {isCampaignOwnedBlueprint && <Section title="Campaign audience" icon={<BookOpen className="h-4 w-4 text-violet-600" />}>
+      {isCampaignOwnedBlueprint && <Section title="Campaign audience" icon={<BookOpen className="h-4 w-4 text-brand-600" />}>
         <div className="rounded-md border bg-gray-50 p-3 space-y-1 text-sm">
           <p className="font-medium">{blueprintAudienceType === "ai_workbook" ? "AI Workbook" : "Audiences"} · set in campaign {selectedBlueprint?.name}</p>
           {blueprintAudienceType === "ai_workbook" ? (
@@ -919,7 +919,7 @@ export default function WhatsAppCampaignAutomationForm({ id }: { id?: string }) 
         <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-4">
           <p className="font-medium text-emerald-950">How this automation decides</p>
           <p className="mt-1 text-sm text-emerald-900">
-            On each run, Chroney checks every row in this order:
+            On each run, Orvey checks every row in this order:
           </p>
           <ol className="mt-3 grid gap-2 text-sm text-emerald-950 sm:grid-cols-2">
             <li className="flex gap-2"><span className="font-semibold">1.</span><span>The row has a mobile number and a record ID.</span></li>
@@ -931,7 +931,7 @@ export default function WhatsAppCampaignAutomationForm({ id }: { id?: string }) 
 
         <div className="rounded-lg border p-4 space-y-4">
           <div className="flex gap-3">
-            <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-violet-600" />
+            <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" />
             <div>
               <h3 className="font-medium">Where to send and how to personalize</h3>
               <p className="text-xs text-gray-500">These fields identify the WhatsApp destination and the customer name used by the message template.</p>

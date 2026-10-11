@@ -141,7 +141,7 @@ export default function VisitorJourneys() {
           </Link>
           <div>
             <h1 className="text-2xl font-bold flex items-center gap-2">
-              <MapPin className="w-6 h-6 text-indigo-600" />
+              <MapPin className="w-6 h-6 text-brand-600" />
               Visitor Journeys
             </h1>
             <p className="text-sm text-gray-500">
@@ -170,7 +170,7 @@ export default function VisitorJourneys() {
       
       {isLoading ? (
         <div className="text-center py-12">
-          <div className="animate-spin w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full mx-auto mb-4" />
+          <div className="animate-spin w-8 h-8 border-4 border-brand-600 border-t-transparent rounded-full mx-auto mb-4" />
           <p className="text-gray-500">Loading visitor journeys...</p>
         </div>
       ) : visitors.length === 0 ? (
@@ -194,7 +194,7 @@ export default function VisitorJourneys() {
                 open={isExpanded}
                 onOpenChange={(open) => setExpandedVisitor(open ? visitor.visitorToken : null)}
               >
-                <Card className={isExpanded ? "ring-2 ring-indigo-200" : ""}>
+                <Card className={isExpanded ? "ring-2 ring-brand-200" : ""}>
                   <CollapsibleTrigger asChild>
                     <CardHeader className="cursor-pointer hover:bg-gray-50 transition-colors">
                       <div className="flex items-center justify-between">
@@ -269,13 +269,13 @@ export default function VisitorJourneys() {
                     <CardContent className="border-t pt-4">
                       {isLoadingDetails ? (
                         <div className="text-center py-6">
-                          <div className="animate-spin w-6 h-6 border-2 border-indigo-600 border-t-transparent rounded-full mx-auto" />
+                          <div className="animate-spin w-6 h-6 border-2 border-brand-600 border-t-transparent rounded-full mx-auto" />
                         </div>
                       ) : visitorDetails ? (
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                           <div className="lg:col-span-2">
                             <h4 className="font-medium text-sm mb-3 flex items-center gap-2">
-                              <FileText className="w-4 h-4 text-indigo-600" />
+                              <FileText className="w-4 h-4 text-brand-600" />
                               Pages Visited
                             </h4>
                             <div className="space-y-2">
@@ -366,7 +366,7 @@ export default function VisitorJourneys() {
                             
                             <div>
                               <h4 className="font-medium text-sm mb-3 flex items-center gap-2">
-                                <Layers className="w-4 h-4 text-purple-600" />
+                                <Layers className="w-4 h-4 text-brand-600" />
                                 Top Sections
                               </h4>
                               {visitorDetails.topSections.length === 0 ? (

@@ -61,7 +61,7 @@ export default function CRMIntegrations({ embedded = false }: { embedded?: boole
           <div className="mb-6">
             <h1 className="text-3xl font-bold mb-2">CRM Integrations</h1>
             <p className="text-muted-foreground">
-              Connect your favorite CRM to automatically sync leads captured by Chroney
+              Connect your favorite CRM to automatically sync leads captured by Orvey
             </p>
           </div>
         )}
@@ -129,7 +129,7 @@ export default function CRMIntegrations({ embedded = false }: { embedded?: boole
                       <Button
                         onClick={() => setLocation(isIntegrationTab(crm.id) ? integrationPath(crm.id) : crm.route)}
                         disabled={!crm.available}
-                        className={crm.available ? "w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600" : "w-full"}
+                        className={crm.available ? "w-full bg-gradient-to-r from-brand-500 to-ink-500 hover:from-brand-600 hover:to-ink-600" : "w-full"}
                         variant={crm.available ? "default" : "outline"}
                       >
                         {crm.available ? (

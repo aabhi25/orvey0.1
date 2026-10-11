@@ -49,7 +49,7 @@ const typeColors: Record<string, string> = {
   pendant: '#6366F1',
   chain: '#84CC16',
   anklet: '#F97316',
-  brooch: '#A855F7',
+  brooch: '#3A63B5',
   'maang-tikka': '#E11D48',
   'nose-ring': '#14B8A6',
   'waist-chain': '#EAB308',

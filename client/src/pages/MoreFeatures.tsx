@@ -11,17 +11,17 @@ const features = [
     description: "Connect your CRM to automatically sync captured leads",
     icon: Link2,
     path: integrationPath(),
-    color: "bg-purple-100",
-    iconColor: "text-purple-600",
+    color: "bg-brand-100",
+    iconColor: "text-brand-600",
   },
   {
     id: "chroney-iq",
-    title: "Chroney IQ",
+    title: "Orvey IQ",
     description: "AI-powered insights and analytics for your conversations",
     icon: Sparkles,
     path: "/ai-insights",
-    color: "bg-purple-100",
-    iconColor: "text-purple-600",
+    color: "bg-brand-100",
+    iconColor: "text-brand-600",
   },
   {
     id: "gaps",
@@ -56,8 +56,8 @@ const features = [
     description: "Create visual navigation menus for your chat widget",
     icon: LayoutGrid,
     path: "/admin/menu-builder",
-    color: "bg-indigo-100",
-    iconColor: "text-indigo-600",
+    color: "bg-brand-100",
+    iconColor: "text-brand-600",
   },
 ];
 

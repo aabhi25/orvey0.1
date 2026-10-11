@@ -202,7 +202,7 @@ export default function UsersPage() {
   return (
     <div className="flex flex-col flex-1 h-screen">
       {/* Header */}
-      <header className="flex items-center justify-between h-[56px] px-6 bg-gradient-to-r from-red-500 via-purple-600 to-blue-600 shadow-sm">
+      <header className="flex items-center justify-between h-[56px] px-6 bg-gradient-to-r from-brand-800 via-ink-700 to-ink-900 shadow-sm">
         <div className="flex items-center gap-3">
           <SidebarTrigger data-testid="button-sidebar-toggle" className="text-white hover:bg-white/10 rounded-md" />
           <div className="flex items-center gap-2.5">
@@ -210,7 +210,7 @@ export default function UsersPage() {
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h1 className="text-[15px] font-semibold text-white leading-tight">AI Chroney</h1>
+              <h1 className="text-[15px] font-semibold text-white leading-tight">Orvey</h1>
               <p className="text-[11px] text-white/90 leading-tight mt-0.5">Users Management</p>
             </div>
           </div>
@@ -257,7 +257,7 @@ export default function UsersPage() {
               }
             }}>
               <DialogTrigger asChild>
-                <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 shadow-sm" data-testid="button-create-user">
+                <Button className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700 shadow-sm" data-testid="button-create-user">
                   <UserPlus className="w-4 h-4 mr-2" />
                   Add User
                 </Button>
@@ -375,7 +375,7 @@ export default function UsersPage() {
                           setNewUserPassword("");
                           setSelectedBusinessId("");
                         }}
-                        className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600"
+                        className="flex-1 bg-gradient-to-r from-brand-600 to-ink-600"
                       >
                         Done
                       </Button>
@@ -435,7 +435,7 @@ export default function UsersPage() {
 
           {isLoading ? (
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
-              <div className="w-8 h-8 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+              <div className="w-8 h-8 border-4 border-brand-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
               <p className="text-sm text-gray-600">Loading users...</p>
             </div>
           ) : filteredUsers.length === 0 ? (
@@ -468,7 +468,7 @@ export default function UsersPage() {
                       <TableCell className="font-medium py-3">{user.username}</TableCell>
                       <TableCell className="py-3">
                         <div className="flex items-center gap-2">
-                          <Building2 className="h-4 w-4 text-purple-600" />
+                          <Building2 className="h-4 w-4 text-brand-600" />
                           <span className="text-sm">{getUserBusinessName(user.businessAccountId)}</span>
                         </div>
                       </TableCell>
@@ -604,7 +604,7 @@ export default function UsersPage() {
 
               <Button 
                 onClick={() => setIsCredentialsDialogOpen(false)}
-                className="w-full bg-gradient-to-r from-purple-600 to-blue-600"
+                className="w-full bg-gradient-to-r from-brand-600 to-ink-600"
               >
                 Close
               </Button>
@@ -731,7 +731,7 @@ export default function UsersPage() {
                     setResetPasswordCredentials(null);
                     setNewTempPassword("");
                   }}
-                  className="flex-1 bg-gradient-to-r from-purple-600 to-blue-600"
+                  className="flex-1 bg-gradient-to-r from-brand-600 to-ink-600"
                 >
                   Done
                 </Button>

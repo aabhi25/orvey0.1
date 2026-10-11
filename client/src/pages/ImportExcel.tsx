@@ -221,7 +221,7 @@ export default function ImportExcel() {
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl flex items-center gap-2">
-            <FileSpreadsheet className="w-6 h-6 text-purple-600" />
+            <FileSpreadsheet className="w-6 h-6 text-brand-600" />
             Import Products from Excel
           </CardTitle>
           <CardDescription>
@@ -246,11 +246,11 @@ export default function ImportExcel() {
             </Button>
           </div>
 
-          <div className="bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 rounded-lg p-4">
-            <h3 className="font-semibold text-purple-900 dark:text-purple-100 mb-2">
+          <div className="bg-brand-50 dark:bg-brand-950/30 border border-brand-200 dark:border-brand-800 rounded-lg p-4">
+            <h3 className="font-semibold text-brand-900 dark:text-brand-100 mb-2">
               Step 2: Fill Your Data
             </h3>
-            <div className="text-sm text-purple-800 dark:text-purple-200 space-y-2">
+            <div className="text-sm text-brand-800 dark:text-brand-200 space-y-2">
               <p>Open the downloaded template and fill in your product information:</p>
               <ul className="list-disc list-inside space-y-1 ml-2">
                 <li><strong>Name</strong> (required): Product name or title</li>
@@ -277,7 +277,7 @@ export default function ImportExcel() {
               <Button
                 onClick={() => document.getElementById('file-upload')?.click()}
                 disabled={isUploading || (activeJob?.status === 'processing')}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
               >
                 <Upload className="h-4 w-4 mr-2" />
                 {isUploading ? "Uploading..." : "Upload Excel File"}
@@ -399,7 +399,7 @@ export default function ImportExcel() {
                   <div 
                     key={job.id}
                     className={`p-3 rounded-lg border flex items-center justify-between cursor-pointer hover:bg-muted/50 ${
-                      activeJob?.id === job.id ? 'ring-2 ring-purple-500' : ''
+                      activeJob?.id === job.id ? 'ring-2 ring-brand-500' : ''
                     }`}
                     onClick={() => setSelectedJobId(job.id)}
                   >

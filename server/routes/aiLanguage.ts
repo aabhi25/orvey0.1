@@ -1,5 +1,5 @@
 /**
- * AI reply-language setting (Train Chroney → Language). Business users edit their own account;
+ * AI reply-language setting (Train Orvey → Language). Business users edit their own account;
  * super admins may pass ?businessAccountId=. See services/language/languagePolicy.ts.
  */
 import { Router, type Request, type Response } from "express";

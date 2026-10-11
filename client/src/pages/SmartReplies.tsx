@@ -186,7 +186,7 @@ export default function SmartReplies({ channel, headerContent }: SmartRepliesPro
               setFormData({ keywords: "", responseText: "", responseUrl: "", priority: 0, isActive: true });
               setIsDialogOpen(true);
             }}
-            className="bg-purple-600 hover:bg-purple-700"
+            className="bg-brand-600 hover:bg-brand-700"
           >
             <Plus className="w-4 h-4 mr-2" />
             Add Smart Reply
@@ -195,7 +195,7 @@ export default function SmartReplies({ channel, headerContent }: SmartRepliesPro
 
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
-            <Loader2 className="w-6 h-6 animate-spin text-purple-600" />
+            <Loader2 className="w-6 h-6 animate-spin text-brand-600" />
           </div>
         ) : sortedReplies.length === 0 ? (
           <Card>
@@ -344,7 +344,7 @@ export default function SmartReplies({ channel, headerContent }: SmartRepliesPro
             <Button
               onClick={handleSubmit}
               disabled={isSaving}
-              className="bg-purple-600 hover:bg-purple-700"
+              className="bg-brand-600 hover:bg-brand-700"
             >
               {isSaving && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
               {editingReply ? "Save Changes" : "Create"}

@@ -60,7 +60,7 @@ export function CallingPageHeader({ title, description, actions }: { title: stri
               aria-selected={active}
               onClick={() => setLocation(item.href)}
               className={`flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-sm transition-colors ${
-                active ? "bg-purple-600 text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                active ? "bg-brand-600 text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
               data-testid={`tab-${item.testId}`}
             >

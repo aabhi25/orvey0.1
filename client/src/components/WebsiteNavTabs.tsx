@@ -49,7 +49,7 @@ export default function WebsiteNavTabs({ hideHeader }: WebsiteNavTabsProps) {
         <header className="bg-white border-b px-3 py-1.5 flex items-center gap-3">
           <SidebarTrigger />
           <div className="flex items-center gap-1.5">
-            <div className="p-0.5 rounded bg-gradient-to-br from-violet-500 to-purple-600">
+            <div className="p-0.5 rounded bg-gradient-to-br from-brand-500 to-ink-600">
               <Globe className="w-3.5 h-3.5 text-white" />
             </div>
             <h1 className="text-sm font-semibold">Website</h1>
@@ -67,7 +67,7 @@ export default function WebsiteNavTabs({ hideHeader }: WebsiteNavTabsProps) {
                 onClick={() => setLocation(tab.path)}
                 className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium border-b-2 transition-colors whitespace-nowrap ${
                   isActive
-                    ? 'border-purple-500 text-purple-700'
+                    ? 'border-brand-500 text-brand-700'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >

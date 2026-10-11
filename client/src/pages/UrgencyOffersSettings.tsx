@@ -186,7 +186,7 @@ export default function UrgencyOffersSettings() {
 
           <div className="mb-8">
             <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg shadow-purple-500/20">
+              <div className="p-3 rounded-2xl bg-gradient-to-br from-brand-500 to-ink-500 shadow-lg shadow-brand-500/20">
                 <Timer className="w-6 h-6 text-white" />
               </div>
               <div className="flex-1">
@@ -204,8 +204,8 @@ export default function UrgencyOffersSettings() {
             <Card>
               <CardHeader className="pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-indigo-100 dark:bg-indigo-900/30">
-                    <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                  <div className="p-2 rounded-lg bg-brand-100 dark:bg-brand-900/30">
+                    <Sparkles className="w-4 h-4 text-brand-600 dark:text-brand-400" />
                   </div>
                   <div>
                     <CardTitle className="text-lg">Campaign Info</CardTitle>
@@ -455,8 +455,8 @@ export default function UrgencyOffersSettings() {
                   <CardHeader className="cursor-pointer hover:bg-muted/50 transition-colors rounded-t-lg">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/30">
-                          <Target className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                        <div className="p-2 rounded-lg bg-brand-100 dark:bg-brand-900/30">
+                          <Target className="w-4 h-4 text-brand-600 dark:text-brand-400" />
                         </div>
                         <div>
                           <CardTitle className="text-lg">AI Detection Settings</CardTitle>
@@ -481,11 +481,11 @@ export default function UrgencyOffersSettings() {
                           onClick={() => setForm({ ...form, triggerMode: "intent" })}
                           className={`flex items-center gap-3 p-3 rounded-xl border-2 transition-all text-left ${
                             form.triggerMode === "intent"
-                              ? "border-purple-500 bg-purple-50 dark:bg-purple-900/20"
+                              ? "border-brand-500 bg-brand-50 dark:bg-brand-900/20"
                               : "border-muted hover:border-muted-foreground/30"
                           }`}
                         >
-                          <Brain className={`w-5 h-5 ${form.triggerMode === "intent" ? "text-purple-600" : "text-muted-foreground"}`} />
+                          <Brain className={`w-5 h-5 ${form.triggerMode === "intent" ? "text-brand-600" : "text-muted-foreground"}`} />
                           <div>
                             <div className="text-sm font-medium">AI Intent</div>
                             <div className="text-xs text-muted-foreground">AI detects buying interest</div>
@@ -496,11 +496,11 @@ export default function UrgencyOffersSettings() {
                           onClick={() => setForm({ ...form, triggerMode: "keyword" })}
                           className={`flex items-center gap-3 p-3 rounded-xl border-2 transition-all text-left ${
                             form.triggerMode === "keyword"
-                              ? "border-purple-500 bg-purple-50 dark:bg-purple-900/20"
+                              ? "border-brand-500 bg-brand-50 dark:bg-brand-900/20"
                               : "border-muted hover:border-muted-foreground/30"
                           }`}
                         >
-                          <Search className={`w-5 h-5 ${form.triggerMode === "keyword" ? "text-purple-600" : "text-muted-foreground"}`} />
+                          <Search className={`w-5 h-5 ${form.triggerMode === "keyword" ? "text-brand-600" : "text-muted-foreground"}`} />
                           <div>
                             <div className="text-sm font-medium">Keyword</div>
                             <div className="text-xs text-muted-foreground">Trigger on specific words</div>
@@ -585,7 +585,7 @@ export default function UrgencyOffersSettings() {
               <Button
                 onClick={handleSave}
                 disabled={isSaving}
-                className="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg"
+                className="flex-1 bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700 text-white shadow-lg"
               >
                 {isSaving ? (
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -649,7 +649,7 @@ export default function UrgencyOffersSettings() {
 
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-4">
-            <div className="p-3 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 shadow-lg shadow-purple-500/20">
+            <div className="p-3 rounded-2xl bg-gradient-to-br from-brand-500 to-ink-500 shadow-lg shadow-brand-500/20">
               <Timer className="w-6 h-6 text-white" />
             </div>
             <div className="flex-1">
@@ -658,7 +658,7 @@ export default function UrgencyOffersSettings() {
             </div>
             <Button
               onClick={handleCreate}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg"
+              className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700 text-white shadow-lg"
             >
               <Plus className="w-4 h-4 mr-2" />
               Create Campaign
@@ -678,7 +678,7 @@ export default function UrgencyOffersSettings() {
               </p>
               <Button
                 onClick={handleCreate}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700 text-white"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Create your first campaign
@@ -700,7 +700,7 @@ export default function UrgencyOffersSettings() {
                       </div>
                       <div className="flex items-center gap-3 flex-wrap">
                         {campaign.triggerMode === 'intent' ? (
-                          <Badge variant="outline" className="border-purple-200 text-purple-700 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20">
+                          <Badge variant="outline" className="border-brand-200 text-brand-700 dark:text-brand-400 bg-brand-50 dark:bg-brand-900/20">
                             <Brain className="w-3 h-3 mr-1" />
                             AI Intent
                           </Badge>

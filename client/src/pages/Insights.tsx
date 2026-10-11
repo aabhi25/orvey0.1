@@ -345,12 +345,12 @@ export default function Insights() {
   const dynamicColorPalette = [
     { bg: "bg-blue-100", text: "text-blue-700", bar: "bg-blue-200" },
     { bg: "bg-green-100", text: "text-green-700", bar: "bg-green-200" },
-    { bg: "bg-purple-100", text: "text-purple-700", bar: "bg-purple-200" },
+    { bg: "bg-brand-100", text: "text-brand-700", bar: "bg-brand-200" },
     { bg: "bg-orange-100", text: "text-orange-700", bar: "bg-orange-200" },
     { bg: "bg-pink-100", text: "text-pink-700", bar: "bg-pink-200" },
     { bg: "bg-cyan-100", text: "text-cyan-700", bar: "bg-cyan-200" },
     { bg: "bg-yellow-100", text: "text-yellow-700", bar: "bg-yellow-200" },
-    { bg: "bg-indigo-100", text: "text-indigo-700", bar: "bg-indigo-200" },
+    { bg: "bg-brand-100", text: "text-brand-700", bar: "bg-brand-200" },
     { bg: "bg-teal-100", text: "text-teal-700", bar: "bg-teal-200" },
     { bg: "bg-rose-100", text: "text-rose-700", bar: "bg-rose-200" },
     { bg: "bg-red-100", text: "text-red-700", bar: "bg-red-200" },
@@ -397,8 +397,8 @@ export default function Insights() {
       value: totalConversations,
       icon: MessageSquare,
       description: getFilterDescription(totalConversations, 'conversations'),
-      color: "text-purple-600",
-      bgColor: "bg-purple-50",
+      color: "text-brand-600",
+      bgColor: "bg-brand-50",
     },
     {
       title: "Products Listed",
@@ -620,7 +620,7 @@ export default function Insights() {
       {accountAnalytics && (
         <div className="mb-3">
           <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-3 flex items-center gap-2">
-            <BarChart3 className="w-4 h-4 text-purple-500" />
+            <BarChart3 className="w-4 h-4 text-brand-500" />
             Conversation Funnel
           </h2>
           <div className="flex flex-col md:flex-row items-stretch gap-3">
@@ -662,18 +662,18 @@ export default function Insights() {
               <ArrowRight className="w-5 h-5 text-gray-300" />
             </div>
 
-            <Card className="border-0 shadow-sm bg-gradient-to-br from-purple-50 to-pink-50 flex-1">
+            <Card className="border-0 shadow-sm bg-gradient-to-br from-brand-50 to-ink-50 flex-1">
               <CardContent className="p-5">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-9 h-9 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <Percent className="w-5 h-5 text-purple-600" />
+                  <div className="w-9 h-9 bg-brand-100 rounded-lg flex items-center justify-center">
+                    <Percent className="w-5 h-5 text-brand-600" />
                   </div>
                   <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Conversion Rate</span>
                 </div>
-                <p className="text-3xl font-bold text-purple-700">{accountAnalytics.conversationFunnel.conversionRate}%</p>
+                <p className="text-3xl font-bold text-brand-700">{accountAnalytics.conversationFunnel.conversionRate}%</p>
                 <div className="mt-2 bg-white/60 rounded-full h-1.5">
                   <div
-                    className="bg-purple-500 h-1.5 rounded-full transition-all"
+                    className="bg-brand-500 h-1.5 rounded-full transition-all"
                     style={{ width: `${Math.min(accountAnalytics.conversationFunnel.conversionRate, 100)}%` }}
                   />
                 </div>
@@ -690,8 +690,8 @@ export default function Insights() {
           <Card className="border border-gray-100 shadow-sm bg-white overflow-hidden">
             <CardHeader className="pb-2">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <MessageSquare className="w-4.5 h-4.5 text-purple-600" />
+                <div className="w-9 h-9 bg-brand-100 rounded-lg flex items-center justify-center">
+                  <MessageSquare className="w-4.5 h-4.5 text-brand-600" />
                 </div>
                 <div>
                   <CardTitle className="text-sm font-semibold text-gray-800 uppercase tracking-wide">Conversations</CardTitle>
@@ -706,7 +706,7 @@ export default function Insights() {
                     <PieChart margin={{ top: 10, right: 40, bottom: 10, left: 40 }}>
                       <defs>
                         <filter id="shadow3dAcctConv" x="-20%" y="-20%" width="140%" height="140%">
-                          <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#7c3aed" floodOpacity="0.15" />
+                          <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#1a3878" floodOpacity="0.15" />
                         </filter>
                       </defs>
                       <Pie
@@ -753,12 +753,12 @@ export default function Insights() {
 
                   <div className="w-full grid grid-cols-2 gap-2 mt-2">
                     {[
-                      { label: 'Journey', value: accountAnalytics.conversationBreakdown.journey, pctVal: acctPct(accountAnalytics.conversationBreakdown.journey, accountAnalytics.conversationBreakdown.total), dot: 'bg-violet-500' },
+                      { label: 'Journey', value: accountAnalytics.conversationBreakdown.journey, pctVal: acctPct(accountAnalytics.conversationBreakdown.journey, accountAnalytics.conversationBreakdown.total), dot: 'bg-brand-500' },
                       { label: 'Via Form', value: accountAnalytics.conversationBreakdown.form, pctVal: acctPct(accountAnalytics.conversationBreakdown.form, accountAnalytics.conversationBreakdown.total), dot: 'bg-emerald-500' },
                       { label: 'Chat', value: accountAnalytics.conversationBreakdown.chat, pctVal: acctPct(accountAnalytics.conversationBreakdown.chat, accountAnalytics.conversationBreakdown.total), dot: 'bg-blue-500' },
                       { label: 'Discount', value: accountAnalytics.conversationBreakdown.discountAvailed, pctVal: acctPct(accountAnalytics.conversationBreakdown.discountAvailed, accountAnalytics.conversationBreakdown.total), dot: 'bg-orange-500' },
                     ].map(({ label, value, pctVal, dot }) => (
-                      <div key={label} className="flex items-center justify-between px-3 py-2 bg-gray-50 rounded-lg border border-gray-100 hover:bg-purple-50/50 transition-colors">
+                      <div key={label} className="flex items-center justify-between px-3 py-2 bg-gray-50 rounded-lg border border-gray-100 hover:bg-brand-50/50 transition-colors">
                         <div className="flex items-center gap-2 min-w-0">
                           <div className={`w-2.5 h-2.5 rounded-full ${dot} flex-shrink-0`} />
                           <span className="text-xs text-gray-600 truncate">{label}</span>
@@ -784,8 +784,8 @@ export default function Insights() {
           <Card className="border border-gray-100 shadow-sm bg-white overflow-hidden">
             <CardHeader className="pb-2">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <FileText className="w-4.5 h-4.5 text-purple-600" />
+                <div className="w-9 h-9 bg-brand-100 rounded-lg flex items-center justify-center">
+                  <FileText className="w-4.5 h-4.5 text-brand-600" />
                 </div>
                 <div>
                   <CardTitle className="text-sm font-semibold text-gray-800 uppercase tracking-wide">Lead Sources</CardTitle>
@@ -800,7 +800,7 @@ export default function Insights() {
                     <PieChart margin={{ top: 10, right: 40, bottom: 10, left: 40 }}>
                       <defs>
                         <filter id="shadow3dAcctLead" x="-20%" y="-20%" width="140%" height="140%">
-                          <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#7c3aed" floodOpacity="0.15" />
+                          <feDropShadow dx="0" dy="3" stdDeviation="3" floodColor="#1a3878" floodOpacity="0.15" />
                         </filter>
                       </defs>
                       <Pie
@@ -848,11 +848,11 @@ export default function Insights() {
                   <div className="w-full grid grid-cols-2 gap-2 mt-2">
                     {[
                       { label: 'Via Form', value: accountAnalytics.leadSources.form, pctVal: acctPct(accountAnalytics.leadSources.form, accountAnalytics.leadSources.total), dot: 'bg-emerald-500' },
-                      { label: 'Via Journey', value: accountAnalytics.leadSources.journey, pctVal: acctPct(accountAnalytics.leadSources.journey, accountAnalytics.leadSources.total), dot: 'bg-violet-500' },
+                      { label: 'Via Journey', value: accountAnalytics.leadSources.journey, pctVal: acctPct(accountAnalytics.leadSources.journey, accountAnalytics.leadSources.total), dot: 'bg-brand-500' },
                       { label: 'Chat', value: accountAnalytics.leadSources.chat, pctVal: acctPct(accountAnalytics.leadSources.chat, accountAnalytics.leadSources.total), dot: 'bg-blue-500' },
                       { label: 'Discount Availed', value: accountAnalytics.leadSources.discountAvailed, pctVal: acctPct(accountAnalytics.leadSources.discountAvailed, accountAnalytics.leadSources.total), dot: 'bg-orange-500' },
                     ].map(({ label, value, pctVal, dot }) => (
-                      <div key={label} className="flex items-center justify-between px-3 py-2 bg-gray-50 rounded-lg border border-gray-100 hover:bg-purple-50/50 transition-colors">
+                      <div key={label} className="flex items-center justify-between px-3 py-2 bg-gray-50 rounded-lg border border-gray-100 hover:bg-brand-50/50 transition-colors">
                         <div className="flex items-center gap-2 min-w-0">
                           <div className={`w-2.5 h-2.5 rounded-full ${dot} flex-shrink-0`} />
                           <span className="text-xs text-gray-600 truncate">{label}</span>
@@ -955,7 +955,7 @@ export default function Insights() {
         <CardHeader className="pb-3">
           <div>
             <CardTitle className="flex items-center gap-2 text-lg">
-              <Eye className="w-4 h-4 text-indigo-600" />
+              <Eye className="w-4 h-4 text-brand-600" />
               Visitor Insights
             </CardTitle>
             <CardDescription className="text-xs">
@@ -978,12 +978,12 @@ export default function Insights() {
             <>
             {/* Visitor Stats Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
-              <div className="p-3 bg-indigo-50 rounded-lg">
+              <div className="p-3 bg-brand-50 rounded-lg">
                 <div className="flex items-center gap-2 mb-1">
-                  <MessageSquare className="w-4 h-4 text-indigo-600" />
+                  <MessageSquare className="w-4 h-4 text-brand-600" />
                   <span className="text-xs font-medium text-gray-700">Opened Chat</span>
                 </div>
-                <p className="text-2xl font-bold text-indigo-600">{pageVisitorStats?.uniqueVisitors || 0}</p>
+                <p className="text-2xl font-bold text-brand-600">{pageVisitorStats?.uniqueVisitors || 0}</p>
               </div>
               
               <div className="p-3 bg-green-50 rounded-lg">
@@ -994,12 +994,12 @@ export default function Insights() {
                 <p className="text-2xl font-bold text-green-600">{totalConversations}</p>
               </div>
               
-              <div className="p-3 bg-purple-50 rounded-lg">
+              <div className="p-3 bg-brand-50 rounded-lg">
                 <div className="flex items-center gap-2 mb-1">
-                  <Users className="w-4 h-4 text-purple-600" />
+                  <Users className="w-4 h-4 text-brand-600" />
                   <span className="text-xs font-medium text-gray-700">Leads Generated</span>
                 </div>
-                <p className="text-2xl font-bold text-purple-600">{totalLeads}</p>
+                <p className="text-2xl font-bold text-brand-600">{totalLeads}</p>
               </div>
             </div>
 
@@ -1298,7 +1298,7 @@ export default function Insights() {
             <div className="flex items-center justify-between">
               <div>
                 <CardTitle className="flex items-center gap-2 text-lg">
-                  <Brain className="w-4 h-4 text-purple-600" />
+                  <Brain className="w-4 h-4 text-brand-600" />
                   Weekly AI Report
                 </CardTitle>
                 <CardDescription className="text-xs mt-1">
@@ -1325,7 +1325,7 @@ export default function Insights() {
           <CardContent className="pt-0">
             {(isAnalysisLoading || isRefreshingReport) ? (
               <div className="text-center py-8">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto mb-3"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-600 mx-auto mb-3"></div>
                 <p className="text-sm text-gray-600">
                   {isRefreshingReport ? 'Generating fresh AI report...' : 'Loading cached report...'}
                 </p>
@@ -1340,9 +1340,9 @@ export default function Insights() {
             ) : conversationAnalysis ? (
               <div className="space-y-3">
                 {conversationAnalysis.summary && (
-                  <div className="p-3 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-200">
+                  <div className="p-3 bg-gradient-to-r from-brand-50 to-ink-50 rounded-lg border border-brand-200">
                     <div className="flex items-start gap-2">
-                      <Sparkles className="w-4 h-4 text-purple-600 mt-0.5 flex-shrink-0" />
+                      <Sparkles className="w-4 h-4 text-brand-600 mt-0.5 flex-shrink-0" />
                       <p className="text-sm text-gray-800 leading-relaxed">{conversationAnalysis.summary}</p>
                     </div>
                   </div>
@@ -1452,16 +1452,16 @@ export default function Insights() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-                  <div className="p-3 bg-purple-50 rounded-lg">
+                  <div className="p-3 bg-brand-50 rounded-lg">
                     <div className="flex items-center gap-1.5 mb-2">
-                      <MessageSquare className="w-4 h-4 text-purple-600" />
+                      <MessageSquare className="w-4 h-4 text-brand-600" />
                       <h3 className="text-sm font-semibold text-gray-900">Common Patterns</h3>
                     </div>
                     {conversationAnalysis.commonPatterns.length > 0 ? (
                       <ul className="space-y-1">
                         {conversationAnalysis.commonPatterns.map((pattern, index) => (
                           <li key={index} className="flex items-start gap-1.5 text-xs text-gray-800">
-                            <span className="text-purple-600 mt-0.5">•</span>
+                            <span className="text-brand-600 mt-0.5">•</span>
                             <span>{pattern}</span>
                           </li>
                         ))}

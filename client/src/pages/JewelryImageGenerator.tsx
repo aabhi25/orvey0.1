@@ -553,7 +553,7 @@ export default function JewelryImageGenerator() {
     return handles.map(handle => (
       <div
         key={handle}
-        className="absolute w-2.5 h-2.5 bg-white rounded-full border border-purple-500 shadow-sm z-20 hover:scale-125 transition-transform"
+        className="absolute w-2.5 h-2.5 bg-white rounded-full border border-brand-500 shadow-sm z-20 hover:scale-125 transition-transform"
         style={handlePositions[handle]}
         onMouseDown={(e) => handleResizeStart(e, handle)}
         onTouchStart={(e) => handleResizeStart(e, handle)}
@@ -574,7 +574,7 @@ export default function JewelryImageGenerator() {
     switch (status) {
       case 'pending':
       case 'processing':
-        return <Loader2 className="w-4 h-4 animate-spin text-purple-500" />;
+        return <Loader2 className="w-4 h-4 animate-spin text-brand-500" />;
       case 'completed':
         return <CheckCircle className="w-4 h-4 text-green-500" />;
       case 'failed':
@@ -600,8 +600,8 @@ export default function JewelryImageGenerator() {
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center">
-              <Camera className="w-5 h-5 text-purple-600" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-100 to-ink-50 flex items-center justify-center">
+              <Camera className="w-5 h-5 text-brand-600" />
             </div>
             <div>
               <h1 className="text-2xl font-semibold text-gray-900">Vista Studio</h1>
@@ -612,7 +612,7 @@ export default function JewelryImageGenerator() {
             <Button
               variant={activeTab === 'create' ? 'default' : 'outline'}
               onClick={() => setActiveTab('create')}
-              className={activeTab === 'create' ? 'bg-purple-600 hover:bg-purple-700' : ''}
+              className={activeTab === 'create' ? 'bg-brand-600 hover:bg-brand-700' : ''}
             >
               <Sparkles className="w-4 h-4 mr-2" />
               Create
@@ -620,12 +620,12 @@ export default function JewelryImageGenerator() {
             <Button
               variant={activeTab === 'history' ? 'default' : 'outline'}
               onClick={() => setActiveTab('history')}
-              className={activeTab === 'history' ? 'bg-purple-600 hover:bg-purple-700' : ''}
+              className={activeTab === 'history' ? 'bg-brand-600 hover:bg-brand-700' : ''}
             >
               <History className="w-4 h-4 mr-2" />
               History
               {pendingJobsCount > 0 && (
-                <span className="ml-2 px-2 py-0.5 bg-purple-100 text-purple-700 rounded-full text-xs">
+                <span className="ml-2 px-2 py-0.5 bg-brand-100 text-brand-700 rounded-full text-xs">
                   {pendingJobsCount}
                 </span>
               )}
@@ -656,7 +656,7 @@ export default function JewelryImageGenerator() {
                           className="absolute inset-0 w-full h-full object-cover opacity-50"
                         />
                         <div className="relative z-10 bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg">
-                          <Loader2 className="w-8 h-8 animate-spin text-purple-500 mx-auto mb-2" />
+                          <Loader2 className="w-8 h-8 animate-spin text-brand-500 mx-auto mb-2" />
                           <p className="text-sm font-medium text-gray-700">Generating...</p>
                           <p className="text-xs text-gray-500">This may take 15-30 seconds</p>
                         </div>
@@ -737,7 +737,7 @@ export default function JewelryImageGenerator() {
                             variant="ghost"
                             onClick={() => handleRetryJob(job.id)}
                             disabled={retryingJobId === job.id}
-                            className="text-purple-500 hover:text-purple-600 hover:bg-purple-50"
+                            className="text-brand-500 hover:text-brand-600 hover:bg-brand-50"
                             title="Retry generation"
                           >
                             {retryingJobId === job.id ? (
@@ -780,9 +780,9 @@ export default function JewelryImageGenerator() {
                 <div
                   className={`flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300 ${
                     currentStep > step.id
-                      ? 'bg-purple-500 text-white'
+                      ? 'bg-brand-500 text-white'
                       : currentStep === step.id
-                      ? 'bg-purple-100 border-2 border-purple-500 text-purple-600'
+                      ? 'bg-brand-100 border-2 border-brand-500 text-brand-600'
                       : 'bg-gray-100 text-gray-400'
                   }`}
                   title={step.title}
@@ -796,7 +796,7 @@ export default function JewelryImageGenerator() {
                 {index < STEPS.length - 1 && (
                   <div
                     className={`w-8 h-0.5 mx-1 transition-colors duration-300 ${
-                      currentStep > step.id ? 'bg-purple-500' : 'bg-gray-200'
+                      currentStep > step.id ? 'bg-brand-500' : 'bg-gray-200'
                     }`}
                   />
                 )}
@@ -811,7 +811,7 @@ export default function JewelryImageGenerator() {
               className={`relative rounded-xl transition-all duration-300 cursor-pointer group ${
                 uploadedImage 
                   ? 'bg-gray-50' 
-                  : 'bg-gray-50 hover:bg-gray-100 border-2 border-dashed border-gray-200 hover:border-purple-300'
+                  : 'bg-gray-50 hover:bg-gray-100 border-2 border-dashed border-gray-200 hover:border-brand-300'
               }`}
               style={{ minHeight: uploadedImage ? 'auto' : '280px' }}
               onDragOver={(e) => e.preventDefault()}
@@ -838,8 +838,8 @@ export default function JewelryImageGenerator() {
                 </div>
               ) : (
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-8">
-                  <div className="w-14 h-14 rounded-full bg-purple-100 flex items-center justify-center mb-4 group-hover:bg-purple-200 transition-colors">
-                    <Upload className="w-6 h-6 text-purple-600" />
+                  <div className="w-14 h-14 rounded-full bg-brand-100 flex items-center justify-center mb-4 group-hover:bg-brand-200 transition-colors">
+                    <Upload className="w-6 h-6 text-brand-600" />
                   </div>
                   <p className="text-gray-700 font-medium mb-1">
                     Drop your image here
@@ -897,7 +897,7 @@ export default function JewelryImageGenerator() {
                 />
                 {cropBox && (
                   <div
-                    className="absolute border-2 border-purple-500 bg-transparent cursor-move shadow-lg"
+                    className="absolute border-2 border-brand-500 bg-transparent cursor-move shadow-lg"
                     style={{
                       left: `${cropBox.x}%`,
                       top: `${cropBox.y}%`,
@@ -931,8 +931,8 @@ export default function JewelryImageGenerator() {
                         key={category.id}
                         className={`relative cursor-pointer rounded-xl p-4 transition-all duration-300 ${
                           isSelected
-                            ? 'bg-purple-50 border-2 border-purple-500 shadow-md'
-                            : 'bg-gray-50 border-2 border-gray-200 hover:border-purple-300 hover:bg-purple-50/50'
+                            ? 'bg-brand-50 border-2 border-brand-500 shadow-md'
+                            : 'bg-gray-50 border-2 border-gray-200 hover:border-brand-300 hover:bg-brand-50/50'
                         }`}
                         onClick={() => {
                           setSelectedCategory(category.id);
@@ -943,19 +943,19 @@ export default function JewelryImageGenerator() {
                       >
                         <div className="flex flex-col items-center text-center gap-2">
                           <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                            isSelected ? 'bg-purple-500 text-white' : 'bg-gray-200 text-gray-600'
+                            isSelected ? 'bg-brand-500 text-white' : 'bg-gray-200 text-gray-600'
                           }`}>
                             <IconComponent className="w-5 h-5" />
                           </div>
                           <div>
-                            <p className={`font-medium text-sm ${isSelected ? 'text-purple-700' : 'text-gray-900'}`}>
+                            <p className={`font-medium text-sm ${isSelected ? 'text-brand-700' : 'text-gray-900'}`}>
                               {category.name}
                             </p>
                             <p className="text-xs text-gray-500 mt-0.5">{category.description}</p>
                           </div>
                         </div>
                         {isSelected && (
-                          <div className="absolute top-2 right-2 w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center">
+                          <div className="absolute top-2 right-2 w-5 h-5 bg-brand-500 rounded-full flex items-center justify-center">
                             <Check className="w-3 h-3 text-white" />
                           </div>
                         )}
@@ -978,8 +978,8 @@ export default function JewelryImageGenerator() {
                           key={style.id}
                           className={`relative cursor-pointer rounded-xl overflow-hidden transition-all duration-300 group ${
                             isSelected
-                              ? 'ring-2 ring-purple-500 shadow-lg'
-                              : 'border border-gray-200 hover:border-purple-300 hover:shadow-md'
+                              ? 'ring-2 ring-brand-500 shadow-lg'
+                              : 'border border-gray-200 hover:border-brand-300 hover:shadow-md'
                           }`}
                           onClick={async () => {
                             setSelectedStyle(style.id);
@@ -1011,7 +1011,7 @@ export default function JewelryImageGenerator() {
                               />
                             )}
                             {isSelected && (
-                              <div className="absolute top-2 right-2 w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center">
+                              <div className="absolute top-2 right-2 w-6 h-6 bg-brand-500 rounded-full flex items-center justify-center">
                                 <Check className="w-3.5 h-3.5 text-white" />
                               </div>
                             )}
@@ -1036,7 +1036,7 @@ export default function JewelryImageGenerator() {
                     onClick={() => setShowPromptEditor(!showPromptEditor)}
                   >
                     <div className="flex items-center gap-2">
-                      <Edit3 className="w-4 h-4 text-purple-600" />
+                      <Edit3 className="w-4 h-4 text-brand-600" />
                       <span className="text-sm font-medium text-gray-700">
                         AI Prompt
                       </span>
@@ -1056,7 +1056,7 @@ export default function JewelryImageGenerator() {
                       <textarea
                         value={customPrompt}
                         onChange={(e) => setCustomPrompt(e.target.value.slice(0, 1000))}
-                        className="w-full h-32 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+                        className="w-full h-32 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"
                         placeholder="Describe how you want the jewelry to be displayed..."
                       />
                       <div className="flex items-center justify-between">
@@ -1081,7 +1081,7 @@ export default function JewelryImageGenerator() {
                               }
                             }
                           }}
-                          className="text-purple-600 hover:text-purple-700 hover:bg-purple-50"
+                          className="text-brand-600 hover:text-brand-700 hover:bg-brand-50"
                         >
                           <RotateCcw className="w-3 h-3 mr-1" />
                           Reset to default
@@ -1105,27 +1105,27 @@ export default function JewelryImageGenerator() {
                   return (
                     <div className="py-12">
                       <div className="relative w-24 h-24 mx-auto mb-6">
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 animate-pulse opacity-30" />
-                        <div className="absolute inset-2 rounded-full bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center">
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-brand-400 to-ink-600 animate-pulse opacity-30" />
+                        <div className="absolute inset-2 rounded-full bg-gradient-to-br from-brand-100 to-ink-200 flex items-center justify-center">
                           <div className="relative">
-                            <Sparkles className="w-10 h-10 text-purple-600 animate-pulse" />
+                            <Sparkles className="w-10 h-10 text-brand-600 animate-pulse" />
                             <div className="absolute inset-0 animate-spin" style={{ animationDuration: '3s' }}>
-                              <div className="absolute top-0 left-1/2 w-1 h-1 bg-purple-500 rounded-full transform -translate-x-1/2 -translate-y-2" />
+                              <div className="absolute top-0 left-1/2 w-1 h-1 bg-brand-500 rounded-full transform -translate-x-1/2 -translate-y-2" />
                             </div>
                           </div>
                         </div>
-                        <div className="absolute inset-0 rounded-full border-2 border-purple-300 border-t-purple-600 animate-spin" style={{ animationDuration: '1.5s' }} />
+                        <div className="absolute inset-0 rounded-full border-2 border-brand-300 border-t-brand-600 animate-spin" style={{ animationDuration: '1.5s' }} />
                       </div>
                       <p className="text-lg text-gray-700 font-medium mb-2">
                         AI is creating your image...
                       </p>
                       <p className="text-sm text-gray-500 mb-4">
-                        Chroney Vista is generating professional product photography
+                        Orvey Vista is generating professional product photography
                       </p>
                       <div className="max-w-xs mx-auto">
                         <div className="relative h-2 bg-gray-200 rounded-full overflow-hidden">
                           <div 
-                            className="absolute inset-y-0 left-0 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full transition-all duration-500"
+                            className="absolute inset-y-0 left-0 bg-gradient-to-r from-brand-500 to-ink-600 rounded-full transition-all duration-500"
                             style={{ width: `${generationProgress}%` }}
                           />
                           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
@@ -1173,7 +1173,7 @@ export default function JewelryImageGenerator() {
                       <div className="flex items-center justify-center gap-3 pt-2">
                         <Button 
                           onClick={handleDownload} 
-                          className="bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white px-6"
+                          className="bg-gradient-to-r from-brand-600 to-ink-500 hover:from-brand-700 hover:to-ink-600 text-white px-6"
                         >
                           <Download className="w-4 h-4 mr-2" />
                           Download
@@ -1213,7 +1213,7 @@ export default function JewelryImageGenerator() {
               <Button
                 onClick={handleGenerate}
                 disabled={!canProceed()}
-                className="bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white px-6 disabled:opacity-40"
+                className="bg-gradient-to-r from-brand-600 to-ink-500 hover:from-brand-700 hover:to-ink-600 text-white px-6 disabled:opacity-40"
               >
                 Generate Image
                 <Sparkles className="w-4 h-4 ml-2" />
@@ -1222,7 +1222,7 @@ export default function JewelryImageGenerator() {
               <Button
                 onClick={() => setCurrentStep(Math.min(4, currentStep + 1))}
                 disabled={!canProceed()}
-                className="bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white px-6 disabled:opacity-40"
+                className="bg-gradient-to-r from-brand-600 to-ink-500 hover:from-brand-700 hover:to-ink-600 text-white px-6 disabled:opacity-40"
               >
                 Continue
                 <ArrowRight className="w-4 h-4 ml-2" />

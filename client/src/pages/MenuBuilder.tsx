@@ -181,7 +181,7 @@ function CustomFieldRow({
       <div className="flex items-center justify-between py-2 px-3">
         <div className="flex items-center gap-2 min-w-0">
           <span className="text-sm text-gray-800 truncate">{field.label}</span>
-          <span className="text-xs px-1.5 py-0.5 bg-purple-100 text-purple-700 rounded capitalize shrink-0">{field.fieldType}</span>
+          <span className="text-xs px-1.5 py-0.5 bg-brand-100 text-brand-700 rounded capitalize shrink-0">{field.fieldType}</span>
           {field.required && <span className="text-xs text-red-500 shrink-0">Required</span>}
           {gateCount > 0 && (
             <span
@@ -206,7 +206,7 @@ function CustomFieldRow({
             type="button"
             onClick={() => (editOpen ? setEditOpen(false) : openEditor())}
             title="Edit field"
-            className={`p-1 rounded transition-colors ${editOpen ? 'text-purple-700 bg-purple-100' : 'text-gray-400 hover:text-purple-600'}`}
+            className={`p-1 rounded transition-colors ${editOpen ? 'text-brand-700 bg-brand-100' : 'text-gray-400 hover:text-brand-600'}`}
           >
             <Pencil className="w-3.5 h-3.5" />
           </button>
@@ -421,8 +421,8 @@ export default function MenuBuilder() {
     queryKey: ["/api/journeys"],
   });
 
-  const chatColor = widgetSettings?.chatColor || "#9333ea";
-  const chatColorEnd = widgetSettings?.chatColorEnd || "#3b82f6";
+  const chatColor = widgetSettings?.chatColor || "#1f4596";
+  const chatColorEnd = widgetSettings?.chatColorEnd || "#0a1530";
 
   // Initialize all local text fields from config
   useEffect(() => {
@@ -857,7 +857,7 @@ export default function MenuBuilder() {
                         })()}
 
                         {showAddCustomField ? (
-                          <div className="mt-2 p-3 border border-purple-200 rounded-lg bg-purple-50 space-y-3">
+                          <div className="mt-2 p-3 border border-brand-200 rounded-lg bg-brand-50 space-y-3">
                             <div>
                               <label className="text-xs font-medium text-gray-700 block mb-1">Field Label</label>
                               <Input
@@ -908,7 +908,7 @@ export default function MenuBuilder() {
                                   const opts = newCustomField.options.split('\n').map(o => o.trim()).filter(Boolean);
                                   if (opts.length === 0) return null;
                                   return (
-                                    <div className="pt-1 border-t border-purple-200">
+                                    <div className="pt-1 border-t border-brand-200">
                                       <label className="text-xs font-medium text-gray-700 block mb-1">Send to LeadSquared only for</label>
                                       <p className="text-[11px] text-muted-foreground mb-2">
                                         Leave all unchecked to send every lead. Tick options to only push leads with those answers.
@@ -988,7 +988,7 @@ export default function MenuBuilder() {
                           <button
                             type="button"
                             onClick={() => setShowAddCustomField(true)}
-                            className="flex items-center gap-1.5 text-sm text-purple-600 hover:text-purple-800 font-medium mt-1"
+                            className="flex items-center gap-1.5 text-sm text-brand-600 hover:text-brand-800 font-medium mt-1"
                           >
                             <Plus className="w-4 h-4" />
                             Add Custom Field
@@ -1491,7 +1491,7 @@ export default function MenuBuilder() {
                               })()}
 
                               {showItemAddCustomField ? (
-                                <div className="mt-2 p-3 border border-purple-200 rounded-lg bg-purple-50 space-y-3">
+                                <div className="mt-2 p-3 border border-brand-200 rounded-lg bg-brand-50 space-y-3">
                                   <div>
                                     <label className="text-xs font-medium text-gray-700 block mb-1">Field Label</label>
                                     <Input
@@ -1541,7 +1541,7 @@ export default function MenuBuilder() {
                                         const opts = newItemCustomField.options.split('\n').map(o => o.trim()).filter(Boolean);
                                         if (opts.length === 0) return null;
                                         return (
-                                          <div className="pt-1 border-t border-purple-200">
+                                          <div className="pt-1 border-t border-brand-200">
                                             <label className="text-xs font-medium text-gray-700 block mb-1">Send to LeadSquared only for</label>
                                             <p className="text-[11px] text-muted-foreground mb-2">
                                               Leave all unchecked to send every lead.
@@ -1625,7 +1625,7 @@ export default function MenuBuilder() {
                                 <button
                                   type="button"
                                   onClick={() => setShowItemAddCustomField(true)}
-                                  className="flex items-center gap-1.5 text-sm text-purple-600 hover:text-purple-800 font-medium mt-1"
+                                  className="flex items-center gap-1.5 text-sm text-brand-600 hover:text-brand-800 font-medium mt-1"
                                 >
                                   <Plus className="w-4 h-4" />
                                   Add Custom Field

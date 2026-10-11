@@ -885,7 +885,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hi Chroney Widget</title>
+  <title>Orvey Widget</title>
   <style>
     * {
       margin: 0;
@@ -4424,7 +4424,7 @@ Return JSON:
   // CAPTCHA settings (per-business reCAPTCHA v2 secret key)
   // ==========================================================
   // The public site key + enabled toggle live in leadTrainingConfig (managed by
-  // the lead-config endpoint / Train Chroney mobile field). This endpoint only
+  // the lead-config endpoint / Train Orvey mobile field). This endpoint only
   // handles the sensitive secret key (AES-256-GCM encrypted on widget_settings).
   // GET never returns the raw secret — only whether one is configured + a mask.
   app.get("/api/admin/captcha-settings", requireAuth, requireBusinessAccount, async (req, res) => {
@@ -9518,7 +9518,7 @@ Return ONLY the refined instruction, nothing else.`
   // Helper function for rotating intro messages (Phase 1 optimization)
   const getRandomIntroMessage = () => {
     const introMessages = [
-      // The assistant speaks for the business it is installed on — never "Chroney" (the software).
+      // The assistant speaks for the business it is installed on — never "Orvey" (the software).
       "Hey there! I'm your AI assistant. I can help with products, FAQs, and more. What brings you here today?",
       "Hi! I know our products inside out and can answer your questions. How can I help?",
       "Hello! Need product info or have a question? Just ask!",
@@ -27625,7 +27625,7 @@ Be constructive and helpful. Return ONLY valid JSON.`;
       const { id } = req.params;
       await storage.deleteAnalyzedPage(id, businessAccountId);
       
-      // Invalidate business context cache so Chroney doesn't use deleted page
+      // Invalidate business context cache so Orvey doesn't use deleted page
       businessContextCache.invalidateBusinessContext(businessAccountId);
       
       res.json({ success: true, message: "Analyzed page deleted successfully" });

@@ -1024,7 +1024,7 @@ export default function SuperAdminApiKeys() {
                 <div className="border-t pt-4">
                   <Label className="text-sm font-medium mb-2 block">Google AI API Key</Label>
                   <p className="text-xs text-gray-500 mb-3">
-                    Get the API key from <a href="https://aistudio.google.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 hover:underline">Google AI Studio</a>
+                    Get the API key from <a href="https://aistudio.google.com" target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:underline">Google AI Studio</a>
                   </p>
                   <div className="flex gap-2">
                     <div className="relative flex-1">
@@ -1101,9 +1101,9 @@ export default function SuperAdminApiKeys() {
           </Card>
 
           <Card className="shadow-lg border-gray-200">
-            <CardHeader className="border-b bg-gradient-to-r from-indigo-50 to-blue-50 py-4">
+            <CardHeader className="border-b bg-gradient-to-r from-brand-50 to-ink-50 py-4">
               <CardTitle className="text-base flex items-center gap-2">
-                <Cpu className="w-4 h-4 text-indigo-600" />
+                <Cpu className="w-4 h-4 text-brand-600" />
                 Visual Search Engine
               </CardTitle>
               <CardDescription className="mt-1">
@@ -1122,7 +1122,7 @@ export default function SuperAdminApiKeys() {
                     className={cn(
                       "flex items-start space-x-3 p-4 rounded-lg border-2 cursor-pointer transition-all",
                       visualSearchModel === 'google_vision_warehouse' 
-                        ? "border-indigo-500 bg-indigo-50/50" 
+                        ? "border-brand-500 bg-brand-50/50" 
                         : "border-gray-200 hover:border-gray-300"
                     )}
                     onClick={() => handleVisualSearchModelChange('google_vision_warehouse')}
@@ -1423,7 +1423,7 @@ export default function SuperAdminApiKeys() {
                       value={vwCredentialsJson}
                       onChange={(e) => setVwCredentialsJson(e.target.value)}
                       placeholder='Paste your service account JSON here...'
-                      className="w-full h-32 p-3 text-xs font-mono border rounded-lg resize-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      className="w-full h-32 p-3 text-xs font-mono border rounded-lg resize-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
                     />
                   </div>
                   
@@ -1569,7 +1569,7 @@ export default function SuperAdminApiKeys() {
         <Card>
           <CardContent className="flex items-center justify-center py-12">
             <div className="text-center">
-              <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+              <div className="w-12 h-12 border-4 border-brand-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
               <p className="text-muted-foreground">Loading settings...</p>
             </div>
           </CardContent>

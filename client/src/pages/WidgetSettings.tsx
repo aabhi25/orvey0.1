@@ -284,7 +284,7 @@ function WhatsappNumberField({
           type="button"
           variant="ghost"
           size="sm"
-          className="h-auto p-0 mt-1 text-xs text-purple-700 hover:bg-transparent hover:underline"
+          className="h-auto p-0 mt-1 text-xs text-brand-700 hover:bg-transparent hover:underline"
           onClick={() => { onChange(""); onSave(""); setCustom(false); }}
           data-testid={`${testId}-use-connected`}
         >
@@ -411,13 +411,13 @@ function ElevenLabsVoiceBrowser({
     <div className="border-t pt-4 mt-4">
       <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-1.5">
         ElevenLabs Voices
-        <span className="text-[10px] font-medium text-purple-600 bg-purple-100 px-1.5 py-0.5 rounded-full normal-case tracking-normal">Premium</span>
+        <span className="text-[10px] font-medium text-brand-600 bg-brand-100 px-1.5 py-0.5 rounded-full normal-case tracking-normal">Premium</span>
       </p>
 
       {selectedElVoiceName && (
-        <div className="mb-3 p-3 rounded-lg bg-purple-50 border border-purple-200 flex items-center gap-2">
-          <Check className="w-4 h-4 text-purple-600" />
-          <span className="text-sm text-purple-800">Selected: <strong>{selectedElVoiceName}</strong></span>
+        <div className="mb-3 p-3 rounded-lg bg-brand-50 border border-brand-200 flex items-center gap-2">
+          <Check className="w-4 h-4 text-brand-600" />
+          <span className="text-sm text-brand-800">Selected: <strong>{selectedElVoiceName}</strong></span>
         </div>
       )}
 
@@ -483,8 +483,8 @@ function ElevenLabsVoiceBrowser({
               key={voice.voice_id}
               className={`flex items-start space-x-3 rounded-xl border-2 p-3 transition-all cursor-pointer ${
                 voiceSelection === elId
-                  ? "border-purple-500 bg-purple-50/50 shadow-md"
-                  : "border-gray-200 hover:border-purple-300 bg-white"
+                  ? "border-brand-500 bg-brand-50/50 shadow-md"
+                  : "border-gray-200 hover:border-brand-300 bg-white"
               }`}
               onClick={() => setVoiceSelection(elId)}
             >
@@ -511,8 +511,8 @@ function ElevenLabsVoiceBrowser({
                 disabled={!voice.preview_url || (playingVoice !== null && playingVoice !== `el:${voice.voice_id}`)}
                 className={`p-1.5 rounded-lg transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0 ${
                   playingVoice === `el:${voice.voice_id}`
-                    ? "bg-purple-500 text-white shadow-lg"
-                    : "bg-gray-100 hover:bg-purple-100 text-gray-700 hover:text-purple-700"
+                    ? "bg-brand-500 text-white shadow-lg"
+                    : "bg-gray-100 hover:bg-brand-100 text-gray-700 hover:text-brand-700"
                 }`}
                 title={!voice.preview_url ? "No preview available" : (playingVoice === `el:${voice.voice_id}` ? "Stop preview" : "Play voice sample")}
               >
@@ -531,7 +531,7 @@ function ElevenLabsVoiceBrowser({
         <button
           onClick={() => setElNextSortId(elVoicesQuery.data!.last_sort_id)}
           disabled={elVoicesQuery.isFetching}
-          className="w-full mt-3 py-2 text-sm text-purple-600 hover:text-purple-800 hover:bg-purple-50 rounded-lg border border-purple-200 transition-all disabled:opacity-50"
+          className="w-full mt-3 py-2 text-sm text-brand-600 hover:text-brand-800 hover:bg-brand-50 rounded-lg border border-brand-200 transition-all disabled:opacity-50"
         >
           {elVoicesQuery.isFetching ? (
             <span className="flex items-center justify-center gap-2"><Loader2 className="w-4 h-4 animate-spin" />Loading...</span>
@@ -553,9 +553,9 @@ function ElevenLabsVoiceBrowser({
 export default function WidgetSettings() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const [chatColor, setChatColor] = useState("#9333ea");
-  const [chatColorEnd, setChatColorEnd] = useState("#3b82f6");
-  const [widgetHeaderText, setWidgetHeaderText] = useState("Hi Chroney");
+  const [chatColor, setChatColor] = useState("#1f4596");
+  const [chatColorEnd, setChatColorEnd] = useState("#0a1530");
+  const [widgetHeaderText, setWidgetHeaderText] = useState("Orvey");
   const [welcomeMessageType, setWelcomeMessageType] = useState("custom");
   const [welcomeMessage, setWelcomeMessage] = useState("Hi! How can I help you today?");
   const [buttonStyle, setButtonStyle] = useState("circular");
@@ -626,8 +626,8 @@ export default function WidgetSettings() {
   const [centerBannerButtonText, setCenterBannerButtonText] = useState("Start Chat");
   const [centerBannerShowOnce, setCenterBannerShowOnce] = useState(true);
   const [centerBannerBackgroundStyle, setCenterBannerBackgroundStyle] = useState("gradient");
-  const [centerBannerStartColor, setCenterBannerStartColor] = useState("#9333ea");
-  const [centerBannerEndColor, setCenterBannerEndColor] = useState("#3b82f6");
+  const [centerBannerStartColor, setCenterBannerStartColor] = useState("#1f4596");
+  const [centerBannerEndColor, setCenterBannerEndColor] = useState("#0a1530");
   const [centerBannerTextColor, setCenterBannerTextColor] = useState("white");
   const [centerBannerImageUrl, setCenterBannerImageUrl] = useState<string | null>(null);
   
@@ -734,8 +734,8 @@ export default function WidgetSettings() {
   useEffect(() => {
     if (settings) {
       setChatColor(settings.chatColor);
-      setChatColorEnd(settings.chatColorEnd || "#3b82f6");
-      setWidgetHeaderText(settings.widgetHeaderText || "Hi Chroney");
+      setChatColorEnd(settings.chatColorEnd || "#0a1530");
+      setWidgetHeaderText(settings.widgetHeaderText || "Orvey");
       setWelcomeMessageType(settings.welcomeMessageType || "custom");
       setWelcomeMessage(settings.welcomeMessage);
       setButtonStyle(settings.buttonStyle || "circular");
@@ -799,8 +799,8 @@ export default function WidgetSettings() {
       setCenterBannerButtonText(settings.centerBannerButtonText || "Start Chat");
       setCenterBannerShowOnce(settings.centerBannerShowOnce !== 'false');
       setCenterBannerBackgroundStyle(settings.centerBannerBackgroundStyle || "gradient");
-      setCenterBannerStartColor(settings.centerBannerStartColor || "#9333ea");
-      setCenterBannerEndColor(settings.centerBannerEndColor || "#3b82f6");
+      setCenterBannerStartColor(settings.centerBannerStartColor || "#1f4596");
+      setCenterBannerEndColor(settings.centerBannerEndColor || "#0a1530");
       setCenterBannerTextColor(settings.centerBannerTextColor || "white");
       setCenterBannerImageUrl(settings.centerBannerImageUrl || null);
       
@@ -1000,8 +1000,8 @@ export default function WidgetSettings() {
       centerBannerButtonText !== (settings.centerBannerButtonText || "Start Chat") ||
       (centerBannerShowOnce ? "true" : "false") !== (settings.centerBannerShowOnce || "true") ||
       centerBannerBackgroundStyle !== (settings.centerBannerBackgroundStyle || "gradient") ||
-      centerBannerStartColor !== (settings.centerBannerStartColor || "#9333ea") ||
-      centerBannerEndColor !== (settings.centerBannerEndColor || "#3b82f6") ||
+      centerBannerStartColor !== (settings.centerBannerStartColor || "#1f4596") ||
+      centerBannerEndColor !== (settings.centerBannerEndColor || "#0a1530") ||
       centerBannerTextColor !== (settings.centerBannerTextColor || "white") ||
       centerBannerImageUrl !== (settings.centerBannerImageUrl || null) ||
       (reengagementBannerEnabled ? "true" : "false") !== (settings.reengagementBannerEnabled || "false") ||
@@ -1223,7 +1223,7 @@ export default function WidgetSettings() {
   const businessName = settings?.businessName || '';
   const businessWebsite = settings?.businessWebsite || '';
   
-  const embedCode = `<!-- AI Chroney Widget -->
+  const embedCode = `<!-- Orvey Widget -->
 <!-- Business: ${businessName}${businessWebsite ? ` | Website: ${businessWebsite}` : ''} -->
 <script src="${widgetDomain}/widget-loader.js" data-business-id="${businessId}"></script>`;
 
@@ -1248,7 +1248,7 @@ export default function WidgetSettings() {
   // mandatory and the tutor refuses to answer when it is missing. data-chapter is
   // OPTIONAL — when supplied it narrows answers to a single chapter on top of the
   // subject; omit it for whole-subject scope.
-  const k12EmbedCode = `<!-- AI Chroney Widget (subject-scoped for student portals) -->
+  const k12EmbedCode = `<!-- Orvey Widget (subject-scoped for student portals) -->
 <!-- Replace the placeholders with the logged-in student's values from your portal -->
 <!-- All scope attributes are required — data-subject is mandatory -->
 <!-- data-chapter is optional — it narrows answers to one chapter; omit for whole-subject -->
@@ -1274,7 +1274,7 @@ export default function WidgetSettings() {
   // signed token" is enabled. Your portal builds the token on its server with the
   // shared secret; include `chapter` in the signed payload to narrow answers to a
   // single chapter (omit it for whole-subject scope).
-  const k12SecureEmbedCode = `<!-- AI Chroney Widget (secure mode — server-signed launch token) -->
+  const k12SecureEmbedCode = `<!-- Orvey Widget (secure mode — server-signed launch token) -->
 <!-- Build the token on YOUR server (see the integration guide in TopScholar admin) -->
 <!-- The token seals board, medium, grade, subject, chapter (optional), studentId and name -->
 <!-- INLINE MODE (optional): add data-mode="inline" + data-container="ai-tutor" to -->
@@ -1289,7 +1289,7 @@ export default function WidgetSettings() {
   // the configured staging origin instead of production. Embed this on your staging portal
   // so every chat request hits the dev server — logs, doubt sync, and token issues can
   // all be diagnosed in real time before switching to the production snippet.
-  const k12DevSecureEmbedCode = `<!-- AI Chroney Widget — STAGING ONLY -->
+  const k12DevSecureEmbedCode = `<!-- Orvey Widget — STAGING ONLY -->
  <!-- Use on your staging portal — swap for the Secure Embed Code above in production -->
 <!-- Build the signed token on your server exactly as you would for production -->
  <script src="${widgetDomain}/widget-loader.js" data-business-id="${businessId}"
@@ -1778,9 +1778,9 @@ export default function WidgetSettings() {
 
   if (isLoading) {
     return (
-      <div className="flex-1 overflow-auto bg-gradient-to-br from-gray-50 via-purple-50/30 to-blue-50/30 flex items-center justify-center">
+      <div className="flex-1 overflow-auto bg-gradient-to-br from-gray-50 via-brand-50/30 to-blue-50/30 flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="w-8 h-8 animate-spin text-purple-600 mx-auto mb-3" />
+          <Loader2 className="w-8 h-8 animate-spin text-brand-600 mx-auto mb-3" />
           <p className="text-sm text-gray-600">Loading widget settings...</p>
         </div>
       </div>
@@ -1788,14 +1788,14 @@ export default function WidgetSettings() {
   }
 
   return (
-    <div className="flex-1 overflow-auto bg-gradient-to-br from-gray-50 via-purple-50/30 to-blue-50/30">
+    <div className="flex-1 overflow-auto bg-gradient-to-br from-gray-50 via-brand-50/30 to-blue-50/30">
       <div className="container mx-auto p-4 md:p-6 max-w-[1600px]">
         {/* Header */}
         <div className="mb-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent flex items-center gap-3">
-                <Wand2 className="w-8 h-8 text-purple-600" />
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-brand-600 to-ink-600 bg-clip-text text-transparent flex items-center gap-3">
+                <Wand2 className="w-8 h-8 text-brand-600" />
                 Widget Studio
               </h1>
               <p className="text-muted-foreground mt-2 text-sm">
@@ -1829,32 +1829,32 @@ export default function WidgetSettings() {
 
         {/* Tabs Component - TabsList always full width */}
         <Tabs defaultValue="appearance" className="w-full" value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-6 bg-gradient-to-r from-purple-50 to-white backdrop-blur-sm shadow-md h-auto p-1 rounded-xl mb-6">
-            <TabsTrigger value="appearance" className="flex items-center gap-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+          <TabsList className="grid w-full grid-cols-6 bg-gradient-to-r from-brand-50 to-white backdrop-blur-sm shadow-md h-auto p-1 rounded-xl mb-6">
+            <TabsTrigger value="appearance" className="flex items-center gap-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
               <Palette className="w-4 h-4" />
               <span className="hidden sm:inline">Style</span>
             </TabsTrigger>
-            <TabsTrigger value="behavior" className="flex items-center gap-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+            <TabsTrigger value="behavior" className="flex items-center gap-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
               <Settings2 className="w-4 h-4" />
               <span className="hidden sm:inline">Behavior</span>
             </TabsTrigger>
-            <TabsTrigger value="nudges" className="flex items-center gap-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+            <TabsTrigger value="nudges" className="flex items-center gap-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
               <Bell className="w-4 h-4" />
               <span className="hidden sm:inline">Nudges</span>
             </TabsTrigger>
-            <TabsTrigger value="voice" className="flex items-center gap-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+            <TabsTrigger value="voice" className="flex items-center gap-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
               <Volume2 className="w-4 h-4" />
               <span className="hidden sm:inline">Voice</span>
             </TabsTrigger>
-            <TabsTrigger value="avatar" className="flex items-center gap-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+            <TabsTrigger value="avatar" className="flex items-center gap-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
               <User className="w-4 h-4" />
               <span className="hidden sm:inline">Avatar</span>
             </TabsTrigger>
-            <TabsTrigger value="shopping" className="flex items-center gap-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+            <TabsTrigger value="shopping" className="flex items-center gap-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
               <ShoppingCart className="w-4 h-4" />
               <span className="hidden sm:inline">Shopping</span>
             </TabsTrigger>
-            <TabsTrigger value="embed" className="flex items-center gap-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+            <TabsTrigger value="embed" className="flex items-center gap-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
               <Code2 className="w-4 h-4" />
               <span className="hidden sm:inline">Embed</span>
             </TabsTrigger>
@@ -1867,7 +1867,7 @@ export default function WidgetSettings() {
               {/* Style Tab */}
               <TabsContent value="appearance" className="space-y-4 mt-4">
                 <Card className="shadow-lg border border-gray-200 bg-white">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg">Colors & Branding</CardTitle>
                     <CardDescription>Customize colors to match your brand</CardDescription>
                   </CardHeader>
@@ -1882,7 +1882,7 @@ export default function WidgetSettings() {
                         type="text"
                         value={widgetHeaderText}
                         onChange={(e) => setWidgetHeaderText(e.target.value)}
-                        placeholder="Hi Chroney"
+                        placeholder="Orvey"
                         maxLength={30}
                         className="text-base"
                       />
@@ -1917,7 +1917,7 @@ export default function WidgetSettings() {
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
                         <div>
-                          <Label className="text-sm font-semibold text-gray-700">Powered by AI Chroney</Label>
+                          <Label className="text-sm font-semibold text-gray-700">Powered by Orvey</Label>
                           <p className="text-xs text-gray-500 mt-0.5">Show branding badge at the bottom of the widget</p>
                         </div>
                         <Switch
@@ -1945,8 +1945,8 @@ export default function WidgetSettings() {
                             onClick={() => setChatFontSize(opt.id)}
                             className={`rounded-lg border-2 py-2 transition-all ${
                               chatFontSize === opt.id
-                                ? "border-purple-500 bg-purple-50/50 text-purple-700 shadow-sm"
-                                : "border-gray-200 hover:border-purple-300 text-gray-600 bg-white"
+                                ? "border-brand-500 bg-brand-50/50 text-brand-700 shadow-sm"
+                                : "border-gray-200 hover:border-brand-300 text-gray-600 bg-white"
                             }`}
                             data-testid={`button-font-size-${opt.id}`}
                           >
@@ -1979,7 +1979,7 @@ export default function WidgetSettings() {
                               type="text"
                               value={chatColor}
                               onChange={(e) => setChatColor(e.target.value)}
-                              placeholder="#9333ea"
+                              placeholder="#1f4596"
                               className="flex-1 text-sm font-mono"
                             />
                           </div>
@@ -2025,7 +2025,7 @@ export default function WidgetSettings() {
                 </Card>
 
                 <Card className="shadow-lg border border-gray-200 bg-white">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg">Button Style</CardTitle>
                     <CardDescription>Choose your chat button appearance</CardDescription>
                   </CardHeader>
@@ -2042,8 +2042,8 @@ export default function WidgetSettings() {
                           onClick={() => setButtonStyle(style.id)}
                           className={`p-4 border-2 rounded-xl transition-all hover:scale-105 ${
                             buttonStyle === style.id 
-                              ? "border-purple-600 bg-purple-50 shadow-lg" 
-                              : "border-gray-200 hover:border-purple-300 bg-white"
+                              ? "border-brand-600 bg-brand-50 shadow-lg" 
+                              : "border-gray-200 hover:border-brand-300 bg-white"
                           }`}
                         >
                           <div className="flex flex-col items-center gap-2">
@@ -2071,8 +2071,8 @@ export default function WidgetSettings() {
                             onClick={() => setButtonAnimation(anim.id)}
                             className={`p-4 border-2 rounded-xl transition-all hover:scale-105 ${
                               buttonAnimation === anim.id 
-                                ? "border-purple-600 bg-purple-50 shadow-lg" 
-                                : "border-gray-200 hover:border-purple-300 bg-white"
+                                ? "border-brand-600 bg-brand-50 shadow-lg" 
+                                : "border-gray-200 hover:border-brand-300 bg-white"
                             }`}
                           >
                             <div className="flex flex-col items-center gap-2">
@@ -2095,7 +2095,7 @@ export default function WidgetSettings() {
 
                 {/* Widget Size & Position Card */}
                 <Card className="shadow-lg border border-gray-200 bg-white">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg flex items-center gap-2">
                       <Maximize2 className="w-5 h-5" />
                       Widget Size & Position
@@ -2124,8 +2124,8 @@ export default function WidgetSettings() {
                             }}
                             className={`p-3 border-2 rounded-xl transition-all hover:scale-105 ${
                               sizePreset === preset.id 
-                                ? "border-purple-600 bg-purple-50 shadow-lg" 
-                                : "border-gray-200 hover:border-purple-300 bg-white"
+                                ? "border-brand-600 bg-brand-50 shadow-lg" 
+                                : "border-gray-200 hover:border-brand-300 bg-white"
                             }`}
                           >
                             <div className="flex flex-col items-center gap-1">
@@ -2208,12 +2208,12 @@ export default function WidgetSettings() {
                             onClick={() => setWidgetPosition(pos.id)}
                             className={`p-4 border-2 rounded-xl transition-all hover:scale-105 ${
                               widgetPosition === pos.id 
-                                ? "border-purple-600 bg-purple-50 shadow-lg" 
-                                : "border-gray-200 hover:border-purple-300 bg-white"
+                                ? "border-brand-600 bg-brand-50 shadow-lg" 
+                                : "border-gray-200 hover:border-brand-300 bg-white"
                             }`}
                           >
                             <div className="flex flex-col items-center gap-2">
-                              <pos.icon className="w-6 h-6 text-purple-600" />
+                              <pos.icon className="w-6 h-6 text-brand-600" />
                               <span className="text-xs font-semibold text-gray-700">{pos.label}</span>
                             </div>
                           </button>
@@ -2293,7 +2293,7 @@ export default function WidgetSettings() {
                             }}
                             className={`text-left rounded-lg border p-3 transition-colors ${
                               launcherMode === opt.value
-                                ? "border-purple-500 bg-purple-50 ring-1 ring-purple-500"
+                                ? "border-brand-500 bg-brand-50 ring-1 ring-brand-500"
                                 : "border-gray-200 hover:border-gray-300 bg-white"
                             }`}
                             data-testid={`button-launcher-mode-${opt.value}`}
@@ -2402,7 +2402,7 @@ export default function WidgetSettings() {
                                 }}
                                 className={`text-center rounded-lg border px-2 py-2 text-xs font-medium transition-colors ${
                                   whatsappWidgetPosition === opt.value
-                                    ? "border-purple-500 bg-purple-50 ring-1 ring-purple-500 text-gray-900"
+                                    ? "border-brand-500 bg-brand-50 ring-1 ring-brand-500 text-gray-900"
                                     : "border-gray-200 hover:border-gray-300 bg-white text-gray-700"
                                 }`}
                                 data-testid={`button-whatsapp-position-${opt.value || "inherit"}`}
@@ -2446,7 +2446,7 @@ export default function WidgetSettings() {
                   {/* Left Column */}
                   <div className="space-y-4">
                 <Card className="shadow-lg border border-gray-200 bg-white">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg">Welcome Message</CardTitle>
                     <CardDescription>First impression matters</CardDescription>
                   </CardHeader>
@@ -2454,8 +2454,8 @@ export default function WidgetSettings() {
                     <RadioGroup value={welcomeMessageType} onValueChange={setWelcomeMessageType}>
                       <div className={`flex items-start space-x-3 rounded-xl border-2 p-4 cursor-pointer transition-all ${
                         welcomeMessageType === "custom" 
-                          ? "border-purple-500 bg-purple-50/50 shadow-md" 
-                          : "border-gray-200 hover:border-purple-300 bg-white"
+                          ? "border-brand-500 bg-brand-50/50 shadow-md" 
+                          : "border-gray-200 hover:border-brand-300 bg-white"
                       }`} onClick={() => setWelcomeMessageType("custom")}>
                         <RadioGroupItem value="custom" id="custom" className="mt-1" />
                         <div className="flex-1">
@@ -2470,13 +2470,13 @@ export default function WidgetSettings() {
 
                       <div className={`flex items-start space-x-3 rounded-xl border-2 p-4 cursor-pointer transition-all ${
                         welcomeMessageType === "ai_generated" 
-                          ? "border-purple-500 bg-purple-50/50 shadow-md" 
-                          : "border-gray-200 hover:border-purple-300 bg-white"
+                          ? "border-brand-500 bg-brand-50/50 shadow-md" 
+                          : "border-gray-200 hover:border-brand-300 bg-white"
                       }`} onClick={() => setWelcomeMessageType("ai_generated")}>
                         <RadioGroupItem value="ai_generated" id="ai_generated" className="mt-1" />
                         <div className="flex-1">
                           <Label htmlFor="ai_generated" className="font-semibold cursor-pointer flex items-center gap-2 text-base">
-                            <Sparkles className="w-5 h-5 text-purple-600" />
+                            <Sparkles className="w-5 h-5 text-brand-600" />
                             AI-Generated
                           </Label>
                           <p className="text-sm text-gray-600 mt-1">
@@ -2508,9 +2508,9 @@ export default function WidgetSettings() {
                 </Card>
 
                 <Card className="shadow-lg border border-gray-200 bg-white">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg">AI Personality</CardTitle>
-                    <CardDescription>How should Chroney interact?</CardDescription>
+                    <CardDescription>How should Orvey interact?</CardDescription>
                   </CardHeader>
                   <CardContent className="pt-6">
                     <RadioGroup value={personality} onValueChange={setPersonality} className="space-y-3">
@@ -2525,8 +2525,8 @@ export default function WidgetSettings() {
                           key={p.id}
                           className={`flex items-start space-x-3 rounded-xl border-2 p-4 cursor-pointer transition-all ${
                             personality === p.id 
-                              ? "border-purple-500 bg-purple-50/50 shadow-md" 
-                              : "border-gray-200 hover:border-purple-300 bg-white"
+                              ? "border-brand-500 bg-brand-50/50 shadow-md" 
+                              : "border-gray-200 hover:border-brand-300 bg-white"
                           }`}
                           onClick={() => setPersonality(p.id)}
                         >
@@ -2545,7 +2545,7 @@ export default function WidgetSettings() {
                 </Card>
 
                 <Card className="shadow-lg border border-gray-200 bg-white">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg">Response Length</CardTitle>
                     <CardDescription>Control how detailed AI responses are</CardDescription>
                   </CardHeader>
@@ -2560,8 +2560,8 @@ export default function WidgetSettings() {
                           key={r.id}
                           className={`flex items-start space-x-3 rounded-xl border-2 p-4 cursor-pointer transition-all ${
                             responseLength === r.id 
-                              ? "border-purple-500 bg-purple-50/50 shadow-md" 
-                              : "border-gray-200 hover:border-purple-300 bg-white"
+                              ? "border-brand-500 bg-brand-50/50 shadow-md" 
+                              : "border-gray-200 hover:border-brand-300 bg-white"
                           }`}
                           onClick={() => setResponseLength(r.id)}
                         >
@@ -2580,7 +2580,7 @@ export default function WidgetSettings() {
                 </Card>
 
                 <Card className="shadow-lg border border-gray-200 bg-white">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg">Chat Behavior</CardTitle>
                     <CardDescription>Control how the chat widget appears</CardDescription>
                   </CardHeader>
@@ -2608,8 +2608,8 @@ export default function WidgetSettings() {
                               (autoOpenChat === option.id || 
                                (autoOpenChat === "true" && option.id === "both") ||
                                (autoOpenChat === "false" && option.id === "off"))
-                                ? "border-purple-600 bg-purple-50 shadow-lg" 
-                                : "border-gray-200 hover:border-purple-300 bg-white"
+                                ? "border-brand-600 bg-brand-50 shadow-lg" 
+                                : "border-gray-200 hover:border-brand-300 bg-white"
                             }`}
                           >
                             <div className="flex flex-col items-center gap-1">
@@ -2635,8 +2635,8 @@ export default function WidgetSettings() {
                               onClick={() => setAutoOpenFrequency("once")}
                               className={`p-3 border-2 rounded-xl transition-all hover:scale-105 ${
                                 autoOpenFrequency === "once"
-                                  ? "border-purple-600 bg-purple-50 shadow-lg" 
-                                  : "border-gray-200 hover:border-purple-300 bg-white"
+                                  ? "border-brand-600 bg-brand-50 shadow-lg" 
+                                  : "border-gray-200 hover:border-brand-300 bg-white"
                               }`}
                             >
                               <div className="flex flex-col items-center gap-1">
@@ -2648,8 +2648,8 @@ export default function WidgetSettings() {
                               onClick={() => setAutoOpenFrequency("always")}
                               className={`p-3 border-2 rounded-xl transition-all hover:scale-105 ${
                                 autoOpenFrequency === "always"
-                                  ? "border-purple-600 bg-purple-50 shadow-lg" 
-                                  : "border-gray-200 hover:border-purple-300 bg-white"
+                                  ? "border-brand-600 bg-brand-50 shadow-lg" 
+                                  : "border-gray-200 hover:border-brand-300 bg-white"
                               }`}
                             >
                               <div className="flex flex-col items-center gap-1">
@@ -2666,10 +2666,10 @@ export default function WidgetSettings() {
                       
                       {/* Opening Sound Toggle */}
                       <div className="mt-4 pt-4 border-t border-gray-100">
-                        <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-purple-50/30 to-pink-50/30 border border-purple-100">
+                        <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-brand-50/30 to-ink-50/30 border border-brand-100">
                           <div className="space-y-1">
                             <Label htmlFor="opening-sound" className="text-sm font-semibold cursor-pointer flex items-center gap-2">
-                              <Volume2 className="w-4 h-4 text-purple-600" />
+                              <Volume2 className="w-4 h-4 text-brand-600" />
                               AI Activation Sound
                             </Label>
                             <p className="text-xs text-gray-500">
@@ -2700,8 +2700,8 @@ export default function WidgetSettings() {
                                   onClick={() => setOpeningSoundStyle(sound.id)}
                                   className={`p-3 border-2 rounded-xl transition-all hover:scale-105 ${
                                     openingSoundStyle === sound.id
-                                      ? "border-purple-600 bg-purple-50 shadow-lg" 
-                                      : "border-gray-200 hover:border-purple-300 bg-white"
+                                      ? "border-brand-600 bg-brand-50 shadow-lg" 
+                                      : "border-gray-200 hover:border-brand-300 bg-white"
                                   }`}
                                 >
                                   <div className="flex flex-col items-center gap-1">
@@ -2723,9 +2723,9 @@ export default function WidgetSettings() {
                   <div className="space-y-4">
                 {/* Conversation Starters Card */}
                 <Card className="shadow-lg border border-gray-200 bg-white">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg flex items-center gap-2">
-                      <Sparkles className="w-5 h-5 text-purple-600" />
+                      <Sparkles className="w-5 h-5 text-brand-600" />
                       AI Conversation Starters
                     </CardTitle>
                     <CardDescription>Help users start conversations with suggested questions</CardDescription>
@@ -2883,7 +2883,7 @@ export default function WidgetSettings() {
                     <Button
                       onClick={handleGenerateStarters}
                       disabled={generatingStarters}
-                      className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
+                      className="w-full bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700 text-white"
                     >
                       {generatingStarters ? (
                         <>
@@ -2906,9 +2906,9 @@ export default function WidgetSettings() {
                 
                 {/* Language Selector Card */}
                 <Card className="shadow-lg border border-gray-200 bg-white">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg flex items-center gap-2">
-                      <Globe className="w-5 h-5 text-purple-600" />
+                      <Globe className="w-5 h-5 text-brand-600" />
                       Language Selector
                     </CardTitle>
                     <CardDescription>Allow visitors to choose their preferred language</CardDescription>
@@ -2950,8 +2950,8 @@ export default function WidgetSettings() {
                               key={lang.code}
                               className={`flex items-center space-x-2 p-2 rounded-lg cursor-pointer transition-all ${
                                 selectedLanguages.includes(lang.code)
-                                  ? 'bg-purple-100 border border-purple-300'
-                                  : 'bg-white border border-gray-200 hover:border-purple-200'
+                                  ? 'bg-brand-100 border border-brand-300'
+                                  : 'bg-white border border-gray-200 hover:border-brand-200'
                               }`}
                               onClick={() => {
                                 const newSelection = selectedLanguages.includes(lang.code)
@@ -2988,7 +2988,7 @@ export default function WidgetSettings() {
                 {/* Visual Search Settings Card - Only show if visual search is enabled */}
                 {settings?.visualSearchEnabled && (
                   <Card className="shadow-lg border border-gray-200 bg-white">
-                    <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                    <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                       <CardTitle className="text-lg flex items-center gap-2">
                         📷 Visual Product Search
                       </CardTitle>
@@ -2998,7 +2998,7 @@ export default function WidgetSettings() {
                       <div className="space-y-3">
                         <Label className="text-sm font-semibold text-gray-700 flex items-center justify-between">
                           <span>Minimum Match Threshold</span>
-                          <span className="text-purple-600 font-bold text-lg">{visualSimilarityThreshold}%</span>
+                          <span className="text-brand-600 font-bold text-lg">{visualSimilarityThreshold}%</span>
                         </Label>
                         <p className="text-xs text-gray-500">
                           Only show products with similarity score above this threshold
@@ -3026,8 +3026,8 @@ export default function WidgetSettings() {
                           <span>50%</span>
                           <span>100% (Exact)</span>
                         </div>
-                        <div className="mt-4 p-3 rounded-lg bg-purple-50 border border-purple-100">
-                          <p className="text-xs text-purple-700">
+                        <div className="mt-4 p-3 rounded-lg bg-brand-50 border border-brand-100">
+                          <p className="text-xs text-brand-700">
                             💡 <strong>Tip:</strong> Higher threshold = fewer but more accurate matches. 
                             Lower threshold = more matches including similar products.
                           </p>
@@ -3040,7 +3040,7 @@ export default function WidgetSettings() {
                 {/* Product Page AI Widget Mode Card */}
                 <Card className="shadow-lg border border-gray-200 bg-white">
                   <Collapsible open={productPageSectionOpen} onOpenChange={setProductPageSectionOpen}>
-                    <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                    <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                       <div className="flex items-center justify-between">
                         <div 
                           className="flex-1 cursor-pointer" 
@@ -3048,11 +3048,11 @@ export default function WidgetSettings() {
                         >
                           <CardTitle className="text-lg flex items-center gap-2">
                             {productPageSectionOpen ? (
-                              <ChevronDown className="w-4 h-4 text-purple-600" />
+                              <ChevronDown className="w-4 h-4 text-brand-600" />
                             ) : (
-                              <ChevronRight className="w-4 h-4 text-purple-600" />
+                              <ChevronRight className="w-4 h-4 text-brand-600" />
                             )}
-                            <Sparkles className="w-5 h-5 text-purple-600" />
+                            <Sparkles className="w-5 h-5 text-brand-600" />
                             Product Page AI Mode
                           </CardTitle>
                           <CardDescription className="mt-1">
@@ -3144,11 +3144,11 @@ export default function WidgetSettings() {
                           </div>
                           
                           {/* Preview/Info Box */}
-                          <div className="mt-4 p-4 rounded-lg bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-100">
-                            <p className="text-sm text-purple-800 font-medium mb-2">
+                          <div className="mt-4 p-4 rounded-lg bg-gradient-to-r from-brand-50 to-ink-50 border border-brand-100">
+                            <p className="text-sm text-brand-800 font-medium mb-2">
                               How it works:
                             </p>
-                            <ul className="text-xs text-purple-700 space-y-1 list-disc pl-4">
+                            <ul className="text-xs text-brand-700 space-y-1 list-disc pl-4">
                               <li>Widget auto-detects product pages via URL patterns and page data</li>
                               <li>Supports Shopify, WooCommerce, Magento, BigCommerce, and custom stores</li>
                               <li>Uses existing assistant name, colors, and theme from your settings</li>
@@ -3177,7 +3177,7 @@ export default function WidgetSettings() {
                             onClick={() => setInactivityNudgeEnabled(!inactivityNudgeEnabled)}
                             className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                               inactivityNudgeEnabled 
-                                ? "bg-purple-100 text-purple-700 border border-purple-200" 
+                                ? "bg-brand-100 text-brand-700 border border-brand-200" 
                                 : "bg-gray-100 text-gray-500 border border-gray-200"
                             }`}
                           >
@@ -3189,7 +3189,7 @@ export default function WidgetSettings() {
                             onClick={() => setProactiveNudgeEnabled(!proactiveNudgeEnabled)}
                             className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                               proactiveNudgeEnabled 
-                                ? "bg-purple-100 text-purple-700 border border-purple-200" 
+                                ? "bg-brand-100 text-brand-700 border border-brand-200" 
                                 : "bg-gray-100 text-gray-500 border border-gray-200"
                             }`}
                           >
@@ -3201,7 +3201,7 @@ export default function WidgetSettings() {
                             onClick={() => setCenterBannerEnabled(!centerBannerEnabled)}
                             className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                               centerBannerEnabled 
-                                ? "bg-purple-100 text-purple-700 border border-purple-200" 
+                                ? "bg-brand-100 text-brand-700 border border-brand-200" 
                                 : "bg-gray-100 text-gray-500 border border-gray-200"
                             }`}
                           >
@@ -3213,7 +3213,7 @@ export default function WidgetSettings() {
                             onClick={() => setReengagementBannerEnabled(!reengagementBannerEnabled)}
                             className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                               reengagementBannerEnabled 
-                                ? "bg-purple-100 text-purple-700 border border-purple-200" 
+                                ? "bg-brand-100 text-brand-700 border border-brand-200" 
                                 : "bg-gray-100 text-gray-500 border border-gray-200"
                             }`}
                           >
@@ -3237,7 +3237,7 @@ export default function WidgetSettings() {
                             ) : (
                               <ChevronRight className="w-5 h-5 text-gray-400" />
                             )}
-                            <Bell className="w-5 h-5 text-purple-600" />
+                            <Bell className="w-5 h-5 text-brand-600" />
                             <div className="text-left">
                               <h3 className="text-base font-semibold text-gray-900">Inactivity Nudge</h3>
                               <p className="text-sm font-normal text-gray-500">Re-engage visitors who stop responding</p>
@@ -3260,7 +3260,7 @@ export default function WidgetSettings() {
                                 {/* Initial Delay Setting */}
                                 <div className="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg border border-gray-200">
                                   <div className="flex items-center gap-2">
-                                    <Clock className="w-4 h-4 text-purple-600" />
+                                    <Clock className="w-4 h-4 text-brand-600" />
                                     <span className="text-sm font-medium text-gray-700">Initial delay</span>
                                   </div>
                                   <div className="flex items-center gap-3">
@@ -3272,16 +3272,16 @@ export default function WidgetSettings() {
                                       step={5}
                                       className="w-32"
                                     />
-                                    <span className="text-sm font-semibold text-purple-700 min-w-[50px] text-right">
+                                    <span className="text-sm font-semibold text-brand-700 min-w-[50px] text-right">
                                       {inactivityNudgeDelay}s
                                     </span>
                                   </div>
                                 </div>
 
                                 {/* Use AI Toggle */}
-                                <div className="flex items-center justify-between py-3 px-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-200">
+                                <div className="flex items-center justify-between py-3 px-4 bg-gradient-to-r from-brand-50 to-ink-50 rounded-lg border border-brand-200">
                                   <div className="flex items-center gap-2">
-                                    <Sparkles className="w-4 h-4 text-purple-600" />
+                                    <Sparkles className="w-4 h-4 text-brand-600" />
                                     <div>
                                       <span className="text-sm font-medium text-gray-700">Use AI</span>
                                       <p className="text-xs text-gray-500">AI generates contextual follow-ups based on conversation</p>
@@ -3295,14 +3295,14 @@ export default function WidgetSettings() {
 
                                 {/* Show AI indicator or manual message sequence */}
                                 {smartNudgeEnabled ? (
-                                  <div className="p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border border-purple-200">
+                                  <div className="p-4 bg-gradient-to-r from-brand-50 to-ink-50 rounded-lg border border-brand-200">
                                     <div className="flex items-center gap-3">
-                                      <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
-                                        <Sparkles className="w-5 h-5 text-purple-600" />
+                                      <div className="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center">
+                                        <Sparkles className="w-5 h-5 text-brand-600" />
                                       </div>
                                       <div>
                                         <p className="text-sm font-medium text-gray-800">AI-Powered Nudges Active</p>
-                                        <p className="text-xs text-gray-500">Chroney will analyze the conversation and generate contextual follow-up questions</p>
+                                        <p className="text-xs text-gray-500">Orvey will analyze the conversation and generate contextual follow-up questions</p>
                                       </div>
                                     </div>
                                     <div className="mt-3 text-xs text-gray-500 bg-white/60 rounded p-2">
@@ -3315,14 +3315,14 @@ export default function WidgetSettings() {
                                   <div className="space-y-0">
                                     {/* First Message (always present) */}
                                     <div 
-                                      className={`border border-gray-200 rounded-lg bg-white transition-all ${expandedInactivityMsg === 0 ? 'ring-2 ring-purple-200' : ''}`}
+                                      className={`border border-gray-200 rounded-lg bg-white transition-all ${expandedInactivityMsg === 0 ? 'ring-2 ring-brand-200' : ''}`}
                                     >
                                       <div 
                                         className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50"
                                         onClick={() => setExpandedInactivityMsg(expandedInactivityMsg === 0 ? null : 0)}
                                       >
-                                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-purple-600 text-white text-xs flex items-center justify-center font-bold">1</span>
-                                        <span className="text-xs px-2 py-0.5 bg-purple-100 text-purple-700 rounded font-medium">after {inactivityNudgeDelay}s</span>
+                                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-600 text-white text-xs flex items-center justify-center font-bold">1</span>
+                                        <span className="text-xs px-2 py-0.5 bg-brand-100 text-brand-700 rounded font-medium">after {inactivityNudgeDelay}s</span>
                                         <span className="flex-1 text-sm text-gray-600 truncate">
                                           {inactivityNudgeMessage.substring(0, 40)}{inactivityNudgeMessage.length > 40 ? '...' : ''}
                                         </span>
@@ -3352,14 +3352,14 @@ export default function WidgetSettings() {
                                     {inactivityNudgeMessages.map((msg, index) => (
                                       <div 
                                         key={index}
-                                        className={`border border-gray-200 rounded-lg bg-white mt-2 transition-all ${expandedInactivityMsg === index + 1 ? 'ring-2 ring-purple-200' : ''}`}
+                                        className={`border border-gray-200 rounded-lg bg-white mt-2 transition-all ${expandedInactivityMsg === index + 1 ? 'ring-2 ring-brand-200' : ''}`}
                                       >
                                         <div 
                                           className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50"
                                           onClick={() => setExpandedInactivityMsg(expandedInactivityMsg === index + 1 ? null : index + 1)}
                                         >
-                                          <span className="flex-shrink-0 w-6 h-6 rounded-full bg-purple-600 text-white text-xs flex items-center justify-center font-bold">{index + 2}</span>
-                                          <span className="text-xs px-2 py-0.5 bg-purple-100 text-purple-700 rounded font-medium">+{msg.delay}s</span>
+                                          <span className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-600 text-white text-xs flex items-center justify-center font-bold">{index + 2}</span>
+                                          <span className="text-xs px-2 py-0.5 bg-brand-100 text-brand-700 rounded font-medium">+{msg.delay}s</span>
                                           <span className="flex-1 text-sm text-gray-600 truncate">
                                             {msg.message.substring(0, 40)}{msg.message.length > 40 ? '...' : ''}
                                           </span>
@@ -3396,7 +3396,7 @@ export default function WidgetSettings() {
                                                 step={5}
                                                 className="w-32"
                                               />
-                                              <span className="text-sm font-semibold text-purple-700">{msg.delay}s</span>
+                                              <span className="text-sm font-semibold text-brand-700">{msg.delay}s</span>
                                             </div>
                                             <Textarea
                                               value={msg.message}
@@ -3425,7 +3425,7 @@ export default function WidgetSettings() {
                                           ]);
                                           setExpandedInactivityMsg(inactivityNudgeMessages.length + 1);
                                         }}
-                                        className="w-full mt-2 py-3 border-2 border-dashed border-gray-200 rounded-lg text-sm text-gray-500 hover:border-purple-300 hover:text-purple-600 hover:bg-purple-50/50 transition-all flex items-center justify-center gap-2"
+                                        className="w-full mt-2 py-3 border-2 border-dashed border-gray-200 rounded-lg text-sm text-gray-500 hover:border-brand-300 hover:text-brand-600 hover:bg-brand-50/50 transition-all flex items-center justify-center gap-2"
                                       >
                                         <Plus className="w-4 h-4" />
                                         Add follow-up message ({inactivityNudgeMessages.length + 1}/5)
@@ -3467,8 +3467,8 @@ export default function WidgetSettings() {
                                         
                                         {/* Delay indicator */}
                                         <div className="flex items-center justify-center gap-1.5 my-2">
-                                          <Clock className="w-3 h-3 text-purple-500" />
-                                          <span className="text-[9px] text-purple-600 font-medium">After {inactivityNudgeDelay}s of inactivity</span>
+                                          <Clock className="w-3 h-3 text-brand-500" />
+                                          <span className="text-[9px] text-brand-600 font-medium">After {inactivityNudgeDelay}s of inactivity</span>
                                         </div>
                                         
                                         {/* Nudge message bubble */}
@@ -3531,7 +3531,7 @@ export default function WidgetSettings() {
                             ) : (
                               <ChevronRight className="w-5 h-5 text-gray-400" />
                             )}
-                            <MessageCircle className="w-5 h-5 text-purple-600" />
+                            <MessageCircle className="w-5 h-5 text-brand-600" />
                             <div className="text-left">
                               <h3 className="text-base font-semibold text-gray-900">Proactive Engagement</h3>
                               <p className="text-sm font-normal text-gray-500">Pop up a message to visitors who haven't started chatting</p>
@@ -3554,7 +3554,7 @@ export default function WidgetSettings() {
                                 {/* Initial Delay Setting */}
                                 <div className="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg border border-gray-200">
                                   <div className="flex items-center gap-2">
-                                    <Clock className="w-4 h-4 text-purple-600" />
+                                    <Clock className="w-4 h-4 text-brand-600" />
                                     <span className="text-sm font-medium text-gray-700">Initial delay</span>
                                   </div>
                                   <div className="flex items-center gap-3">
@@ -3566,7 +3566,7 @@ export default function WidgetSettings() {
                                       step={5}
                                       className="w-32"
                                     />
-                                    <span className="text-sm font-semibold text-purple-700 min-w-[50px] text-right">
+                                    <span className="text-sm font-semibold text-brand-700 min-w-[50px] text-right">
                                       {proactiveNudgeDelay}s
                                     </span>
                                   </div>
@@ -3578,14 +3578,14 @@ export default function WidgetSettings() {
                                   <div className="space-y-0">
                                     {/* First Message (always present) */}
                                     <div 
-                                      className={`border border-gray-200 rounded-lg bg-white transition-all ${expandedProactiveMsg === 0 ? 'ring-2 ring-purple-200' : ''}`}
+                                      className={`border border-gray-200 rounded-lg bg-white transition-all ${expandedProactiveMsg === 0 ? 'ring-2 ring-brand-200' : ''}`}
                                     >
                                       <div 
                                         className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50"
                                         onClick={() => setExpandedProactiveMsg(expandedProactiveMsg === 0 ? null : 0)}
                                       >
-                                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-purple-600 text-white text-xs flex items-center justify-center font-bold">1</span>
-                                        <span className="text-xs px-2 py-0.5 bg-purple-100 text-purple-700 rounded font-medium">after {proactiveNudgeDelay}s</span>
+                                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-600 text-white text-xs flex items-center justify-center font-bold">1</span>
+                                        <span className="text-xs px-2 py-0.5 bg-brand-100 text-brand-700 rounded font-medium">after {proactiveNudgeDelay}s</span>
                                         <span className="flex-1 text-sm text-gray-600 truncate">
                                           {proactiveNudgeMessage.substring(0, 40)}{proactiveNudgeMessage.length > 40 ? '...' : ''}
                                         </span>
@@ -3629,14 +3629,14 @@ export default function WidgetSettings() {
                                     {proactiveNudgeMessages.map((msg, index) => (
                                       <div 
                                         key={index}
-                                        className={`border border-gray-200 rounded-lg bg-white mt-2 transition-all ${expandedProactiveMsg === index + 1 ? 'ring-2 ring-purple-200' : ''}`}
+                                        className={`border border-gray-200 rounded-lg bg-white mt-2 transition-all ${expandedProactiveMsg === index + 1 ? 'ring-2 ring-brand-200' : ''}`}
                                       >
                                         <div 
                                           className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-gray-50"
                                           onClick={() => setExpandedProactiveMsg(expandedProactiveMsg === index + 1 ? null : index + 1)}
                                         >
-                                          <span className="flex-shrink-0 w-6 h-6 rounded-full bg-purple-600 text-white text-xs flex items-center justify-center font-bold">{index + 2}</span>
-                                          <span className="text-xs px-2 py-0.5 bg-purple-100 text-purple-700 rounded font-medium">+{msg.delay}s</span>
+                                          <span className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-600 text-white text-xs flex items-center justify-center font-bold">{index + 2}</span>
+                                          <span className="text-xs px-2 py-0.5 bg-brand-100 text-brand-700 rounded font-medium">+{msg.delay}s</span>
                                           <span className="flex-1 text-sm text-gray-600 truncate">
                                             {msg.message.substring(0, 40)}{msg.message.length > 40 ? '...' : ''}
                                           </span>
@@ -3673,7 +3673,7 @@ export default function WidgetSettings() {
                                                 step={5}
                                                 className="w-32"
                                               />
-                                              <span className="text-sm font-semibold text-purple-700">{msg.delay}s</span>
+                                              <span className="text-sm font-semibold text-brand-700">{msg.delay}s</span>
                                             </div>
                                             <div className="flex items-center gap-1 pb-1">
                                               <button
@@ -3724,7 +3724,7 @@ export default function WidgetSettings() {
                                           ]);
                                           setExpandedProactiveMsg(proactiveNudgeMessages.length + 1);
                                         }}
-                                        className="w-full mt-2 py-3 border-2 border-dashed border-gray-200 rounded-lg text-sm text-gray-500 hover:border-purple-300 hover:text-purple-600 hover:bg-purple-50/50 transition-all flex items-center justify-center gap-2"
+                                        className="w-full mt-2 py-3 border-2 border-dashed border-gray-200 rounded-lg text-sm text-gray-500 hover:border-brand-300 hover:text-brand-600 hover:bg-brand-50/50 transition-all flex items-center justify-center gap-2"
                                       >
                                         <Plus className="w-4 h-4" />
                                         Add follow-up message ({proactiveNudgeMessages.length + 1}/5)
@@ -3856,8 +3856,8 @@ export default function WidgetSettings() {
 
                                       {/* Delay indicator */}
                                       <div className="absolute top-2 right-2 flex items-center gap-1 bg-white/90 rounded-full px-2 py-0.5 shadow-sm">
-                                        <Clock className="w-2.5 h-2.5 text-purple-500" />
-                                        <span className="text-[8px] text-purple-600 font-medium">After {proactiveNudgeDelay}s</span>
+                                        <Clock className="w-2.5 h-2.5 text-brand-500" />
+                                        <span className="text-[8px] text-brand-600 font-medium">After {proactiveNudgeDelay}s</span>
                                       </div>
                                     </div>
                                   </div>
@@ -3885,7 +3885,7 @@ export default function WidgetSettings() {
                             ) : (
                               <ChevronRight className="w-5 h-5 text-gray-400" />
                             )}
-                            <Sparkles className="w-5 h-5 text-purple-600" />
+                            <Sparkles className="w-5 h-5 text-brand-600" />
                             <div className="text-left">
                               <h3 className="text-base font-semibold text-gray-900">Center Banner</h3>
                               <p className="text-sm font-normal text-gray-500">Eye-catching popup in the center of the screen</p>
@@ -3908,7 +3908,7 @@ export default function WidgetSettings() {
                                 {/* Delay Setting */}
                                 <div className="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg border border-gray-200">
                                   <div className="flex items-center gap-2">
-                                    <Clock className="w-4 h-4 text-purple-600" />
+                                    <Clock className="w-4 h-4 text-brand-600" />
                                     <span className="text-sm font-medium text-gray-700">Show after</span>
                                   </div>
                                   <div className="flex items-center gap-3">
@@ -3920,7 +3920,7 @@ export default function WidgetSettings() {
                                       step={1}
                                       className="w-32"
                                     />
-                                    <span className="text-sm font-semibold text-purple-700 min-w-[50px] text-right">
+                                    <span className="text-sm font-semibold text-brand-700 min-w-[50px] text-right">
                                       {centerBannerDelay}s
                                     </span>
                                   </div>
@@ -4034,7 +4034,7 @@ export default function WidgetSettings() {
                                       onClick={() => setCenterBannerTextColor("white")}
                                       className={`flex-1 py-2 px-4 rounded-lg border transition-all ${
                                         centerBannerTextColor === "white"
-                                          ? "border-purple-500 bg-purple-50"
+                                          ? "border-brand-500 bg-brand-50"
                                           : "border-gray-200 bg-white hover:border-gray-300"
                                       }`}
                                     >
@@ -4048,7 +4048,7 @@ export default function WidgetSettings() {
                                       onClick={() => setCenterBannerTextColor("black")}
                                       className={`flex-1 py-2 px-4 rounded-lg border transition-all ${
                                         centerBannerTextColor === "black"
-                                          ? "border-purple-500 bg-purple-50"
+                                          ? "border-brand-500 bg-brand-50"
                                           : "border-gray-200 bg-white hover:border-gray-300"
                                       }`}
                                     >
@@ -4091,8 +4091,8 @@ export default function WidgetSettings() {
                                       
                                       {/* Delay indicator badge */}
                                       <div className="absolute top-2 right-2 flex items-center gap-1 bg-white/90 rounded-full px-2 py-0.5 shadow-sm z-20">
-                                        <Clock className="w-2.5 h-2.5 text-purple-500" />
-                                        <span className="text-[8px] text-purple-600 font-medium">After {centerBannerDelay}s</span>
+                                        <Clock className="w-2.5 h-2.5 text-brand-500" />
+                                        <span className="text-[8px] text-brand-600 font-medium">After {centerBannerDelay}s</span>
                                       </div>
                                       
                                       {/* Banner card */}
@@ -4154,7 +4154,7 @@ export default function WidgetSettings() {
                             ) : (
                               <ChevronRight className="w-5 h-5 text-gray-400" />
                             )}
-                            <RefreshCw className="w-5 h-5 text-purple-600" />
+                            <RefreshCw className="w-5 h-5 text-brand-600" />
                             <div className="text-left">
                               <h3 className="text-base font-semibold text-gray-900">Re-engagement Banner</h3>
                               <p className="text-sm font-normal text-gray-500">Show a second banner after the first is dismissed</p>
@@ -4177,7 +4177,7 @@ export default function WidgetSettings() {
                                 {/* Delay Setting */}
                                 <div className="flex items-center justify-between py-3 px-4 bg-gray-50 rounded-lg border border-gray-200">
                                   <div className="flex items-center gap-2">
-                                    <Clock className="w-4 h-4 text-purple-600" />
+                                    <Clock className="w-4 h-4 text-brand-600" />
                                     <span className="text-sm font-medium text-gray-700">Wait after dismissal</span>
                                   </div>
                                   <div className="flex items-center gap-3">
@@ -4189,7 +4189,7 @@ export default function WidgetSettings() {
                                       step={5}
                                       className="w-32"
                                     />
-                                    <span className="text-sm font-semibold text-purple-700 min-w-[50px] text-right">
+                                    <span className="text-sm font-semibold text-brand-700 min-w-[50px] text-right">
                                       {reengagementBannerDelay}s
                                     </span>
                                   </div>
@@ -4232,7 +4232,7 @@ export default function WidgetSettings() {
                                   </div>
                                 </div>
 
-                                <p className="text-xs text-purple-600 bg-purple-50 border border-purple-200 p-3 rounded-lg">
+                                <p className="text-xs text-brand-600 bg-brand-50 border border-brand-200 p-3 rounded-lg">
                                   Uses the same visual style as the Center Banner above
                                 </p>
                               </div>
@@ -4257,8 +4257,8 @@ export default function WidgetSettings() {
                                       
                                       {/* Delay indicator badge */}
                                       <div className="absolute top-2 right-2 flex items-center gap-1 bg-white/90 rounded-full px-2 py-0.5 shadow-sm z-20">
-                                        <Clock className="w-2.5 h-2.5 text-purple-500" />
-                                        <span className="text-[8px] text-purple-600 font-medium">+{reengagementBannerDelay}s</span>
+                                        <Clock className="w-2.5 h-2.5 text-brand-500" />
+                                        <span className="text-[8px] text-brand-600 font-medium">+{reengagementBannerDelay}s</span>
                                       </div>
                                       
                                       {/* Banner card - uses same gradient as Center Banner */}
@@ -4323,8 +4323,8 @@ export default function WidgetSettings() {
                     {/* Left Column */}
                     <div className="space-y-4">
                   {/* Chat Modes - NEW SECTION AT TOP */}
-                  <Card className="shadow-lg border border-gray-200 bg-white border-2 border-purple-200">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                  <Card className="shadow-lg border border-gray-200 bg-white border-2 border-brand-200">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg flex items-center gap-2">
                       🎯 Chat Modes
                     </CardTitle>
@@ -4341,8 +4341,8 @@ export default function WidgetSettings() {
                           key={mode.id}
                           className={`flex items-center space-x-3 rounded-xl border-2 p-4 transition-all cursor-pointer ${
                             chatMode === mode.id 
-                              ? "border-purple-500 bg-purple-50/50 shadow-md ring-2 ring-purple-200" 
-                              : "border-gray-200 hover:border-purple-300 bg-white"
+                              ? "border-brand-500 bg-brand-50/50 shadow-md ring-2 ring-brand-200" 
+                              : "border-gray-200 hover:border-brand-300 bg-white"
                           }`}
                           onClick={() => setChatMode(mode.id)}
                         >
@@ -4356,7 +4356,7 @@ export default function WidgetSettings() {
                               <span>{mode.emoji}</span>
                               {mode.label}
                               {mode.recommended && (
-                                <span className="text-xs font-normal text-purple-600 bg-purple-100 px-2 py-0.5 rounded-full">
+                                <span className="text-xs font-normal text-brand-600 bg-brand-100 px-2 py-0.5 rounded-full">
                                   Recommended
                                 </span>
                               )}
@@ -4371,7 +4371,7 @@ export default function WidgetSettings() {
 
                 {/* Voice input: how students take turns */}
                 <Card className="shadow-lg border border-gray-200 bg-white">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg flex items-center gap-2">
                       ✋ Voice input
                     </CardTitle>
@@ -4396,8 +4396,8 @@ export default function WidgetSettings() {
                           key={option.id}
                           className={`flex items-start space-x-3 rounded-xl border-2 p-3 transition-all cursor-pointer ${
                             voiceInputMode === option.id
-                              ? "border-purple-500 bg-purple-50/50"
-                              : "border-gray-200 hover:border-purple-300 bg-white"
+                              ? "border-brand-500 bg-brand-50/50"
+                              : "border-gray-200 hover:border-brand-300 bg-white"
                           }`}
                           onClick={() => {
                             if (voiceInputMode === option.id) return;
@@ -4421,11 +4421,11 @@ export default function WidgetSettings() {
                   {/* Right Column */}
                   <div className="space-y-4">
                 <Card className="shadow-lg border border-gray-200 bg-white">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg flex items-center gap-2">
                       🎤 Voice Selection
                     </CardTitle>
-                    <CardDescription>Choose Chroney's voice for voice mode conversations</CardDescription>
+                    <CardDescription>Choose Orvey's voice for voice mode conversations</CardDescription>
                   </CardHeader>
                   <CardContent className="pt-6">
                     <RadioGroup value={voiceSelection} onValueChange={setVoiceSelection} className="space-y-3">
@@ -4449,8 +4449,8 @@ export default function WidgetSettings() {
                           key={voice.id}
                           className={`flex items-start space-x-3 rounded-xl border-2 p-4 transition-all ${
                             voiceSelection === voice.id 
-                              ? "border-purple-500 bg-purple-50/50 shadow-md" 
-                              : "border-gray-200 hover:border-purple-300 bg-white"
+                              ? "border-brand-500 bg-brand-50/50 shadow-md" 
+                              : "border-gray-200 hover:border-brand-300 bg-white"
                           }`}
                         >
                           <RadioGroupItem 
@@ -4476,8 +4476,8 @@ export default function WidgetSettings() {
                             disabled={playingVoice !== null && playingVoice !== voice.id}
                             className={`p-2 rounded-lg transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed ${
                               playingVoice === voice.id 
-                                ? "bg-purple-500 text-white shadow-lg" 
-                                : "bg-gray-100 hover:bg-purple-100 text-gray-700 hover:text-purple-700"
+                                ? "bg-brand-500 text-white shadow-lg" 
+                                : "bg-gray-100 hover:bg-brand-100 text-gray-700 hover:text-brand-700"
                             }`}
                             title={playingVoice === voice.id ? "Stop preview" : "Play voice sample"}
                           >
@@ -4504,7 +4504,7 @@ export default function WidgetSettings() {
                 </Card>
 
                 <Card className="shadow-lg border border-gray-200 bg-white">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg flex items-center gap-2">
                       ✨ Voice Mode Style
                     </CardTitle>
@@ -4554,8 +4554,8 @@ export default function WidgetSettings() {
                             key={style.id}
                             className={`flex items-center space-x-3 rounded-xl border-2 p-4 transition-all ${
                               voiceModeStyle === style.id 
-                                ? "border-purple-500 bg-purple-50/50 shadow-md" 
-                                : "border-gray-200 hover:border-purple-300 bg-white"
+                                ? "border-brand-500 bg-brand-50/50 shadow-md" 
+                                : "border-gray-200 hover:border-brand-300 bg-white"
                             }`}
                           >
                             <RadioGroupItem 
@@ -4617,7 +4617,7 @@ export default function WidgetSettings() {
               {/* Avatar Tab */}
               <TabsContent value="avatar" className="space-y-4 mt-4">
                 <Card className="shadow-lg border border-gray-200 bg-white">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg">Chat Avatar</CardTitle>
                     <CardDescription>Choose an avatar for your AI assistant</CardDescription>
                   </CardHeader>
@@ -4631,13 +4631,13 @@ export default function WidgetSettings() {
                       }}
                       className={`relative cursor-pointer p-4 border-2 rounded-xl transition-all ${
                         avatarType === "none" 
-                          ? "border-purple-500 bg-purple-50" 
-                          : "border-gray-200 hover:border-purple-300 bg-white"
+                          ? "border-brand-500 bg-brand-50" 
+                          : "border-gray-200 hover:border-brand-300 bg-white"
                       }`}
                     >
                       <div className="flex items-center gap-4">
                         <div className={`w-16 h-16 rounded-full flex items-center justify-center bg-gradient-to-br ${
-                          avatarType === "none" ? "from-purple-500 to-blue-500" : "from-gray-200 to-gray-300"
+                          avatarType === "none" ? "from-brand-500 to-ink-500" : "from-gray-200 to-gray-300"
                         }`}>
                           <Sparkles className="w-8 h-8 text-white" />
                         </div>
@@ -4646,7 +4646,7 @@ export default function WidgetSettings() {
                           <p className="text-sm text-gray-600">Use the default Sparkles icon</p>
                         </div>
                         {avatarType === "none" && (
-                          <Check className="w-6 h-6 text-purple-600" />
+                          <Check className="w-6 h-6 text-brand-600" />
                         )}
                       </div>
                     </div>
@@ -4672,8 +4672,8 @@ export default function WidgetSettings() {
                             }}
                             className={`relative cursor-pointer p-3 border-2 rounded-xl transition-all ${
                               avatarType === preset.type 
-                                ? "border-purple-500 bg-purple-50" 
-                                : "border-gray-200 hover:border-purple-300 bg-white"
+                                ? "border-brand-500 bg-brand-50" 
+                                : "border-gray-200 hover:border-brand-300 bg-white"
                             }`}
                           >
                             <div className="flex flex-col items-center gap-2">
@@ -4684,7 +4684,7 @@ export default function WidgetSettings() {
                                   className="w-16 h-16 rounded-full object-cover"
                                 />
                                 {avatarType === preset.type && (
-                                  <div className="absolute -top-1 -right-1 w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center">
+                                  <div className="absolute -top-1 -right-1 w-6 h-6 bg-brand-600 rounded-full flex items-center justify-center">
                                     <Check className="w-4 h-4 text-white" />
                                   </div>
                                 )}
@@ -4708,8 +4708,8 @@ export default function WidgetSettings() {
                               key={avatar.url}
                               className={`relative cursor-pointer p-3 border-2 rounded-xl transition-all group ${
                                 avatarType === "custom" && avatarUrl === avatar.url
-                                  ? "border-purple-500 bg-purple-50" 
-                                  : "border-gray-200 hover:border-purple-300 bg-white"
+                                  ? "border-brand-500 bg-brand-50" 
+                                  : "border-gray-200 hover:border-brand-300 bg-white"
                               }`}
                               onClick={() => {
                                 setAvatarType("custom");
@@ -4725,7 +4725,7 @@ export default function WidgetSettings() {
                                     className="w-16 h-16 rounded-full object-cover"
                                   />
                                   {avatarType === "custom" && avatarUrl === avatar.url && (
-                                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center">
+                                    <div className="absolute -top-1 -right-1 w-6 h-6 bg-brand-600 rounded-full flex items-center justify-center">
                                       <Check className="w-4 h-4 text-white" />
                                     </div>
                                   )}
@@ -4753,7 +4753,7 @@ export default function WidgetSettings() {
                       )}
 
                       {/* Upload Button */}
-                      <div className="p-4 border-2 border-dashed border-gray-300 rounded-xl bg-gray-50 hover:border-purple-400 transition-all">
+                      <div className="p-4 border-2 border-dashed border-gray-300 rounded-xl bg-gray-50 hover:border-brand-400 transition-all">
                         <div className="flex items-center justify-center gap-4">
                           <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
                             <Upload className="w-6 h-6 text-gray-500" />
@@ -4769,7 +4769,7 @@ export default function WidgetSettings() {
                             />
                             <Label
                               htmlFor="avatar-upload"
-                              className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all"
+                              className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-600 to-ink-600 text-white rounded-lg hover:from-brand-700 hover:to-ink-700 transition-all"
                             >
                               {uploadingAvatar ? (
                                 <>
@@ -4801,8 +4801,8 @@ export default function WidgetSettings() {
                   <CardHeader className="pb-4">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
-                          <ShoppingCart className="w-5 h-5 text-purple-600" />
+                        <div className="w-10 h-10 rounded-lg bg-brand-100 flex items-center justify-center">
+                          <ShoppingCart className="w-5 h-5 text-brand-600" />
                         </div>
                         <div>
                           <CardTitle className="text-base">Product Carousel</CardTitle>
@@ -4852,7 +4852,7 @@ export default function WidgetSettings() {
                             {featuredProductIds.map(id => {
                               const product = allProducts?.find(p => p.id === id);
                               return (
-                                <div key={id} className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs ${product ? 'bg-purple-100 text-purple-800' : 'bg-orange-100 text-orange-800'}`}>
+                                <div key={id} className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs ${product ? 'bg-brand-100 text-brand-800' : 'bg-orange-100 text-orange-800'}`}>
                                   <span className="truncate max-w-[120px]">{product?.name || 'Unknown product'}</span>
                                   <button
                                     onClick={() => {
@@ -4860,7 +4860,7 @@ export default function WidgetSettings() {
                                       setFeaturedProductIds(newIds);
                                       updateMutation.mutate({ featuredProductIds: newIds });
                                     }}
-                                    className={`rounded-full p-0.5 ${product ? 'hover:bg-purple-200' : 'hover:bg-orange-200'}`}
+                                    className={`rounded-full p-0.5 ${product ? 'hover:bg-brand-200' : 'hover:bg-orange-200'}`}
                                   >
                                     <X className="w-3 h-3" />
                                   </button>
@@ -5157,12 +5157,12 @@ export default function WidgetSettings() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <div>
                 <Card className="shadow-lg border border-gray-200 bg-white">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg">Website Integration</CardTitle>
                     <CardDescription>Add the widget to your website</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4 pt-6">
-                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-4 border border-blue-200">
+                    <div className="bg-gradient-to-r from-blue-50 to-brand-50 rounded-xl p-4 border border-blue-200">
                       <div className="flex gap-3">
                         <div className="flex-shrink-0">
                           <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center">
@@ -5198,7 +5198,7 @@ export default function WidgetSettings() {
                         <Button
                           onClick={handleCopy}
                           size="sm"
-                          className="absolute top-3 right-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                          className="absolute top-3 right-3 bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                         >
                           {copied ? (
                             <>
@@ -5235,7 +5235,7 @@ export default function WidgetSettings() {
                          <Button
                            onClick={handleCopyTrigger}
                            size="sm"
-                           className="absolute top-3 right-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                           className="absolute top-3 right-3 bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                          >
                            {triggerCopied ? (
                              <>
@@ -5264,7 +5264,7 @@ export default function WidgetSettings() {
                            <Button
                              onClick={handleCopyApi}
                              size="sm"
-                             className="absolute top-3 right-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                             className="absolute top-3 right-3 bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                            >
                              {apiCopied ? (
                                <>
@@ -5304,7 +5304,7 @@ export default function WidgetSettings() {
                           <Button
                             onClick={handleCopyK12}
                             size="sm"
-                            className="absolute top-3 right-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                            className="absolute top-3 right-3 bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                           >
                             {k12Copied ? (
                               <>
@@ -5341,7 +5341,7 @@ export default function WidgetSettings() {
                             <Button
                               onClick={handleCopyK12Secure}
                               size="sm"
-                              className="absolute top-3 right-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                              className="absolute top-3 right-3 bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                             >
                               {k12SecureCopied ? (
                                 <>
@@ -5421,11 +5421,11 @@ export default function WidgetSettings() {
           {(activeTab === "appearance" || activeTab === "avatar") && (
           <div className="lg:sticky lg:top-40 h-fit">
             <Card className="shadow-xl border-gray-200/60 bg-white/80 backdrop-blur-sm overflow-hidden">
-              <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+              <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="text-lg flex items-center gap-2">
-                      <Eye className="w-5 h-5 text-purple-600" />
+                      <Eye className="w-5 h-5 text-brand-600" />
                       Live Preview
                     </CardTitle>
                     <CardDescription className="mt-1">See your changes instantly</CardDescription>

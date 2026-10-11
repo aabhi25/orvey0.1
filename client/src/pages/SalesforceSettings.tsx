@@ -275,10 +275,10 @@ export default function SalesforceSettings({ embedded = false }: { embedded?: bo
             </CardContent>
           </Card>
 
-          <Card className="cursor-pointer transition-all hover:shadow-lg hover:border-purple-300 hover:-translate-y-0.5" onClick={() => setActiveSection('sync')}>
+          <Card className="cursor-pointer transition-all hover:shadow-lg hover:border-brand-300 hover:-translate-y-0.5" onClick={() => setActiveSection('sync')}>
             <CardHeader>
               <div className="flex items-center gap-3">
-                <div className="rounded-xl bg-purple-100 dark:bg-purple-900 p-2.5"><Zap className="h-5 w-5 text-purple-600 dark:text-purple-400" /></div>
+                <div className="rounded-xl bg-brand-100 dark:bg-brand-900 p-2.5"><Zap className="h-5 w-5 text-brand-600 dark:text-brand-400" /></div>
                 <div>
                   <CardTitle className="text-lg">Auto-Sync</CardTitle>
                   <CardDescription>Enable automatic syncing of new leads to Salesforce</CardDescription>
@@ -391,7 +391,7 @@ export default function SalesforceSettings({ embedded = false }: { embedded?: bo
       {activeSection === 'sync' && (
         <div className="space-y-6">
           <Card>
-            <CardHeader><CardTitle>Auto-Sync to Salesforce</CardTitle><CardDescription>When enabled, leads captured by Chroney are automatically synced to Salesforce in real time.</CardDescription></CardHeader>
+            <CardHeader><CardTitle>Auto-Sync to Salesforce</CardTitle><CardDescription>When enabled, leads captured by Orvey are automatically synced to Salesforce in real time.</CardDescription></CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between p-4 rounded-lg border bg-muted/30">
                 <div>
@@ -484,7 +484,7 @@ export default function SalesforceSettings({ embedded = false }: { embedded?: bo
             ) : (
               <div className="space-y-2">
                 <Label>Static Value</Label>
-                <Input placeholder="e.g. Chroney Chat" value={customValue} onChange={e => setCustomValue(e.target.value)} />
+                <Input placeholder="e.g. Orvey Chat" value={customValue} onChange={e => setCustomValue(e.target.value)} />
               </div>
             )}
           </div>

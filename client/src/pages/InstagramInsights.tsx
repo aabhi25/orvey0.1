@@ -109,7 +109,7 @@ export default function InstagramInsights() {
               variant={period === p.value ? "default" : "outline"}
               size="sm"
               onClick={() => setPeriod(p.value)}
-              className={period === p.value ? "bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white border-0" : ""}
+              className={period === p.value ? "bg-gradient-to-r from-ink-500 via-brand-500 to-brand-500 text-white border-0" : ""}
             >
               {p.label}
             </Button>
@@ -133,7 +133,7 @@ export default function InstagramInsights() {
           </CardContent>
         </Card>
 
-        <Card className="border-l-4 border-l-purple-500">
+        <Card className="border-l-4 border-l-brand-500">
           <CardContent className="p-5">
             <div className="flex items-center justify-between">
               <div>
@@ -141,14 +141,14 @@ export default function InstagramInsights() {
                 <p className="text-3xl font-bold text-gray-900 mt-1">{stats.leads.total}</p>
                 <p className="text-xs text-gray-400 mt-1">{stats.leads.uniqueSenders} unique senders</p>
               </div>
-              <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center">
-                <Users className="w-6 h-6 text-purple-500" />
+              <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center">
+                <Users className="w-6 h-6 text-brand-500" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-l-4 border-l-indigo-500">
+        <Card className="border-l-4 border-l-brand-500">
           <CardContent className="p-5">
             <div className="flex items-center justify-between">
               <div>
@@ -156,8 +156,8 @@ export default function InstagramInsights() {
                 <p className="text-3xl font-bold text-gray-900 mt-1">{stats.messages.totalIncoming + stats.messages.totalOutgoing}</p>
                 <p className="text-xs text-gray-400 mt-1">{stats.messages.totalIncoming} in / {stats.messages.totalOutgoing} out</p>
               </div>
-              <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center">
-                <Instagram className="w-6 h-6 text-indigo-500" />
+              <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center">
+                <Instagram className="w-6 h-6 text-brand-500" />
               </div>
             </div>
           </CardContent>
@@ -210,8 +210,8 @@ export default function InstagramInsights() {
                 <p className="text-2xl font-bold text-gray-900">{stats.messages.totalIncoming}</p>
                 <p className="text-xs text-gray-500 mt-1">Messages Received</p>
               </div>
-              <div className="text-center p-4 bg-purple-50 rounded-xl">
-                <ArrowUpRight className="w-5 h-5 text-purple-500 mx-auto mb-2 rotate-180" />
+              <div className="text-center p-4 bg-brand-50 rounded-xl">
+                <ArrowUpRight className="w-5 h-5 text-brand-500 mx-auto mb-2 rotate-180" />
                 <p className="text-2xl font-bold text-gray-900">{stats.messages.totalOutgoing}</p>
                 <p className="text-xs text-gray-500 mt-1">Messages Sent</p>
               </div>
@@ -247,11 +247,11 @@ export default function InstagramInsights() {
                           {label}: {day.sessions} ({day.completed} done)
                         </div>
                         <div
-                          className="w-full bg-purple-200 rounded-t-sm relative overflow-hidden"
+                          className="w-full bg-brand-200 rounded-t-sm relative overflow-hidden"
                           style={{ height: `${Math.max(height, 2)}%` }}
                         >
                           <div
-                            className="absolute bottom-0 left-0 right-0 bg-purple-500 rounded-t-sm"
+                            className="absolute bottom-0 left-0 right-0 bg-brand-500 rounded-t-sm"
                             style={{ height: `${(day.completed / Math.max(day.sessions, 1)) * 100}%` }}
                           />
                         </div>
@@ -261,11 +261,11 @@ export default function InstagramInsights() {
                 </div>
                 <div className="flex items-center gap-4 justify-center pt-2 text-xs text-gray-500">
                   <div className="flex items-center gap-1.5">
-                    <div className="w-3 h-3 bg-purple-500 rounded-sm" />
+                    <div className="w-3 h-3 bg-brand-500 rounded-sm" />
                     <span>Completed</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <div className="w-3 h-3 bg-purple-200 rounded-sm" />
+                    <div className="w-3 h-3 bg-brand-200 rounded-sm" />
                     <span>Total</span>
                   </div>
                 </div>
@@ -292,7 +292,7 @@ export default function InstagramInsights() {
                   return (
                     <div key={day.date} className="flex items-center justify-between">
                       <span className="text-sm text-gray-700">{label}</span>
-                      <span className="text-sm font-semibold bg-purple-100 text-purple-700 px-2.5 py-0.5 rounded-full">
+                      <span className="text-sm font-semibold bg-brand-100 text-brand-700 px-2.5 py-0.5 rounded-full">
                         {day.leads}
                       </span>
                     </div>

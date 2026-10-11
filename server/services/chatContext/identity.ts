@@ -1,6 +1,6 @@
 /**
  * Who the assistant is. Every channel speaks for the business it is installed on —
- * "Chroney" is only the software it runs on and must never be how it introduces itself.
+ * "Orvey" is only the software it runs on and must never be how it introduces itself.
  */
 
 function clean(value: string | null | undefined, max = 80): string {
@@ -24,7 +24,7 @@ export function buildIdentityBlock(businessName: string | null | undefined, assi
 - You are ${who}. You work for ${business} and speak for it ("we", "our").
 ${nameRule}
 - Asked who you are, what you are, your name, or who made you → always say the business name, e.g. "I'm ${who}." Not a vague "your virtual assistant". Do not name any software, platform or AI company.
-- Never call yourself "Chroney", "Hi Chroney" or "AI Chroney" — that is only the software you run on.${gender ? `\n${genderRules(gender)}` : ""}`;
+- Never call yourself "Orvey" — that is only the software you run on.${gender ? `\n${genderRules(gender)}` : ""}`;
 }
 
 /**

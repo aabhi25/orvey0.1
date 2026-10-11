@@ -456,7 +456,7 @@ function LinkedStepsPanel({
           <button type="button" className="w-full text-left" aria-label={open ? "Hide linked journey steps" : "Show linked journey steps"}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 gap-3">
               <div className="flex items-center gap-3 min-w-0">
-                <Link2 className="h-5 w-5 text-purple-600 shrink-0" />
+                <Link2 className="h-5 w-5 text-brand-600 shrink-0" />
                 <div className="min-w-0">
                   <CardTitle className="text-base">Linked journey steps</CardTitle>
                   <CardDescription className="truncate">
@@ -496,7 +496,7 @@ function LinkedStepsPanel({
                           </p>
                         </div>
                         <div className="flex items-center gap-2">
-                          {isSuggestion && <Badge variant="outline" className="text-purple-700 border-purple-200">Suggested</Badge>}
+                          {isSuggestion && <Badge variant="outline" className="text-brand-700 border-brand-200">Suggested</Badge>}
                           <Select
                             value={value ?? "none"}
                             onValueChange={v => setDraft(d => ({ ...d, [s.stepId]: v === "none" ? null : (v as SheetLevel) }))}
@@ -565,9 +565,9 @@ function SeedCard({ isEmpty, onHide }: { isEmpty: boolean; onHide: () => void })
 
   return (
     <>
-      <Card className="border-purple-200 bg-gradient-to-br from-purple-50 to-white">
+      <Card className="border-brand-200 bg-gradient-to-br from-brand-50 to-white">
         <CardContent className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center gap-4">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-500 to-ink-600 flex items-center justify-center shrink-0">
             <Sparkles className="h-5 w-5 text-white" />
           </div>
           <div className="flex-1">
@@ -1151,7 +1151,7 @@ export default function StoreSheet() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
+        <Loader2 className="w-8 h-8 animate-spin text-brand-500" />
       </div>
     );
   }

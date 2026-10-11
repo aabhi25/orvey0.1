@@ -14,9 +14,9 @@ function SubRows({ location, onNavigate }: { location: string; onNavigate: (href
             <SidebarMenuButton
               onClick={() => onNavigate(item.href)}
               data-testid={item.testId}
-              className={`group/nav transition-all duration-200 ${active ? "text-purple-700 font-medium bg-purple-50/50" : "hover:bg-gray-50/80"}`}
+              className={`group/nav transition-all duration-200 ${active ? "text-brand-700 font-medium bg-brand-50/50" : "hover:bg-gray-50/80"}`}
             >
-              <item.icon className={`w-3.5 h-3.5 shrink-0 ${active ? "text-purple-600" : "text-gray-400"}`} />
+              <item.icon className={`w-3.5 h-3.5 shrink-0 ${active ? "text-brand-600" : "text-gray-400"}`} />
               <span className="text-[13px]">{item.label}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -39,10 +39,10 @@ export function CallingNavGroupItem({ location, onNavigate }: { location: string
             data-testid="link-phone-calls"
             aria-label={open ? "Collapse Phone calls" : "Expand Phone calls"}
             className={`group/nav relative transition-all duration-200 ${
-              active ? "bg-gradient-to-r from-purple-50 to-indigo-50 text-purple-700 font-medium shadow-sm border border-purple-100/60" : "hover:bg-gray-50/80"
+              active ? "bg-gradient-to-r from-brand-50 to-ink-50 text-brand-700 font-medium shadow-sm border border-brand-100/60" : "hover:bg-gray-50/80"
             }`}
           >
-            <div className={`flex items-center justify-center w-7 h-7 rounded-lg transition-all duration-200 ${active ? "bg-gradient-to-br from-sky-500 to-indigo-600" : "bg-gray-100 group-hover/nav:bg-gray-200/80"}`}>
+            <div className={`flex items-center justify-center w-7 h-7 rounded-lg transition-all duration-200 ${active ? "bg-gradient-to-br from-sky-500 to-brand-600" : "bg-gray-100 group-hover/nav:bg-gray-200/80"}`}>
               <Phone className={`w-3.5 h-3.5 transition-colors ${active ? "text-white" : "text-gray-500 group-hover/nav:text-gray-700"}`} />
             </div>
             <span className="text-[14px]">Phone calls</span>

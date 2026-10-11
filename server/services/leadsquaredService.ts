@@ -342,8 +342,8 @@ export class LeadSquaredService {
     if (leadData.sourceCampaign) {
       attributes.push({ Attribute: 'mx_Source_Campaign', Value: trimToMaxLength(leadData.sourceCampaign) });
     }
-    attributes.push({ Attribute: 'Source', Value: trimToMaxLength(leadData.source || 'AI Chroney') });
-    attributes.push({ Attribute: 'mx_Secondary_Lead_Source', Value: trimToMaxLength('AI Chroney') });
+    attributes.push({ Attribute: 'Source', Value: trimToMaxLength(leadData.source || 'Orvey') });
+    attributes.push({ Attribute: 'mx_Secondary_Lead_Source', Value: trimToMaxLength('Orvey') });
     
     return attributes;
   }
@@ -1042,7 +1042,7 @@ export function buildSampleLeadContext(
   const pageUrl = `${business.website || 'https://example.com'}/?utm_source=sample_source&utm_medium=sample_medium&utm_campaign=sample_campaign`;
   return {
     lead: {
-      name: 'AI Chroney Test Lead',
+      name: 'Orvey Test Lead',
       email: 'test.lead@example.com',
       phone: '9000000000',
       whatsapp: '9000000000',

@@ -176,7 +176,7 @@ export default function AIInsights() {
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'faq': return 'bg-blue-500/10 text-blue-600';
-      case 'training': return 'bg-purple-500/10 text-purple-600';
+      case 'training': return 'bg-brand-500/10 text-brand-600';
       case 'journey': return 'bg-green-500/10 text-green-600';
       case 'product': return 'bg-orange-500/10 text-orange-600';
       default: return 'bg-gray-500/10 text-gray-600';
@@ -201,8 +201,8 @@ export default function AIInsights() {
         <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
-            <Sparkles className="h-8 w-8 text-purple-600" />
-            Chroney IQ
+            <Sparkles className="h-8 w-8 text-brand-600" />
+            Orvey IQ
           </h1>
           <p className="text-muted-foreground mt-2">
             AI-powered suggestions to improve your chatbot based on conversation analysis
@@ -211,7 +211,7 @@ export default function AIInsights() {
         <Button
           onClick={handleAnalyze}
           disabled={isAnalyzing || analyzeMutation.isPending}
-          className="gap-2 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600"
+          className="gap-2 bg-gradient-to-r from-brand-500 to-ink-500 hover:from-brand-600 hover:to-ink-600"
         >
           <Brain className="h-4 w-4" />
           {(isAnalyzing || analyzeMutation.isPending) ? 'Analyzing...' : 'Analyze Conversations'}
@@ -262,19 +262,19 @@ export default function AIInsights() {
 
       {/* Tabs for filtering by type */}
       <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)} className="mb-6">
-        <TabsList className="grid w-full grid-cols-5 bg-gradient-to-r from-purple-50 to-white backdrop-blur-sm shadow-md h-auto p-1 rounded-xl">
-          <TabsTrigger value="all" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">All Suggestions</TabsTrigger>
-          <TabsTrigger value="faq" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">FAQs</TabsTrigger>
-          <TabsTrigger value="training" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">Training</TabsTrigger>
-          <TabsTrigger value="journey" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">Journeys</TabsTrigger>
-          <TabsTrigger value="product" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">Products</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-5 bg-gradient-to-r from-brand-50 to-white backdrop-blur-sm shadow-md h-auto p-1 rounded-xl">
+          <TabsTrigger value="all" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">All Suggestions</TabsTrigger>
+          <TabsTrigger value="faq" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">FAQs</TabsTrigger>
+          <TabsTrigger value="training" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">Training</TabsTrigger>
+          <TabsTrigger value="journey" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">Journeys</TabsTrigger>
+          <TabsTrigger value="product" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">Products</TabsTrigger>
         </TabsList>
       </Tabs>
 
       {/* Suggestions List */}
       {isLoading ? (
         <div className="text-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600 mx-auto"></div>
           <p className="text-muted-foreground mt-4">Loading suggestions...</p>
         </div>
       ) : filteredSuggestions.length === 0 ? (

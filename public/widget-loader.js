@@ -6,7 +6,7 @@
   
   var businessAccountId = currentScript.getAttribute('data-business-id');
   if (!businessAccountId) {
-    console.error('[Chroney Widget] Missing data-business-id attribute');
+    console.error('[Orvey Widget] Missing data-business-id attribute');
     return;
   }
   
@@ -112,7 +112,7 @@
   // Subject is mandatory for grade-scoped (education) embeds. Warn integrators when a
   // grade-scope is present without it — the tutor refuses to answer until a subject is set.
   if ((studentBoard || studentMedium || studentGrade) && !studentSubject) {
-    console.warn('[Chroney Widget] data-subject is required for grade-scoped embeds; the tutor will refuse to answer until a subject is provided.');
+    console.warn('[Orvey Widget] data-subject is required for grade-scoped embeds; the tutor will refuse to answer until a subject is provided.');
   }
   
   var VISITOR_KEY = 'chroney_visitor_' + config.businessAccountId;
@@ -314,7 +314,7 @@
         }
         
         if (hasMatchingRule) {
-          console.log('[Chroney Widget] Proactive guidance active - auto-opening chat');
+          console.log('[Orvey Widget] Proactive guidance active - auto-opening chat');
           config.autoOpenChat = 'both';
           config.autoOpenFrequency = 'always';
           config.proactiveGuidanceActive = true;
@@ -323,7 +323,7 @@
         initWidget();
       })
       .catch(function(err) {
-        console.log('[Chroney Widget] Could not check proactive guidance:', err);
+        console.log('[Orvey Widget] Could not check proactive guidance:', err);
         initWidget();
       });
   }

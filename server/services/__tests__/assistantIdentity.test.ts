@@ -1,5 +1,5 @@
 /**
- * The assistant speaks for the business it is installed on — never as "Chroney".
+ * The assistant speaks for the business it is installed on — never as "Orvey".
  * Run: npx tsx server/services/__tests__/assistantIdentity.test.ts
  */
 process.env.DATABASE_URL = process.env.DATABASE_URL || 'postgres://unused@127.0.0.1:1/unused'; // modules import db lazily; never queried here
@@ -15,7 +15,7 @@ async function main() {
 
   const plain = buildIdentityBlock('Cooke & Kelvey');
   expect(plain.includes("You are Cooke & Kelvey's AI assistant"), 'text chat: the business\'s AI assistant', plain);
-  expect(/Never call yourself "Chroney"/.test(plain), 'forbids introducing itself as Chroney');
+  expect(/Never call yourself "Orvey"/.test(plain), 'forbids introducing itself as Orvey');
   expect(/business custom instructions give you a name or persona, use it/.test(plain), 'without an avatar, a name from the business instructions wins');
   expect(!/Your name is/.test(plain), 'no invented personal name without an avatar');
 
@@ -77,12 +77,12 @@ async function main() {
   expect(g.textChatAssistantGender({ voiceModeEnabled: 'true' }, { voiceSelection: 'elevenlabs-lily', chatMode: 'chat-only' }) === null, 'text-only widget → no gender rule');
   expect(g.textChatAssistantGender(null, null) === null, 'missing account → null');
 
-  // The main prompt no longer claims to be Chroney.
+  // The main prompt no longer claims to be Orvey.
   const { readFileSync } = await import('fs');
   const llama = readFileSync(new URL('../../llamaService.ts', import.meta.url), 'utf8');
-  expect(!/You are Chroney/.test(llama), 'llamaService prompts never say "You are Chroney"');
+  expect(!/You are Orvey/.test(llama), 'llamaService prompts never say "You are Orvey"');
   const routes = readFileSync(new URL('../../routes.ts', import.meta.url), 'utf8');
-  expect(!/I'm Chroney|Chroney here|Chroney reporting/.test(routes), 'default visitor intros never say "I\'m Chroney"');
+  expect(!/I'm Orvey|Orvey here|Orvey reporting/.test(routes), 'default visitor intros never say "I\'m Orvey"');
 
   if (failed) { console.log(`\n${failed} check(s) failed`); process.exit(1); }
   console.log('\nAll assistant identity checks passed.');

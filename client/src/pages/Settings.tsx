@@ -43,10 +43,10 @@ const LUXE_THEMES: Record<ThemePreset, { name: string; description: string; prim
   amethyst_aurora: {
     name: "Amethyst Aurora",
     description: "Cool purple radiance",
-    primary: "#7c3aed",
-    secondary: "#a855f7",
-    accent: "#e9d5ff",
-    bg: "#faf5ff",
+    primary: "#1a3878",
+    secondary: "#3a63b5",
+    accent: "#c3d2ee",
+    bg: "#f0f4fb",
     text: "#1e1b4b"
   }
 };
@@ -68,7 +68,7 @@ export default function Settings({ section, embedded = false }: { section?: "acc
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [showcaseThemeColor, setShowcaseThemeColor] = useState("#9333ea");
+  const [showcaseThemeColor, setShowcaseThemeColor] = useState("#1f4596");
   const [showcaseThemePreset, setShowcaseThemePreset] = useState<ThemePreset>('noir_luxe');
   const logoInputRef = useRef<HTMLInputElement>(null);
 
@@ -357,7 +357,7 @@ export default function Settings({ section, embedded = false }: { section?: "acc
       {!embedded && (
         <div className="mb-8">
           <h1 className="text-2xl font-bold flex items-center gap-2">
-            <Settings2 className="w-6 h-6 text-purple-600" />
+            <Settings2 className="w-6 h-6 text-brand-600" />
             Settings
           </h1>
           <p className="text-muted-foreground mt-1">
@@ -369,13 +369,13 @@ export default function Settings({ section, embedded = false }: { section?: "acc
       <div className="space-y-6">
         {showPrivacy && section === "lead-privacy" && !isSuperAdminImpersonating && (
           <Card className="shadow-lg border-gray-200" data-testid="card-lead-privacy-readonly">
-            <CardHeader className="border-b bg-gradient-to-r from-purple-50 to-pink-50 py-4">
+            <CardHeader className="border-b bg-gradient-to-r from-brand-50 to-ink-50 py-4">
               <CardTitle className="text-base flex items-center gap-2">
-                <EyeOff className="w-4 h-4 text-purple-600" />
+                <EyeOff className="w-4 h-4 text-brand-600" />
                 Lead privacy
               </CardTitle>
               <CardDescription className="mt-1">
-                These are set for your account by your AI Chroney administrator. Contact support to change them.
+                These are set for your account by your Orvey administrator. Contact support to change them.
               </CardDescription>
             </CardHeader>
             <CardContent className="pt-6 space-y-4">
@@ -404,9 +404,9 @@ export default function Settings({ section, embedded = false }: { section?: "acc
         {showPrivacy && isSuperAdminImpersonating && (
           <div className="space-y-6">
             <Card className="shadow-lg border-gray-200">
-            <CardHeader className="border-b bg-gradient-to-r from-purple-50 to-pink-50 py-4">
+            <CardHeader className="border-b bg-gradient-to-r from-brand-50 to-ink-50 py-4">
               <CardTitle className="text-base flex items-center gap-2">
-                <Download className="w-4 h-4 text-purple-600" />
+                <Download className="w-4 h-4 text-brand-600" />
                 Leads Export Access
               </CardTitle>
               <CardDescription className="mt-1">
@@ -442,9 +442,9 @@ export default function Settings({ section, embedded = false }: { section?: "acc
             </Card>
 
             <Card className="shadow-lg border-gray-200">
-              <CardHeader className="border-b bg-gradient-to-r from-purple-50 to-pink-50 py-4">
+              <CardHeader className="border-b bg-gradient-to-r from-brand-50 to-ink-50 py-4">
                 <CardTitle className="text-base flex items-center gap-2">
-                  <EyeOff className="w-4 h-4 text-purple-600" />
+                  <EyeOff className="w-4 h-4 text-brand-600" />
                   Lead Phone Privacy
                 </CardTitle>
                 <CardDescription className="mt-1">
@@ -485,9 +485,9 @@ export default function Settings({ section, embedded = false }: { section?: "acc
           <>
         {hasJewelryAccess && (
           <Card className="shadow-lg border-gray-200">
-            <CardHeader className="border-b bg-gradient-to-r from-purple-50 to-pink-50 py-4">
+            <CardHeader className="border-b bg-gradient-to-r from-brand-50 to-ink-50 py-4">
               <CardTitle className="text-base flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-purple-600" />
+                <Sparkles className="w-4 h-4 text-brand-600" />
                 Vista Customization
               </CardTitle>
               <CardDescription className="mt-1">
@@ -520,13 +520,13 @@ export default function Settings({ section, embedded = false }: { section?: "acc
                             }}
                             className={`relative p-4 rounded-xl border-2 transition-all duration-300 text-left ${
                               isSelected 
-                                ? 'border-purple-500 ring-2 ring-purple-200 shadow-lg scale-[1.02]' 
+                                ? 'border-brand-500 ring-2 ring-brand-200 shadow-lg scale-[1.02]' 
                                 : 'border-gray-200 hover:border-gray-300 hover:shadow-md'
                             }`}
                             style={{ backgroundColor: theme.bg }}
                           >
                             {isSelected && (
-                              <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-purple-500 flex items-center justify-center">
+                              <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-brand-500 flex items-center justify-center">
                                 <Check className="w-3 h-3 text-white" />
                               </div>
                             )}
@@ -772,9 +772,9 @@ export default function Settings({ section, embedded = false }: { section?: "acc
 
         {canManageTopScholarContent && (
           <Card className="shadow-lg border-gray-200">
-            <CardHeader className="border-b bg-gradient-to-r from-violet-50 to-purple-50 py-4">
+            <CardHeader className="border-b bg-gradient-to-r from-brand-50 to-ink-50 py-4">
               <CardTitle className="text-base flex items-center gap-2">
-                <RefreshCw className="w-4 h-4 text-violet-600" />
+                <RefreshCw className="w-4 h-4 text-brand-600" />
                 Content Sync
               </CardTitle>
               <CardDescription className="mt-1">
@@ -784,7 +784,7 @@ export default function Settings({ section, embedded = false }: { section?: "acc
             <CardContent className="pt-6">
               <div className="flex items-center justify-between p-4 border rounded-lg bg-gray-50">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white">
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-500 to-ink-600 flex items-center justify-center text-white">
                     <RefreshCw className="w-5 h-5" />
                   </div>
                   <div>
@@ -845,9 +845,9 @@ export default function Settings({ section, embedded = false }: { section?: "acc
         )}
 
         <Card className="shadow-lg border-gray-200">
-          <CardHeader className="border-b bg-gradient-to-r from-purple-50 to-pink-50 py-4">
+          <CardHeader className="border-b bg-gradient-to-r from-brand-50 to-ink-50 py-4">
             <CardTitle className="text-base flex items-center gap-2">
-              <Lock className="w-4 h-4 text-purple-600" />
+              <Lock className="w-4 h-4 text-brand-600" />
               Change Password
             </CardTitle>
             <CardDescription className="mt-1">
@@ -911,7 +911,7 @@ export default function Settings({ section, embedded = false }: { section?: "acc
               <Button
                 type="submit"
                 disabled={changePasswordMutation.isPending}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white"
+                className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700 text-white"
               >
                 {changePasswordMutation.isPending ? (
                   <>

@@ -12,7 +12,7 @@ interface AvatarStatus {
   maxSessionMinutes?: number;
 }
 
-/** Read-only for business users: the Live AI avatar add-on is managed by the Chroney team. */
+/** Read-only for business users: the Live AI avatar add-on is managed by the Orvey team. */
 export function LiveAvatarStatusCard() {
   const { data } = useQuery<AvatarStatus>({
     queryKey: ["/api/avatar/status"],
@@ -26,9 +26,9 @@ export function LiveAvatarStatusCard() {
   if (!data) return null;
   return (
     <Card className="shadow-lg border border-gray-200 bg-white" data-testid="card-live-avatar-status">
-      <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+      <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
         <CardTitle className="text-lg flex items-center gap-2"><Video className="h-5 w-5" /> Live AI avatar</CardTitle>
-        <CardDescription>A lip-synced video avatar for voice conversations. Managed by the Chroney team — contact us to change it.</CardDescription>
+        <CardDescription>A lip-synced video avatar for voice conversations. Managed by the Orvey team — contact us to change it.</CardDescription>
       </CardHeader>
       <CardContent className="pt-4 text-sm space-y-1">
         {data.enabled ? (

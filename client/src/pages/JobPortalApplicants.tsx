@@ -173,7 +173,7 @@ export default function JobPortalApplicants() {
     const colors: Record<string, string> = {
       manual: "bg-gray-100 text-gray-600",
       chat: "bg-blue-100 text-blue-700",
-      import: "bg-purple-100 text-purple-700",
+      import: "bg-brand-100 text-brand-700",
     };
     return <Badge className={colors[source] || "bg-gray-100 text-gray-600"}>{source}</Badge>;
   };

@@ -170,7 +170,7 @@ export default function WhatsAppCampaignAutomationDetail({ id }: { id: string })
             Messages people {describeDateRule(automation.dateOffsetDays, automation.dateColumn)} · sends at {automation.sendTime} ({automation.timezone})
           </p>
           {isBlueprintSource && (
-            <p className="text-xs text-violet-700 mt-1">
+            <p className="text-xs text-brand-700 mt-1">
               Based on campaign <span className="font-medium">{sourceCampaign?.name || preview?.source.campaignName || "(no longer available)"}</span>. Every run uses its message, AI replies and reply outcomes.
             </p>
           )}

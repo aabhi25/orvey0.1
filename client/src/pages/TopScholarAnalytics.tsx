@@ -238,7 +238,7 @@ function KpiCard({
   tone?: "indigo" | "emerald" | "rose" | "amber";
 }) {
   const tones: Record<string, string> = {
-    indigo: "from-indigo-500 to-violet-600",
+    indigo: "from-brand-500 to-ink-600",
     emerald: "from-emerald-500 to-teal-600",
     rose: "from-rose-500 to-red-600",
     amber: "from-amber-500 to-orange-600",
@@ -645,11 +645,11 @@ export default function TopScholarAnalytics() {
             {cohortTotal > 0 && ad && (
               <div>
                 <div className="h-2 rounded-full overflow-hidden flex">
-                  <div className="bg-indigo-500 h-full" style={{ width: `${(ad.newStudents / cohortTotal) * 100}%` }} />
+                  <div className="bg-brand-500 h-full" style={{ width: `${(ad.newStudents / cohortTotal) * 100}%` }} />
                   <div className="bg-cyan-500 h-full" style={{ width: `${(ad.returningStudents / cohortTotal) * 100}%` }} />
                 </div>
                 <div className="flex justify-between text-[11px] text-muted-foreground mt-1">
-                  <span className="flex items-center gap-1"><UserPlus className="w-3 h-3 text-indigo-500" /> {Math.round((ad.newStudents / cohortTotal) * 100)}% new</span>
+                  <span className="flex items-center gap-1"><UserPlus className="w-3 h-3 text-brand-500" /> {Math.round((ad.newStudents / cohortTotal) * 100)}% new</span>
                   <span>{Math.round((ad.returningStudents / cohortTotal) * 100)}% returning</span>
                 </div>
               </div>

@@ -15,7 +15,7 @@ import {
 } from "@shared/leadTrainingConfig";
 
 /**
- * "When to collect" for one lead field — shared by Train Chroney (account) and
+ * "When to collect" for one lead field — shared by Train Orvey (account) and
  * the group training editor so both offer exactly the same timings and inputs:
  * At Start / Custom (ask after reply #) / Intent (sensitivity) / Keyword (list).
  */

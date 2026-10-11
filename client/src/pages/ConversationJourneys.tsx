@@ -985,9 +985,9 @@ export default function ConversationJourneys() {
             onClick={() => setShowImportDialog(true)} 
             size="lg" 
             variant="outline"
-            className="gap-2 shadow-sm hover:shadow-md transition-all border-purple-200 hover:border-purple-400 hover:bg-purple-50 dark:border-purple-800 dark:hover:border-purple-600 dark:hover:bg-purple-950/30"
+            className="gap-2 shadow-sm hover:shadow-md transition-all border-brand-200 hover:border-brand-400 hover:bg-brand-50 dark:border-brand-800 dark:hover:border-brand-600 dark:hover:bg-brand-950/30"
           >
-            <FileText className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+            <FileText className="w-5 h-5 text-brand-600 dark:text-brand-400" />
             Import from Script
           </Button>
           <Button onClick={() => setShowTemplates(true)} size="lg" className="gap-2 shadow-md hover:shadow-lg transition-all">
@@ -1128,7 +1128,7 @@ export default function ConversationJourneys() {
                                   setEditingJourneyName(false);
                                 }
                               }}
-                              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                              className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                             >
                               <Check className="w-4 h-4" />
                             </Button>
@@ -1189,7 +1189,7 @@ export default function ConversationJourneys() {
                                   });
                                   setEditingJourneyDescription(false);
                                 }}
-                                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 h-8 w-8 p-0"
+                                className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700 h-8 w-8 p-0"
                               >
                                 <Check className="w-4 h-4" />
                               </Button>
@@ -1228,7 +1228,7 @@ export default function ConversationJourneys() {
                     </div>
                   </div>
 
-                  <Card className="bg-gradient-to-br from-blue-50/50 to-indigo-50/30 dark:from-blue-950/20 dark:to-indigo-950/10 border-blue-200/50 dark:border-blue-800/30 shadow-sm">
+                  <Card className="bg-gradient-to-br from-blue-50/50 to-brand-50/30 dark:from-blue-950/20 dark:to-brand-950/10 border-blue-200/50 dark:border-blue-800/30 shadow-sm">
                     <CardContent className="pt-4 pb-4">
                       <div className="flex items-center justify-between p-3 bg-white/60 dark:bg-gray-800/30 rounded-lg">
                         <div>
@@ -1286,7 +1286,7 @@ export default function ConversationJourneys() {
                   </Card>
 
                   {selectedJourney.startFromScratch !== 'true' && (
-                    <Card className="bg-gradient-to-br from-purple-50/50 to-pink-50/30 dark:from-purple-950/20 dark:to-pink-950/10 border-purple-200/50 dark:border-purple-800/30 shadow-sm">
+                    <Card className="bg-gradient-to-br from-brand-50/50 to-ink-50/30 dark:from-brand-950/20 dark:to-ink-950/10 border-brand-200/50 dark:border-brand-800/30 shadow-sm">
                       <CardHeader className="pb-4">
                         <CardTitle className="text-base">Trigger Keywords</CardTitle>
                         <CardDescription className="text-sm">
@@ -1298,7 +1298,7 @@ export default function ConversationJourneys() {
                           {parsedTriggerKeywords.map((keyword, index) => (
                             <div
                               key={index}
-                              className="group flex items-center gap-1.5 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-3 py-1.5 rounded-full text-sm font-medium transition-all hover:bg-purple-200 dark:hover:bg-purple-900/50"
+                              className="group flex items-center gap-1.5 bg-brand-100 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 px-3 py-1.5 rounded-full text-sm font-medium transition-all hover:bg-brand-200 dark:hover:bg-brand-900/50"
                             >
                               <span>{keyword}</span>
                               <button
@@ -1346,14 +1346,14 @@ export default function ConversationJourneys() {
                   )}
 
                   {selectedJourney.journeyType !== 'form' && (
-                    <Card className="bg-gradient-to-br from-purple-50/50 to-blue-50/30 dark:from-purple-950/20 dark:to-blue-950/10 border-purple-200/50 dark:border-purple-800/30 shadow-sm">
+                    <Card className="bg-gradient-to-br from-brand-50/50 to-ink-50/30 dark:from-brand-950/20 dark:to-ink-950/10 border-brand-200/50 dark:border-brand-800/30 shadow-sm">
                       <CardHeader className="pb-4">
                         <CardTitle className="text-base flex items-center gap-2">
-                          <MessageSquare className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                          <MessageSquare className="w-4 h-4 text-brand-600 dark:text-brand-400" />
                           Journey-Specific Training
                         </CardTitle>
                       <CardDescription className="text-sm">
-                        Optional conversational guidelines that work alongside your global Train Chroney instructions when this journey is active
+                        Optional conversational guidelines that work alongside your global Train Orvey instructions when this journey is active
                         </CardDescription>
                       </CardHeader>
                       <CardContent className="space-y-4">
@@ -1389,7 +1389,7 @@ export default function ConversationJourneys() {
                                     <Button
                                       size="sm"
                                       onClick={() => handleUpdateJourneyInstruction(instruction.id, editInstructionText)}
-                                      className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                                      className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                                     >
                                       <Check className="w-3 h-3 mr-1" />
                                       Save
@@ -1397,8 +1397,8 @@ export default function ConversationJourneys() {
                                   </div>
                                 </div>
                               ) : (
-                                <div className="flex items-start gap-2 p-3 rounded-lg bg-white/60 dark:bg-gray-800/30 border border-purple-200/30 dark:border-purple-800/20 hover:border-purple-300/50 dark:hover:border-purple-700/40 transition-colors">
-                                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white flex items-center justify-center text-xs font-medium mt-0.5">
+                                <div className="flex items-start gap-2 p-3 rounded-lg bg-white/60 dark:bg-gray-800/30 border border-brand-200/30 dark:border-brand-800/20 hover:border-brand-300/50 dark:hover:border-brand-700/40 transition-colors">
+                                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-r from-brand-600 to-ink-600 text-white flex items-center justify-center text-xs font-medium mt-0.5">
                                     {index + 1}
                                   </div>
                                   <p className="flex-1 text-sm leading-relaxed pt-0.5">{instruction.text}</p>
@@ -1409,7 +1409,7 @@ export default function ConversationJourneys() {
                                       className="h-7 w-7 p-0"
                                       onClick={() => handleRefineJourneyInstruction(instruction)}
                                     >
-                                      <Sparkles className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
+                                      <Sparkles className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
                                     </Button>
                                     <Button
                                       size="sm"
@@ -1462,7 +1462,7 @@ export default function ConversationJourneys() {
                             size="sm"
                             onClick={handleAddJourneyInstruction}
                             disabled={!newJourneyInstruction.trim()}
-                            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                            className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                           >
                             <Plus className="w-3 h-3 mr-1" />
                             Add Instruction
@@ -1530,7 +1530,7 @@ export default function ConversationJourneys() {
                                 </span>
                               )}
                               {step.toolTrigger && step.toolTrigger !== 'none' && (
-                                <span className="text-xs font-semibold text-purple-600 bg-purple-100 dark:bg-purple-900/40 px-2.5 py-1 rounded-full">
+                                <span className="text-xs font-semibold text-brand-600 bg-brand-100 dark:bg-brand-900/40 px-2.5 py-1 rounded-full">
                                   {step.toolTrigger}
                                 </span>
                               )}
@@ -1607,7 +1607,7 @@ export default function ConversationJourneys() {
           ) : (
             <Card className="shadow-md border-0">
               <CardContent className="flex flex-col items-center justify-center py-32">
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/20 p-8 rounded-full mb-6">
+                <div className="bg-gradient-to-br from-blue-50 to-brand-50 dark:from-blue-950/30 dark:to-brand-950/20 p-8 rounded-full mb-6">
                   <Route className="w-20 h-20 text-blue-400 dark:text-blue-500" />
                 </div>
                 <h3 className="text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-3">No Journey Selected</h3>
@@ -1640,12 +1640,12 @@ export default function ConversationJourneys() {
               return (
                 <Card
                   key={type.id}
-                  className={`cursor-pointer transition-colors ${isConversational ? 'hover:border-blue-500' : 'hover:border-purple-500'}`}
+                  className={`cursor-pointer transition-colors ${isConversational ? 'hover:border-blue-500' : 'hover:border-brand-500'}`}
                   onClick={() => handleCreateFromTemplate(type)}
                 >
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <Icon className={`w-5 h-5 ${isConversational ? 'text-blue-600' : 'text-purple-600'}`} />
+                      <Icon className={`w-5 h-5 ${isConversational ? 'text-blue-600' : 'text-brand-600'}`} />
                       {type.name}
                     </CardTitle>
                     <CardDescription>{type.description}</CardDescription>
@@ -1777,7 +1777,7 @@ export default function ConversationJourneys() {
 
                 {/* Answer Options - shown when Dropdown or Radio is selected */}
                 {(stepForm.questionType === 'dropdown' || stepForm.questionType === 'radio') && (
-                  <div className="border rounded-lg p-4 bg-purple-50/50 dark:bg-purple-950/20">
+                  <div className="border rounded-lg p-4 bg-brand-50/50 dark:bg-brand-950/20">
                     <Label className="mb-2 block">Answer Options</Label>
                     <p className="text-xs text-muted-foreground mb-3">
                       Add the choices users can select from (e.g., Yes, No, Maybe)
@@ -1985,7 +1985,7 @@ export default function ConversationJourneys() {
             {selectedJourney?.journeyType !== 'form' && (
             <div className="border-t pt-4 mt-6">
               <div className="flex items-center gap-2 mb-4">
-                <GitBranch className="w-5 h-5 text-purple-600" />
+                <GitBranch className="w-5 h-5 text-brand-600" />
                 <Label className="text-base font-semibold">Conditional Branching (Optional)</Label>
               </div>
               <p className="text-sm text-muted-foreground mb-4">
@@ -1996,8 +1996,8 @@ export default function ConversationJourneys() {
               {branchRoutes.length > 0 && (
                 <div className="space-y-2 mb-4">
                   {branchRoutes.map((route, index) => (
-                    <div key={index} className="flex items-center gap-2 p-3 bg-purple-50 dark:bg-purple-950/20 rounded-lg border border-purple-200 dark:border-purple-800">
-                      <ArrowRight className="w-4 h-4 text-purple-600 flex-shrink-0" />
+                    <div key={index} className="flex items-center gap-2 p-3 bg-brand-50 dark:bg-brand-950/20 rounded-lg border border-brand-200 dark:border-brand-800">
+                      <ArrowRight className="w-4 h-4 text-brand-600 flex-shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium truncate">
                           {route.label || `If response ${route.matchType} "${route.matchValue}"`}
@@ -2290,7 +2290,7 @@ export default function ConversationJourneys() {
                     <div 
                       className={`flex items-center gap-3 px-4 py-3 rounded-xl shadow-md w-[240px]
                         ${isConditional 
-                          ? 'border-2 border-dashed border-purple-400 bg-purple-50/50 dark:bg-purple-950/30' 
+                          ? 'border-2 border-dashed border-brand-400 bg-brand-50/50 dark:bg-brand-950/30' 
                           : isEndStep 
                             ? 'border-2 border-green-400 bg-green-50 dark:bg-green-950/30'
                             : lane === 'skip'
@@ -2299,7 +2299,7 @@ export default function ConversationJourneys() {
                         }`}
                     >
                       <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm text-white
-                        ${isConditional ? 'bg-purple-500' : isEndStep ? 'bg-green-500' : lane === 'skip' ? 'bg-orange-500' : 'bg-blue-600'}`}>
+                        ${isConditional ? 'bg-brand-500' : isEndStep ? 'bg-green-500' : lane === 'skip' ? 'bg-orange-500' : 'bg-blue-600'}`}>
                         {stepNumber}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -2308,12 +2308,12 @@ export default function ConversationJourneys() {
                         </div>
                         <div className="flex items-center gap-1 mt-1 flex-wrap">
                           {step.toolTrigger && step.toolTrigger !== 'none' && (
-                            <span className="text-[9px] bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 px-1 py-0.5 rounded">
+                            <span className="text-[9px] bg-brand-100 dark:bg-brand-900/40 text-brand-700 dark:text-brand-300 px-1 py-0.5 rounded">
                               {step.toolTrigger}
                             </span>
                           )}
                           {isConditional && (
-                            <span className="text-[9px] bg-purple-200 dark:bg-purple-800 text-purple-700 dark:text-purple-200 px-1 py-0.5 rounded">
+                            <span className="text-[9px] bg-brand-200 dark:bg-brand-800 text-brand-700 dark:text-brand-200 px-1 py-0.5 rounded">
                               conditional
                             </span>
                           )}
@@ -2390,13 +2390,13 @@ export default function ConversationJourneys() {
                                         <div className={`px-2 py-1 rounded-full border text-[10px] font-semibold
                                           ${branch.type === 'skip' 
                                             ? 'bg-orange-100 dark:bg-orange-900/40 border-orange-300 text-orange-700' 
-                                            : 'bg-purple-100 dark:bg-purple-900/40 border-purple-300 text-purple-700'
+                                            : 'bg-brand-100 dark:bg-brand-900/40 border-brand-300 text-brand-700'
                                           }`}>
                                           "{branch.label}"
                                         </div>
                                         <div className="flex items-center gap-1 mt-1">
-                                          <ArrowRight className={`w-3 h-3 ${branch.type === 'skip' ? 'text-orange-500' : 'text-purple-500'}`} />
-                                          <span className={`text-[10px] font-medium ${branch.type === 'skip' ? 'text-orange-600' : 'text-purple-600'}`}>
+                                          <ArrowRight className={`w-3 h-3 ${branch.type === 'skip' ? 'text-orange-500' : 'text-brand-500'}`} />
+                                          <span className={`text-[10px] font-medium ${branch.type === 'skip' ? 'text-orange-600' : 'text-brand-600'}`}>
                                             Step {branch.targetStepNum}
                                           </span>
                                         </div>
@@ -2486,7 +2486,7 @@ export default function ConversationJourneys() {
                 <span>Main Path Step</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 rounded border-2 border-dashed border-purple-400 bg-purple-50" />
+                <div className="w-4 h-4 rounded border-2 border-dashed border-brand-400 bg-brand-50" />
                 <span>Conditional (skip-to only)</span>
               </div>
               <div className="flex items-center gap-2">
@@ -2541,7 +2541,7 @@ export default function ConversationJourneys() {
         <DialogContent className="max-w-3xl">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-2xl">
-              <FileText className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+              <FileText className="w-6 h-6 text-brand-600 dark:text-brand-400" />
               Import from Conversation Script
             </DialogTitle>
             <DialogDescription className="text-base">
@@ -2574,7 +2574,7 @@ export default function ConversationJourneys() {
             <Button 
               onClick={handleParseScript} 
               disabled={!scriptInput.trim() || isParsingScript}
-              className="gap-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+              className="gap-2 bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
             >
               {isParsingScript ? (
                 <>
@@ -2596,7 +2596,7 @@ export default function ConversationJourneys() {
         <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-2xl">
-              <Sparkles className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+              <Sparkles className="w-6 h-6 text-brand-600 dark:text-brand-400" />
               AI Analysis Results
             </DialogTitle>
             <DialogDescription className="text-base">
@@ -2622,7 +2622,7 @@ export default function ConversationJourneys() {
                   {parsedScriptData.steps?.map((step: any, index: number) => (
                     <div key={index} className="p-4 rounded-lg border bg-card">
                       <div className="flex items-start gap-3">
-                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-semibold text-sm">
+                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-ink-500 flex items-center justify-center text-white font-semibold text-sm">
                           {index + 1}
                         </div>
                         <div className="flex-1 space-y-2">
@@ -2634,7 +2634,7 @@ export default function ConversationJourneys() {
                               </span>
                             )}
                             {step.toolTrigger && (
-                              <span className="px-2 py-1 text-xs rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">
+                              <span className="px-2 py-1 text-xs rounded-full bg-brand-100 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300">
                                 Tool: {step.toolTrigger}
                               </span>
                             )}
@@ -2662,14 +2662,14 @@ export default function ConversationJourneys() {
               {parsedScriptData.conversationalGuidelines && (
                 <div className="space-y-2">
                   <Label className="text-base font-semibold flex items-center gap-2">
-                    <MessageSquare className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                    <MessageSquare className="w-4 h-4 text-brand-600 dark:text-brand-400" />
                     Conversational Guidelines
                   </Label>
-                  <div className="p-4 rounded-lg border bg-purple-50/50 dark:bg-purple-950/20 border-purple-200 dark:border-purple-800">
+                  <div className="p-4 rounded-lg border bg-brand-50/50 dark:bg-brand-950/20 border-brand-200 dark:border-brand-800">
                     <p className="text-sm whitespace-pre-wrap">{parsedScriptData.conversationalGuidelines}</p>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    These journey-specific instructions will work alongside your global Train Chroney instructions when this journey is active.
+                    These journey-specific instructions will work alongside your global Train Orvey instructions when this journey is active.
                   </p>
                 </div>
               )}
@@ -2685,7 +2685,7 @@ export default function ConversationJourneys() {
             </Button>
             <Button 
               onClick={handleCreateFromScript}
-              className="gap-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+              className="gap-2 bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
             >
               <Check className="w-4 h-4" />
               Create Journey
@@ -2720,7 +2720,7 @@ export default function ConversationJourneys() {
         <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+              <Sparkles className="w-5 h-5 text-brand-600 dark:text-brand-400" />
               AI-Refined Instruction
             </DialogTitle>
             <DialogDescription>
@@ -2729,7 +2729,7 @@ export default function ConversationJourneys() {
           </DialogHeader>
           {isRefiningInstruction ? (
             <div className="flex flex-col items-center justify-center py-8 space-y-3">
-              <Loader2 className="w-8 h-8 animate-spin text-purple-600 dark:text-purple-400" />
+              <Loader2 className="w-8 h-8 animate-spin text-brand-600 dark:text-brand-400" />
               <p className="text-sm text-muted-foreground">Refining instruction with AI...</p>
             </div>
           ) : (
@@ -2761,7 +2761,7 @@ export default function ConversationJourneys() {
             <Button
               onClick={handleAcceptRefinedInstruction}
               disabled={isRefiningInstruction}
-              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+              className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
             >
               <Check className="w-4 h-4 mr-2" />
               Accept Refined

@@ -282,8 +282,8 @@ export default function PublicChat() {
   });
 
   const businessAccountId = data?.businessAccount?.id;
-  const chatColor = data?.widgetSettings?.chatColor || "#9333ea";
-  const chatColorEnd = data?.widgetSettings?.chatColorEnd || "#3b82f6";
+  const chatColor = data?.widgetSettings?.chatColor || "#1f4596";
+  const chatColorEnd = data?.widgetSettings?.chatColorEnd || "#0a1530";
   const currency = data?.widgetSettings?.currency || "USD";
   const { data: menuData } = useQuery<PublicMenuData>({
     queryKey: ["/api/chat-menu/public", businessAccountId, token],
@@ -1194,9 +1194,9 @@ export default function PublicChat() {
 
   if (dataLoading) {
     return (
-      <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-purple-50 via-white to-blue-50 p-4">
+      <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-brand-50 via-white to-blue-50 p-4">
         <div className="text-center w-full max-w-md mx-auto">
-          <div className="w-16 h-16 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-16 h-16 border-4 border-brand-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-muted-foreground text-base">Loading chat...</p>
         </div>
       </div>
@@ -1205,7 +1205,7 @@ export default function PublicChat() {
 
   if (error || !data) {
     return (
-      <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-purple-50 via-white to-blue-50 p-4">
+      <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-brand-50 via-white to-blue-50 p-4">
         <Card className="max-w-md w-full mx-auto">
           <CardHeader>
             <div className="w-12 h-12 bg-destructive/10 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -1223,7 +1223,7 @@ export default function PublicChat() {
 
   if (data.hasPassword && !isPasswordVerified) {
     return (
-      <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-50 via-purple-50/30 to-blue-50/30 p-4">
+      <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-50 via-brand-50/30 to-blue-50/30 p-4">
         <Card className="max-w-md w-full mx-auto shadow-2xl">
           <CardHeader className="space-y-4">
             <div 
@@ -1296,7 +1296,7 @@ export default function PublicChat() {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <img src="/c_logo.png" alt="AI Chroney" className="w-5 h-5 object-contain" />
+                <img src="/orvey-logo.svg" alt="Orvey" className="w-5 h-5 object-contain" />
               )}
             </div>
             <div className="flex-1">
@@ -1810,7 +1810,7 @@ export default function PublicChat() {
                   onChange={(e) => setMessage(e.target.value)}
                   onKeyPress={handleKeyPress}
                   readOnly={isLoading}
-                  className="flex-1 text-base border-slate-300 focus:border-purple-500"
+                  className="flex-1 text-base border-slate-300 focus:border-brand-500"
                 />
                 <Button
                   onClick={() => sendMessage()}

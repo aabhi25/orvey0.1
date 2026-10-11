@@ -789,7 +789,7 @@ export default function SuperAdminAccountGroups() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-8 w-8 text-indigo-600 hover:bg-indigo-50"
+                        className="h-8 w-8 text-brand-600 hover:bg-brand-50"
                         title="Manage Group Admins"
                         onClick={() => openAdminsDialog(group)}
                       >
@@ -816,7 +816,7 @@ export default function SuperAdminAccountGroups() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-8 w-8 text-purple-600 hover:bg-purple-50"
+                        className="h-8 w-8 text-brand-600 hover:bg-brand-50"
                         title="Auto-delete (data retention)"
                         onClick={() => setRetentionGroup({ id: group.id, name: group.name })}
                       >

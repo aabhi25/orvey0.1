@@ -151,7 +151,7 @@ export default function CategorySettings({ embedded = false }: { embedded?: bool
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
+        <Loader2 className="w-8 h-8 animate-spin text-brand-500" />
       </div>
     );
   }
@@ -193,7 +193,7 @@ export default function CategorySettings({ embedded = false }: { embedded?: bool
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <Wand2 className="w-5 h-5 text-purple-600" />
+                    <Wand2 className="w-5 h-5 text-brand-600" />
                     Auto-Generate Categories
                   </CardTitle>
                   <CardDescription className="text-sm mt-1">
@@ -203,7 +203,7 @@ export default function CategorySettings({ embedded = false }: { embedded?: bool
                 <Button
                   onClick={() => autoGenerateMutation.mutate()}
                   disabled={autoGenerateMutation.isPending}
-                  className="gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                  className="gap-2 bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                 >
                   {autoGenerateMutation.isPending ? (
                     <>
@@ -251,14 +251,14 @@ export default function CategorySettings({ embedded = false }: { embedded?: bool
                   <Tag className="w-10 h-10 mx-auto mb-3 opacity-30" />
                   <p className="text-sm font-medium">No custom categories defined</p>
                   <p className="text-xs mt-1 mb-4">The AI will generate categories freely for each conversation</p>
-                  <p className="text-xs text-purple-500">Use "Auto-Generate" above or add categories manually</p>
+                  <p className="text-xs text-brand-500">Use "Auto-Generate" above or add categories manually</p>
                 </div>
               ) : (
                 <div className="space-y-2">
                   {editCategories.map((cat, catIndex) => {
                     const isExpanded = expandedCategories.has(catIndex);
                     return (
-                      <div key={catIndex} className="border rounded-lg p-3 bg-white hover:border-purple-200 transition-colors">
+                      <div key={catIndex} className="border rounded-lg p-3 bg-white hover:border-brand-200 transition-colors">
                         <div className="flex items-center justify-between">
                           <button
                             className="flex items-center gap-2 text-sm font-medium text-gray-800 hover:text-gray-600"
@@ -268,7 +268,7 @@ export default function CategorySettings({ embedded = false }: { embedded?: bool
                               return next;
                             })}
                           >
-                            {isExpanded ? <ChevronDown className="w-4 h-4 text-purple-500" /> : <ChevronRight className="w-4 h-4 text-gray-400" />}
+                            {isExpanded ? <ChevronDown className="w-4 h-4 text-brand-500" /> : <ChevronRight className="w-4 h-4 text-gray-400" />}
                             <span className="text-base">{cat.name}</span>
                             {cat.subcategories.length > 0 && (
                               <span className="text-xs text-gray-400 font-normal ml-1">
@@ -310,7 +310,7 @@ export default function CategorySettings({ embedded = false }: { embedded?: bool
                           <div className="mt-3 ml-6 space-y-2">
                             {cat.subcategories.map((sub, subIndex) => (
                               <div key={subIndex} className="flex items-center gap-2 group">
-                                <div className="w-1.5 h-1.5 rounded-full bg-purple-300 flex-shrink-0" />
+                                <div className="w-1.5 h-1.5 rounded-full bg-brand-300 flex-shrink-0" />
                                 <span className="text-sm text-gray-600 bg-gray-50 px-3 py-1.5 rounded-md flex-1">{sub}</span>
                                 <Button
                                   variant="ghost"

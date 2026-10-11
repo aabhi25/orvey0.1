@@ -430,7 +430,7 @@ export default function WhatsAppCampaignDetail() {
             </ConfigRow>
             <ConfigRow label="Audiences">
               {campaign.campaignType === "automation"
-                ? <span className="text-violet-700 font-normal">Selected in Automations</span>
+                ? <span className="text-brand-700 font-normal">Selected in Automations</span>
                 : targetGroups.length === 0 ? NOT_SET : (
                 <span className="flex flex-wrap gap-1 justify-end">
                   {targetGroups.map(g => (
@@ -455,7 +455,7 @@ export default function WhatsAppCampaignDetail() {
             )}
             <ConfigRow label="Schedule">
               {campaign.campaignType === "automation"
-                ? <span className="text-violet-700 font-normal">Recurring timing is set in Automations</span>
+                ? <span className="text-brand-700 font-normal">Recurring timing is set in Automations</span>
                 : campaign.scheduledAt
                 ? new Date(campaign.scheduledAt).toLocaleString()
                 : <span className="text-gray-500 font-normal">Send manually</span>}
@@ -463,7 +463,7 @@ export default function WhatsAppCampaignDetail() {
             <ConfigRow label="AI replies">
               {campaign.aiEnabled === "false"
                 ? <span className="text-gray-500 font-normal">Off</span>
-                : <span className="text-indigo-700">On · {campaign.aiAgentName || "Sales Agent"}</span>}
+                : <span className="text-brand-700">On · {campaign.aiAgentName || "Sales Agent"}</span>}
             </ConfigRow>
             {campaign.aiEnabled !== "false" && (
               <ConfigRow label="Knowledge sources">
@@ -651,7 +651,7 @@ export default function WhatsAppCampaignDetail() {
                           {outcome ? (
                             <Badge
                               variant="outline"
-                              className="bg-violet-50 text-violet-700 border-violet-200 whitespace-nowrap"
+                              className="bg-brand-50 text-brand-700 border-brand-200 whitespace-nowrap"
                               data-testid={`badge-outcome-${r.id}`}
                             >
                               {outcome}
@@ -808,7 +808,7 @@ export default function WhatsAppCampaignDetail() {
                 <DialogDescription className="flex flex-wrap items-center gap-x-3 gap-y-1">
                   <span className="font-mono text-xs">{selectedRecipient.phone}</span>
                   {selectedRecipient.primaryClassification && (
-                    <Badge variant="outline" className="bg-violet-50 text-violet-700 border-violet-200">
+                    <Badge variant="outline" className="bg-brand-50 text-brand-700 border-brand-200">
                       {classificationLabels[selectedRecipient.primaryClassification] || selectedRecipient.primaryClassification}
                     </Badge>
                   )}

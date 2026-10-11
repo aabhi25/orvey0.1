@@ -162,7 +162,7 @@ function JobDetailFullPage({ job, chatColor, applicantId, onApply, onClose }: {
   );
 }
 
-export function JobCarousel({ jobs, chatColor = "#9333ea", applicantId, onApply }: JobCarouselProps) {
+export function JobCarousel({ jobs, chatColor = "#1f4596", applicantId, onApply }: JobCarouselProps) {
   const [selectedJob, setSelectedJob] = useState<JobItem | null>(null);
 
   if (!jobs || jobs.length === 0) return null;

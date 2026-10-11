@@ -68,7 +68,7 @@ export function ProductCard({
   comparisonEnabled = false,
   compareProducts = new Set(),
   onCompareToggle,
-  chatColor = "#9333ea",
+  chatColor = "#1f4596",
   addToCartEnabled = false,
   tryOnEnabled = false,
   onTryOn,
@@ -201,9 +201,9 @@ export function ProductCard({
             <div
               key={product.id}
               onClick={() => { setSelectedProduct(product); handleTranslateDescription(product); }}
-              className="group relative flex-shrink-0 w-[220px] bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-lg hover:border-purple-300 dark:hover:border-purple-700 transition-all duration-200 snap-start cursor-pointer"
+              className="group relative flex-shrink-0 w-[220px] bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-lg hover:border-brand-300 dark:hover:border-brand-700 transition-all duration-200 snap-start cursor-pointer"
             >
-              <div className="relative w-full h-[160px] bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20">
+              <div className="relative w-full h-[160px] bg-gradient-to-br from-brand-50 to-ink-50 dark:from-brand-950/20 dark:to-ink-950/20">
                 {product.imageUrl ? (
                   <img
                     src={product.imageUrl}
@@ -212,7 +212,7 @@ export function ProductCard({
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <ShoppingBag className="w-12 h-12 text-purple-300 dark:text-purple-700" />
+                    <ShoppingBag className="w-12 h-12 text-brand-300 dark:text-brand-700" />
                   </div>
                 )}
                 
@@ -241,8 +241,8 @@ export function ProductCard({
                     onClick={(e) => handleCompareToggle(product.id, e)}
                     className={`absolute top-1.5 left-1.5 p-1.5 rounded-full transition-all duration-200 ${
                       compareProducts.has(product.id)
-                        ? 'bg-purple-600 text-white'
-                        : 'bg-white/80 text-gray-600 hover:bg-purple-100'
+                        ? 'bg-brand-600 text-white'
+                        : 'bg-white/80 text-gray-600 hover:bg-brand-100'
                     }`}
                     title={compareProducts.has(product.id) ? "Remove from compare" : "Add to compare"}
                   >
@@ -321,7 +321,7 @@ export function ProductCard({
                 </div>
               </div>
 
-              <div className="absolute inset-0 border-2 border-transparent group-hover:border-purple-400/50 dark:group-hover:border-purple-600/50 rounded-lg pointer-events-none transition-colors duration-200" />
+              <div className="absolute inset-0 border-2 border-transparent group-hover:border-brand-400/50 dark:group-hover:border-brand-600/50 rounded-lg pointer-events-none transition-colors duration-200" />
             </div>
           ))}
           
@@ -332,7 +332,7 @@ export function ProductCard({
               className={`flex-shrink-0 w-[120px] h-full min-h-[240px] bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center gap-2 snap-start transition-all duration-200 ${
                 isLoadingMore 
                   ? 'opacity-60 cursor-wait' 
-                  : 'cursor-pointer hover:shadow-md hover:border-purple-300 dark:hover:border-purple-600'
+                  : 'cursor-pointer hover:shadow-md hover:border-brand-300 dark:hover:border-brand-600'
               }`}
             >
               {isLoadingMore ? (
@@ -369,7 +369,7 @@ export function ProductCard({
 
           {selectedProduct && (
             <div className="space-y-6">
-              <div className="relative w-full bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20 rounded-lg overflow-hidden">
+              <div className="relative w-full bg-gradient-to-br from-brand-50 to-ink-50 dark:from-brand-950/20 dark:to-ink-950/20 rounded-lg overflow-hidden">
                 {selectedProduct.imageUrl ? (
                   <img
                     src={selectedProduct.imageUrl}
@@ -378,7 +378,7 @@ export function ProductCard({
                   />
                 ) : (
                   <div className="w-full h-80 flex items-center justify-center">
-                    <ShoppingBag className="w-32 h-32 text-purple-300 dark:text-purple-700" />
+                    <ShoppingBag className="w-32 h-32 text-brand-300 dark:text-brand-700" />
                   </div>
                 )}
               </div>

@@ -777,11 +777,11 @@ export default function Calendar() {
     <div className="p-4 md:p-6 max-w-7xl mx-auto">
       {/* Hero Header with Gradient */}
       <div className="mb-4">
-        <div className="bg-gradient-to-br from-[#0B0F1A] via-[#1e3a8a] to-[#7c3aed] rounded-xl p-4 shadow-xl">
+        <div className="bg-gradient-to-br from-[#0B0F1A] via-[#1e3a8a] to-[#1a3878] rounded-xl p-4 shadow-xl">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2.5">
               <div className="p-2 bg-white rounded-lg shadow-md">
-                <CalendarIcon className="w-5 h-5 text-indigo-600" />
+                <CalendarIcon className="w-5 h-5 text-brand-600" />
               </div>
               <div>
                 <h1 className="text-xl font-bold text-white drop-shadow-md">
@@ -796,7 +796,7 @@ export default function Calendar() {
             {/* Master Toggle for Appointment Booking */}
             <div className="flex items-center gap-2.5 bg-white/95 backdrop-blur-md rounded-lg px-3 py-2 border border-white shadow-lg">
               <div className="flex items-center gap-1.5">
-                <Power className="w-4 h-4 text-indigo-600" />
+                <Power className="w-4 h-4 text-brand-600" />
                 <p className="font-semibold text-xs text-gray-800">Booking</p>
               </div>
               <Switch
@@ -811,7 +811,7 @@ export default function Calendar() {
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-white/95 backdrop-blur-lg rounded-lg p-3 border border-white shadow-lg">
               <div className="flex items-center gap-2.5">
-                <div className="p-1.5 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg shadow-md">
+                <div className="p-1.5 bg-gradient-to-br from-brand-500 to-ink-500 rounded-lg shadow-md">
                   <CalendarIcon className="w-4 h-4 text-white" />
                 </div>
                 <div>
@@ -823,7 +823,7 @@ export default function Calendar() {
             
             <div className="bg-white/95 backdrop-blur-lg rounded-lg p-3 border border-white shadow-lg">
               <div className="flex items-center gap-2.5">
-                <div className="p-1.5 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg shadow-md">
+                <div className="p-1.5 bg-gradient-to-br from-brand-500 to-ink-500 rounded-lg shadow-md">
                   <TrendingUp className="w-4 h-4 text-white" />
                 </div>
                 <div>
@@ -849,26 +849,26 @@ export default function Calendar() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-4 bg-gradient-to-r from-purple-50 to-white backdrop-blur-sm shadow-md h-auto p-1 rounded-xl">
-          <TabsTrigger value="schedule" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+        <TabsList className="grid w-full grid-cols-4 bg-gradient-to-r from-brand-50 to-white backdrop-blur-sm shadow-md h-auto p-1 rounded-xl">
+          <TabsTrigger value="schedule" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
             <Clock className="w-4 h-4 mr-2" />
             Weekly Schedule
             {scheduleTemplates.length > 0 && (
               <Badge variant="secondary" className="ml-2">{scheduleTemplates.length}</Badge>
             )}
           </TabsTrigger>
-          <TabsTrigger value="overrides" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+          <TabsTrigger value="overrides" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
             <XCircle className="w-4 h-4 mr-2" />
             Slot Overrides
           </TabsTrigger>
-          <TabsTrigger value="appointments" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+          <TabsTrigger value="appointments" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
             <User className="w-4 h-4 mr-2" />
             Appointments
             {appointments.length > 0 && (
               <Badge variant="secondary" className="ml-2">{appointments.length}</Badge>
             )}
           </TabsTrigger>
-          <TabsTrigger value="triggers" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+          <TabsTrigger value="triggers" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
             <Zap className="w-4 h-4 mr-2" />
             Triggers
             {triggerRules.filter(r => r.enabled).length > 0 && (
@@ -1276,7 +1276,7 @@ export default function Calendar() {
             {/* Left Column - Legend and Calendar */}
             <div className="space-y-3">
               {/* Compact Legend */}
-              <Card className="border-purple-100 shadow-sm">
+              <Card className="border-brand-100 shadow-sm">
                 <CardContent className="pt-4 pb-3">
                   <p className="text-xs font-semibold text-muted-foreground mb-2">Legend</p>
                   <div className="flex items-center gap-4 text-xs">
@@ -1293,7 +1293,7 @@ export default function Calendar() {
               </Card>
 
               {/* Full-height Calendar */}
-              <Card className="border-purple-100 shadow-lg">
+              <Card className="border-brand-100 shadow-lg">
                 <CardContent className="pt-4 pb-4">
                   <CalendarComponent
                     mode="single"
@@ -1342,7 +1342,7 @@ export default function Calendar() {
             <div className="space-y-6">
               {/* Dynamic Panel: Empty State or Form */}
               {!showForm ? (
-                <Card className="border-purple-100 shadow-lg">
+                <Card className="border-brand-100 shadow-lg">
                   <CardContent className="pt-16 pb-16 text-center">
                     <div className="flex flex-col items-center gap-4">
                       <div className="p-4 bg-red-100 dark:bg-red-900 rounded-full">
@@ -1618,7 +1618,7 @@ export default function Calendar() {
         {/* Appointments Tab */}
         <TabsContent value="appointments" className="space-y-6 mt-6">
           <Card className="shadow-lg border-blue-100">
-            <CardHeader className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 border-b">
+            <CardHeader className="bg-gradient-to-br from-blue-50 to-brand-50 dark:from-blue-950 dark:to-brand-950 border-b">
               <CardTitle className="flex items-center gap-2 text-lg">
                 <div className="p-1.5 bg-blue-100 dark:bg-blue-900 rounded-lg">
                   <User className="h-4 w-4 text-blue-600 dark:text-blue-400" />

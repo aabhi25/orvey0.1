@@ -113,7 +113,7 @@ export default function InstagramConversations() {
         <div className="flex rounded-2xl shadow-sm border overflow-hidden bg-white" style={{ height: 'calc(100vh - 140px)' }}>
           {/* Left Panel - Conversation List */}
           <div className={`${selectedSenderId ? 'hidden md:flex' : 'flex'} flex-col w-full md:w-[380px] md:min-w-[380px] border-r`}>
-            <div className="bg-gradient-to-r from-purple-600 to-pink-500 px-6 py-5 shrink-0">
+            <div className="bg-gradient-to-r from-brand-600 to-ink-500 px-6 py-5 shrink-0">
               <div className="flex items-center gap-2">
                 <h2 className="text-xl font-semibold text-white">Conversations</h2>
                 {conversations.length > 0 && (
@@ -122,7 +122,7 @@ export default function InstagramConversations() {
                   </span>
                 )}
               </div>
-              <p className="text-purple-100 text-sm mt-1">View message history from Instagram DMs</p>
+              <p className="text-brand-100 text-sm mt-1">View message history from Instagram DMs</p>
             </div>
 
             <div className="px-3 py-2 border-b shrink-0">
@@ -149,7 +149,7 @@ export default function InstagramConversations() {
               {loadingConversations ? (
                 <div className="flex items-center justify-center py-16">
                   <div className="text-center">
-                    <Loader2 className="h-8 w-8 animate-spin text-purple-500 mx-auto mb-2" />
+                    <Loader2 className="h-8 w-8 animate-spin text-brand-500 mx-auto mb-2" />
                     <p className="text-gray-500 text-sm">Loading conversations...</p>
                   </div>
                 </div>
@@ -175,11 +175,11 @@ export default function InstagramConversations() {
                   return (
                     <div
                       key={conv.senderId}
-                      className={`flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 group ${isActive ? 'bg-purple-50 border-l-4 border-l-purple-500' : 'hover:bg-gray-50 border-l-4 border-l-transparent'}`}
+                      className={`flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 group ${isActive ? 'bg-brand-50 border-l-4 border-l-brand-500' : 'hover:bg-gray-50 border-l-4 border-l-transparent'}`}
                       onClick={() => setSelectedSenderId(conv.senderId)}
                     >
                       <div className="relative shrink-0">
-                        <div className="w-11 h-11 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center">
+                        <div className="w-11 h-11 bg-gradient-to-br from-brand-400 to-ink-500 rounded-full flex items-center justify-center">
                           <span className="text-base font-semibold text-white">
                             {conv.senderUsername ? conv.senderUsername[0].toUpperCase() : "?"}
                           </span>
@@ -191,7 +191,7 @@ export default function InstagramConversations() {
                           <h3 className="font-semibold text-sm text-gray-900 truncate">
                             {conv.senderUsername ? `@${conv.senderUsername}` : conv.senderId}
                           </h3>
-                          <span className={`text-[11px] shrink-0 ml-2 ${isToday ? 'text-purple-600 font-medium' : 'text-gray-400'}`}>
+                          <span className={`text-[11px] shrink-0 ml-2 ${isToday ? 'text-brand-600 font-medium' : 'text-gray-400'}`}>
                             {isToday
                               ? format(parseUTCDate(conv.lastMessageAt), "h:mm a")
                               : format(parseUTCDate(conv.lastMessageAt), "MMM d, yyyy")}
@@ -199,7 +199,7 @@ export default function InstagramConversations() {
                         </div>
                         <div className="flex items-center justify-between">
                           <p className="text-xs text-gray-500 truncate">{conv.lastMessageText}</p>
-                          <span className="inline-flex items-center px-1.5 py-0.5 rounded-full bg-purple-100 text-purple-700 text-[10px] font-medium shrink-0 ml-2">
+                          <span className="inline-flex items-center px-1.5 py-0.5 rounded-full bg-brand-100 text-brand-700 text-[10px] font-medium shrink-0 ml-2">
                             {conv.messageCount}
                           </span>
                         </div>
@@ -226,7 +226,7 @@ export default function InstagramConversations() {
           <div className={`${selectedSenderId ? 'flex' : 'hidden md:flex'} flex-col flex-1 min-w-0`}>
             {selectedSenderId ? (
               <>
-                <div className="bg-gradient-to-r from-purple-600 to-pink-500 px-5 py-3 shrink-0">
+                <div className="bg-gradient-to-r from-brand-600 to-ink-500 px-5 py-3 shrink-0">
                   <div className="flex items-center gap-3">
                     <Button
                       variant="ghost"
@@ -269,11 +269,11 @@ export default function InstagramConversations() {
                   </div>
                 </div>
 
-                <div className="bg-[#faf5ff] flex-1 overflow-y-auto">
+                <div className="bg-[#f0f4fb] flex-1 overflow-y-auto">
                   {loadingMessages ? (
                     <div className="flex items-center justify-center h-64">
                       <div className="text-center">
-                        <Loader2 className="h-8 w-8 animate-spin text-purple-500 mx-auto mb-2" />
+                        <Loader2 className="h-8 w-8 animate-spin text-brand-500 mx-auto mb-2" />
                         <p className="text-gray-500 text-sm">Loading messages...</p>
                       </div>
                     </div>
@@ -317,7 +317,7 @@ export default function InstagramConversations() {
                                     ? 'text-white rounded-br-md'
                                     : 'bg-white text-gray-800 rounded-bl-md'
                                 }`}
-                                style={isOutgoing ? { background: 'linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #d946ef 100%)' } : {}}
+                                style={isOutgoing ? { background: 'linear-gradient(135deg, #1a3878 0%, #3a63b5 50%, #d946ef 100%)' } : {}}
                               >
                                 {msg.messageType === "image" && msg.mediaUrl ? (
                                   <div className="space-y-2">
@@ -358,8 +358,8 @@ export default function InstagramConversations() {
             ) : (
               <div className="flex-1 flex items-center justify-center bg-gray-50/50">
                 <div className="text-center">
-                  <div className="w-24 h-24 bg-gradient-to-br from-purple-100 to-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <MessageCircle className="h-12 w-12 text-purple-300" />
+                  <div className="w-24 h-24 bg-gradient-to-br from-brand-100 to-ink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <MessageCircle className="h-12 w-12 text-brand-300" />
                   </div>
                   <h3 className="text-lg font-medium text-gray-600 mb-1">Select a conversation</h3>
                   <p className="text-sm text-gray-400">Choose a conversation from the list to view messages</p>

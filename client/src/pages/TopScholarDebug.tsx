@@ -290,7 +290,7 @@ interface SyncResult {
 
 function SyncTester() {
   const [doubtId, setDoubtId] = useState("");
-  const [message, setMessage] = useState("Debug test message from AI Chroney admin panel.");
+  const [message, setMessage] = useState("Debug test message from Orvey admin panel.");
   const test = useMutation<SyncResult, Error, void>({
     mutationFn: () => postJson("/api/topscholar/debug/test-sync", { doubtId, message, from: "sme" }),
   });
@@ -367,7 +367,7 @@ interface DebugEvent {
 
 const KIND_STYLES: Record<string, { label: string; cls: string }> = {
   token_check: { label: "Token", cls: "bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-200" },
-  scope_resolution: { label: "Scope", cls: "bg-violet-100 text-violet-800 dark:bg-violet-900/40 dark:text-violet-200" },
+  scope_resolution: { label: "Scope", cls: "bg-brand-100 text-brand-800 dark:bg-brand-900/40 dark:text-brand-200" },
   sync_result: { label: "Sync", cls: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200" },
   refusal: { label: "Refusal", cls: "bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-200" },
   chat_request: { label: "Chat", cls: "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200" },

@@ -49,14 +49,14 @@ export default function VoiceEmbed() {
 
   if (!businessAccountId) {
     return (
-      <div className="flex items-center justify-center h-full bg-gradient-to-br from-purple-50 to-blue-50 rounded-3xl">
+      <div className="flex items-center justify-center h-full bg-gradient-to-br from-brand-50 to-ink-50 rounded-3xl">
         <p className="text-gray-500">Loading...</p>
       </div>
     );
   }
 
-  const chatColor = settings?.chatColor || '#9333ea';
-  const chatColorEnd = settings?.chatColorEnd || '#3b82f6';
+  const chatColor = settings?.chatColor || '#1f4596';
+  const chatColorEnd = settings?.chatColorEnd || '#0a1530';
 
   if (!isVoiceOpen) {
     return <div className="h-full w-full bg-transparent" />;

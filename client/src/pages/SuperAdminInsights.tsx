@@ -218,7 +218,7 @@ export default function SuperAdminInsights() {
     { icon: Contact, label: "Leads", value: totals.leads, iconColor: "text-green-600" },
     { icon: MessageSquare, label: "Conversations", value: totals.conversations, iconColor: "text-orange-600" },
     { icon: Package, label: "Products", value: totals.products, iconColor: "text-cyan-600" },
-    { icon: FileQuestion, label: "FAQs", value: totals.faqs, iconColor: "text-indigo-600" },
+    { icon: FileQuestion, label: "FAQs", value: totals.faqs, iconColor: "text-brand-600" },
   ];
 
   const formatDate = (dateString: string | null) => {
@@ -244,7 +244,7 @@ export default function SuperAdminInsights() {
   return (
     <div className="flex flex-col flex-1 h-screen">
       {/* Header */}
-      <header className="flex items-center justify-between h-[56px] px-6 bg-gradient-to-r from-red-500 via-purple-600 to-blue-600 shadow-sm">
+      <header className="flex items-center justify-between h-[56px] px-6 bg-gradient-to-r from-brand-800 via-ink-700 to-ink-900 shadow-sm">
         <div className="flex items-center gap-3">
           <SidebarTrigger data-testid="button-sidebar-toggle" className="text-white hover:bg-white/10 rounded-md" />
           <div className="flex items-center gap-2.5">
@@ -252,7 +252,7 @@ export default function SuperAdminInsights() {
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h1 className="text-[15px] font-semibold text-white leading-tight">AI Chroney</h1>
+              <h1 className="text-[15px] font-semibold text-white leading-tight">Orvey</h1>
               <p className="text-[11px] text-white/90 leading-tight mt-0.5">Super Admin Insights</p>
             </div>
           </div>
@@ -267,7 +267,7 @@ export default function SuperAdminInsights() {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-4">
               <div>
                 <div className="flex items-center gap-2">
-                  <BarChart3 className="w-6 h-6 text-purple-600" />
+                  <BarChart3 className="w-6 h-6 text-brand-600" />
                   <h2 className="text-2xl font-bold text-gray-900">Business Insights</h2>
                 </div>
                 <p className="text-muted-foreground mt-1">
@@ -310,12 +310,12 @@ export default function SuperAdminInsights() {
                             }}
                             className={cn(
                               "w-full px-3 py-2 text-left text-sm rounded-md hover:bg-gray-100 flex items-center justify-between",
-                              dateFilter === option.value && "bg-purple-50 text-purple-700"
+                              dateFilter === option.value && "bg-brand-50 text-brand-700"
                             )}
                           >
                             {option.label}
                             {dateFilter === option.value && (
-                              <Check className="w-4 h-4 text-purple-600" />
+                              <Check className="w-4 h-4 text-brand-600" />
                             )}
                           </button>
                         ))}
@@ -348,7 +348,7 @@ export default function SuperAdminInsights() {
                 <div className="relative">
                   {selectedBusiness ? (
                     <div className="flex items-center gap-2 px-3 py-2 border rounded-md bg-white">
-                      <Building2 className="w-4 h-4 text-purple-600 flex-shrink-0" />
+                      <Building2 className="w-4 h-4 text-brand-600 flex-shrink-0" />
                       <span className="flex-1 truncate font-medium">{selectedBusiness.name}</span>
                       <button
                         onClick={handleClearSelection}
@@ -388,17 +388,17 @@ export default function SuperAdminInsights() {
                             key={account.id}
                             onClick={() => handleSelectBusiness(account.id)}
                             className={cn(
-                              "w-full px-4 py-3 text-left hover:bg-purple-50 flex items-center gap-3 border-b last:border-b-0",
-                              selectedBusinessId === account.id && "bg-purple-50"
+                              "w-full px-4 py-3 text-left hover:bg-brand-50 flex items-center gap-3 border-b last:border-b-0",
+                              selectedBusinessId === account.id && "bg-brand-50"
                             )}
                           >
-                            <Building2 className="w-4 h-4 text-purple-600 flex-shrink-0" />
+                            <Building2 className="w-4 h-4 text-brand-600 flex-shrink-0" />
                             <div className="flex-1 min-w-0">
                               <p className="font-medium text-gray-900 truncate">{account.name}</p>
                               <p className="text-xs text-gray-500 truncate">{account.website}</p>
                             </div>
                             {selectedBusinessId === account.id && (
-                              <Check className="w-4 h-4 text-purple-600 flex-shrink-0" />
+                              <Check className="w-4 h-4 text-brand-600 flex-shrink-0" />
                             )}
                           </button>
                         ))
@@ -441,7 +441,7 @@ export default function SuperAdminInsights() {
           {/* Loading State */}
           {selectedBusinessId && isLoading && (
             <div className="text-center py-16 mb-6">
-              <div className="inline-block w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mb-4"></div>
+              <div className="inline-block w-12 h-12 border-4 border-brand-600 border-t-transparent rounded-full animate-spin mb-4"></div>
               <p className="text-lg font-medium text-gray-900 mb-2">Loading Business Analytics</p>
               <p className="text-sm text-gray-600">Gathering data for {selectedBusiness?.name}...</p>
             </div>
@@ -460,7 +460,7 @@ export default function SuperAdminInsights() {
           {!selectedBusinessId && (
             <Card>
               <CardContent className="text-center py-16">
-                <Search className="w-12 h-12 text-purple-300 mx-auto mb-4" />
+                <Search className="w-12 h-12 text-brand-300 mx-auto mb-4" />
                 <h3 className="text-lg font-medium text-gray-900 mb-2">Select a Business Account</h3>
                 <p className="text-gray-600 max-w-md mx-auto">
                   Use the search box above to find and select a business account to view its analytics and insights.
@@ -483,13 +483,13 @@ export default function SuperAdminInsights() {
           {selectedBusinessId && !isLoading && !isError && analytics.length > 0 && (
             <div className="space-y-6">
               {analytics.map((business) => (
-                <Card key={business.id} className="border-l-4 border-l-purple-600">
+                <Card key={business.id} className="border-l-4 border-l-brand-600">
                   <CardHeader>
                     <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 flex-wrap">
                           <CardTitle className="text-lg md:text-xl flex items-center gap-2">
-                            <Building2 className="w-5 h-5 text-purple-600" />
+                            <Building2 className="w-5 h-5 text-brand-600" />
                             {business.name}
                           </CardTitle>
                           <Badge 
@@ -549,23 +549,23 @@ export default function SuperAdminInsights() {
                         <div className="text-2xl font-bold text-cyan-900">{business.productCount}</div>
                       </div>
 
-                      <div className="bg-indigo-50 rounded-lg p-3">
-                        <div className="flex items-center gap-2 text-indigo-600 mb-1">
+                      <div className="bg-brand-50 rounded-lg p-3">
+                        <div className="flex items-center gap-2 text-brand-600 mb-1">
                           <FileQuestion className="w-4 h-4" />
                           <span className="text-xs font-medium">FAQs</span>
                         </div>
-                        <div className="text-2xl font-bold text-indigo-900">{business.faqCount}</div>
+                        <div className="text-2xl font-bold text-brand-900">{business.faqCount}</div>
                       </div>
                     </div>
 
                     {/* User Information (1:1 relationship) */}
                     {business.users.length > 0 && (
-                      <div className="bg-purple-50 rounded-lg p-4 border border-purple-200">
+                      <div className="bg-brand-50 rounded-lg p-4 border border-brand-200">
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1">
-                              <Users className="w-4 h-4 text-purple-600" />
-                              <p className="text-xs font-semibold text-purple-700 uppercase tracking-wide">Account User</p>
+                              <Users className="w-4 h-4 text-brand-600" />
+                              <p className="text-xs font-semibold text-brand-700 uppercase tracking-wide">Account User</p>
                             </div>
                             <p className="font-medium text-gray-900 truncate">{business.users[0].username}</p>
                             <p className="text-xs text-gray-600 mt-1">

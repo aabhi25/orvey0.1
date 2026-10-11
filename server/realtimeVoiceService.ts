@@ -2127,7 +2127,7 @@ export class RealtimeVoiceService {
     const selectedVoice = (settings?.voiceSelection || 'shimmer').toLowerCase();
     const voiceGender = conversation.voiceGender ?? genderOfVoiceSync(selectedVoice) ?? 'neutral';
 
-    let instructions = `You are the AI assistant for ${companyDescription || 'this business'} and speak for it (never call yourself Chroney). `;
+    let instructions = `You are the AI assistant for ${companyDescription || 'this business'} and speak for it (never call yourself Orvey). `;
 
     if (voiceGender === 'male') {
       instructions += 'You are a MALE assistant. In English use "he/him" if referring to yourself in third person. In languages with grammatical gender, always use masculine forms. ';
@@ -2188,7 +2188,7 @@ export class RealtimeVoiceService {
     // Add custom business instructions (HIGH PRIORITY - but AFTER language matching)
     if (customInstructions && customInstructions.trim()) {
       try {
-        // Try to parse as JSON array (new format from Train Chroney page)
+        // Try to parse as JSON array (new format from Train Orvey page)
         const instructionsArray = JSON.parse(customInstructions);
         if (Array.isArray(instructionsArray) && instructionsArray.length > 0) {
           const formattedInstructions = instructionsArray

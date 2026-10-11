@@ -66,8 +66,8 @@ export default function VoiceOrbEmbed() {
     return null;
   }
 
-  const chatColor = settings?.chatColor || '#9333ea';
-  const chatColorEnd = settings?.chatColorEnd || '#3b82f6';
+  const chatColor = settings?.chatColor || '#1f4596';
+  const chatColorEnd = settings?.chatColorEnd || '#0a1530';
 
   return (
     <VoiceMode

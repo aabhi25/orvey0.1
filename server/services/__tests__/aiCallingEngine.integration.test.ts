@@ -540,7 +540,7 @@ async function main() {
     await db.update(schema.aiCallingSettings).set({ whatsappFollowUp: true, whatsappFollowUpTemplateId: "tpl-1" }).where(eq(schema.aiCallingSettings.businessAccountId, F));
     const convF = await mkConversation(F, "Phone call");
     await db.insert(schema.messages).values([
-      { conversationId: convF.id, role: "assistant", content: "Hi, this is Chroney from the store. You enquired about sofas?" },
+      { conversationId: convF.id, role: "assistant", content: "Hi, this is Orvey from the store. You enquired about sofas?" },
       { conversationId: convF.id, role: "user", content: "Yes, I'm Ravi. Can you send prices?" },
     ]);
     const leadF = await mkLead(F, { name: null, email: null });

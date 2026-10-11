@@ -142,7 +142,7 @@ export default function FacebookInsights() {
             </CardContent>
           </Card>
 
-          <Card className="border-l-4 border-l-indigo-500">
+          <Card className="border-l-4 border-l-brand-500">
             <CardContent className="p-5">
               <div className="flex items-center justify-between">
                 <div>
@@ -150,8 +150,8 @@ export default function FacebookInsights() {
                   <p className="text-3xl font-bold text-gray-900 mt-1">{responseRate}%</p>
                   <p className="text-xs text-gray-400 mt-1">{respondedConversations} of {totalConversations} conversations</p>
                 </div>
-                <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center">
-                  <TrendingUp className="w-6 h-6 text-indigo-500" />
+                <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center">
+                  <TrendingUp className="w-6 h-6 text-brand-500" />
                 </div>
               </div>
             </CardContent>
@@ -196,8 +196,8 @@ export default function FacebookInsights() {
                   <p className="text-2xl font-bold text-gray-900">{totalLeads}</p>
                   <p className="text-xs text-gray-500 mt-1">Total Leads</p>
                 </div>
-                <div className="text-center p-4 bg-indigo-50 rounded-xl">
-                  <TrendingUp className="w-5 h-5 text-indigo-500 mx-auto mb-2" />
+                <div className="text-center p-4 bg-brand-50 rounded-xl">
+                  <TrendingUp className="w-5 h-5 text-brand-500 mx-auto mb-2" />
                   <p className="text-2xl font-bold text-gray-900">{responseRate}%</p>
                   <p className="text-xs text-gray-500 mt-1">Response Rate</p>
                 </div>

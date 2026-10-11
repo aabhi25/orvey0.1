@@ -56,7 +56,7 @@ const mappings = [
   mapping({ leadsquaredField: "mx_Utm_Source", sourceType: "dynamic", sourceField: "session.utmSource" }),
   mapping({ leadsquaredField: "mx_Utm_Medium", sourceType: "dynamic", sourceField: "session.utmMedium", fallbackValue: "Direct" }),
   mapping({ leadsquaredField: "mx_Sub_Source", sourceType: "dynamic", sourceField: "session.utmSource", valueWhenPresent: "PRChat" }),
-  mapping({ leadsquaredField: "Source", sourceType: "custom", customValue: "AI Chroney" }),
+  mapping({ leadsquaredField: "Source", sourceType: "custom", customValue: "Orvey" }),
   mapping({ leadsquaredField: "mx_Disabled", sourceType: "custom", customValue: "x", isEnabled: "false" }),
 ];
 
@@ -107,7 +107,7 @@ async function main() {
     expect(body.mx_Utm_Source === "google", "utm source mapped");
     expect(body.mx_Utm_Medium === "Direct", "fallback value applied");
     expect(body.mx_Sub_Source === "PRChat", "value-when-present applied");
-    expect(body.Source === "AI Chroney", "fixed custom value applied");
+    expect(body.Source === "Orvey", "fixed custom value applied");
     expect(!("mx_Disabled" in body), "disabled mapping omitted");
     expect(received[0].headers["x-access-token"] === "ick-123", "ickey sent as x-access-token header");
     expect(!received[0].url.includes("ick-123"), "ickey not put in the URL");
@@ -191,7 +191,7 @@ async function main() {
       sample,
     );
     expect(attrs[0]?.Value === "Sample answer", "sample context fills journey.* fields");
-    expect(sample.lead.name === "AI Chroney Test Lead", "sample lead is clearly labelled as a test");
+    expect(sample.lead.name === "Orvey Test Lead", "sample lead is clearly labelled as a test");
   }
 
   if (failed > 0) {

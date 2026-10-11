@@ -620,7 +620,7 @@ export default function LeadSquaredSettings({ embedded = false }: { embedded?: b
       const data = await response.json();
       if (response.ok && data.success) {
         setConnectionStatus("success");
-        setConnectionMessage(`${data.message}. Check the client's UDS logs / LeadSquared for "AI Chroney Test Lead".`);
+        setConnectionMessage(`${data.message}. Check the client's UDS logs / LeadSquared for "Orvey Test Lead".`);
         if (data.payload) setUdsPreview(data.payload);
         toast({ title: "Test Lead Sent", description: data.message });
       } else {
@@ -787,13 +787,13 @@ export default function LeadSquaredSettings({ embedded = false }: { embedded?: b
       {!activeSection && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Card
-            className="cursor-pointer transition-all hover:shadow-lg hover:border-purple-300 hover:-translate-y-0.5"
+            className="cursor-pointer transition-all hover:shadow-lg hover:border-brand-300 hover:-translate-y-0.5"
             onClick={() => setActiveSection('connection')}
           >
             <CardContent className="p-6">
               <div className="flex items-start gap-4">
-                <div className="rounded-xl bg-purple-100 p-3">
-                  <KeyRound className="h-6 w-6 text-purple-600" />
+                <div className="rounded-xl bg-brand-100 p-3">
+                  <KeyRound className="h-6 w-6 text-brand-600" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-lg mb-1">Connection Settings</h3>
@@ -922,10 +922,10 @@ export default function LeadSquaredSettings({ embedded = false }: { embedded?: b
                     key={value}
                     type="button"
                     onClick={() => { setSettings({ ...settings, connectionType: value }); setConnectionStatus(null); }}
-                    className={`text-left rounded-lg border p-3 transition-colors ${settings.connectionType === value ? "border-purple-500 bg-purple-50 ring-1 ring-purple-500" : "hover:bg-muted/50"}`}
+                    className={`text-left rounded-lg border p-3 transition-colors ${settings.connectionType === value ? "border-brand-500 bg-brand-50 ring-1 ring-brand-500" : "hover:bg-muted/50"}`}
                   >
                     <div className="flex items-center gap-2 font-medium text-sm">
-                      <Icon className="h-4 w-4 text-purple-600" />
+                      <Icon className="h-4 w-4 text-brand-600" />
                       {title}
                     </div>
                     <p className="text-xs text-muted-foreground mt-1">{desc}</p>
@@ -982,7 +982,7 @@ export default function LeadSquaredSettings({ embedded = false }: { embedded?: b
                   </Button>
                   <Button
                     type="button"
-                    className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+                    className="flex-1 bg-gradient-to-r from-brand-500 to-ink-500 hover:from-brand-600 hover:to-ink-600"
                     onClick={() => setConfirmUdsTestOpen(true)}
                     disabled={testing || !settings.udsWebhookUrl.trim()}
                   >
@@ -1108,7 +1108,7 @@ export default function LeadSquaredSettings({ embedded = false }: { embedded?: b
               onClick={testConnection}
               disabled={testing}
               variant="default"
-              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+              className="w-full bg-gradient-to-r from-brand-500 to-ink-500 hover:from-brand-600 hover:to-ink-600"
             >
               {testing ? (
                 <>
@@ -1158,7 +1158,7 @@ export default function LeadSquaredSettings({ embedded = false }: { embedded?: b
             <AlertDialogHeader>
               <AlertDialogTitle>Send a test lead to UDS?</AlertDialogTitle>
               <AlertDialogDescription>
-                This sends one lead named "AI Chroney Test Lead" (phone 9000000000, test.lead@example.com) to the webhook.
+                This sends one lead named "Orvey Test Lead" (phone 9000000000, test.lead@example.com) to the webhook.
                 If the client's UDS flow is live, it will be created in their LeadSquared — ask them to delete it afterwards.
               </AlertDialogDescription>
             </AlertDialogHeader>
@@ -1260,7 +1260,7 @@ export default function LeadSquaredSettings({ embedded = false }: { embedded?: b
                         <td className="p-3 font-mono text-xs bg-muted/30">{mapping.leadsquaredField}</td>
                         <td className="p-3 text-xs text-muted-foreground">
                           {mapping.sourceType === 'custom' ? (
-                            <span className="text-purple-600">"{mapping.customValue}"</span>
+                            <span className="text-brand-600">"{mapping.customValue}"</span>
                           ) : (
                             <span>
                               {dynamicSourceOptions.find(o => o.value === mapping.sourceField)?.label || mapping.sourceField}
@@ -1401,7 +1401,7 @@ export default function LeadSquaredSettings({ embedded = false }: { embedded?: b
                   <Label htmlFor="customValue">Custom Value *</Label>
                   <Input
                     id="customValue"
-                    placeholder='e.g., "AI Chroney", "Website Chat"'
+                    placeholder='e.g., "Orvey", "Website Chat"'
                     value={newMapping.customValue}
                     onChange={(e) => setNewMapping({ ...newMapping, customValue: e.target.value })}
                   />
@@ -1450,7 +1450,7 @@ export default function LeadSquaredSettings({ embedded = false }: { embedded?: b
           <Card>
             <CardHeader>
               <div className="flex items-center gap-2">
-                <Bot className="h-5 w-5 text-purple-600" />
+                <Bot className="h-5 w-5 text-brand-600" />
                 <div>
                   <CardTitle>AI URL Extraction</CardTitle>
                   <CardDescription>

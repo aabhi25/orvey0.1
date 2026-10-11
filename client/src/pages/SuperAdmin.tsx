@@ -945,7 +945,7 @@ export default function SuperAdmin() {
   return (
     <div className="flex flex-col flex-1 h-screen">
       {/* Header */}
-      <header className="flex items-center justify-between h-[56px] px-6 bg-gradient-to-r from-red-500 via-purple-600 to-blue-600 shadow-sm">
+      <header className="flex items-center justify-between h-[56px] px-6 bg-gradient-to-r from-brand-800 via-ink-700 to-ink-900 shadow-sm">
         <div className="flex items-center gap-3">
           <SidebarTrigger data-testid="button-sidebar-toggle" className="text-white hover:bg-white/10 rounded-md" />
           <div className="flex items-center gap-2.5">
@@ -953,7 +953,7 @@ export default function SuperAdmin() {
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h1 className="text-[15px] font-semibold text-white leading-tight">AI Chroney</h1>
+              <h1 className="text-[15px] font-semibold text-white leading-tight">Orvey</h1>
               <p className="text-[11px] text-white/90 leading-tight mt-0.5">Super Admin Dashboard</p>
             </div>
           </div>
@@ -983,7 +983,7 @@ export default function SuperAdmin() {
               </div>
               <Dialog open={isBusinessDialogOpen} onOpenChange={setIsBusinessDialogOpen}>
                 <DialogTrigger asChild>
-                  <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 shadow-sm" data-testid="button-create-business">
+                  <Button className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700 shadow-sm" data-testid="button-create-business">
                     <Plus className="w-4 h-4 mr-2" />
                     New Business Account
                   </Button>
@@ -1033,7 +1033,7 @@ export default function SuperAdmin() {
                       <div className="flex items-center justify-between p-2 border rounded-lg">
                         <div className="flex items-center gap-2">
                           <MessageSquare className="w-4 h-4 text-blue-600" />
-                          <span className="text-sm font-medium">Chroney Chat</span>
+                          <span className="text-sm font-medium">Orvey Chat</span>
                         </div>
                         <Switch
                           checked={newChroneyEnabled}
@@ -1135,7 +1135,7 @@ export default function SuperAdmin() {
                     <div className="flex items-center justify-between p-2 border rounded-lg">
                       <div className="flex items-center gap-2">
                         <MessageSquare className="w-4 h-4 text-blue-600" />
-                        <span className="text-sm font-medium">Chroney Chat</span>
+                        <span className="text-sm font-medium">Orvey Chat</span>
                       </div>
                       <Switch
                         checked={editChroneyEnabled}
@@ -1310,7 +1310,7 @@ export default function SuperAdmin() {
               
               <div className="space-y-4 py-4 max-h-[60vh] overflow-y-auto">
                 {/* System Mode Selector - Top of dialog */}
-                <div className="p-4 bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-lg">
+                <div className="p-4 bg-gradient-to-r from-brand-50 to-ink-50 border border-brand-200 rounded-lg">
                   <div className="flex items-center justify-between">
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-1">System Mode</h4>
@@ -1340,7 +1340,7 @@ export default function SuperAdmin() {
                   </div>
                 </div>
 
-                {/* Show Chroney modules only when Chroney Chat is enabled */}
+                {/* Show Orvey modules only when Orvey Chat is enabled */}
                 {selectedBusiness?.chroneyEnabled && (
                   <>
                     {/* Shopify Module */}
@@ -1372,13 +1372,13 @@ export default function SuperAdmin() {
 
                     {/* Appointments Module */}
                     <div className="flex items-start gap-4 p-4 border rounded-lg hover:bg-gray-50 transition-colors">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-500 to-ink-600 flex items-center justify-center flex-shrink-0">
                         <Calendar className="h-5 w-5 text-white" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <h4 className="font-semibold text-gray-900 mb-1">Appointment Booking</h4>
                         <p className="text-sm text-gray-600 mb-2">
-                          AI-powered appointment scheduling with weekly templates, slot overrides, and conversational booking through Chroney.
+                          AI-powered appointment scheduling with weekly templates, slot overrides, and conversational booking through Orvey.
                         </p>
                         <div className="flex items-center gap-2">
                           <Switch
@@ -1399,7 +1399,7 @@ export default function SuperAdmin() {
 
                     {/* Voice Mode Module */}
                     <div className="flex items-start gap-4 p-4 border rounded-lg hover:bg-gray-50 transition-colors">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-brand-600 flex items-center justify-center flex-shrink-0">
                         <Mic className="h-5 w-5 text-white" />
                       </div>
                       <div className="flex-1 min-w-0">
@@ -1426,7 +1426,7 @@ export default function SuperAdmin() {
 
                     {/* Live AI avatar (commercial add-on, configured per account) */}
                     <div className="flex items-start gap-4 p-4 border rounded-lg hover:bg-gray-50 transition-colors" data-testid="card-module-live-avatar">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-fuchsia-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-500 to-ink-600 flex items-center justify-center flex-shrink-0">
                         <Video className="h-5 w-5 text-white" />
                       </div>
                       <div className="flex-1 min-w-0">
@@ -1512,7 +1512,7 @@ export default function SuperAdmin() {
                   </div>
                 )}
 
-                {/* Show Shopify for jewelry-only tier (since it's not shown in the Chroney modules section) */}
+                {/* Show Shopify for jewelry-only tier (since it's not shown in the Orvey modules section) */}
                 {selectedBusiness?.productTier === 'jewelry_showcase' && (
                   <div className="flex items-start gap-4 p-4 border rounded-lg hover:bg-gray-50 transition-colors">
                     <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center flex-shrink-0">
@@ -1570,7 +1570,7 @@ export default function SuperAdmin() {
 
                 {/* K12 Education Module */}
                 <div className="flex items-start gap-4 p-4 border rounded-lg hover:bg-gray-50 transition-colors">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-500 to-ink-600 flex items-center justify-center flex-shrink-0">
                     <GraduationCap className="h-5 w-5 text-white" />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -1680,7 +1680,7 @@ export default function SuperAdmin() {
             <DialogContent className="sm:max-w-[420px] max-h-[85vh] flex flex-col p-0 gap-0">
               <DialogHeader className="px-6 pt-6 pb-3 shrink-0">
                 <DialogTitle className="flex items-center gap-2">
-                  <Sparkles className="h-5 w-5 text-purple-600" />
+                  <Sparkles className="h-5 w-5 text-brand-600" />
                   Product Features
                 </DialogTitle>
                 <DialogDescription>
@@ -1696,7 +1696,7 @@ export default function SuperAdmin() {
                         <MessageSquare className="w-5 h-5 text-blue-600" />
                       </div>
                       <div>
-                        <p className="font-medium text-sm">Chroney Chat</p>
+                        <p className="font-medium text-sm">Orvey Chat</p>
                         <p className="text-xs text-gray-500">AI chatbot, conversations, training</p>
                       </div>
                     </div>
@@ -1778,8 +1778,8 @@ export default function SuperAdmin() {
 
                   <div className="flex items-center justify-between p-3 border rounded-lg hover:bg-gray-50">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center">
-                        <GraduationCap className="w-5 h-5 text-indigo-600" />
+                      <div className="w-10 h-10 rounded-lg bg-brand-100 flex items-center justify-center">
+                        <GraduationCap className="w-5 h-5 text-brand-600" />
                       </div>
                       <div>
                         <p className="font-medium text-sm">K12 Education</p>
@@ -1829,7 +1829,7 @@ export default function SuperAdmin() {
                 <Button
                   onClick={handleSaveTier}
                   disabled={updateTierMutation.isPending || (!tierChroneyEnabled && !tierWhatsappEnabled && !tierInstagramEnabled && !tierFacebookEnabled && !tierJewelryEnabled && !tierK12EducationEnabled && !tierJobPortalEnabled)}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600"
+                  className="bg-gradient-to-r from-brand-600 to-ink-600"
                 >
                   {updateTierMutation.isPending ? "Saving..." : "Save Changes"}
                 </Button>
@@ -2018,7 +2018,7 @@ export default function SuperAdmin() {
                   <Button
                     type="submit"
                     disabled={duplicateAccountMutation.isPending || !duplicateName.trim() || !duplicateAdminEmail.trim() || !duplicateAdminPassword.trim()}
-                    className="bg-gradient-to-r from-blue-600 to-purple-600"
+                    className="bg-gradient-to-r from-blue-600 to-brand-600"
                   >
                     {duplicateAccountMutation.isPending ? "Duplicating..." : "Duplicate Account"}
                   </Button>
@@ -2029,7 +2029,7 @@ export default function SuperAdmin() {
 
           {isLoadingAccounts ? (
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
-              <div className="w-8 h-8 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+              <div className="w-8 h-8 border-4 border-brand-600 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
               <p className="text-sm text-gray-600">Loading business accounts...</p>
             </div>
           ) : businessAccounts.length === 0 ? (
@@ -2076,7 +2076,7 @@ export default function SuperAdmin() {
                       <TableRow key={business.id} className="hover:bg-gray-50">
                         <TableCell className="font-medium">
                           <div className="flex items-start gap-2">
-                            <Building2 className="h-4 w-4 text-purple-600 flex-shrink-0 mt-0.5" />
+                            <Building2 className="h-4 w-4 text-brand-600 flex-shrink-0 mt-0.5" />
                             <div className="min-w-0">
                               <div className="flex items-center gap-2">
                                 <span className="truncate">{business.name}</span>
@@ -2087,7 +2087,7 @@ export default function SuperAdmin() {
                                   href={business.website} 
                                   target="_blank" 
                                   rel="noopener noreferrer"
-                                  className="text-xs text-purple-600 hover:underline truncate block"
+                                  className="text-xs text-brand-600 hover:underline truncate block"
                                   title={business.website}
                                 >
                                   {getDomain(business.website)}
@@ -2147,7 +2147,7 @@ export default function SuperAdmin() {
                                 variant="outline"
                                 size="sm"
                                 onClick={() => window.open('/demo/razorpay-rize', '_blank')}
-                                className="text-purple-600 hover:text-purple-700 hover:bg-purple-50 border-purple-200 h-8"
+                                className="text-brand-600 hover:text-brand-700 hover:bg-brand-50 border-brand-200 h-8"
                               >
                                 <Play className="h-4 w-4 sm:mr-1.5" />
                                 <span className="hidden sm:inline">Demo</span>
@@ -2231,7 +2231,7 @@ export default function SuperAdmin() {
               <div ref={loadMoreRef} className="py-4">
                 {isFetchingNextPage && (
                   <div className="flex items-center justify-center border-t border-gray-100 pt-4">
-                    <div className="w-5 h-5 border-2 border-purple-600 border-t-transparent rounded-full animate-spin mr-2" />
+                    <div className="w-5 h-5 border-2 border-brand-600 border-t-transparent rounded-full animate-spin mr-2" />
                     <span className="text-sm text-gray-500">Loading more accounts...</span>
                   </div>
                 )}

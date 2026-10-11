@@ -279,7 +279,7 @@ Respond with ONLY valid JSON:
 
   /**
    * Send the AI resolution back to the chat conversation
-   * This makes the auto-resolution seamless - customer just sees Chroney respond
+   * This makes the auto-resolution seamless - customer just sees Orvey respond
    */
   private async sendResolutionToChat(
     conversationId: string,

@@ -98,7 +98,7 @@ export function LiveAvatarPlatformCard() {
   return (
     <Card data-testid="card-live-avatar-platform">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2"><Video className="h-5 w-5 text-purple-600" />Live AI avatar — platform keys</CardTitle>
+        <CardTitle className="flex items-center gap-2"><Video className="h-5 w-5 text-brand-600" />Live AI avatar — platform keys</CardTitle>
         <CardDescription>
           Our own provider keys. An account uses them only when it has no key of its own and "Allow platform key (we pay)" is on
           in its Live AI avatar settings. Keys are encrypted and only the last 4 characters are shown.

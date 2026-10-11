@@ -1,5 +1,5 @@
 /**
- * Channel tags on training items (FAQs, documents, trained URLs, website pages, Train Chroney
+ * Channel tags on training items (FAQs, documents, trained URLs, website pages, Train Orvey
  * instructions): a WhatsApp-only item reaches WhatsApp prompts and never the website, a
  * website-only item never reaches WhatsApp, untagged items reach every channel, Instagram /
  * Facebook respect their tags; API validation; caches refresh right after a tag change; untagged

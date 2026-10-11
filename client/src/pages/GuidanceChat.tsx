@@ -488,8 +488,8 @@ export default function GuidanceChat() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
   
-  const chatColor = settings?.chatColor || "#9333ea";
-  const chatColorEnd = settings?.chatColorEnd || "#3b82f6";
+  const chatColor = settings?.chatColor || "#1f4596";
+  const chatColorEnd = settings?.chatColorEnd || "#0a1530";
   const widgetHeaderText = settings?.widgetHeaderText || "Assistant";
   const currency = settings?.currency || "USD";
   
@@ -775,12 +775,12 @@ export default function GuidanceChat() {
                               setIsLanguageDropdownOpen(false);
                             }}
                             className={`w-full px-3 py-2 text-left text-sm hover:bg-gray-100 flex items-center justify-between gap-2 transition-colors ${
-                              selectedLanguage === langCode ? 'bg-purple-50 text-purple-700' : 'text-gray-700'
+                              selectedLanguage === langCode ? 'bg-brand-50 text-brand-700' : 'text-gray-700'
                             }`}
                           >
                             <span className="font-medium">{lang.nativeName}</span>
                             {selectedLanguage === langCode && (
-                              <span className="text-purple-600">✓</span>
+                              <span className="text-brand-600">✓</span>
                             )}
                           </button>
                         );
@@ -1042,7 +1042,7 @@ export default function GuidanceChat() {
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask me anything..."
-            className="flex-1 resize-none border rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 max-h-32"
+            className="flex-1 resize-none border rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 max-h-32"
             rows={1}
             disabled={isLoading}
           />

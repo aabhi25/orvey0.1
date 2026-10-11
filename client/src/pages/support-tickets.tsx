@@ -164,10 +164,10 @@ export default function SupportTickets() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 rounded-lg">
-              <AlertCircle className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+            <div className="p-2 bg-gradient-to-br from-brand-100 to-ink-100 dark:from-brand-900/30 dark:to-ink-900/30 rounded-lg">
+              <AlertCircle className="h-6 w-6 text-brand-600 dark:text-brand-400" />
             </div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent" data-testid="text-page-title">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-brand-600 to-ink-600 bg-clip-text text-transparent" data-testid="text-page-title">
               {viewMode === "exceptions" ? "Exception Queue" : "Support Tickets"}
             </h1>
           </div>
@@ -186,9 +186,9 @@ export default function SupportTickets() {
               <Button 
                 variant="outline" 
                 size="icon" 
-                className="h-9 w-9 rounded-full border-purple-200 hover:bg-purple-50 hover:border-purple-300 dark:border-purple-800 dark:hover:bg-purple-950/50 transition-all"
+                className="h-9 w-9 rounded-full border-brand-200 hover:bg-brand-50 hover:border-brand-300 dark:border-brand-800 dark:hover:bg-brand-950/50 transition-all"
               >
-                <Settings className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                <Settings className="h-4 w-4 text-brand-600 dark:text-brand-400" />
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
@@ -233,7 +233,7 @@ export default function SupportTickets() {
             <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle className="flex items-center gap-2">
-                  <Bot className="h-5 w-5 text-purple-600" />
+                  <Bot className="h-5 w-5 text-brand-600" />
                   How Autonomous Support Works
                 </DialogTitle>
                 <DialogDescription>
@@ -256,7 +256,7 @@ export default function SupportTickets() {
                 {/* How AI Automation Works */}
                 <div>
                   <h3 className="font-semibold flex items-center gap-2 text-base mb-2">
-                    <Sparkles className="h-4 w-4 text-purple-500" />
+                    <Sparkles className="h-4 w-4 text-brand-500" />
                     How AI Handles Tickets Automatically
                   </h3>
                   <div className="text-sm text-muted-foreground space-y-2">
@@ -302,7 +302,7 @@ export default function SupportTickets() {
                       <li>Click on any ticket to see full conversation history and AI analysis</li>
                       <li>Review AI's suggested response (if available)</li>
                       <li>Either approve AI suggestion, edit it, or write your own response</li>
-                      <li>Your response appears as Chroney in the chat widget - seamless for customers</li>
+                      <li>Your response appears as Orvey in the chat widget - seamless for customers</li>
                       <li>Click "Resolve Ticket" when issue is handled</li>
                       <li>AI learns from your corrections to improve future auto-resolutions</li>
                     </ol>
@@ -333,7 +333,7 @@ export default function SupportTickets() {
                     Configure Autonomous Behavior
                   </h3>
                   <p className="text-sm text-muted-foreground mb-3">
-                    Click the <span className="font-medium text-purple-600">Settings icon (⚙️)</span> above to control how aggressively AI handles tickets:
+                    Click the <span className="font-medium text-brand-600">Settings icon (⚙️)</span> above to control how aggressively AI handles tickets:
                   </p>
                   <ul className="text-sm text-muted-foreground space-y-2">
                     <li><span className="font-medium">Confidence Threshold (60-90%):</span> Higher = more cautious, lower = more automated</li>
@@ -345,11 +345,11 @@ export default function SupportTickets() {
                 {/* View Analytics */}
                 <div className="border-t pt-4">
                   <h3 className="font-semibold flex items-center gap-2 text-base mb-2">
-                    <BarChart3 className="h-4 w-4 text-indigo-500" />
+                    <BarChart3 className="h-4 w-4 text-brand-500" />
                     Track Automation Performance
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    Visit <Link href="/automation-analytics" className="text-purple-600 hover:underline font-medium">Automation Analytics</Link> to see AI resolution rate, customer satisfaction scores, hours saved, and identify areas for improvement.
+                    Visit <Link href="/automation-analytics" className="text-brand-600 hover:underline font-medium">Automation Analytics</Link> to see AI resolution rate, customer satisfaction scores, hours saved, and identify areas for improvement.
                   </p>
                 </div>
               </div>
@@ -360,7 +360,7 @@ export default function SupportTickets() {
           
           {/* View Mode Selector */}
           <Select value={viewMode} onValueChange={(v) => setViewMode(v as "exceptions" | "all")}>
-            <SelectTrigger className="w-[200px] border-purple-200 hover:border-purple-300 dark:border-purple-800 focus:ring-purple-500">
+            <SelectTrigger className="w-[200px] border-brand-200 hover:border-brand-300 dark:border-brand-800 focus:ring-brand-500">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -383,12 +383,12 @@ export default function SupportTickets() {
 
       {/* AI Automation Insights Banner */}
       {!statsLoading && stats && stats.autoResolved > 0 && (
-        <Card className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20 border-purple-200 dark:border-purple-800">
+        <Card className="bg-gradient-to-r from-brand-50 to-ink-50 dark:from-brand-950/20 dark:to-ink-950/20 border-brand-200 dark:border-brand-800">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded-full">
-                  <Sparkles className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                <div className="p-3 bg-brand-100 dark:bg-brand-900 rounded-full">
+                  <Sparkles className="h-6 w-6 text-brand-600 dark:text-brand-400" />
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold">AI Automation Active</h3>
@@ -403,7 +403,7 @@ export default function SupportTickets() {
                 </div>
               </div>
               <div className="text-right">
-                <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+                <div className="text-2xl font-bold text-brand-600 dark:text-brand-400">
                   {Math.round((stats.autoResolved / Math.max(stats.total, 1)) * 15 * 10) / 10}h
                 </div>
                 <p className="text-xs text-muted-foreground">saved (est.)</p>
@@ -464,21 +464,21 @@ export default function SupportTickets() {
           </Card>
 
           {/* AI Automation Card */}
-          <Card className="overflow-hidden border-0 shadow-lg bg-gradient-to-br from-purple-50 to-fuchsia-100 dark:from-purple-950 dark:to-fuchsia-900">
+          <Card className="overflow-hidden border-0 shadow-lg bg-gradient-to-br from-brand-50 to-ink-100 dark:from-brand-950 dark:to-ink-900">
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <div className="p-3 bg-white dark:bg-purple-950 rounded-xl shadow-sm">
-                  <Sparkles className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+                <div className="p-3 bg-white dark:bg-brand-950 rounded-xl shadow-sm">
+                  <Sparkles className="h-5 w-5 text-brand-600 dark:text-brand-400" />
                 </div>
-                <Bot className="h-4 w-4 text-purple-400" />
+                <Bot className="h-4 w-4 text-brand-400" />
               </div>
-              <h3 className="text-sm font-medium text-purple-700 dark:text-purple-300 mb-1">
+              <h3 className="text-sm font-medium text-brand-700 dark:text-brand-300 mb-1">
                 AI Automation
               </h3>
-              <div className="text-3xl font-bold text-purple-900 dark:text-white" data-testid="text-stat-auto-resolved">
+              <div className="text-3xl font-bold text-brand-900 dark:text-white" data-testid="text-stat-auto-resolved">
                 {stats.total > 0 ? Math.round((stats.autoResolved / stats.total) * 100) : 0}%
               </div>
-              <p className="text-xs text-purple-600 dark:text-purple-400 mt-2">
+              <p className="text-xs text-brand-600 dark:text-brand-400 mt-2">
                 {stats.autoResolved} tickets handled autonomously
               </p>
             </CardContent>
@@ -513,8 +513,8 @@ export default function SupportTickets() {
       <Card className="border-0 shadow-lg">
         <CardHeader className="bg-gradient-to-r from-slate-50 to-gray-50 dark:from-slate-900 dark:to-gray-900 border-b">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 rounded-lg">
-              <MessageSquare className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+            <div className="p-2 bg-gradient-to-br from-brand-100 to-ink-100 dark:from-brand-900/30 dark:to-ink-900/30 rounded-lg">
+              <MessageSquare className="h-5 w-5 text-brand-600 dark:text-brand-400" />
             </div>
             <div>
               <CardTitle className="text-lg">Ticket List</CardTitle>

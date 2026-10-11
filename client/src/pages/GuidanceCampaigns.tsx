@@ -112,7 +112,7 @@ export default function GuidanceCampaigns() {
         
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-400 to-violet-500 flex items-center justify-center shadow-lg shadow-violet-500/20">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-400 to-ink-500 flex items-center justify-center shadow-lg shadow-brand-500/20">
               <Sparkles className="w-6 h-6 text-white" />
             </div>
             <div>

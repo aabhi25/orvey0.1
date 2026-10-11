@@ -316,7 +316,7 @@ export default function AdminFaqs() {
         <TrainingNavTabs />
         <div className="flex items-center justify-center h-screen">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-600 mx-auto mb-4"></div>
             <p className="text-sm text-gray-500">Loading FAQs...</p>
           </div>
         </div>
@@ -331,14 +331,14 @@ export default function AdminFaqs() {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-brand-600 to-ink-600 bg-clip-text text-transparent">
               FAQs Management {totalCount > 0 && <span className="text-lg font-semibold text-gray-500">({totalCount})</span>}
             </h1>
             <p className="text-muted-foreground mt-1">
               Manage your frequently asked questions
             </p>
           </div>
-          <Button onClick={openCreateDialog} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+          <Button onClick={openCreateDialog} className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700">
             <Plus className="mr-2 h-4 w-4" />
             Add FAQ
           </Button>
@@ -419,7 +419,7 @@ export default function AdminFaqs() {
                           <ChannelBadge channels={faq.channels} className="mt-1" />
                         </TableCell>
                         <TableCell>
-                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 whitespace-nowrap">
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-100 text-brand-800 whitespace-nowrap">
                             {faq.category || "General"}
                           </span>
                         </TableCell>
@@ -525,21 +525,21 @@ export default function AdminFaqs() {
 
               {/* Right Column - Quality Analysis Panel */}
               <div className="space-y-4">
-                <div className="rounded-lg border bg-gradient-to-br from-purple-50/50 to-blue-50/50 p-4">
+                <div className="rounded-lg border bg-gradient-to-br from-brand-50/50 to-ink-50/50 p-4">
                   <div className="flex items-center gap-2 mb-3">
-                    <Sparkles className="h-5 w-5 text-purple-600" />
+                    <Sparkles className="h-5 w-5 text-brand-600" />
                     <h3 className="font-semibold text-gray-900">AI Quality Coach</h3>
                   </div>
 
                   {!qualityAnalysis && !isAnalyzing && (
                     <div className="text-center py-6">
-                      <Lightbulb className="h-8 w-8 mx-auto mb-3 text-purple-400" />
+                      <Lightbulb className="h-8 w-8 mx-auto mb-3 text-brand-400" />
                       <p className="text-sm text-muted-foreground mb-4">Get AI-powered feedback to improve your FAQ quality</p>
                       <Button
                         type="button"
                         onClick={analyzeQuality}
                         disabled={!formData.question.trim() && !formData.answer.trim()}
-                        className="bg-purple-600 hover:bg-purple-700"
+                        className="bg-brand-600 hover:bg-brand-700"
                       >
                         <Sparkles className="h-4 w-4 mr-2" />
                         Check Quality
@@ -549,7 +549,7 @@ export default function AdminFaqs() {
                   
                   {isAnalyzing && (
                     <div className="text-center py-8">
-                      <Loader2 className="h-8 w-8 mx-auto mb-3 animate-spin text-purple-600" />
+                      <Loader2 className="h-8 w-8 mx-auto mb-3 animate-spin text-brand-600" />
                       <p className="text-sm text-muted-foreground">Analyzing your FAQ...</p>
                     </div>
                   )}
@@ -628,20 +628,20 @@ export default function AdminFaqs() {
 
                       {/* Improved Question */}
                       {qualityAnalysis.improvedQuestion && qualityAnalysis.improvedQuestion !== formData.question && (
-                        <div className="p-3 rounded-md bg-purple-50 border border-purple-200">
+                        <div className="p-3 rounded-md bg-brand-50 border border-brand-200">
                           <div className="flex items-center justify-between mb-1">
-                            <p className="text-xs font-medium text-purple-700">Suggested Question</p>
+                            <p className="text-xs font-medium text-brand-700">Suggested Question</p>
                             <Button
                               type="button"
                               variant="ghost"
                               size="sm"
                               onClick={applyImprovedQuestion}
-                              className="h-6 text-xs text-purple-600 hover:text-purple-700 hover:bg-purple-100"
+                              className="h-6 text-xs text-brand-600 hover:text-brand-700 hover:bg-brand-100"
                             >
                               <Copy className="h-3 w-3 mr-1" /> Apply
                             </Button>
                           </div>
-                          <p className="text-xs text-purple-900">{qualityAnalysis.improvedQuestion}</p>
+                          <p className="text-xs text-brand-900">{qualityAnalysis.improvedQuestion}</p>
                         </div>
                       )}
 
@@ -679,7 +679,7 @@ export default function AdminFaqs() {
                           size="sm"
                           onClick={analyzeQuality}
                           disabled={isAnalyzing}
-                          className="w-full text-purple-600 border-purple-200 hover:bg-purple-50"
+                          className="w-full text-brand-600 border-brand-200 hover:bg-brand-50"
                         >
                           <Sparkles className="h-4 w-4 mr-2" />
                           Re-check Quality
@@ -697,7 +697,7 @@ export default function AdminFaqs() {
               <Button 
                 type="submit" 
                 disabled={createMutation.isPending || updateMutation.isPending}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
               >
                 {(createMutation.isPending || updateMutation.isPending) && (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -729,7 +729,7 @@ export default function AdminFaqs() {
                 <div>
                   <Label className="text-sm font-medium text-gray-500">Category</Label>
                   <p className="mt-1">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-brand-100 text-brand-800">
                       {viewingFaq.category || "General"}
                     </span>
                   </p>

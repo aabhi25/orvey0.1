@@ -236,7 +236,7 @@ export function ShareLinkModal({
                 id="password-enabled-modal"
                 checked={isPasswordEnabled}
                 onChange={(e) => setIsPasswordEnabled(e.target.checked)}
-                className="w-4 h-4 rounded border-gray-300 cursor-pointer accent-purple-600"
+                className="w-4 h-4 rounded border-gray-300 cursor-pointer accent-brand-600"
               />
               <label htmlFor="password-enabled-modal" className="text-sm font-medium text-gray-700 flex items-center gap-2 cursor-pointer">
                 {isPasswordEnabled ? <Lock className="w-4 h-4" /> : <LockOpen className="w-4 h-4" />}

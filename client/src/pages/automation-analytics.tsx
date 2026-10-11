@@ -100,10 +100,10 @@ export default function AutomationAnalytics() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between gap-2 space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">AI Resolution Rate</CardTitle>
-            <Sparkles className="h-4 w-4 text-purple-500" />
+            <Sparkles className="h-4 w-4 text-brand-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-purple-600">
+            <div className="text-3xl font-bold text-brand-600">
               {Math.round(analytics.aiResolutionRate)}%
             </div>
             <p className="text-xs text-muted-foreground">
@@ -169,16 +169,16 @@ export default function AutomationAnalytics() {
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <Sparkles className="h-4 w-4 text-purple-500" />
+                    <Sparkles className="h-4 w-4 text-brand-500" />
                     <span className="text-sm font-medium">AI Auto-Resolve</span>
                   </div>
-                  <span className="text-2xl font-bold text-purple-600">
+                  <span className="text-2xl font-bold text-brand-600">
                     {analytics.averageAutoResolveTime.toFixed(1)}h
                   </span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div 
-                    className="bg-purple-600 h-2 rounded-full" 
+                    className="bg-brand-600 h-2 rounded-full" 
                     style={{ width: `${(analytics.averageAutoResolveTime / Math.max(analytics.averageAutoResolveTime, analytics.averageHumanResolveTime)) * 100}%` }}
                   />
                 </div>

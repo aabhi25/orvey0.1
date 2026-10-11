@@ -231,7 +231,7 @@ export function CampaignReplyList({ items, isLoading, selectedId, onSelect, show
                     <span className="text-[10px] text-gray-500 truncate max-w-[10rem]" title={r.campaignName}>{r.campaignName}</span>
                   )}
                   {r.classificationLabel && (
-                    <Badge variant="outline" className={`text-[10px] px-1.5 py-0 h-4 ${r.interested ? "bg-emerald-50 text-emerald-700 border-emerald-200" : "bg-violet-50 text-violet-700 border-violet-200"}`}>
+                    <Badge variant="outline" className={`text-[10px] px-1.5 py-0 h-4 ${r.interested ? "bg-emerald-50 text-emerald-700 border-emerald-200" : "bg-brand-50 text-brand-700 border-brand-200"}`}>
                       {r.classificationLabel}
                     </Badge>
                   )}
@@ -363,7 +363,7 @@ export function CampaignReplyThread({ recipientId, onBack, onChanged }: {
         </div>
         <div className="flex flex-wrap items-center gap-1.5">
           {r.classificationLabel && (
-            <Badge variant="outline" className="bg-violet-50 text-violet-700 border-violet-200 text-[11px]">{r.classificationLabel}</Badge>
+            <Badge variant="outline" className="bg-brand-50 text-brand-700 border-brand-200 text-[11px]">{r.classificationLabel}</Badge>
           )}
           {r.needsHumanAny && (
             <Badge variant="outline" className="bg-amber-50 text-amber-800 border-amber-200 text-[11px]" title={r.needsHumanReason || r.callbackReason || undefined}>

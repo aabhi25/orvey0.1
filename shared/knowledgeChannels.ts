@@ -1,5 +1,5 @@
 /**
- * Channel tags for training items (FAQs, documents, website pages, trained URLs and Train Chroney
+ * Channel tags for training items (FAQs, documents, website pages, trained URLs and Train Orvey
  * instructions). An item with no tag (NULL / empty list) is used on every channel — that is the
  * default, so accounts that never tag anything behave exactly as before. A tagged item is used
  * only on the listed channels.

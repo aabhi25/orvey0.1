@@ -1496,7 +1496,7 @@ export default function WhatsApp({ embeddedPage }: { embeddedPage?: "config" | "
                               </p>
                               <div className="flex items-center gap-1.5 shrink-0 ml-2">
                                 {hasJourneys && (
-                                  <span className="inline-flex items-center px-1.5 py-0.5 rounded-full bg-purple-100 text-purple-700 text-[10px] font-medium">
+                                  <span className="inline-flex items-center px-1.5 py-0.5 rounded-full bg-brand-100 text-brand-700 text-[10px] font-medium">
                                     {conversation.journeys.length} {conversation.journeys.length === 1 ? 'journey' : 'journeys'}
                                   </span>
                                 )}
@@ -1524,14 +1524,14 @@ export default function WhatsApp({ embeddedPage }: { embeddedPage?: "config" | "
                           const visibleJourneys = conversation.journeys.slice(0, visibleCount);
                           const hasMore = conversation.journeys.length > visibleCount;
                           return (
-                          <div className="border-l-2 border-purple-200 ml-10 bg-gray-50/50">
+                          <div className="border-l-2 border-brand-200 ml-10 bg-gray-50/50">
                             {visibleJourneys.map((journey) => {
                               const journeyTime = format(parseUTCDate(journey.first_message_at), "MMM d, h:mm a");
                               const isJourneyActive = selectedConversation?.flowSessionId === journey.flow_session_id;
                               return (
                                 <div
                                   key={journey.flow_session_id}
-                                  className={`flex items-center gap-2.5 px-5 py-2.5 cursor-pointer transition-all duration-200 group ${isJourneyActive ? 'bg-purple-50' : 'hover:bg-purple-50/50'}`}
+                                  className={`flex items-center gap-2.5 px-5 py-2.5 cursor-pointer transition-all duration-200 group ${isJourneyActive ? 'bg-brand-50' : 'hover:bg-brand-50/50'}`}
                                   onClick={(e) => {
                                     e.stopPropagation();
                                     setSelectedConversation({
@@ -1544,12 +1544,12 @@ export default function WhatsApp({ embeddedPage }: { embeddedPage?: "config" | "
                                     });
                                   }}
                                 >
-                                  <div className="w-7 h-7 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center shrink-0">
+                                  <div className="w-7 h-7 bg-gradient-to-br from-brand-400 to-ink-600 rounded-full flex items-center justify-center shrink-0">
                                     <Sparkles className="h-3.5 w-3.5 text-white" />
                                   </div>
                                   <div className="flex-1 min-w-0">
                                     <div className="flex items-center gap-2">
-                                      <span className="font-medium text-purple-800 text-xs truncate">
+                                      <span className="font-medium text-brand-800 text-xs truncate">
                                         {journey.flow_name}
                                       </span>
                                       <span className="text-[10px] text-gray-400 shrink-0">
@@ -1565,7 +1565,7 @@ export default function WhatsApp({ embeddedPage }: { embeddedPage?: "config" | "
                             })}
                             {hasMore && (
                               <button
-                                className="w-full py-2 text-xs text-purple-600 hover:text-purple-800 hover:bg-purple-50 transition-colors font-medium"
+                                className="w-full py-2 text-xs text-brand-600 hover:text-brand-800 hover:bg-brand-50 transition-colors font-medium"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   setJourneyVisibleCount(prev => ({
@@ -1607,7 +1607,7 @@ export default function WhatsApp({ embeddedPage }: { embeddedPage?: "config" | "
                       >
                         <ArrowLeft className="h-5 w-5" />
                       </Button>
-                      <div className={`w-10 h-10 ${selectedConversation.journeyName ? 'bg-purple-400/40' : 'bg-white/20'} backdrop-blur rounded-full flex items-center justify-center shrink-0`}>
+                      <div className={`w-10 h-10 ${selectedConversation.journeyName ? 'bg-brand-400/40' : 'bg-white/20'} backdrop-blur rounded-full flex items-center justify-center shrink-0`}>
                         {selectedConversation.journeyName ? (
                           <Sparkles className="h-5 w-5 text-white" />
                         ) : (
@@ -2364,7 +2364,7 @@ export default function WhatsApp({ embeddedPage }: { embeddedPage?: "config" | "
                               {field.allowedValues && field.allowedValues.length > 0 && (
                                 <div className="flex flex-wrap gap-1 mt-1">
                                   {field.allowedValues.map((v) => (
-                                    <span key={v} className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-violet-100 text-violet-700 border border-violet-200">{v}</span>
+                                    <span key={v} className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-brand-100 text-brand-700 border border-brand-200">{v}</span>
                                   ))}
                                 </div>
                               )}
@@ -2454,11 +2454,11 @@ export default function WhatsApp({ embeddedPage }: { embeddedPage?: "config" | "
                 {newFieldAllowedValues.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mb-2">
                     {newFieldAllowedValues.map((v) => (
-                      <span key={v} className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-violet-100 text-violet-700 border border-violet-200">
+                      <span key={v} className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-brand-100 text-brand-700 border border-brand-200">
                         {v}
                         <button
                           type="button"
-                          className="hover:text-violet-900 ml-0.5"
+                          className="hover:text-brand-900 ml-0.5"
                           onClick={() => setNewFieldAllowedValues(newFieldAllowedValues.filter((x) => x !== v))}
                         >×</button>
                       </span>
@@ -2533,11 +2533,11 @@ export default function WhatsApp({ embeddedPage }: { embeddedPage?: "config" | "
                 {editAllowedValues.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mb-2">
                     {editAllowedValues.map((v) => (
-                      <span key={v} className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-violet-100 text-violet-700 border border-violet-200">
+                      <span key={v} className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-brand-100 text-brand-700 border border-brand-200">
                         {v}
                         <button
                           type="button"
-                          className="hover:text-violet-900 ml-0.5"
+                          className="hover:text-brand-900 ml-0.5"
                           onClick={() => setEditAllowedValues(editAllowedValues.filter((x) => x !== v))}
                         >×</button>
                       </span>
@@ -2694,7 +2694,7 @@ export default function WhatsApp({ embeddedPage }: { embeddedPage?: "config" | "
                 {renderSection("Loan Details", loanFields, "bg-green-50")}
                 {renderSection("Bank Details", bankFields, "bg-blue-50")}
                 {renderSection("Address", addressFields, "bg-amber-50")}
-                {renderSection("Business / Employment", businessFields, "bg-purple-50")}
+                {renderSection("Business / Employment", businessFields, "bg-brand-50")}
                 {renderSection("Other Details", otherFields, "bg-gray-50")}
 
                 <div className="space-y-2 pt-2 border-t">
@@ -3015,7 +3015,7 @@ function SortableStepItem({ step, index, onEdit, onDelete, onTogglePause }: Sort
           <GripVertical className="h-4 w-4 text-gray-400" />
         </button>
       </div>
-      <div className={`flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full text-xs font-medium ${step.paused ? 'bg-gray-200 text-gray-400' : 'bg-purple-100 text-purple-700'}`}>
+      <div className={`flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full text-xs font-medium ${step.paused ? 'bg-gray-200 text-gray-400' : 'bg-brand-100 text-brand-700'}`}>
         {index + 1}
       </div>
       <div className="flex-1 min-w-0">
@@ -3368,7 +3368,7 @@ function DocTypeMultiSelect({
     <div className="space-y-2">
       <div className="relative" ref={dropdownRef}>
         <div
-          className="flex items-center border rounded-lg px-3 py-2 cursor-pointer hover:border-purple-400 transition-colors"
+          className="flex items-center border rounded-lg px-3 py-2 cursor-pointer hover:border-brand-400 transition-colors"
           onClick={() => setOpen(!open)}
         >
           <Search className="h-4 w-4 text-gray-400 mr-2 flex-shrink-0" />
@@ -3397,7 +3397,7 @@ function DocTypeMultiSelect({
               filtered.map((doc) => (
                 <div
                   key={doc.docType}
-                  className="flex items-center gap-2 px-3 py-2 text-sm cursor-pointer hover:bg-purple-50 transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 text-sm cursor-pointer hover:bg-brand-50 transition-colors"
                   onClick={() => addDoc(doc)}
                 >
                   <FileText className="h-4 w-4 text-gray-400" />
@@ -4011,7 +4011,7 @@ function FlowBuilderSection() {
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <GitBranch className="h-5 w-5 text-purple-600" />
+            <GitBranch className="h-5 w-5 text-brand-600" />
             <CardTitle>Conversation Flows</CardTitle>
           </div>
           <div className="flex items-center gap-2">
@@ -4042,7 +4042,7 @@ function FlowBuilderSection() {
               <div
                 key={flow.id}
                 className={`p-4 border rounded-lg cursor-pointer transition-colors ${
-                  selectedFlow?.id === flow.id ? "border-purple-500 bg-purple-50" : "hover:border-gray-300"
+                  selectedFlow?.id === flow.id ? "border-brand-500 bg-brand-50" : "hover:border-gray-300"
                 }`}
                 onClick={() => setSelectedFlow(selectedFlow?.id === flow.id ? null : flow)}
               >
@@ -4059,7 +4059,7 @@ function FlowBuilderSection() {
                       <h4 className="font-medium">{flow.name}</h4>
                       {flow.description && <p className="text-sm text-gray-500">{flow.description}</p>}
                       {flow.adaptiveMode === "true" && (
-                        <p className="text-xs text-purple-700 mt-1">Adaptive guided journey enabled</p>
+                        <p className="text-xs text-brand-700 mt-1">Adaptive guided journey enabled</p>
                       )}
                       {!(flow as any).verificationRuleSetId && (
                         <p className="text-xs text-amber-600 mt-1" data-testid={`text-no-rules-${flow.id}`}>
@@ -4276,7 +4276,7 @@ function FlowBuilderSection() {
                 }}
                 className="space-y-2"
               >
-                <div className={`flex items-start space-x-3 p-3 rounded-md border cursor-pointer transition-colors ${flowTriggerMode === "auto" ? "border-purple-500 bg-purple-50" : "hover:bg-gray-50"}`}>
+                <div className={`flex items-start space-x-3 p-3 rounded-md border cursor-pointer transition-colors ${flowTriggerMode === "auto" ? "border-brand-500 bg-brand-50" : "hover:bg-gray-50"}`}>
                   <RadioGroupItem value="auto" id="trigger-auto" className="mt-0.5" />
                   <div className="space-y-0.5">
                     <Label htmlFor="trigger-auto" className="cursor-pointer font-medium">Start from scratch</Label>
@@ -4285,7 +4285,7 @@ function FlowBuilderSection() {
                     </p>
                   </div>
                 </div>
-                <div className={`flex items-start space-x-3 p-3 rounded-md border cursor-pointer transition-colors ${flowTriggerMode === "keyword" ? "border-purple-500 bg-purple-50" : "hover:bg-gray-50"}`}>
+                <div className={`flex items-start space-x-3 p-3 rounded-md border cursor-pointer transition-colors ${flowTriggerMode === "keyword" ? "border-brand-500 bg-brand-50" : "hover:bg-gray-50"}`}>
                   <RadioGroupItem value="keyword" id="trigger-keyword" className="mt-0.5" />
                   <div className="space-y-0.5 flex-1">
                     <Label htmlFor="trigger-keyword" className="cursor-pointer font-medium">Start from keyword</Label>
@@ -4341,7 +4341,7 @@ function FlowBuilderSection() {
                 onValueChange={(value: "once" | "loop") => setNewFlowRepeatMode(value)}
                 className="space-y-2"
               >
-                <div className={`flex items-start space-x-3 p-3 rounded-md border cursor-pointer transition-colors ${newFlowRepeatMode === "once" ? "border-purple-500 bg-purple-50" : "hover:bg-gray-50"}`}>
+                <div className={`flex items-start space-x-3 p-3 rounded-md border cursor-pointer transition-colors ${newFlowRepeatMode === "once" ? "border-brand-500 bg-brand-50" : "hover:bg-gray-50"}`}>
                   <RadioGroupItem value="once" id="repeat-once" className="mt-0.5" />
                   <div className="space-y-0.5">
                     <Label htmlFor="repeat-once" className="cursor-pointer font-medium">Run once</Label>
@@ -4350,7 +4350,7 @@ function FlowBuilderSection() {
                     </p>
                   </div>
                 </div>
-                <div className={`flex items-start space-x-3 p-3 rounded-md border cursor-pointer transition-colors ${newFlowRepeatMode === "loop" ? "border-purple-500 bg-purple-50" : "hover:bg-gray-50"}`}>
+                <div className={`flex items-start space-x-3 p-3 rounded-md border cursor-pointer transition-colors ${newFlowRepeatMode === "loop" ? "border-brand-500 bg-brand-50" : "hover:bg-gray-50"}`}>
                   <RadioGroupItem value="loop" id="repeat-loop" className="mt-0.5" />
                   <div className="space-y-0.5">
                     <Label htmlFor="repeat-loop" className="cursor-pointer font-medium">Loop (repeat)</Label>
@@ -4361,12 +4361,12 @@ function FlowBuilderSection() {
                 </div>
               </RadioGroup>
             </div>
-            <div className="rounded-lg border border-purple-200 bg-purple-50/60 p-4">
+            <div className="rounded-lg border border-brand-200 bg-brand-50/60 p-4">
               <div className="flex items-start justify-between gap-4">
                 <div className="space-y-1">
                   <Label htmlFor="adaptive-flow-mode" className="cursor-pointer">Adaptive guided journey</Label>
                   <p className="text-xs text-muted-foreground">
-                    Let customers type configured choices in their own words or upload configured documents before the upload step. Chroney keeps the existing validation and returns to the next missing step.
+                    Let customers type configured choices in their own words or upload configured documents before the upload step. Orvey keeps the existing validation and returns to the next missing step.
                   </p>
                 </div>
                 <Switch
@@ -4375,7 +4375,7 @@ function FlowBuilderSection() {
                   onCheckedChange={setNewFlowAdaptiveMode}
                 />
               </div>
-              <p className="mt-3 text-xs text-purple-800">
+              <p className="mt-3 text-xs text-brand-800">
                 When off, this flow remains strictly step-by-step.
               </p>
             </div>
@@ -4542,7 +4542,7 @@ function FlowBuilderSection() {
                                   setStepRequiredFields(stepRequiredFields.filter(rf => rf.fieldKey !== field.fieldKey));
                                 }
                               }}
-                              className="h-4 w-4 rounded border-gray-300 text-purple-600 focus:ring-purple-500"
+                              className="h-4 w-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
                             />
                             <span className="text-sm font-medium">{field.fieldLabel}</span>
                           </div>

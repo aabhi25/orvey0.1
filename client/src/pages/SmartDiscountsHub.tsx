@@ -95,9 +95,9 @@ export default function SmartDiscountsHub() {
       title: "AI Urgency Offers",
       description: "AI detects purchase intent and shows time-limited discount with countdown timer",
       icon: Timer,
-      color: "bg-purple-500",
-      lightColor: "bg-purple-50",
-      borderColor: "border-purple-200",
+      color: "bg-brand-500",
+      lightColor: "bg-brand-50",
+      borderColor: "border-brand-200",
       path: "/admin/smart-discounts/urgency-offers",
       isEnabled: urgencyCampaigns?.some(c => c.isEnabled) || false,
       onToggle: (checked: boolean) => updateUrgencyMutation.mutate(checked),
@@ -136,8 +136,8 @@ export default function SmartDiscountsHub() {
       <MoreFeaturesNavTabs />
       <div className="container mx-auto py-8 px-4 max-w-6xl">
       <div className="flex items-center gap-3 mb-2">
-        <div className="p-2 rounded-lg bg-purple-100">
-          <Sparkles className="w-6 h-6 text-purple-600" />
+        <div className="p-2 rounded-lg bg-brand-100">
+          <Sparkles className="w-6 h-6 text-brand-600" />
         </div>
         <h1 className="text-3xl font-bold">Smart Discounts</h1>
       </div>
@@ -183,7 +183,7 @@ export default function SmartDiscountsHub() {
                     </Badge>
                   ))}
                 </div>
-                <div className="flex items-center text-sm text-purple-600 font-medium">
+                <div className="flex items-center text-sm text-brand-600 font-medium">
                   Configure settings
                   <ChevronRight className="w-4 h-4 ml-1" />
                 </div>
@@ -197,8 +197,8 @@ export default function SmartDiscountsHub() {
         <h2 className="text-xl font-semibold mb-4">How Smart Discounts Work</h2>
         <div className="grid gap-4 md:grid-cols-3">
           <div className="flex items-start gap-3 p-4 rounded-lg bg-muted/50">
-            <div className="p-2 rounded-full bg-purple-100">
-              <span className="text-purple-600 font-bold text-sm">1</span>
+            <div className="p-2 rounded-full bg-brand-100">
+              <span className="text-brand-600 font-bold text-sm">1</span>
             </div>
             <div>
               <h3 className="font-medium">Detect Behavior</h3>
@@ -206,8 +206,8 @@ export default function SmartDiscountsHub() {
             </div>
           </div>
           <div className="flex items-start gap-3 p-4 rounded-lg bg-muted/50">
-            <div className="p-2 rounded-full bg-purple-100">
-              <span className="text-purple-600 font-bold text-sm">2</span>
+            <div className="p-2 rounded-full bg-brand-100">
+              <span className="text-brand-600 font-bold text-sm">2</span>
             </div>
             <div>
               <h3 className="font-medium">Trigger Offer</h3>
@@ -215,8 +215,8 @@ export default function SmartDiscountsHub() {
             </div>
           </div>
           <div className="flex items-start gap-3 p-4 rounded-lg bg-muted/50">
-            <div className="p-2 rounded-full bg-purple-100">
-              <span className="text-purple-600 font-bold text-sm">3</span>
+            <div className="p-2 rounded-full bg-brand-100">
+              <span className="text-brand-600 font-bold text-sm">3</span>
             </div>
             <div>
               <h3 className="font-medium">Capture Lead</h3>

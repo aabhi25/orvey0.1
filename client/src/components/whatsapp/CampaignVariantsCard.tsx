@@ -45,7 +45,7 @@ export function CampaignVariantsCard({ campaignId, variants: given }: { campaign
     <Card data-testid="card-campaign-variants">
       <CardHeader className="pb-2">
         <CardTitle className="flex flex-wrap items-center gap-2 text-base">
-          <FlaskConical className="h-4 w-4 text-violet-600" /> A/B test
+          <FlaskConical className="h-4 w-4 text-brand-600" /> A/B test
           {split ? <span className="text-sm font-normal text-gray-500">A {100 - split}% · B {split}%</span> : null}
         </CardTitle>
       </CardHeader>

@@ -25,7 +25,7 @@ export function ProductComparisonView({
   currencySymbol = "$",
   onRemove,
   onClose,
-  chatColor = "#9333ea",
+  chatColor = "#1f4596",
   whatsappNumber,
   whatsappMessage
 }: ProductComparisonViewProps) {

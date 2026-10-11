@@ -566,7 +566,7 @@ export function ChatMenuNavigation({
                     type="text"
                     value={leadFormData.name}
                     onChange={(e) => setLeadFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
                     placeholder={t("Enter your name")}
                     required={fieldsConfig.name?.required}
                   />
@@ -584,7 +584,7 @@ export function ChatMenuNavigation({
                       setLeadFormData(prev => ({ ...prev, phone: value }));
                       if (phoneError) setPhoneError(null);
                     }}
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
                     placeholder={t("Enter your mobile number")}
                     required={fieldsConfig.phone?.required}
                     pattern="[0-9]{10}"
@@ -608,7 +608,7 @@ export function ChatMenuNavigation({
                     type="email"
                     value={leadFormData.email}
                     onChange={(e) => setLeadFormData(prev => ({ ...prev, email: e.target.value }))}
-                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
                     placeholder={t("Enter your email")}
                     required={fieldsConfig.email?.required}
                   />
@@ -624,7 +624,7 @@ export function ChatMenuNavigation({
                     <select
                       value={leadFormData.customFields[field.id] || ''}
                       onChange={(e) => setLeadFormData(prev => ({ ...prev, customFields: { ...prev.customFields, [field.id]: e.target.value } }))}
-                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white text-sm"
+                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent bg-white text-sm"
                       required={field.required}
                     >
                       <option value="">{t("Select an option")}</option>
@@ -636,7 +636,7 @@ export function ChatMenuNavigation({
                     <textarea
                       value={leadFormData.customFields[field.id] || ''}
                       onChange={(e) => setLeadFormData(prev => ({ ...prev, customFields: { ...prev.customFields, [field.id]: e.target.value } }))}
-                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm resize-none"
+                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent text-sm resize-none"
                       placeholder={t(field.label)}
                       rows={3}
                       required={field.required}
@@ -646,7 +646,7 @@ export function ChatMenuNavigation({
                       type="text"
                       value={leadFormData.customFields[field.id] || ''}
                       onChange={(e) => setLeadFormData(prev => ({ ...prev, customFields: { ...prev.customFields, [field.id]: e.target.value } }))}
-                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                      className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
                       placeholder={t(field.label)}
                       required={field.required}
                     />

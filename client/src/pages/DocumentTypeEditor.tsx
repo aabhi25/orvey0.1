@@ -96,7 +96,7 @@ export default function DocumentTypeEditor() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
+        <Loader2 className="w-8 h-8 animate-spin text-brand-500" />
       </div>
     );
   }
@@ -320,7 +320,7 @@ function EditorForm({
       <Card>
         <CardHeader className="pb-4">
           <CardTitle className="text-base flex items-center gap-2">
-            <FileText className="h-4 w-4 text-purple-600" />
+            <FileText className="h-4 w-4 text-brand-600" />
             Basic Information
           </CardTitle>
         </CardHeader>
@@ -487,7 +487,7 @@ function EditorForm({
           <div className="flex items-center justify-between">
             <div>
               <CardTitle className="text-base flex items-center gap-2">
-                <Link2 className="h-4 w-4 text-purple-600" />
+                <Link2 className="h-4 w-4 text-brand-600" />
                 Lead Field Mapping
               </CardTitle>
               <p className="text-sm text-gray-500 mt-1">
@@ -619,7 +619,7 @@ function EditorForm({
       <Card>
         <CardHeader className="pb-4">
           <CardTitle className="text-base flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-purple-600" />
+            <Sparkles className="h-4 w-4 text-brand-600" />
             AI Scan Model
           </CardTitle>
           <p className="text-sm text-gray-500">
@@ -634,7 +634,7 @@ function EditorForm({
               data-testid="scan-model-mini"
               className={`text-left rounded-lg border-2 p-4 transition-all ${
                 scanModel === "gpt-4o-mini"
-                  ? "border-purple-500 bg-purple-50 ring-2 ring-purple-100"
+                  ? "border-brand-500 bg-brand-50 ring-2 ring-brand-100"
                   : "border-gray-200 bg-white hover:border-gray-300"
               }`}
             >
@@ -644,7 +644,7 @@ function EditorForm({
                   <span className="font-semibold text-sm">GPT-4o Mini</span>
                 </div>
                 {scanModel === "gpt-4o-mini" && (
-                  <span className="text-xs font-medium text-purple-700 bg-purple-100 px-2 py-0.5 rounded">
+                  <span className="text-xs font-medium text-brand-700 bg-brand-100 px-2 py-0.5 rounded">
                     Selected
                   </span>
                 )}
@@ -659,17 +659,17 @@ function EditorForm({
               data-testid="scan-model-full"
               className={`text-left rounded-lg border-2 p-4 transition-all ${
                 scanModel === "gpt-4o"
-                  ? "border-purple-500 bg-purple-50 ring-2 ring-purple-100"
+                  ? "border-brand-500 bg-brand-50 ring-2 ring-brand-100"
                   : "border-gray-200 bg-white hover:border-gray-300"
               }`}
             >
               <div className="flex items-center justify-between mb-1">
                 <div className="flex items-center gap-2">
-                  <Sparkles className="h-4 w-4 text-purple-500" />
+                  <Sparkles className="h-4 w-4 text-brand-500" />
                   <span className="font-semibold text-sm">GPT-4o</span>
                 </div>
                 {scanModel === "gpt-4o" && (
-                  <span className="text-xs font-medium text-purple-700 bg-purple-100 px-2 py-0.5 rounded">
+                  <span className="text-xs font-medium text-brand-700 bg-brand-100 px-2 py-0.5 rounded">
                     Selected
                   </span>
                 )}

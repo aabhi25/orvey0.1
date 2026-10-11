@@ -589,7 +589,7 @@ export default function SmartDiscounts() {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-br from-brand-500 to-ink-500 rounded-lg flex items-center justify-center">
               {showAnalytics ? <BarChart3 className="w-5 h-5 text-white" /> : <Sparkles className="w-5 h-5 text-white" />}
             </div>
             <div>
@@ -644,8 +644,8 @@ export default function SmartDiscounts() {
       </div>
 
       {!showAnalytics && (
-        <Alert className="mb-6 border-purple-200 bg-purple-50 dark:bg-purple-950/20">
-          <InfoIcon className="h-4 w-4 text-purple-600" />
+        <Alert className="mb-6 border-brand-200 bg-brand-50 dark:bg-brand-950/20">
+          <InfoIcon className="h-4 w-4 text-brand-600" />
           <AlertDescription className="text-sm">
             Smart Discounts automatically detects when visitors show high purchase intent (browsing products, scrolling, returning)
             and triggers personalized discount offers through your chatbot. Configure rules below to control when and how discounts are offered.
@@ -905,7 +905,7 @@ export default function SmartDiscounts() {
                     <TableRow key={rule.id}>
                       <TableCell>
                         <div className="flex items-center gap-2">
-                          <Target className="w-4 h-4 text-purple-500" />
+                          <Target className="w-4 h-4 text-brand-500" />
                           {rule.intentThreshold}%
                         </div>
                       </TableCell>
@@ -1008,7 +1008,7 @@ export default function SmartDiscounts() {
                       <TableCell className="font-medium">{rule.productName || 'Unknown Product'}</TableCell>
                       <TableCell>
                         <div className="flex items-center gap-2">
-                          <Target className="w-4 h-4 text-purple-500" />
+                          <Target className="w-4 h-4 text-brand-500" />
                           {rule.intentThreshold}%
                         </div>
                       </TableCell>
@@ -1430,7 +1430,7 @@ export default function SmartDiscounts() {
         <Card>
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-br from-brand-500 to-ink-500 rounded-lg flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
               <div>
@@ -1920,7 +1920,7 @@ export default function SmartDiscounts() {
         <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-xl">
-              <Sparkles className="w-5 h-5 text-purple-500" />
+              <Sparkles className="w-5 h-5 text-brand-500" />
               How Smart Discounts Works
             </DialogTitle>
             <DialogDescription>
@@ -1931,7 +1931,7 @@ export default function SmartDiscounts() {
           <div className="space-y-6 py-4">
             <div className="space-y-3">
               <h3 className="font-semibold text-lg flex items-center gap-2">
-                <Target className="w-4 h-4 text-purple-500" />
+                <Target className="w-4 h-4 text-brand-500" />
                 Behavioral Intent Detection
               </h3>
               <p className="text-sm text-muted-foreground">
@@ -1943,7 +1943,7 @@ export default function SmartDiscounts() {
 
             <div className="space-y-3">
               <h3 className="font-semibold text-lg flex items-center gap-2">
-                <Percent className="w-4 h-4 text-purple-500" />
+                <Percent className="w-4 h-4 text-brand-500" />
                 Rule-Based Discount Triggers
               </h3>
               <p className="text-sm text-muted-foreground">
@@ -1958,7 +1958,7 @@ export default function SmartDiscounts() {
 
             <div className="space-y-3">
               <h3 className="font-semibold text-lg flex items-center gap-2">
-                <Gift className="w-4 h-4 text-purple-500" />
+                <Gift className="w-4 h-4 text-brand-500" />
                 Personalized Chatbot Nudges
               </h3>
               <p className="text-sm text-muted-foreground">
@@ -1969,7 +1969,7 @@ export default function SmartDiscounts() {
 
             <div className="space-y-3">
               <h3 className="font-semibold text-lg flex items-center gap-2">
-                <Clock className="w-4 h-4 text-purple-500" />
+                <Clock className="w-4 h-4 text-brand-500" />
                 Smart Cooldowns & Limits
               </h3>
               <p className="text-sm text-muted-foreground">
@@ -1984,7 +1984,7 @@ export default function SmartDiscounts() {
 
             <div className="space-y-3">
               <h3 className="font-semibold text-lg flex items-center gap-2">
-                <BarChart3 className="w-4 h-4 text-purple-500" />
+                <BarChart3 className="w-4 h-4 text-brand-500" />
                 Track Performance
               </h3>
               <p className="text-sm text-muted-foreground">
@@ -1993,8 +1993,8 @@ export default function SmartDiscounts() {
               </p>
             </div>
 
-            <div className="bg-purple-50 dark:bg-purple-950/20 p-4 rounded-lg border border-purple-200 dark:border-purple-800">
-              <p className="text-sm font-medium text-purple-700 dark:text-purple-300">
+            <div className="bg-brand-50 dark:bg-brand-950/20 p-4 rounded-lg border border-brand-200 dark:border-brand-800">
+              <p className="text-sm font-medium text-brand-700 dark:text-brand-300">
                 Pro Tip: Start with a higher intent threshold (80+) and lower discount (5-10%) to target your most interested 
                 visitors without giving away too much margin.
               </p>
@@ -2013,7 +2013,7 @@ export default function SmartDiscounts() {
         <DialogContent className="max-w-lg max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-xl">
-              <Target className="w-5 h-5 text-purple-500" />
+              <Target className="w-5 h-5 text-brand-500" />
               How Intent Scores Are Calculated
             </DialogTitle>
             <DialogDescription>
@@ -2032,39 +2032,39 @@ export default function SmartDiscounts() {
               <div className="bg-muted/50 rounded-lg p-4 space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span>Page View</span>
-                  <span className="font-medium text-purple-600">+5 points</span>
+                  <span className="font-medium text-brand-600">+5 points</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Product View</span>
-                  <span className="font-medium text-purple-600">+10 points</span>
+                  <span className="font-medium text-brand-600">+10 points</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Scroll Depth 50%</span>
-                  <span className="font-medium text-purple-600">+5 points</span>
+                  <span className="font-medium text-brand-600">+5 points</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Scroll Depth 75%</span>
-                  <span className="font-medium text-purple-600">+10 points</span>
+                  <span className="font-medium text-brand-600">+10 points</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Click</span>
-                  <span className="font-medium text-purple-600">+15 points</span>
+                  <span className="font-medium text-brand-600">+15 points</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Add to Cart</span>
-                  <span className="font-medium text-purple-600">+25 points</span>
+                  <span className="font-medium text-brand-600">+25 points</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Return Visit</span>
-                  <span className="font-medium text-purple-600">+20 points</span>
+                  <span className="font-medium text-brand-600">+20 points</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Dwell Time (30+ seconds)</span>
-                  <span className="font-medium text-purple-600">+10 points</span>
+                  <span className="font-medium text-brand-600">+10 points</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Dwell Time (60+ seconds)</span>
-                  <span className="font-medium text-purple-600">+20 points</span>
+                  <span className="font-medium text-brand-600">+20 points</span>
                 </div>
               </div>
             </div>
@@ -2091,8 +2091,8 @@ export default function SmartDiscounts() {
               </div>
             </div>
 
-            <div className="bg-purple-50 dark:bg-purple-950/20 p-3 rounded-lg border border-purple-200 dark:border-purple-800">
-              <p className="text-xs text-purple-700 dark:text-purple-300">
+            <div className="bg-brand-50 dark:bg-brand-950/20 p-3 rounded-lg border border-brand-200 dark:border-brand-800">
+              <p className="text-xs text-brand-700 dark:text-brand-300">
                 <strong>Example:</strong> A visitor who views 2 products (+20), scrolls to 75% (+10), 
                 spends 45 seconds on a page (+10), and clicks on a feature (+15) would have an intent 
                 score of 55 (High).

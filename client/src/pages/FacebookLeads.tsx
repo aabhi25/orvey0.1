@@ -123,7 +123,7 @@ export default function FacebookLeads() {
       case "qualified":
         return <Badge className="bg-green-100 text-green-700 border-0">Qualified</Badge>;
       case "converted":
-        return <Badge className="bg-purple-100 text-purple-700 border-0">Converted</Badge>;
+        return <Badge className="bg-brand-100 text-brand-700 border-0">Converted</Badge>;
       default:
         return <Badge variant="secondary">{status}</Badge>;
     }
@@ -147,7 +147,7 @@ export default function FacebookLeads() {
 
       <div className="p-6">
         <Card className="shadow-lg border-0 rounded-xl overflow-hidden">
-          <CardHeader className="flex flex-row items-center justify-between pb-4 bg-gradient-to-r from-blue-50 via-sky-50 to-indigo-50 border-b">
+          <CardHeader className="flex flex-row items-center justify-between pb-4 bg-gradient-to-r from-blue-50 via-sky-50 to-brand-50 border-b">
             <div className="space-y-1">
               <div className="flex items-center gap-3">
                 <CardTitle className="text-xl font-semibold tracking-tight">Facebook Leads</CardTitle>

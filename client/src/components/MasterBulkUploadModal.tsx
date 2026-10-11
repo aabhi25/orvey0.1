@@ -164,7 +164,7 @@ export default function MasterBulkUploadModal({ open, onClose, onApplied }: Prop
     { label: "Dealers", value: preview?.stats.dealers ?? 0, icon: Building2, bg: "bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800", text: "text-blue-700 dark:text-blue-400", iconCls: "text-blue-600" },
     { label: "Cities", value: preview?.stats.cities ?? 0, icon: MapPin, bg: "bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800", text: "text-green-700 dark:text-green-400", iconCls: "text-green-600" },
     { label: "Stores", value: preview?.stats.stores ?? 0, icon: Store, bg: "bg-orange-50 dark:bg-orange-950/30 border-orange-200 dark:border-orange-800", text: "text-orange-700 dark:text-orange-400", iconCls: "text-orange-600" },
-    { label: "Credentials", value: preview?.stats.credentials ?? 0, icon: Key, bg: "bg-violet-50 dark:bg-violet-950/30 border-violet-200 dark:border-violet-800", text: "text-violet-700 dark:text-violet-400", iconCls: "text-violet-600" },
+    { label: "Credentials", value: preview?.stats.credentials ?? 0, icon: Key, bg: "bg-brand-50 dark:bg-brand-950/30 border-brand-200 dark:border-brand-800", text: "text-brand-700 dark:text-brand-400", iconCls: "text-brand-600" },
   ];
 
   return (
@@ -172,7 +172,7 @@ export default function MasterBulkUploadModal({ open, onClose, onApplied }: Prop
       <DialogContent className="max-w-3xl max-h-[90vh] flex flex-col overflow-hidden">
         <DialogHeader className="shrink-0">
           <DialogTitle className="flex items-center gap-2">
-            <FileSpreadsheet className="h-5 w-5 text-violet-600" />
+            <FileSpreadsheet className="h-5 w-5 text-brand-600" />
             Master Bulk Upload
           </DialogTitle>
         </DialogHeader>
@@ -181,13 +181,13 @@ export default function MasterBulkUploadModal({ open, onClose, onApplied }: Prop
         {stage === "upload" && (
           <div className="flex flex-col items-center gap-6 py-8">
             <div
-              className="border-2 border-dashed border-muted-foreground/30 rounded-xl p-12 w-full text-center cursor-pointer hover:border-violet-400 hover:bg-violet-50/50 dark:hover:bg-violet-950/20 transition-colors"
+              className="border-2 border-dashed border-muted-foreground/30 rounded-xl p-12 w-full text-center cursor-pointer hover:border-brand-400 hover:bg-brand-50/50 dark:hover:bg-brand-950/20 transition-colors"
               onClick={() => fileRef.current?.click()}
             >
               <Upload className="h-10 w-10 mx-auto mb-3 text-muted-foreground" />
               {fileName ? (
                 <div>
-                  <p className="font-medium text-violet-700 dark:text-violet-400">{fileName}</p>
+                  <p className="font-medium text-brand-700 dark:text-brand-400">{fileName}</p>
                   <p className="text-sm text-muted-foreground mt-1">{rows.length} rows detected · Click to change file</p>
                 </div>
               ) : (
@@ -202,7 +202,7 @@ export default function MasterBulkUploadModal({ open, onClose, onApplied }: Prop
             <Button
               onClick={handlePreview}
               disabled={rows.length === 0 || previewing}
-              className="w-full max-w-xs bg-violet-600 hover:bg-violet-700 text-white"
+              className="w-full max-w-xs bg-brand-600 hover:bg-brand-700 text-white"
             >
               {previewing ? <><Loader2 className="h-4 w-4 mr-2 animate-spin" />Analyzing…</> : "Preview Changes"}
             </Button>
@@ -353,7 +353,7 @@ export default function MasterBulkUploadModal({ open, onClose, onApplied }: Prop
 
             <div className="flex justify-between pt-2 border-t shrink-0">
               <Button variant="outline" onClick={() => setStage("upload")}>← Back</Button>
-              <Button onClick={handleApply} className="bg-violet-600 hover:bg-violet-700 text-white">
+              <Button onClick={handleApply} className="bg-brand-600 hover:bg-brand-700 text-white">
                 Apply All Changes
               </Button>
             </div>
@@ -363,7 +363,7 @@ export default function MasterBulkUploadModal({ open, onClose, onApplied }: Prop
         {/* Stage: Applying */}
         {stage === "applying" && (
           <div className="flex flex-col items-center gap-4 py-16">
-            <Loader2 className="h-12 w-12 animate-spin text-violet-600" />
+            <Loader2 className="h-12 w-12 animate-spin text-brand-600" />
             <p className="text-lg font-medium">Applying changes…</p>
             <p className="text-sm text-muted-foreground">Updating flow steps and importing credentials</p>
           </div>
@@ -388,7 +388,7 @@ export default function MasterBulkUploadModal({ open, onClose, onApplied }: Prop
               </div>
               <div className="flex justify-between items-center p-3 bg-muted/40 rounded-lg border text-sm">
                 <span>Credentials updated</span>
-                <Badge variant="outline" className="text-violet-600 border-violet-300">{results.credentials.updated}</Badge>
+                <Badge variant="outline" className="text-brand-600 border-brand-300">{results.credentials.updated}</Badge>
               </div>
               {results.credentials.failed > 0 && (
                 <div className="flex justify-between items-center p-3 bg-red-50 rounded-lg border border-red-200 text-sm">

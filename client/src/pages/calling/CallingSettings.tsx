@@ -429,14 +429,14 @@ export default function CallingSettings() {
           </CardHeader>
           <CardContent className="space-y-4">
             <RadioGroup value={draft.provider} onValueChange={v => set("provider", v as CallProviderId)} className="grid gap-2 sm:grid-cols-2">
-              <label className={`flex cursor-pointer gap-3 rounded-lg border p-3 ${!exotel ? "border-purple-300 bg-purple-50/50" : ""}`}>
+              <label className={`flex cursor-pointer gap-3 rounded-lg border p-3 ${!exotel ? "border-brand-300 bg-brand-50/50" : ""}`}>
                 <RadioGroupItem value="simulator" className="mt-0.5" data-testid="radio-provider-simulator" />
                 <span>
                   <span className="block text-sm font-medium">Test mode</span>
                   <span className="block text-xs text-gray-500">Rings here in the portal — no real phone calls.</span>
                 </span>
               </label>
-              <label className={`flex cursor-pointer gap-3 rounded-lg border p-3 ${exotel ? "border-purple-300 bg-purple-50/50" : ""}`}>
+              <label className={`flex cursor-pointer gap-3 rounded-lg border p-3 ${exotel ? "border-brand-300 bg-brand-50/50" : ""}`}>
                 <RadioGroupItem value="exotel" className="mt-0.5" data-testid="radio-provider-exotel" />
                 <span>
                   <span className="block text-sm font-medium">Exotel</span>
@@ -557,14 +557,14 @@ export default function CallingSettings() {
             <div className="space-y-2">
               <Label>Who can be called automatically</Label>
               <RadioGroup value={draft.consentMode} onValueChange={v => set("consentMode", v as CallConsentMode)} className="space-y-2">
-                <label className={`flex cursor-pointer gap-3 rounded-lg border p-3 ${draft.consentMode === "explicit" ? "border-purple-300 bg-purple-50/50" : ""}`}>
+                <label className={`flex cursor-pointer gap-3 rounded-lg border p-3 ${draft.consentMode === "explicit" ? "border-brand-300 bg-brand-50/50" : ""}`}>
                   <RadioGroupItem value="explicit" className="mt-0.5" data-testid="radio-consent-explicit" />
                   <span>
                     <span className="block text-sm font-medium">Only people who agreed to a call</span>
                     <span className="block text-xs text-gray-500">The safest choice. The AI only auto-calls leads who asked for a call or said yes when your chat offered one.</span>
                   </span>
                 </label>
-                <label className={`flex cursor-pointer gap-3 rounded-lg border p-3 ${draft.consentMode === "business_attested" ? "border-purple-300 bg-purple-50/50" : ""}`}>
+                <label className={`flex cursor-pointer gap-3 rounded-lg border p-3 ${draft.consentMode === "business_attested" ? "border-brand-300 bg-brand-50/50" : ""}`}>
                   <RadioGroupItem value="business_attested" className="mt-0.5" data-testid="radio-consent-attested" />
                   <span>
                     <span className="block text-sm font-medium">Everyone who leaves a phone number</span>
@@ -610,7 +610,7 @@ export default function CallingSettings() {
                       type="button"
                       aria-pressed={on}
                       onClick={() => set("hoursDays", (on ? draft.hoursDays.filter(x => x !== d.value) : [...draft.hoursDays, d.value]).sort())}
-                      className={`h-9 w-12 rounded-md border text-sm ${on ? "border-purple-600 bg-purple-600 text-white" : "bg-white text-gray-700 hover:bg-gray-50"}`}
+                      className={`h-9 w-12 rounded-md border text-sm ${on ? "border-brand-600 bg-brand-600 text-white" : "bg-white text-gray-700 hover:bg-gray-50"}`}
                       data-testid={`button-day-${d.value}`}
                     >
                       {d.label}

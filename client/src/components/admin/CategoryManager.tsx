@@ -133,7 +133,7 @@ export default function CategoryManager() {
   return (
     <div>
       <div className="flex justify-end mb-4">
-        <Button onClick={handleAddNew} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+        <Button onClick={handleAddNew} className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700">
           <Plus className="h-4 w-4 mr-2" />
           Add Category
         </Button>
@@ -194,7 +194,7 @@ export default function CategoryManager() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <FolderTree className="w-5 h-5 text-purple-600" />
+              <FolderTree className="w-5 h-5 text-brand-600" />
               {editingCategory ? "Edit Category" : "Add Category"}
             </DialogTitle>
             <DialogDescription>

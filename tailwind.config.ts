@@ -11,6 +11,34 @@ export default {
         sm: ".1875rem", /* 3px */
       },
       colors: {
+        // Orvey brand: classy navy blue (accents, buttons, gradient starts)
+        brand: {
+          50: "#f0f4fb",
+          100: "#dfe7f6",
+          200: "#c3d2ee",
+          300: "#98b1e0",
+          400: "#6286cb",
+          500: "#3a63b5",
+          600: "#1f4596",
+          700: "#1a3878",
+          800: "#162e60",
+          900: "#11234a",
+          950: "#0a1530",
+        },
+        // Orvey ink: blue-black (gradient ends, dark chrome)
+        ink: {
+          50: "#f3f5f8",
+          100: "#e4e8ef",
+          200: "#c9d0dc",
+          300: "#9aa5b8",
+          400: "#5f6b82",
+          500: "#1c2436",
+          600: "#121828",
+          700: "#0d121e",
+          800: "#090c15",
+          900: "#05070d",
+          950: "#020306",
+        },
         // Flat / base colors (regular buttons)
         background: "hsl(var(--background) / <alpha-value>)",
         foreground: "hsl(var(--foreground) / <alpha-value>)",

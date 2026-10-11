@@ -46,7 +46,7 @@ export function toWhatsappSettingsDto(settings: any) {
     // The mode the AI actually uses (old 'lead_capture' defaults that were never chosen read as 'direct_sales').
     useCaseMode: effectiveUseCaseMode(settings),
     useCaseModeExplicit: settings.useCaseModeExplicit === "true",
-    // WhatsApp-only instructions: 'add' to or 'replace' the Train Chroney instructions.
+    // WhatsApp-only instructions: 'add' to or 'replace' the Train Orvey instructions.
     instructionsMode: instructionsModeOf(settings),
     // WhatsApp answer style; null = same as the website widget.
     personality: settings.personality ?? null,

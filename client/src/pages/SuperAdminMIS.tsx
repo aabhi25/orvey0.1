@@ -20,7 +20,7 @@ function downloadPDF(data: MISRow[], totals: any, totalConversionRate: any) {
 
   doc.setFontSize(16);
   doc.setTextColor(107, 33, 168);
-  doc.text("AI Chroney — MIS Report", 14, 18);
+  doc.text("Orvey — MIS Report", 14, 18);
 
   const now = new Date();
   const istNow = new Date(now.getTime() + 5.5 * 60 * 60 * 1000);
@@ -129,11 +129,11 @@ export default function SuperAdminMIS() {
 
   return (
     <div className="flex flex-col h-screen">
-      <header className="border-b bg-gradient-to-r from-red-600 via-purple-600 to-blue-600 text-white p-4">
+      <header className="border-b bg-gradient-to-r from-red-600 via-brand-600 to-blue-600 text-white p-4">
         <div className="flex items-center gap-3">
           <SidebarTrigger className="text-white hover:bg-white/20" />
           <div>
-            <h1 className="text-lg font-semibold">AI Chroney</h1>
+            <h1 className="text-lg font-semibold">Orvey</h1>
             <p className="text-sm text-white/80">MIS Dashboard</p>
           </div>
         </div>
@@ -142,7 +142,7 @@ export default function SuperAdminMIS() {
       <main className="flex-1 overflow-auto p-6 bg-gray-50 dark:bg-gray-900">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <BarChart3 className="h-6 w-6 text-purple-600" />
+            <BarChart3 className="h-6 w-6 text-brand-600" />
             <div>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white">MIS Report</h2>
               <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -153,7 +153,7 @@ export default function SuperAdminMIS() {
           {data && data.length > 0 && totals && (
             <Button
               onClick={() => downloadPDF(data, totals, totalConversionRate)}
-              className="bg-purple-600 hover:bg-purple-700 text-white gap-2"
+              className="bg-brand-600 hover:bg-brand-700 text-white gap-2"
             >
               <Download className="h-4 w-4" />
               Download PDF
@@ -163,7 +163,7 @@ export default function SuperAdminMIS() {
 
         {isLoading && (
           <div className="flex items-center justify-center py-20">
-            <Loader2 className="h-8 w-8 animate-spin text-purple-600" />
+            <Loader2 className="h-8 w-8 animate-spin text-brand-600" />
             <span className="ml-3 text-gray-500">Loading MIS data...</span>
           </div>
         )}
@@ -182,34 +182,34 @@ export default function SuperAdminMIS() {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-purple-600 text-white">
-                  <th className="px-4 py-3 text-left font-semibold border-r border-purple-500" rowSpan={2}>
+                <tr className="bg-brand-600 text-white">
+                  <th className="px-4 py-3 text-left font-semibold border-r border-brand-500" rowSpan={2}>
                     Partner Name
                   </th>
-                  <th className="px-4 py-3 text-center font-semibold border-r border-purple-500" rowSpan={2}>
+                  <th className="px-4 py-3 text-center font-semibold border-r border-brand-500" rowSpan={2}>
                     Type
                   </th>
-                  <th className="px-4 py-2 text-center font-semibold border-r border-purple-500" colSpan={2}>
+                  <th className="px-4 py-2 text-center font-semibold border-r border-brand-500" colSpan={2}>
                     Visitors
                   </th>
-                  <th className="px-4 py-2 text-center font-semibold border-r border-purple-500" colSpan={2}>
+                  <th className="px-4 py-2 text-center font-semibold border-r border-brand-500" colSpan={2}>
                     Leads
                   </th>
-                  <th className="px-4 py-2 text-center font-semibold border-r border-purple-500" colSpan={2}>
+                  <th className="px-4 py-2 text-center font-semibold border-r border-brand-500" colSpan={2}>
                     Conversations
                   </th>
                   <th className="px-4 py-2 text-center font-semibold" colSpan={2}>
                     Conversion Rate
                   </th>
                 </tr>
-                <tr className="bg-purple-500 text-white text-xs">
-                  <th className="px-4 py-2 text-center font-medium border-r border-purple-400">MTD</th>
-                  <th className="px-4 py-2 text-center font-medium border-r border-purple-400">Today</th>
-                  <th className="px-4 py-2 text-center font-medium border-r border-purple-400">MTD</th>
-                  <th className="px-4 py-2 text-center font-medium border-r border-purple-400">Today</th>
-                  <th className="px-4 py-2 text-center font-medium border-r border-purple-400">MTD</th>
-                  <th className="px-4 py-2 text-center font-medium border-r border-purple-400">Today</th>
-                  <th className="px-4 py-2 text-center font-medium border-r border-purple-400">MTD</th>
+                <tr className="bg-brand-500 text-white text-xs">
+                  <th className="px-4 py-2 text-center font-medium border-r border-brand-400">MTD</th>
+                  <th className="px-4 py-2 text-center font-medium border-r border-brand-400">Today</th>
+                  <th className="px-4 py-2 text-center font-medium border-r border-brand-400">MTD</th>
+                  <th className="px-4 py-2 text-center font-medium border-r border-brand-400">Today</th>
+                  <th className="px-4 py-2 text-center font-medium border-r border-brand-400">MTD</th>
+                  <th className="px-4 py-2 text-center font-medium border-r border-brand-400">Today</th>
+                  <th className="px-4 py-2 text-center font-medium border-r border-brand-400">MTD</th>
                   <th className="px-4 py-2 text-center font-medium">Today</th>
                 </tr>
               </thead>
@@ -219,14 +219,14 @@ export default function SuperAdminMIS() {
                     key={row.name}
                     className={`border-b border-gray-100 dark:border-gray-700 ${
                       i % 2 === 0 ? "bg-white dark:bg-gray-800" : "bg-gray-50 dark:bg-gray-750"
-                    } hover:bg-purple-50 dark:hover:bg-gray-700 transition-colors`}
+                    } hover:bg-brand-50 dark:hover:bg-gray-700 transition-colors`}
                   >
                     <td className="px-4 py-3 font-medium text-gray-900 dark:text-white border-r border-gray-100 dark:border-gray-700">
                       {row.name}
                     </td>
                     <td className="px-4 py-3 text-center border-r border-gray-100 dark:border-gray-700">
                       {row.type === "group" ? (
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300">
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-brand-100 text-brand-700 dark:bg-brand-900/40 dark:text-brand-300">
                           <Users className="h-3 w-3" />
                           Group ({row.accountCount})
                         </span>
@@ -263,31 +263,31 @@ export default function SuperAdminMIS() {
                     </td>
                   </tr>
                 ))}
-                <tr className="bg-purple-100 dark:bg-purple-900/30 font-bold border-t-2 border-purple-300 dark:border-purple-700">
-                  <td className="px-4 py-3 text-gray-900 dark:text-white border-r border-purple-200 dark:border-purple-700">
+                <tr className="bg-brand-100 dark:bg-brand-900/30 font-bold border-t-2 border-brand-300 dark:border-brand-700">
+                  <td className="px-4 py-3 text-gray-900 dark:text-white border-r border-brand-200 dark:border-brand-700">
                     Total
                   </td>
-                  <td className="px-4 py-3 text-center text-gray-900 dark:text-white border-r border-purple-200 dark:border-purple-700">
+                  <td className="px-4 py-3 text-center text-gray-900 dark:text-white border-r border-brand-200 dark:border-brand-700">
                   </td>
-                  <td className="px-4 py-3 text-center text-gray-900 dark:text-white border-r border-purple-200 dark:border-purple-700">
+                  <td className="px-4 py-3 text-center text-gray-900 dark:text-white border-r border-brand-200 dark:border-brand-700">
                     {totals?.visitors.mtd.toLocaleString()}
                   </td>
-                  <td className="px-4 py-3 text-center text-gray-900 dark:text-white border-r border-purple-200 dark:border-purple-700">
+                  <td className="px-4 py-3 text-center text-gray-900 dark:text-white border-r border-brand-200 dark:border-brand-700">
                     {totals?.visitors.today.toLocaleString()}
                   </td>
-                  <td className="px-4 py-3 text-center text-gray-900 dark:text-white border-r border-purple-200 dark:border-purple-700">
+                  <td className="px-4 py-3 text-center text-gray-900 dark:text-white border-r border-brand-200 dark:border-brand-700">
                     {totals?.leads.mtd.toLocaleString()}
                   </td>
-                  <td className="px-4 py-3 text-center text-gray-900 dark:text-white border-r border-purple-200 dark:border-purple-700">
+                  <td className="px-4 py-3 text-center text-gray-900 dark:text-white border-r border-brand-200 dark:border-brand-700">
                     {totals?.leads.today.toLocaleString()}
                   </td>
-                  <td className="px-4 py-3 text-center text-gray-900 dark:text-white border-r border-purple-200 dark:border-purple-700">
+                  <td className="px-4 py-3 text-center text-gray-900 dark:text-white border-r border-brand-200 dark:border-brand-700">
                     {totals?.conversations.mtd.toLocaleString()}
                   </td>
-                  <td className="px-4 py-3 text-center text-gray-900 dark:text-white border-r border-purple-200 dark:border-purple-700">
+                  <td className="px-4 py-3 text-center text-gray-900 dark:text-white border-r border-brand-200 dark:border-brand-700">
                     {totals?.conversations.today.toLocaleString()}
                   </td>
-                  <td className="px-4 py-3 text-center text-gray-900 dark:text-white border-r border-purple-200 dark:border-purple-700">
+                  <td className="px-4 py-3 text-center text-gray-900 dark:text-white border-r border-brand-200 dark:border-brand-700">
                     {totalConversionRate.mtd}%
                   </td>
                   <td className="px-4 py-3 text-center text-gray-900 dark:text-white">

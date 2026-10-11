@@ -265,7 +265,7 @@ export default function TopScholarAdmin() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <GraduationCap className="w-5 h-5 text-violet-600" /> Curriculum API
+              <GraduationCap className="w-5 h-5 text-brand-600" /> Curriculum API
             </CardTitle>
             <CardDescription>
               {forbidden
@@ -297,7 +297,7 @@ export default function TopScholarAdmin() {
   return (
     <div className="p-6 max-w-4xl mx-auto space-y-6">
       <div className="flex items-center gap-3 mb-2">
-        <div className="p-2.5 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg">
+        <div className="p-2.5 rounded-xl bg-gradient-to-br from-brand-500 to-ink-600 shadow-lg">
           <GraduationCap className="w-6 h-6 text-white" />
         </div>
         <div>
@@ -307,10 +307,10 @@ export default function TopScholarAdmin() {
       </div>
 
       {/* How it works */}
-      <Card className="border-violet-100 bg-gradient-to-br from-violet-50/70 to-white">
+      <Card className="border-brand-100 bg-gradient-to-br from-brand-50/70 to-white">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-base">
-            <Workflow className="w-5 h-5 text-violet-600" /> How it all fits together
+            <Workflow className="w-5 h-5 text-brand-600" /> How it all fits together
           </CardTitle>
           <CardDescription>
             Curriculum flows from your source system into a database the chatbot can search, then students get grounded answers.
@@ -322,7 +322,7 @@ export default function TopScholarAdmin() {
               { icon: CloudDownload, title: "Content Bundle API", body: "The source your curriculum is pulled from.", tone: "text-sky-700 bg-sky-50 border-sky-200" },
               { icon: RefreshCw, title: "Sync", body: "Fetches, chunks & embeds the content.", tone: "text-amber-700 bg-amber-50 border-amber-200" },
               { icon: Database, title: "Content Database", body: "Where embeddings live — what the chatbot reads from.", tone: "text-emerald-700 bg-emerald-50 border-emerald-200" },
-              { icon: MessageSquare, title: "Student chat", body: "AI tutor quotes the matched curriculum.", tone: "text-violet-700 bg-violet-50 border-violet-200" },
+              { icon: MessageSquare, title: "Student chat", body: "AI tutor quotes the matched curriculum.", tone: "text-brand-700 bg-brand-50 border-brand-200" },
             ].map((step, i, arr) => (
               <div key={step.title} className="flex items-center gap-2 lg:flex-1">
                 <div className={`flex-1 rounded-lg border p-3 ${step.tone}`}>
@@ -344,7 +344,7 @@ export default function TopScholarAdmin() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Power className="w-5 h-5 text-violet-600" /> AI Tutor Status
+            <Power className="w-5 h-5 text-brand-600" /> AI Tutor Status
           </CardTitle>
           <CardDescription>
             The curriculum tutor is always on for this account — the chatbot answers students using your synced curriculum.
@@ -364,7 +364,7 @@ export default function TopScholarAdmin() {
             </div>
             <Switch checked={uatPlainCpId} onCheckedChange={setUatPlainCpId} />
           </div>
-          <Button onClick={() => saveConfig.mutate()} disabled={saveConfig.isPending} className="gap-2 bg-gradient-to-r from-violet-600 to-purple-600">
+          <Button onClick={() => saveConfig.mutate()} disabled={saveConfig.isPending} className="gap-2 bg-gradient-to-r from-brand-600 to-ink-600">
             {saveConfig.isPending && <Loader2 className="w-4 h-4 animate-spin" />} Save changes
           </Button>
         </CardContent>
@@ -476,7 +476,7 @@ export default function TopScholarAdmin() {
               </div>
             </div>
           )}
-          <Button onClick={() => saveConfig.mutate()} disabled={saveConfig.isPending} className="gap-2 bg-gradient-to-r from-violet-600 to-purple-600">
+          <Button onClick={() => saveConfig.mutate()} disabled={saveConfig.isPending} className="gap-2 bg-gradient-to-r from-brand-600 to-ink-600">
             {saveConfig.isPending && <Loader2 className="w-4 h-4 animate-spin" />} Save changes
           </Button>
         </CardContent>
@@ -516,7 +516,7 @@ export default function TopScholarAdmin() {
               </span>
             )}
           </div>
-          <Button onClick={() => saveConfig.mutate()} disabled={saveConfig.isPending} className="gap-2 bg-gradient-to-r from-violet-600 to-purple-600">
+          <Button onClick={() => saveConfig.mutate()} disabled={saveConfig.isPending} className="gap-2 bg-gradient-to-r from-brand-600 to-ink-600">
             {saveConfig.isPending && <Loader2 className="w-4 h-4 animate-spin" />} Save changes
           </Button>
         </CardContent>
@@ -526,7 +526,7 @@ export default function TopScholarAdmin() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <KeyRound className="w-5 h-5 text-violet-600" /> Launch Security
+            <KeyRound className="w-5 h-5 text-brand-600" /> Launch Security
           </CardTitle>
           <CardDescription>
             The shared secret used to verify signed launch tokens from TopScholar, so only authorised student sessions can bind to a curriculum.
@@ -558,10 +558,10 @@ export default function TopScholarAdmin() {
             </p>
           </div>
 
-          <div className="flex items-center justify-between rounded-lg border border-violet-200 bg-violet-50/60 p-3">
+          <div className="flex items-center justify-between rounded-lg border border-brand-200 bg-brand-50/60 p-3">
             <div className="pr-4">
               <Label className="text-sm font-medium flex items-center gap-2">
-                Require signed token <Badge variant="secondary" className="bg-violet-100 text-violet-700">Secure mode</Badge>
+                Require signed token <Badge variant="secondary" className="bg-brand-100 text-brand-700">Secure mode</Badge>
               </Label>
               <p className="text-xs text-gray-500">
                 When on, the tutor trusts <strong>only</strong> a signed launch token. Plain board/medium/grade/subject
@@ -575,7 +575,7 @@ export default function TopScholarAdmin() {
           <div className="space-y-2">
             <Label className="text-sm font-medium flex items-center gap-2">
               Doubt Sync API base URL
-              <Badge variant="secondary" className="bg-violet-100 text-violet-700">Doubt sync</Badge>
+              <Badge variant="secondary" className="bg-brand-100 text-brand-700">Doubt sync</Badge>
             </Label>
             <Input
               type="text"
@@ -595,7 +595,7 @@ export default function TopScholarAdmin() {
           <div className="space-y-2">
             <Label className="text-sm font-medium flex items-center gap-2">
               Doubt-resolution prompt delay
-              <Badge variant="secondary" className="bg-violet-100 text-violet-700">Doubt sync</Badge>
+              <Badge variant="secondary" className="bg-brand-100 text-brand-700">Doubt sync</Badge>
             </Label>
             <div className="flex items-center gap-2">
               <Input
@@ -616,7 +616,7 @@ export default function TopScholarAdmin() {
             </p>
           </div>
 
-          <Button onClick={() => saveConfig.mutate()} disabled={saveConfig.isPending} className="gap-2 bg-gradient-to-r from-violet-600 to-purple-600">
+          <Button onClick={() => saveConfig.mutate()} disabled={saveConfig.isPending} className="gap-2 bg-gradient-to-r from-brand-600 to-ink-600">
             {saveConfig.isPending && <Loader2 className="w-4 h-4 animate-spin" />} Save changes
           </Button>
 
@@ -664,7 +664,7 @@ function signLaunchToken(secret, fields) {
             </div>
           </details>
 
-          <div className="rounded-lg border border-violet-200 bg-violet-50/40 p-3 space-y-2">
+          <div className="rounded-lg border border-brand-200 bg-brand-50/40 p-3 space-y-2">
             <div className="flex items-center justify-between gap-3">
               <Label className="text-sm font-medium">Portal data API (pull)</Label>
               <Button
@@ -717,7 +717,7 @@ GET /api/topscholar/portal/students/:studentId/conversations/:id      # full tra
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Users className="w-5 h-5 text-violet-600" /> Students
+            <Users className="w-5 h-5 text-brand-600" /> Students
           </CardTitle>
           <CardDescription>Conversations bound to a curriculum, with the resolved board / medium / grade.</CardDescription>
         </CardHeader>

@@ -329,11 +329,11 @@ export default function ScanDocs() {
 
   if (isLoading) {
     return (
-      <div className="flex-1 overflow-auto bg-gradient-to-br from-gray-50 via-purple-50/30 to-blue-50/30">
+      <div className="flex-1 overflow-auto bg-gradient-to-br from-gray-50 via-brand-50/30 to-blue-50/30">
         <TrainingNavTabs />
         <div className="flex items-center justify-center h-full">
           <div className="text-center">
-            <Loader2 className="w-8 h-8 animate-spin text-purple-600 mx-auto mb-3" />
+            <Loader2 className="w-8 h-8 animate-spin text-brand-600 mx-auto mb-3" />
             <p className="text-sm text-gray-600">Loading training documents...</p>
           </div>
         </div>
@@ -342,16 +342,16 @@ export default function ScanDocs() {
   }
 
   return (
-    <div className="flex-1 overflow-auto bg-gradient-to-br from-gray-50 via-purple-50/30 to-blue-50/30">
+    <div className="flex-1 overflow-auto bg-gradient-to-br from-gray-50 via-brand-50/30 to-blue-50/30">
       <TrainingNavTabs />
       <div className="container mx-auto p-4 md:p-6 max-w-[1600px]">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-purple-50 to-white backdrop-blur-sm shadow-md h-auto p-1 rounded-xl">
-            <TabsTrigger value="overview" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+          <TabsList className="grid w-full grid-cols-2 bg-gradient-to-r from-brand-50 to-white backdrop-blur-sm shadow-md h-auto p-1 rounded-xl">
+            <TabsTrigger value="overview" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
               <FileUp className="w-4 h-4 mr-2" />
               Overview
             </TabsTrigger>
-            <TabsTrigger value="documents" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+            <TabsTrigger value="documents" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
               <Files className="w-4 h-4 mr-2" />
               Documents
             </TabsTrigger>
@@ -359,7 +359,7 @@ export default function ScanDocs() {
 
           <TabsContent value="overview" className="space-y-6 mt-6">
             {/* Hero Section */}
-            <Card className="border-0 shadow-lg bg-gradient-to-br from-[#0B0F1A] via-[#1e3a8a] to-[#7c3aed] text-white overflow-hidden">
+            <Card className="border-0 shadow-lg bg-gradient-to-br from-[#0B0F1A] via-[#1e3a8a] to-[#1a3878] text-white overflow-hidden">
               <CardHeader className="relative pb-6">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
                 <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full -ml-24 -mb-24"></div>
@@ -370,7 +370,7 @@ export default function ScanDocs() {
                     </div>
                     <div>
                       <CardTitle className="text-3xl font-bold">Training Documents</CardTitle>
-                      <CardDescription className="text-purple-100 mt-1">
+                      <CardDescription className="text-brand-100 mt-1">
                         Upload PDFs to train your AI assistant with custom knowledge
                       </CardDescription>
                     </div>
@@ -384,7 +384,7 @@ export default function ScanDocs() {
               <Card className="border-gray-200/60 bg-white/80 backdrop-blur-sm shadow-md">
                 <CardHeader className="pb-3">
                   <CardDescription className="text-gray-600">Total Documents</CardDescription>
-                  <CardTitle className="text-3xl font-bold text-purple-600">{stats.total}</CardTitle>
+                  <CardTitle className="text-3xl font-bold text-brand-600">{stats.total}</CardTitle>
                 </CardHeader>
               </Card>
               
@@ -421,7 +421,7 @@ export default function ScanDocs() {
 
             {/* Upload Zone */}
             <Card className="border-gray-200/60 bg-white/80 backdrop-blur-sm shadow-md">
-              <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+              <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                 <CardTitle className="text-lg">Upload Training Documents</CardTitle>
                 <CardDescription>
                   Upload PDF files to enhance your AI's knowledge (Max 25MB per file)
@@ -431,15 +431,15 @@ export default function ScanDocs() {
                 <div
                   className={`border-2 border-dashed rounded-xl p-8 transition-all ${
                     isDragging
-                      ? "border-purple-500 bg-purple-50"
-                      : "border-gray-300 hover:border-purple-400 hover:bg-gray-50"
+                      ? "border-brand-500 bg-brand-50"
+                      : "border-gray-300 hover:border-brand-400 hover:bg-gray-50"
                   }`}
                   onDragOver={handleDragOver}
                   onDragLeave={handleDragLeave}
                   onDrop={handleDrop}
                 >
                   <div className="text-center">
-                    <Upload className={`w-12 h-12 mx-auto mb-4 ${isDragging ? "text-purple-500" : "text-gray-400"}`} />
+                    <Upload className={`w-12 h-12 mx-auto mb-4 ${isDragging ? "text-brand-500" : "text-gray-400"}`} />
                     <h3 className="text-lg font-semibold mb-2">
                       {isDragging ? "Drop files here" : "Drag & drop PDF files here"}
                     </h3>
@@ -447,7 +447,7 @@ export default function ScanDocs() {
                     <Button
                       onClick={() => fileInputRef.current?.click()}
                       disabled={isUploading}
-                      className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                      className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                     >
                       {isUploading ? (
                         <>
@@ -500,7 +500,7 @@ export default function ScanDocs() {
 
           <TabsContent value="documents" className="space-y-6 mt-6">
             <Card className="border-gray-200/60 bg-white/80 backdrop-blur-sm shadow-md">
-              <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+              <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <CardTitle className="text-lg">Uploaded Documents</CardTitle>
@@ -523,7 +523,7 @@ export default function ScanDocs() {
                     </p>
                     <Button
                       onClick={() => document.querySelector<HTMLElement>('[value="overview"]')?.click()}
-                      className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                      className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                     >
                       <Upload className="w-4 h-4 mr-2" />
                       Go to Upload
@@ -547,7 +547,7 @@ export default function ScanDocs() {
                         <AccordionTrigger className="px-4 py-3 hover:bg-gray-50 hover:no-underline">
                           <div className="flex items-start justify-between w-full pr-4">
                             <div className="flex items-start gap-3 flex-1 text-left">
-                              <FileText className="w-5 h-5 text-purple-600 mt-1 flex-shrink-0" />
+                              <FileText className="w-5 h-5 text-brand-600 mt-1 flex-shrink-0" />
                               <div className="flex-1 min-w-0">
                                 <div className="font-semibold text-gray-900 truncate mb-1">
                                   {doc.originalFilename}
@@ -589,7 +589,7 @@ export default function ScanDocs() {
                                     <ul className="space-y-2">
                                       {parseKeyPoints(doc.keyPoints).map((point, idx) => (
                                         <li key={idx} className="text-sm text-gray-700 flex items-start gap-2">
-                                          <span className="text-purple-600 mt-1">•</span>
+                                          <span className="text-brand-600 mt-1">•</span>
                                           <span className="flex-1">{point}</span>
                                         </li>
                                       ))}

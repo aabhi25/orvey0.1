@@ -366,7 +366,7 @@ export default function Conversations() {
               <SlidersHorizontal className="w-3.5 h-3.5" />
               <span>Filter by Date</span>
               {datePreset !== 'all' && (
-                <span className="px-1.5 py-0.5 text-[10px] font-medium rounded-full bg-purple-100 text-purple-700 normal-case">
+                <span className="px-1.5 py-0.5 text-[10px] font-medium rounded-full bg-brand-100 text-brand-700 normal-case">
                   {datePreset === 'today' ? 'Today' : datePreset === 'yesterday' ? 'Yesterday' : datePreset === 'last7' ? '7d' : datePreset === 'last30' ? '30d' : 'Custom'}
                 </span>
               )}
@@ -381,8 +381,8 @@ export default function Conversations() {
                     onClick={() => setDatePreset('all')}
                     className={`px-3 py-2 text-xs font-medium rounded-lg transition-all duration-200 ${
                       datePreset === 'all'
-                        ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md shadow-purple-200'
-                        : 'bg-white text-gray-700 border border-gray-200 hover:border-purple-300 hover:shadow-sm'
+                        ? 'bg-gradient-to-r from-brand-600 to-ink-600 text-white shadow-md shadow-brand-200'
+                        : 'bg-white text-gray-700 border border-gray-200 hover:border-brand-300 hover:shadow-sm'
                     }`}
                   >
                     All Time
@@ -391,8 +391,8 @@ export default function Conversations() {
                     onClick={() => setDatePreset('today')}
                     className={`px-3 py-2 text-xs font-medium rounded-lg transition-all duration-200 ${
                       datePreset === 'today'
-                        ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md shadow-purple-200'
-                        : 'bg-white text-gray-700 border border-gray-200 hover:border-purple-300 hover:shadow-sm'
+                        ? 'bg-gradient-to-r from-brand-600 to-ink-600 text-white shadow-md shadow-brand-200'
+                        : 'bg-white text-gray-700 border border-gray-200 hover:border-brand-300 hover:shadow-sm'
                     }`}
                   >
                     Today
@@ -401,8 +401,8 @@ export default function Conversations() {
                     onClick={() => setDatePreset('yesterday')}
                     className={`px-3 py-2 text-xs font-medium rounded-lg transition-all duration-200 ${
                       datePreset === 'yesterday'
-                        ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md shadow-purple-200'
-                        : 'bg-white text-gray-700 border border-gray-200 hover:border-purple-300 hover:shadow-sm'
+                        ? 'bg-gradient-to-r from-brand-600 to-ink-600 text-white shadow-md shadow-brand-200'
+                        : 'bg-white text-gray-700 border border-gray-200 hover:border-brand-300 hover:shadow-sm'
                     }`}
                   >
                     Yesterday
@@ -411,8 +411,8 @@ export default function Conversations() {
                     onClick={() => setDatePreset('last7')}
                     className={`px-3 py-2 text-xs font-medium rounded-lg transition-all duration-200 ${
                       datePreset === 'last7'
-                        ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md shadow-purple-200'
-                        : 'bg-white text-gray-700 border border-gray-200 hover:border-purple-300 hover:shadow-sm'
+                        ? 'bg-gradient-to-r from-brand-600 to-ink-600 text-white shadow-md shadow-brand-200'
+                        : 'bg-white text-gray-700 border border-gray-200 hover:border-brand-300 hover:shadow-sm'
                     }`}
                   >
                     Last 7 Days
@@ -425,8 +425,8 @@ export default function Conversations() {
                   <button
                     className={`w-full px-3 py-2.5 text-xs font-medium rounded-lg transition-all duration-200 flex items-center justify-center gap-2 ${
                       datePreset === 'custom'
-                        ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md shadow-purple-200'
-                        : 'bg-white text-gray-700 border border-gray-200 hover:border-purple-300 hover:shadow-sm'
+                        ? 'bg-gradient-to-r from-brand-600 to-ink-600 text-white shadow-md shadow-brand-200'
+                        : 'bg-white text-gray-700 border border-gray-200 hover:border-brand-300 hover:shadow-sm'
                     }`}
                   >
                     <Calendar className="w-3.5 h-3.5" />
@@ -497,7 +497,7 @@ export default function Conversations() {
               onClick={() => setTypeFilter(key)}
               className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium transition-all ${
                 typeFilter === key
-                  ? 'bg-purple-600 text-white shadow-sm'
+                  ? 'bg-brand-600 text-white shadow-sm'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             >
@@ -531,10 +531,10 @@ export default function Conversations() {
                   <div className="flex items-start gap-3">
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
                       conversation.viaJourney
-                        ? 'bg-gradient-to-br from-violet-500 to-purple-600'
+                        ? 'bg-gradient-to-br from-brand-500 to-ink-600'
                         : conversation.viaForm
                           ? 'bg-gradient-to-br from-green-500 to-emerald-600'
-                          : 'bg-gradient-to-br from-purple-500 to-blue-600'
+                          : 'bg-gradient-to-br from-brand-500 to-ink-600'
                     }`}>
                       {conversation.viaJourney
                         ? <GitBranch className="w-5 h-5 text-white" />
@@ -557,14 +557,14 @@ export default function Conversations() {
                       </div>
                       <div className="flex items-center justify-between text-xs text-gray-500">
                         <span className="truncate">{formatDate(conversation.createdAt)}</span>
-                        <span className="ml-2 px-2 py-0.5 bg-purple-100 text-purple-700 rounded-full font-medium">
+                        <span className="ml-2 px-2 py-0.5 bg-brand-100 text-brand-700 rounded-full font-medium">
                           {conversation.messageCount}
                         </span>
                       </div>
                       {(conversation.viaJourney || conversation.viaForm || conversation.hasLead || conversation.visitorCity) && (
                         <div className="flex items-center gap-1 mt-1 flex-wrap">
                           {conversation.viaJourney && (
-                            <span className="inline-flex items-center gap-0.5 text-[10px] px-1.5 py-0.5 rounded-full font-medium bg-violet-50 text-violet-600 border border-violet-200" title="Via Journey">
+                            <span className="inline-flex items-center gap-0.5 text-[10px] px-1.5 py-0.5 rounded-full font-medium bg-brand-50 text-brand-600 border border-brand-200" title="Via Journey">
                               <GitBranch className="w-2.5 h-2.5" />
                               Journey
                             </span>
@@ -644,10 +644,10 @@ export default function Conversations() {
                 <div className="flex items-center gap-3">
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
                     selectedConversation.viaJourney
-                      ? 'bg-gradient-to-br from-violet-500 to-purple-600'
+                      ? 'bg-gradient-to-br from-brand-500 to-ink-600'
                       : selectedConversation.viaForm
                         ? 'bg-gradient-to-br from-green-500 to-emerald-600'
-                        : 'bg-gradient-to-br from-purple-500 to-blue-600'
+                        : 'bg-gradient-to-br from-brand-500 to-ink-600'
                   }`}>
                     {selectedConversation.viaJourney
                       ? <GitBranch className="w-5 h-5 text-white" />
@@ -661,7 +661,7 @@ export default function Conversations() {
                     {(selectedConversation.viaJourney || selectedConversation.viaForm || selectedConversation.hasLead || selectedConversation.visitorCity) && (
                       <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
                         {selectedConversation.viaJourney && (
-                          <span className="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full font-medium bg-violet-50 text-violet-600 border border-violet-200">
+                          <span className="inline-flex items-center gap-1 text-[11px] px-2 py-0.5 rounded-full font-medium bg-brand-50 text-brand-600 border border-brand-200">
                             <GitBranch className="w-3 h-3" />
                             Journey
                           </span>
@@ -696,14 +696,14 @@ export default function Conversations() {
             </div>
 
             {selectedConversation.summary && (
-              <div className="bg-gradient-to-r from-purple-50 to-blue-50 border-b border-purple-100 px-4 py-3">
+              <div className="bg-gradient-to-r from-brand-50 to-ink-50 border-b border-brand-100 px-4 py-3">
                 <div className="flex items-start gap-2">
-                  <Sparkles className="w-4 h-4 text-purple-500 mt-0.5 flex-shrink-0" />
+                  <Sparkles className="w-4 h-4 text-brand-500 mt-0.5 flex-shrink-0" />
                   <div className="flex-1 min-w-0">
                     <p className={`text-sm text-gray-700 leading-relaxed ${!summaryExpanded ? 'line-clamp-2' : ''}`}>{selectedConversation.summary}</p>
                     <button
                       onClick={() => setSummaryExpanded(!summaryExpanded)}
-                      className="text-xs text-purple-600 hover:text-purple-800 font-medium mt-1"
+                      className="text-xs text-brand-600 hover:text-brand-800 font-medium mt-1"
                     >
                       {summaryExpanded ? 'View Less' : 'View More'}
                     </button>
@@ -714,7 +714,7 @@ export default function Conversations() {
                           return (
                             <div className="mt-2 flex flex-wrap gap-1.5">
                               {keywords.map((kw: string, i: number) => (
-                                <span key={i} className="px-2 py-0.5 text-xs font-medium rounded-full bg-white text-purple-700 border border-purple-200">
+                                <span key={i} className="px-2 py-0.5 text-xs font-medium rounded-full bg-white text-brand-700 border border-brand-200">
                                   {kw}
                                 </span>
                               ))}
@@ -736,7 +736,7 @@ export default function Conversations() {
                 const currentSource = message.interactionSource || 'chat';
                 const sourceChanged = prevSource !== null && prevSource !== currentSource;
                 const sourceLabel = currentSource === 'form' ? 'Form Submission' : currentSource === 'journey' ? 'Journey' : 'Chat';
-                const sourceColor = currentSource === 'form' ? 'text-green-600 border-green-200 bg-green-50' : currentSource === 'journey' ? 'text-blue-600 border-blue-200 bg-blue-50' : 'text-purple-600 border-purple-200 bg-purple-50';
+                const sourceColor = currentSource === 'form' ? 'text-green-600 border-green-200 bg-green-50' : currentSource === 'journey' ? 'text-blue-600 border-blue-200 bg-blue-50' : 'text-brand-600 border-brand-200 bg-brand-50';
                 const sourceIcon = currentSource === 'form' ? <FileText className="w-3 h-3" /> : currentSource === 'journey' ? <GitBranch className="w-3 h-3" /> : <MessageSquare className="w-3 h-3" />;
                 return (
                 <div key={message.id}>
@@ -755,7 +755,7 @@ export default function Conversations() {
                 >
                   {message.role === 'assistant' && (
                     <div className="flex items-start gap-3 max-w-[85%]">
-                      <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                      <div className="w-8 h-8 bg-gradient-to-br from-brand-500 to-ink-600 rounded-full flex items-center justify-center flex-shrink-0">
                         <Bot className="w-5 h-5 text-white" />
                       </div>
                       <div className="flex-1 min-w-0">
@@ -814,7 +814,7 @@ export default function Conversations() {
                                     <div className="p-2">
                                       <p className="text-xs font-medium text-gray-900 line-clamp-2">{product.name}</p>
                                       {product.price !== null && (
-                                        <p className="text-xs text-purple-600 font-semibold mt-1">
+                                        <p className="text-xs text-brand-600 font-semibold mt-1">
                                           {product.currency || '₹'}{product.price.toLocaleString()}
                                         </p>
                                       )}

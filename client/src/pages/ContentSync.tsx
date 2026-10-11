@@ -212,7 +212,7 @@ function statusColor(status: string) {
   switch (status) {
     case "completed": return "bg-green-100 text-green-700";
     case "syncing": return "bg-blue-100 text-blue-700";
-    case "queued": return "bg-violet-100 text-violet-700";
+    case "queued": return "bg-brand-100 text-brand-700";
     case "failed": return "bg-red-100 text-red-700";
     case "cancelled": return "bg-amber-100 text-amber-700";
     default: return "bg-gray-100 text-gray-600";
@@ -654,7 +654,7 @@ export default function ContentSync() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <GraduationCap className="w-5 h-5 text-violet-600" /> Content Sync
+              <GraduationCap className="w-5 h-5 text-brand-600" /> Content Sync
             </CardTitle>
             <CardDescription>
               {forbidden
@@ -686,7 +686,7 @@ export default function ContentSync() {
   return (
     <div className="p-6 max-w-4xl mx-auto space-y-6">
       <div className="flex items-center gap-3 mb-2">
-        <div className="p-2.5 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg">
+        <div className="p-2.5 rounded-xl bg-gradient-to-br from-brand-500 to-ink-600 shadow-lg">
           <RefreshCw className="w-6 h-6 text-white" />
         </div>
         <div>
@@ -914,7 +914,7 @@ export default function ContentSync() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-violet-600" /> Plan IDs
+            <BookOpen className="w-5 h-5 text-brand-600" /> Plan IDs
             <span className="ml-1 text-sm font-normal text-gray-400">({planCounts.all})</span>
           </CardTitle>
           <CardDescription>
@@ -923,7 +923,7 @@ export default function ContentSync() {
         </CardHeader>
         <CardContent className="space-y-4">
           <Tabs value={planEmbeddingFilter} onValueChange={(value) => setPlanEmbeddingFilter(value as PlanEmbeddingFilter)}>
-            <TabsList className="h-9 bg-violet-50/80">
+            <TabsList className="h-9 bg-brand-50/80">
               <TabsTrigger value="pending" className="h-7 gap-1.5 text-xs">
                 Pending <span className="text-muted-foreground">({planCounts.pending})</span>
               </TabsTrigger>
@@ -949,7 +949,7 @@ export default function ContentSync() {
               <Plus className="w-4 h-4" /> Add plans
             </Button>
             <Button
-              className="h-9 gap-2 bg-violet-600 hover:bg-violet-700"
+              className="h-9 gap-2 bg-brand-600 hover:bg-brand-700"
               onClick={() => setConfirmBulkPlanSync(bulkPlanSyncScope)}
               disabled={bulkPlanSync.isPending || bulkPlanSyncCount === 0}
             >
@@ -982,7 +982,7 @@ export default function ContentSync() {
                 <Button
                   onClick={() => addPlans.mutate()}
                   disabled={addPlans.isPending || savePlanIds.isPending || !addText.trim()}
-                  className="bg-violet-600 gap-2"
+                  className="bg-brand-600 gap-2"
                 >
                   {addPlans.isPending && <Loader2 className="w-4 h-4 animate-spin" />} Add to list
                 </Button>
@@ -1056,13 +1056,13 @@ export default function ContentSync() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-violet-600" /> Content Sync Status
+            <BookOpen className="w-5 h-5 text-brand-600" /> Content Sync Status
           </CardTitle>
           <CardDescription>Live status of every cp_id sync, grouped by plan. Start syncs from the Plan IDs panel above; expand a plan to see rows and cancel an in-progress run.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <Tabs value={statusFilter} onValueChange={setStatusFilter} className="w-full">
-            <TabsList className="h-auto w-full justify-start overflow-x-auto bg-violet-50/80 p-1">
+            <TabsList className="h-auto w-full justify-start overflow-x-auto bg-brand-50/80 p-1">
               <TabsTrigger value="syncing" className="shrink-0 gap-1.5 text-xs">
                 Syncing <span className="text-muted-foreground">({summary?.overall.syncing ?? 0})</span>
               </TabsTrigger>
@@ -1191,7 +1191,7 @@ export default function ContentSync() {
           <AlertDialogFooter>
             <AlertDialogCancel disabled={bulkPlanSync.isPending}>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              className="bg-violet-600 hover:bg-violet-700 text-white"
+              className="bg-brand-600 hover:bg-brand-700 text-white"
               disabled={bulkPlanSync.isPending}
               onClick={() => {
                 if (confirmBulkPlanSync) bulkPlanSync.mutate(confirmBulkPlanSync);
@@ -1263,7 +1263,7 @@ function PlanRow(props: PlanRowProps) {
 
   return (
     <Collapsible open={open} onOpenChange={setOpen} className="border rounded-lg overflow-hidden">
-      <div className="flex flex-wrap items-start justify-between gap-2 bg-violet-50/60 px-3 py-2">
+      <div className="flex flex-wrap items-start justify-between gap-2 bg-brand-50/60 px-3 py-2">
         <div className="flex flex-col gap-1 flex-1 min-w-0">
           <CollapsibleTrigger className="flex items-center gap-2 text-left min-w-0">
             <ChevronRight className={`w-4 h-4 text-gray-400 transition-transform shrink-0 ${open ? "rotate-90" : ""}`} />
@@ -1275,7 +1275,7 @@ function PlanRow(props: PlanRowProps) {
             <Button
               size="sm"
               variant="ghost"
-              className="h-7 gap-1 text-violet-700 hover:bg-violet-100"
+              className="h-7 gap-1 text-brand-700 hover:bg-brand-100"
               onClick={() => onResolvePlan(plan.planId)}
               disabled={planResolving}
             >
@@ -1288,7 +1288,7 @@ function PlanRow(props: PlanRowProps) {
           <Button
             size="sm"
             variant="ghost"
-            className="h-7 gap-1 text-violet-700 hover:bg-violet-100"
+            className="h-7 gap-1 text-brand-700 hover:bg-brand-100"
             onClick={() => onSyncPlan(plan.planId, "sample")}
               disabled={planSyncing || planRunActive}
           >
@@ -1297,7 +1297,7 @@ function PlanRow(props: PlanRowProps) {
           </Button>
           <Button
             size="sm"
-            className="h-7 gap-1 bg-violet-600"
+            className="h-7 gap-1 bg-brand-600"
             onClick={() => onSyncPlan(plan.planId, "full")}
               disabled={planSyncing || planRunActive}
           >
@@ -1318,7 +1318,7 @@ function PlanRow(props: PlanRowProps) {
           </Button>
         </div>
         {planRun && (
-          <div className="w-full border-t border-violet-100 pt-2 text-xs text-gray-600 space-y-1">
+          <div className="w-full border-t border-brand-100 pt-2 text-xs text-gray-600 space-y-1">
             <div className="flex flex-wrap items-center gap-2">
               <span className={`rounded-full px-2 py-0.5 ${statusColor(planRun.status)}`}>
                 {planRun.status === "resolving" ? "resolving cp_ids" : planRun.status}
@@ -1341,7 +1341,7 @@ function PlanRow(props: PlanRowProps) {
                 <Button
                   size="sm"
                   variant="ghost"
-                  className="h-6 px-2 text-violet-700 hover:bg-violet-100"
+                  className="h-6 px-2 text-brand-700 hover:bg-brand-100"
                   onClick={() => onRetryPlanRun(planRun.id)}
                   disabled={retryPlanRunPending}
                 >
@@ -1427,7 +1427,7 @@ function PlanRow(props: PlanRowProps) {
                               <Button
                                 size="sm"
                                 variant="ghost"
-                                className="h-7 gap-1 text-violet-700 hover:bg-violet-100"
+                                className="h-7 gap-1 text-brand-700 hover:bg-brand-100"
                                 onClick={() => onSyncCp(cp.cpId, plan.planId, "sample")}
                                 disabled={cpSyncing}
                               >
@@ -1436,7 +1436,7 @@ function PlanRow(props: PlanRowProps) {
                               </Button>
                               <Button
                                 size="sm"
-                                className="h-7 gap-1 bg-violet-600"
+                                className="h-7 gap-1 bg-brand-600"
                                 onClick={() => onSyncCp(cp.cpId, plan.planId, "full")}
                                 disabled={cpSyncing}
                               >
@@ -1506,7 +1506,7 @@ function StatusPlanRow(props: StatusPlanRowProps) {
 
   return (
     <Collapsible open={open} onOpenChange={setOpen} className="border rounded-lg overflow-hidden">
-      <CollapsibleTrigger className="w-full flex flex-wrap items-center justify-between gap-2 bg-violet-50/60 px-3 py-2 text-left">
+      <CollapsibleTrigger className="w-full flex flex-wrap items-center justify-between gap-2 bg-brand-50/60 px-3 py-2 text-left">
         <div className="flex items-center gap-2 min-w-0">
           <ChevronRight className={`w-4 h-4 text-gray-400 transition-transform shrink-0 ${open ? "rotate-90" : ""}`} />
           {label ? (

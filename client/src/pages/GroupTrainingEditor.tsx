@@ -148,7 +148,7 @@ interface Instruction {
   text: string;
   type: 'always' | 'conditional' | 'fallback';
   keywords?: string[];
-  /** Channel tag set on Train Chroney (no picker here). Kept as-is via the object spreads below. */
+  /** Channel tag set on Train Orvey (no picker here). Kept as-is via the object spreads below. */
   channels?: string[] | null;
 }
 
@@ -639,7 +639,7 @@ export default function GroupTrainingEditor() {
         `/api/super-admin/account-groups/${groupId}/leadsquared/uds/send-test`,
         { udsWebhookUrl: lsqUdsUrl.trim() || undefined, udsKey: lsqUdsKey.trim() || undefined },
       );
-      setLsqUdsTestResult({ ok: true, message: `${data.message}. Check the client's UDS logs / LeadSquared for "AI Chroney Test Lead".` });
+      setLsqUdsTestResult({ ok: true, message: `${data.message}. Check the client's UDS logs / LeadSquared for "Orvey Test Lead".` });
       if (data.payload) setLsqUdsPreview(data.payload);
     } catch (error: any) {
       setLsqUdsTestResult({ ok: false, message: error.message || "UDS webhook call failed" });
@@ -1444,7 +1444,7 @@ export default function GroupTrainingEditor() {
             </Button>
             <div className="h-6 w-px bg-border" />
             <div className="flex items-center gap-2">
-              <GraduationCap className="w-5 h-5 text-purple-600" />
+              <GraduationCap className="w-5 h-5 text-brand-600" />
               <h1 className="font-semibold">Group Training: {groupTraining?.groupName || "Loading..."}</h1>
             </div>
           </div>
@@ -1522,11 +1522,11 @@ export default function GroupTrainingEditor() {
 
         {/* Header */}
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center shadow-lg">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-500 to-ink-600 flex items-center justify-center shadow-lg">
             <GraduationCap className="w-7 h-7 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold">Train Chroney</h1>
+            <h1 className="text-2xl font-bold">Train Orvey</h1>
             <p className="text-muted-foreground">Teach your AI assistant how to respond to customers</p>
           </div>
         </div>
@@ -1535,42 +1535,42 @@ export default function GroupTrainingEditor() {
           <TabsList className="w-full h-auto p-0 bg-transparent border-b border-gray-200 dark:border-gray-800 rounded-none gap-0 justify-start mb-6">
             <TabsTrigger 
               value="instructions" 
-              className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-purple-600 data-[state=active]:bg-purple-50 dark:data-[state=active]:bg-purple-950/30 data-[state=active]:text-purple-700 dark:data-[state=active]:text-purple-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
+              className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-brand-600 data-[state=active]:bg-brand-50 dark:data-[state=active]:bg-brand-950/30 data-[state=active]:text-brand-700 dark:data-[state=active]:text-brand-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
             >
               <Brain className="w-4 h-4" />
               Instructions
             </TabsTrigger>
             <TabsTrigger 
               value="lead-training" 
-              className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-purple-600 data-[state=active]:bg-purple-50 dark:data-[state=active]:bg-purple-950/30 data-[state=active]:text-purple-700 dark:data-[state=active]:text-purple-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
+              className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-brand-600 data-[state=active]:bg-brand-50 dark:data-[state=active]:bg-brand-950/30 data-[state=active]:text-brand-700 dark:data-[state=active]:text-brand-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
             >
               <UserCheck className="w-4 h-4" />
               Lead Training
             </TabsTrigger>
             <TabsTrigger 
               value="leadsquared" 
-              className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-purple-600 data-[state=active]:bg-purple-50 dark:data-[state=active]:bg-purple-950/30 data-[state=active]:text-purple-700 dark:data-[state=active]:text-purple-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
+              className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-brand-600 data-[state=active]:bg-brand-50 dark:data-[state=active]:bg-brand-950/30 data-[state=active]:text-brand-700 dark:data-[state=active]:text-brand-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
             >
               <Link2 className="w-4 h-4" />
               LeadSquared
             </TabsTrigger>
             <TabsTrigger 
               value="journey-training" 
-              className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-purple-600 data-[state=active]:bg-purple-50 dark:data-[state=active]:bg-purple-950/30 data-[state=active]:text-purple-700 dark:data-[state=active]:text-purple-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
+              className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-brand-600 data-[state=active]:bg-brand-50 dark:data-[state=active]:bg-brand-950/30 data-[state=active]:text-brand-700 dark:data-[state=active]:text-brand-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
             >
               <Route className="w-4 h-4" />
               Journey Training
             </TabsTrigger>
             <TabsTrigger 
               value="menu-builder" 
-              className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-purple-600 data-[state=active]:bg-purple-50 dark:data-[state=active]:bg-purple-950/30 data-[state=active]:text-purple-700 dark:data-[state=active]:text-purple-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
+              className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-brand-600 data-[state=active]:bg-brand-50 dark:data-[state=active]:bg-brand-950/30 data-[state=active]:text-brand-700 dark:data-[state=active]:text-brand-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
             >
               <Menu className="w-4 h-4" />
               Menu Builder
             </TabsTrigger>
             <TabsTrigger 
               value="extra" 
-              className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-purple-600 data-[state=active]:bg-purple-50 dark:data-[state=active]:bg-purple-950/30 data-[state=active]:text-purple-700 dark:data-[state=active]:text-purple-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
+              className="gap-2 px-6 py-3 rounded-none border-b-2 border-transparent data-[state=active]:border-brand-600 data-[state=active]:bg-brand-50 dark:data-[state=active]:bg-brand-950/30 data-[state=active]:text-brand-700 dark:data-[state=active]:text-brand-400 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-all duration-200 data-[state=active]:shadow-none"
             >
               <Settings className="w-4 h-4" />
               Extra
@@ -1619,7 +1619,7 @@ export default function GroupTrainingEditor() {
                           setNewKeywords([]);
                           setKeywordInput("");
                         }}
-                        className={`gap-1.5 ${newInstructionType === 'fallback' ? 'bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600' : ''}`}
+                        className={`gap-1.5 ${newInstructionType === 'fallback' ? 'bg-gradient-to-r from-blue-500 to-brand-500 hover:from-blue-600 hover:to-brand-600' : ''}`}
                       >
                         <AlertCircle className="w-3.5 h-3.5" />
                         Fallback
@@ -1857,7 +1857,7 @@ export default function GroupTrainingEditor() {
                           {isRefining ? (
                             <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                           ) : (
-                            <Sparkles className="w-4 h-4 mr-2 text-purple-500" />
+                            <Sparkles className="w-4 h-4 mr-2 text-brand-500" />
                           )}
                           Refine with AI
                         </Button>
@@ -1881,12 +1881,12 @@ export default function GroupTrainingEditor() {
               <CardContent className="pt-6">
                 {instructions.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-12 text-center">
-                    <div className="w-16 h-16 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-4">
-                      <Brain className="w-8 h-8 text-purple-600 dark:text-purple-400" />
+                    <div className="w-16 h-16 rounded-full bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center mb-4">
+                      <Brain className="w-8 h-8 text-brand-600 dark:text-brand-400" />
                     </div>
                     <h3 className="text-lg font-medium mb-2">No instructions yet</h3>
                     <p className="text-sm text-muted-foreground max-w-sm">
-                      Add your first instruction above to start training Chroney on how to respond to your customers.
+                      Add your first instruction above to start training Orvey on how to respond to your customers.
                     </p>
                   </div>
                 ) : (
@@ -1937,7 +1937,7 @@ export default function GroupTrainingEditor() {
                                     <TooltipProvider>
                                       <Tooltip>
                                         <TooltipTrigger asChild>
-                                          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 rounded-full text-xs font-medium">
+                                          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-brand-100 dark:bg-brand-900/50 text-brand-700 dark:text-brand-300 rounded-full text-xs font-medium">
                                             <CheckCircle2 className="w-3 h-3" />
                                             <Users className="w-3 h-3" />
                                             {groupTraining.memberCount}
@@ -1998,7 +1998,7 @@ export default function GroupTrainingEditor() {
               <Button
                 onClick={() => setPublishDialogOpen('instructions')}
                 disabled={publishMutation.isPending}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
               >
                 {publishMutation.isPending ? (
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -2020,7 +2020,7 @@ export default function GroupTrainingEditor() {
                   <div>
                     <CardTitle className="text-xl">Smart Lead Training</CardTitle>
                     <CardDescription className="mt-1">
-                      Configure which contact information Chroney should collect
+                      Configure which contact information Orvey should collect
                     </CardDescription>
                   </div>
                 </div>
@@ -2136,7 +2136,7 @@ export default function GroupTrainingEditor() {
                                   }}
                                   className={`flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-md transition-all duration-200 ${
                                     field.required
-                                      ? 'bg-purple-600 text-white shadow-sm'
+                                      ? 'bg-brand-600 text-white shadow-sm'
                                       : 'bg-transparent text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700'
                                   }`}
                                 >
@@ -2213,7 +2213,7 @@ export default function GroupTrainingEditor() {
               <Button
                 onClick={() => setPublishDialogOpen('leadTraining')}
                 disabled={publishMutation.isPending || groupLeadBlocked}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                 data-testid="button-publish-lead-training"
               >
                 {publishMutation.isPending ? (
@@ -2231,7 +2231,7 @@ export default function GroupTrainingEditor() {
             <Card className="shadow-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Link2 className="w-5 h-5 text-purple-600" />
+                  <Link2 className="w-5 h-5 text-brand-600" />
                   LeadSquared Integration
                 </CardTitle>
                 <CardDescription>
@@ -2265,10 +2265,10 @@ export default function GroupTrainingEditor() {
                         key={value}
                         type="button"
                         onClick={() => { setLsqConnectionType(value); setLsqUdsTestResult(null); }}
-                        className={`text-left rounded-lg border p-3 transition-colors ${lsqConnectionType === value ? "border-purple-500 bg-purple-50 ring-1 ring-purple-500" : "hover:bg-muted/50"}`}
+                        className={`text-left rounded-lg border p-3 transition-colors ${lsqConnectionType === value ? "border-brand-500 bg-brand-50 ring-1 ring-brand-500" : "hover:bg-muted/50"}`}
                       >
                         <div className="flex items-center gap-2 font-medium text-sm">
-                          <Icon className="h-4 w-4 text-purple-600" />
+                          <Icon className="h-4 w-4 text-brand-600" />
                           {title}
                         </div>
                         <p className="text-xs text-muted-foreground mt-1">{desc}</p>
@@ -2441,7 +2441,7 @@ export default function GroupTrainingEditor() {
                 <AlertDialogHeader>
                   <AlertDialogTitle>Send a test lead to UDS?</AlertDialogTitle>
                   <AlertDialogDescription>
-                    This sends one lead named "AI Chroney Test Lead" (phone 9000000000, test.lead@example.com) to the webhook.
+                    This sends one lead named "Orvey Test Lead" (phone 9000000000, test.lead@example.com) to the webhook.
                     If the client's UDS flow is live, it will be created in their LeadSquared — ask them to delete it afterwards.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
@@ -2565,7 +2565,7 @@ export default function GroupTrainingEditor() {
               <Button
                 onClick={() => setPublishDialogOpen('leadsquared')}
                 disabled={publishMutation.isPending}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
               >
                 {publishMutation.isPending ? (
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -2581,7 +2581,7 @@ export default function GroupTrainingEditor() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl font-bold flex items-center gap-2">
-                  <Route className="w-5 h-5 text-purple-600" />
+                  <Route className="w-5 h-5 text-brand-600" />
                   Journey Training
                 </h2>
                 <p className="text-sm text-muted-foreground">Create and manage conversation journeys for all group members</p>
@@ -2623,7 +2623,7 @@ export default function GroupTrainingEditor() {
                           key={journey.id}
                           className={`group relative p-4 rounded-xl cursor-pointer transition-all duration-200 ${
                             selectedGroupJourneyId === journey.id
-                              ? "bg-purple-50 dark:bg-purple-950/30 shadow-md border-l-4 border-purple-500"
+                              ? "bg-brand-50 dark:bg-brand-950/30 shadow-md border-l-4 border-brand-500"
                               : "bg-white dark:bg-gray-800/50 hover:bg-gray-50 dark:hover:bg-gray-800 hover:shadow-md border-l-4 border-transparent"
                           }`}
                           onClick={() => {
@@ -2634,7 +2634,7 @@ export default function GroupTrainingEditor() {
                           <div className="flex items-start justify-between gap-2">
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-2 mb-1">
-                                <h3 className={`font-semibold text-sm truncate ${selectedGroupJourneyId === journey.id ? "text-purple-700 dark:text-purple-300" : ""}`}>
+                                <h3 className={`font-semibold text-sm truncate ${selectedGroupJourneyId === journey.id ? "text-brand-700 dark:text-brand-300" : ""}`}>
                                   {journey.name}
                                 </h3>
                                 {journey.status === 'active' ? (
@@ -2678,12 +2678,12 @@ export default function GroupTrainingEditor() {
                                   }
                                 }}
                               />
-                              <Button size="sm" onClick={() => { handleUpdateGroupJourney(selectedGroupJourney.id, { name: editedGroupJourneyName.trim() }); setEditingGroupJourneyName(false); }} className="bg-purple-600 hover:bg-purple-700"><Check className="w-4 h-4" /></Button>
+                              <Button size="sm" onClick={() => { handleUpdateGroupJourney(selectedGroupJourney.id, { name: editedGroupJourneyName.trim() }); setEditingGroupJourneyName(false); }} className="bg-brand-600 hover:bg-brand-700"><Check className="w-4 h-4" /></Button>
                               <Button size="sm" variant="outline" onClick={() => setEditingGroupJourneyName(false)}><X className="w-4 h-4" /></Button>
                             </div>
                           ) : (
                             <div className="group flex items-center gap-2">
-                              <h2 className="text-xl font-bold cursor-pointer hover:text-purple-600 transition-colors"
+                              <h2 className="text-xl font-bold cursor-pointer hover:text-brand-600 transition-colors"
                                 onClick={() => { setEditingGroupJourneyName(true); setEditedGroupJourneyName(selectedGroupJourney.name); }}
                               >{selectedGroupJourney.name}</h2>
                               <Edit2 className="w-4 h-4 text-muted-foreground opacity-50 group-hover:opacity-100" />
@@ -2692,7 +2692,7 @@ export default function GroupTrainingEditor() {
                           {editingGroupJourneyDesc ? (
                             <div className="flex items-start gap-2 mt-2">
                               <Textarea value={editedGroupJourneyDesc} onChange={(e) => setEditedGroupJourneyDesc(e.target.value)} className="text-sm resize-none min-h-[50px]" autoFocus />
-                              <Button size="sm" onClick={() => { handleUpdateGroupJourney(selectedGroupJourney.id, { description: editedGroupJourneyDesc.trim() }); setEditingGroupJourneyDesc(false); }} className="bg-purple-600 hover:bg-purple-700 h-8 w-8 p-0"><Check className="w-4 h-4" /></Button>
+                              <Button size="sm" onClick={() => { handleUpdateGroupJourney(selectedGroupJourney.id, { description: editedGroupJourneyDesc.trim() }); setEditingGroupJourneyDesc(false); }} className="bg-brand-600 hover:bg-brand-700 h-8 w-8 p-0"><Check className="w-4 h-4" /></Button>
                               <Button size="sm" variant="outline" onClick={() => setEditingGroupJourneyDesc(false)} className="h-8 w-8 p-0"><X className="w-4 h-4" /></Button>
                             </div>
                           ) : (
@@ -2730,7 +2730,7 @@ export default function GroupTrainingEditor() {
                         </div>
 
                         {selectedGroupJourney.startFromScratch !== 'true' && (
-                          <div className="p-3 bg-purple-50/50 dark:bg-purple-950/10 rounded-lg border border-purple-200/50">
+                          <div className="p-3 bg-brand-50/50 dark:bg-brand-950/10 rounded-lg border border-brand-200/50">
                             <Label className="text-sm font-medium">Trigger Keywords</Label>
                             <p className="text-xs text-muted-foreground mb-2">Auto-start this journey when users mention these keywords</p>
                             <div className="flex flex-wrap gap-2 mb-2">
@@ -2738,7 +2738,7 @@ export default function GroupTrainingEditor() {
                                 let keywords: string[] = [];
                                 try { keywords = selectedGroupJourney.triggerKeywords ? JSON.parse(selectedGroupJourney.triggerKeywords) : []; } catch {}
                                 return keywords.map((keyword: string, index: number) => (
-                                  <div key={index} className="flex items-center gap-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 px-2.5 py-1 rounded-full text-xs font-medium">
+                                  <div key={index} className="flex items-center gap-1 bg-brand-100 dark:bg-brand-900/30 text-brand-700 dark:text-brand-300 px-2.5 py-1 rounded-full text-xs font-medium">
                                     <span>{keyword}</span>
                                     <button onClick={() => {
                                       const newKeywords = keywords.filter((_: string, i: number) => i !== index);
@@ -2794,10 +2794,10 @@ export default function GroupTrainingEditor() {
                                 onDragEnd={handleJourneyDragEnd}
                                 className="group flex items-start gap-3 p-4 rounded-xl bg-white dark:bg-gray-800/50 hover:shadow-md transition-all cursor-move shadow-sm border"
                               >
-                                <GripVertical className="w-4 h-4 text-gray-400 mt-1 flex-shrink-0 group-hover:text-purple-500" />
+                                <GripVertical className="w-4 h-4 text-gray-400 mt-1 flex-shrink-0 group-hover:text-brand-500" />
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-center gap-2 mb-2">
-                                    <span className="text-xs font-semibold text-purple-600 bg-purple-100 dark:bg-purple-900/40 px-2 py-0.5 rounded-full">Step {index + 1}</span>
+                                    <span className="text-xs font-semibold text-brand-600 bg-brand-100 dark:bg-brand-900/40 px-2 py-0.5 rounded-full">Step {index + 1}</span>
                                     {step.isRequired === 'true' && (
                                       <span className="text-xs font-semibold text-red-600 bg-red-100 dark:bg-red-900/40 px-2 py-0.5 rounded-full">Required</span>
                                     )}
@@ -2831,7 +2831,7 @@ export default function GroupTrainingEditor() {
                 ) : (
                   <Card className="shadow-sm">
                     <CardContent className="flex flex-col items-center justify-center py-24">
-                      <Route className="w-16 h-16 text-purple-300 mb-4" />
+                      <Route className="w-16 h-16 text-brand-300 mb-4" />
                       <h3 className="text-lg font-semibold text-gray-600 mb-2">No Journey Selected</h3>
                       <p className="text-sm text-muted-foreground text-center mb-4">Select a journey or create a new one</p>
                       <Button onClick={() => setShowJourneyTemplates(true)} className="gap-2">
@@ -2852,7 +2852,7 @@ export default function GroupTrainingEditor() {
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="flex items-center gap-2">
-                      <Menu className="w-5 h-5 text-purple-600" />
+                      <Menu className="w-5 h-5 text-brand-600" />
                       Menu Mode
                     </CardTitle>
                     <CardDescription>
@@ -3651,7 +3651,7 @@ export default function GroupTrainingEditor() {
                             <div key={field.id} className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg border border-gray-200">
                               <div className="flex items-center gap-2 min-w-0">
                                 <span className="text-sm text-gray-800 truncate">{field.label}</span>
-                                <span className="text-xs px-1.5 py-0.5 bg-purple-100 text-purple-700 rounded capitalize shrink-0">{field.fieldType}</span>
+                                <span className="text-xs px-1.5 py-0.5 bg-brand-100 text-brand-700 rounded capitalize shrink-0">{field.fieldType}</span>
                                 {field.required && <span className="text-xs text-red-500 shrink-0">Required</span>}
                               </div>
                               <div className="flex items-center gap-2 ml-2 shrink-0">
@@ -3682,7 +3682,7 @@ export default function GroupTrainingEditor() {
                           ))}
 
                           {showItemAddCustomField ? (
-                            <div className="mt-2 p-3 border border-purple-200 rounded-lg bg-purple-50 space-y-3">
+                            <div className="mt-2 p-3 border border-brand-200 rounded-lg bg-brand-50 space-y-3">
                               <div>
                                 <label className="text-xs font-medium text-gray-700 block mb-1">Field Label</label>
                                 <Input
@@ -3769,7 +3769,7 @@ export default function GroupTrainingEditor() {
                             <button
                               type="button"
                               onClick={() => setShowItemAddCustomField(true)}
-                              className="flex items-center gap-1.5 text-sm text-purple-600 hover:text-purple-800 font-medium mt-1"
+                              className="flex items-center gap-1.5 text-sm text-brand-600 hover:text-brand-800 font-medium mt-1"
                             >
                               <Plus className="w-4 h-4" />
                               Add Custom Field
@@ -3821,7 +3821,7 @@ export default function GroupTrainingEditor() {
               <Button
                 onClick={() => setPublishDialogOpen('menuBuilder')}
                 disabled={publishMutation.isPending}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+                className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
               >
                 {publishMutation.isPending ? (
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -3838,7 +3838,7 @@ export default function GroupTrainingEditor() {
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h2 className="text-xl font-bold flex items-center gap-2">
-                  <Settings className="w-5 h-5 text-purple-600" />
+                  <Settings className="w-5 h-5 text-brand-600" />
                   Extra Settings
                 </h2>
                 <p className="text-sm text-gray-500 mt-1">Configure response length, chat behavior, and inactivity nudge for all group members</p>
@@ -3848,7 +3848,7 @@ export default function GroupTrainingEditor() {
                   {savingExtra ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
                   Save
                 </Button>
-                <Button onClick={handlePublishExtraSettings} disabled={publishingExtra} className="bg-purple-600 hover:bg-purple-700 text-white">
+                <Button onClick={handlePublishExtraSettings} disabled={publishingExtra} className="bg-brand-600 hover:bg-brand-700 text-white">
                   {publishingExtra ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Upload className="w-4 h-4 mr-2" />}
                   Publish to All Accounts
                 </Button>
@@ -3871,7 +3871,7 @@ export default function GroupTrainingEditor() {
                       onClick={() => setExtraResponseLength(opt.value)}
                       className={`p-4 rounded-lg border-2 text-left transition-all ${
                         extraResponseLength === opt.value
-                          ? "border-purple-600 bg-purple-50 dark:bg-purple-950/30"
+                          ? "border-brand-600 bg-brand-50 dark:bg-brand-950/30"
                           : "border-gray-200 dark:border-gray-700 hover:border-gray-300"
                       }`}
                     >
@@ -3880,7 +3880,7 @@ export default function GroupTrainingEditor() {
                           type="radio"
                           checked={extraResponseLength === opt.value}
                           onChange={() => setExtraResponseLength(opt.value)}
-                          className="accent-purple-600"
+                          className="accent-brand-600"
                         />
                         {opt.icon}
                         <span className="font-semibold">{opt.label}</span>
@@ -3915,7 +3915,7 @@ export default function GroupTrainingEditor() {
                           onClick={() => setExtraAutoOpenChat(opt.value)}
                           className={`px-4 py-2 rounded-lg border-2 font-medium transition-all ${
                             extraAutoOpenChat === opt.value
-                              ? "border-purple-600 bg-purple-50 text-purple-700 dark:bg-purple-950/30 dark:text-purple-400"
+                              ? "border-brand-600 bg-brand-50 text-brand-700 dark:bg-brand-950/30 dark:text-brand-400"
                               : "border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-gray-300"
                           }`}
                         >
@@ -3928,7 +3928,7 @@ export default function GroupTrainingEditor() {
                   {/* AI Activation Sound */}
                   <div className="flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-gray-700">
                     <div className="flex items-center gap-3">
-                      <Volume2 className="w-5 h-5 text-purple-600" />
+                      <Volume2 className="w-5 h-5 text-brand-600" />
                       <div>
                         <p className="font-semibold">AI Activation Sound</p>
                         <p className="text-sm text-gray-500">Play a sound when chat opens</p>
@@ -3955,7 +3955,7 @@ export default function GroupTrainingEditor() {
                             onClick={() => setExtraOpeningSoundStyle(opt.value)}
                             className={`px-4 py-3 rounded-lg border-2 text-center transition-all ${
                               extraOpeningSoundStyle === opt.value
-                                ? "border-purple-600 bg-purple-50 text-purple-700 dark:bg-purple-950/30 dark:text-purple-400"
+                                ? "border-brand-600 bg-brand-50 text-brand-700 dark:bg-brand-950/30 dark:text-brand-400"
                                 : "border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 hover:border-gray-300"
                             }`}
                           >
@@ -3975,7 +3975,7 @@ export default function GroupTrainingEditor() {
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <Bell className="w-5 h-5 text-purple-600" />
+                    <Bell className="w-5 h-5 text-brand-600" />
                     <div>
                       <h3 className="text-lg font-semibold">Inactivity Nudge</h3>
                       <p className="text-sm text-gray-500">Re-engage visitors who stop responding</p>
@@ -3999,16 +3999,16 @@ export default function GroupTrainingEditor() {
                         max="120"
                         value={extraInactivityNudgeDelay}
                         onChange={(e) => setExtraInactivityNudgeDelay(e.target.value)}
-                        className="flex-1 accent-purple-600"
+                        className="flex-1 accent-brand-600"
                       />
                       <span className="text-sm font-semibold w-10 text-right">{extraInactivityNudgeDelay}s</span>
                     </div>
 
                     {/* Use AI */}
-                    <div className={`p-4 rounded-lg border-2 transition-all ${extraSmartNudgeEnabled ? "border-purple-600 bg-purple-50 dark:bg-purple-950/30" : "border-gray-200 dark:border-gray-700"}`}>
+                    <div className={`p-4 rounded-lg border-2 transition-all ${extraSmartNudgeEnabled ? "border-brand-600 bg-brand-50 dark:bg-brand-950/30" : "border-gray-200 dark:border-gray-700"}`}>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <Sparkles className="w-5 h-5 text-purple-600" />
+                          <Sparkles className="w-5 h-5 text-brand-600" />
                           <div>
                             <p className="font-semibold">Use AI</p>
                             <p className="text-sm text-gray-500">AI generates contextual follow-ups based on conversation</p>
@@ -4020,12 +4020,12 @@ export default function GroupTrainingEditor() {
                         />
                       </div>
                       {extraSmartNudgeEnabled && (
-                        <div className="mt-3 p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+                        <div className="mt-3 p-3 bg-brand-100 dark:bg-brand-900/30 rounded-lg">
                           <div className="flex items-center gap-2">
-                            <Sparkles className="w-4 h-4 text-purple-600" />
-                            <p className="text-sm font-medium text-purple-700 dark:text-purple-400">AI-Powered Nudges Active</p>
+                            <Sparkles className="w-4 h-4 text-brand-600" />
+                            <p className="text-sm font-medium text-brand-700 dark:text-brand-400">AI-Powered Nudges Active</p>
                           </div>
-                          <p className="text-sm text-purple-600 dark:text-purple-400 mt-1">Chroney will analyze the conversation and generate contextual follow-up questions</p>
+                          <p className="text-sm text-brand-600 dark:text-brand-400 mt-1">Orvey will analyze the conversation and generate contextual follow-up questions</p>
                         </div>
                       )}
                     </div>
@@ -4050,7 +4050,7 @@ export default function GroupTrainingEditor() {
                 {savingExtra ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
                 Save Settings
               </Button>
-              <Button onClick={handlePublishExtraSettings} disabled={publishingExtra} className="bg-purple-600 hover:bg-purple-700 text-white">
+              <Button onClick={handlePublishExtraSettings} disabled={publishingExtra} className="bg-brand-600 hover:bg-brand-700 text-white">
                 {publishingExtra ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Upload className="w-4 h-4 mr-2" />}
                 Publish to All Accounts
               </Button>
@@ -4238,7 +4238,7 @@ export default function GroupTrainingEditor() {
         <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-purple-500" />
+              <Sparkles className="w-5 h-5 text-brand-500" />
               AI-Refined Instruction
             </DialogTitle>
             <DialogDescription>
@@ -4253,15 +4253,15 @@ export default function GroupTrainingEditor() {
               </div>
             </div>
             <div>
-              <Label className="text-sm font-medium text-purple-600">Refined</Label>
-              <div className="p-3 mt-1 bg-purple-50 dark:bg-purple-950/30 rounded-lg text-sm border border-purple-200 dark:border-purple-800">
+              <Label className="text-sm font-medium text-brand-600">Refined</Label>
+              <div className="p-3 mt-1 bg-brand-50 dark:bg-brand-950/30 rounded-lg text-sm border border-brand-200 dark:border-brand-800">
                 {refinedInstruction}
               </div>
             </div>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setRefineDialogOpen(false)}>Keep Original</Button>
-            <Button onClick={handleAcceptRefined} className="bg-purple-600 hover:bg-purple-700">
+            <Button onClick={handleAcceptRefined} className="bg-brand-600 hover:bg-brand-700">
               <Check className="w-4 h-4 mr-2" />
               Use Refined Version
             </Button>
@@ -4278,10 +4278,10 @@ export default function GroupTrainingEditor() {
           </DialogHeader>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
             {JOURNEY_TYPES_GROUP.map((type) => (
-              <Card key={type.id} className="cursor-pointer hover:border-purple-500 transition-colors" onClick={() => handleCreateGroupJourney(type)}>
+              <Card key={type.id} className="cursor-pointer hover:border-brand-500 transition-colors" onClick={() => handleCreateGroupJourney(type)}>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-base">
-                    {type.journeyType === 'conversational' ? <MessageSquare className="w-5 h-5 text-blue-600" /> : <FileText className="w-5 h-5 text-purple-600" />}
+                    {type.journeyType === 'conversational' ? <MessageSquare className="w-5 h-5 text-blue-600" /> : <FileText className="w-5 h-5 text-brand-600" />}
                     {type.name}
                   </CardTitle>
                   <CardDescription>{type.description}</CardDescription>
@@ -4355,7 +4355,7 @@ export default function GroupTrainingEditor() {
                 </div>
 
                 {(journeyStepForm.questionType === 'dropdown' || journeyStepForm.questionType === 'radio') && (
-                  <div className="border rounded-lg p-4 bg-purple-50/50 dark:bg-purple-950/20">
+                  <div className="border rounded-lg p-4 bg-brand-50/50 dark:bg-brand-950/20">
                     <Label className="mb-2 block">Answer Options</Label>
                     <div className="space-y-2">
                       {journeyStepForm.multipleChoiceOptions.map((option, index) => (
@@ -4482,7 +4482,7 @@ export default function GroupTrainingEditor() {
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => { publishMutation.mutate({ module: publishDialogOpen || undefined }); }}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+              className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
               data-testid="button-confirm-publish"
             >
               {publishMutation.isPending ? (

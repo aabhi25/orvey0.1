@@ -32,7 +32,7 @@ type DemoOrder = {
 const STATUS_OPTIONS = [
   { value: "confirmed", label: "Confirmed", color: "bg-blue-100 text-blue-700" },
   { value: "processing", label: "Processing", color: "bg-yellow-100 text-yellow-700" },
-  { value: "shipped", label: "Shipped", color: "bg-purple-100 text-purple-700" },
+  { value: "shipped", label: "Shipped", color: "bg-brand-100 text-brand-700" },
   { value: "out_for_delivery", label: "Out for Delivery", color: "bg-orange-100 text-orange-700" },
   { value: "delivered", label: "Delivered", color: "bg-green-100 text-green-700" },
   { value: "return_requested", label: "Return Requested", color: "bg-rose-100 text-rose-700" },

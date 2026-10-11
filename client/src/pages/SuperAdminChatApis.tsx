@@ -601,7 +601,7 @@ export default function SuperAdminChatApis() {
         onTest={() => handleTest("fallback")}
         isTesting={testingFallback}
         testResult={testResultFallback}
-        icon={<Bot className="w-5 h-5 text-purple-500" />}
+        icon={<Bot className="w-5 h-5 text-brand-500" />}
       />
     </div>
   );

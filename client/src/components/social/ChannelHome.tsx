@@ -30,7 +30,7 @@ const TILES: Tile[] = [
 const TILE_CLASSES: Record<string, { card: string; bg: string; icon: string }> = {
   green: { card: "hover:border-green-300", bg: "bg-green-50 group-hover:bg-green-100", icon: "text-green-600" },
   blue: { card: "hover:border-blue-300", bg: "bg-blue-50 group-hover:bg-blue-100", icon: "text-blue-600" },
-  purple: { card: "hover:border-purple-300", bg: "bg-purple-50 group-hover:bg-purple-100", icon: "text-purple-600" },
+  purple: { card: "hover:border-brand-300", bg: "bg-brand-50 group-hover:bg-brand-100", icon: "text-brand-600" },
   orange: { card: "hover:border-orange-300", bg: "bg-orange-50 group-hover:bg-orange-100", icon: "text-orange-600" },
   teal: { card: "hover:border-teal-300", bg: "bg-teal-50 group-hover:bg-teal-100", icon: "text-teal-600" },
   amber: { card: "hover:border-amber-300", bg: "bg-amber-50 group-hover:bg-amber-100", icon: "text-amber-600" },
@@ -54,7 +54,7 @@ export default function ChannelHome({ channel }: { channel: SocialChannel }) {
         <SidebarTrigger />
         <div className="flex items-center gap-2">
           {isInstagram ? (
-            <div className="p-1 rounded-lg bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400">
+            <div className="p-1 rounded-lg bg-gradient-to-br from-brand-500 via-ink-500 to-orange-400">
               <Camera className="w-4 h-4 text-white" />
             </div>
           ) : (

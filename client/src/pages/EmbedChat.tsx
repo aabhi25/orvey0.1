@@ -213,7 +213,7 @@ interface WidgetSettings {
   proactiveNudgeMessage?: string;
   languageSelectorEnabled?: string;
   availableLanguages?: string;
-  /** Reply languages the business allows (Train Chroney → Language). null = any language. */
+  /** Reply languages the business allows (Train Orvey → Language). null = any language. */
   replyLanguages?: { restricted: boolean; allowed: string[]; defaultLanguage: string } | null;
   productCarouselEnabled?: string;
   productCarouselTitle?: string;
@@ -1467,11 +1467,11 @@ export default function EmbedChat() {
   }, [settings, isLoadingSettings]);
 
   // Use actual settings values
-  const chatColor = settings?.chatColor || "#9333ea";
-  const chatColorEnd = settings?.chatColorEnd || "#3b82f6";
+  const chatColor = settings?.chatColor || "#1f4596";
+  const chatColorEnd = settings?.chatColorEnd || "#0a1530";
   const CHAT_FONT_SIZE_PX: Record<string, string> = { small: "13px", medium: "14px", large: "16px" };
   const chatFontSize = CHAT_FONT_SIZE_PX[settings?.chatFontSize || "medium"] || CHAT_FONT_SIZE_PX.medium;
-  const widgetHeaderText = settings?.widgetHeaderText || "Hi Chroney";
+  const widgetHeaderText = settings?.widgetHeaderText || "Orvey";
   const currency = settings?.currency || "USD";
   const voiceModeStyle = settings?.voiceModeStyle || "circular";
   
@@ -3903,7 +3903,7 @@ export default function EmbedChat() {
     if (isAutoOpenVoice) {
       // Show minimal loading state for voice mode auto-open
       return (
-        <div className="h-screen w-screen flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #9333ea, #3b82f6)' }}>
+        <div className="h-screen w-screen flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #1f4596, #0a1530)' }}>
           <div className="text-center">
             <div className="w-20 h-20 border-4 border-white/30 border-t-white rounded-full animate-spin mx-auto mb-4"></div>
             <p className="text-white text-sm">Connecting...</p>
@@ -3917,7 +3917,7 @@ export default function EmbedChat() {
     return (
       <div className="flex flex-col h-full min-h-0 bg-white overflow-hidden">
         {/* Skeleton Header */}
-        <div className="flex-shrink-0 text-white shadow-md relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #9333ea, #3b82f6)' }}>
+        <div className="flex-shrink-0 text-white shadow-md relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #1f4596, #0a1530)' }}>
           <div className="flex items-center justify-between p-3">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-white/20 animate-pulse" />
@@ -3953,9 +3953,9 @@ export default function EmbedChat() {
           {/* Typing indicator skeleton */}
           <div className="flex justify-start items-center gap-1">
             <div className="flex gap-1 p-3">
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-              <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+              <div className="w-2 h-2 bg-brand-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+              <div className="w-2 h-2 bg-brand-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+              <div className="w-2 h-2 bg-brand-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
             </div>
             <span className="text-xs text-gray-400 ml-2">AI is warming up...</span>
           </div>
@@ -4316,7 +4316,7 @@ export default function EmbedChat() {
               className="w-full h-full object-cover"
             />
           ) : (
-            <img src="/c_logo.png" alt="AI Chroney" className="w-5 h-5 object-contain" />
+            <img src="/orvey-logo.svg" alt="Orvey" className="w-5 h-5 object-contain" />
           )}
         </div>
         <div ref={titleBoxRef} className="flex-1 min-w-0">
@@ -4378,12 +4378,12 @@ export default function EmbedChat() {
                           setIsLanguageDropdownOpen(false);
                         }}
                         className={`w-full px-3 py-2 text-left text-sm hover:bg-gray-100 flex items-center justify-between gap-2 transition-colors ${
-                          displayLanguage === langCode ? 'bg-purple-50 text-purple-700' : 'text-gray-700'
+                          displayLanguage === langCode ? 'bg-brand-50 text-brand-700' : 'text-gray-700'
                         }`}
                       >
                         <span className="font-medium">{lang.nativeName}</span>
                         {displayLanguage === langCode && (
-                          <span className="text-purple-600">✓</span>
+                          <span className="text-brand-600">✓</span>
                         )}
                       </button>
                     );
@@ -4632,7 +4632,7 @@ export default function EmbedChat() {
                       disabled={phoneSubmitting}
                       className={`flex items-center justify-center gap-1.5 rounded-xl border px-2 py-2 text-xs font-medium transition-colors ${
                         active
-                          ? 'border-purple-400 bg-purple-50 text-purple-800'
+                          ? 'border-brand-400 bg-brand-50 text-brand-800'
                           : 'border-gray-200 bg-white text-gray-700 hover:border-gray-300'
                       } disabled:opacity-60`}
                     >
@@ -4774,7 +4774,7 @@ export default function EmbedChat() {
                   setPhoneInput(e.target.value.replace(/[^\d+\s-]/g, ''));
                   if (phoneError) setPhoneError(null);
                 }}
-                className="w-full text-base px-3 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-200 bg-white"
+                className="w-full text-base px-3 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-200 bg-white"
                 placeholder={settings?.phoneValidation === '12' ? 'e.g. 919876543210' : 'e.g. 9876543210'}
                 disabled={phoneSubmitting}
               />
@@ -4936,7 +4936,7 @@ export default function EmbedChat() {
                   setPhoneInput(e.target.value.replace(/[^\d+\s-]/g, ''));
                   if (captchaError) setCaptchaError(null);
                 }}
-                className="w-full text-base px-3 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-200 bg-white"
+                className="w-full text-base px-3 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-200 bg-white"
                 placeholder={settings?.phoneValidation === '12' ? 'e.g. 919876543210' : 'e.g. 9876543210'}
                 disabled={captchaSubmitting}
               />
@@ -5312,7 +5312,7 @@ export default function EmbedChat() {
                     if (otpError) setOtpError(null);
                     if (otpStatus) setOtpStatus(null);
                   }}
-                  className="w-full text-center text-2xl font-mono tracking-[0.5em] px-3 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-200 bg-white"
+                  className="w-full text-center text-2xl font-mono tracking-[0.5em] px-3 py-3 rounded-xl border border-gray-300 focus:outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-200 bg-white"
                   style={{ fontSize: '22px', letterSpacing: '0.4em' }}
                   placeholder="••••••"
                   disabled={otpSubmitting}
@@ -5582,7 +5582,7 @@ export default function EmbedChat() {
                     className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1 border border-gray-200 overflow-hidden"
                     style={{ background: `linear-gradient(135deg, ${chatColor}, ${chatColorEnd})` }}
                   >
-                    <img src="/c_logo.png" alt="AI Chroney" className="w-6 h-6 object-contain" />
+                    <img src="/orvey-logo.svg" alt="Orvey" className="w-6 h-6 object-contain" />
                   </div>
                 )
               )}
@@ -6533,7 +6533,7 @@ export default function EmbedChat() {
                 }}
                 readOnly={isLoading}
                 rows={2}
-                className={`w-full px-3 sm:px-4 py-2 sm:py-3 ${avatarAvailable ? 'pr-24 sm:pr-28' : 'pr-12 sm:pr-14'} rounded-xl sm:rounded-2xl border border-gray-200 bg-white placeholder:text-gray-400 focus:outline-none focus:border-purple-400 focus:ring-1 focus:ring-purple-400 resize-none text-sm sm:text-base`}
+                className={`w-full px-3 sm:px-4 py-2 sm:py-3 ${avatarAvailable ? 'pr-24 sm:pr-28' : 'pr-12 sm:pr-14'} rounded-xl sm:rounded-2xl border border-gray-200 bg-white placeholder:text-gray-400 focus:outline-none focus:border-brand-400 focus:ring-1 focus:ring-brand-400 resize-none text-sm sm:text-base`}
                 style={{ 
                   fontSize: isMobileDevice ? '16px' : '15px',
                   WebkitAppearance: 'none',
@@ -6665,9 +6665,9 @@ export default function EmbedChat() {
                     href="https://aichroney.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ color: '#9333ea', textDecoration: 'none', fontWeight: 500 }}
+                    style={{ color: '#1f4596', textDecoration: 'none', fontWeight: 500 }}
                   >
-                    AI Chroney
+                    Orvey
                   </a>
                 </span>
               )}

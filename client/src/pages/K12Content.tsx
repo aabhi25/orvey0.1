@@ -370,8 +370,8 @@ export default function K12Content() {
                       onClick={() => setSelectedGrade("")}
                       className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                         !selectedGrade
-                          ? "bg-purple-600 text-white shadow-sm"
-                          : "bg-white text-gray-600 border border-gray-200 hover:border-purple-300 hover:text-purple-600"
+                          ? "bg-brand-600 text-white shadow-sm"
+                          : "bg-white text-gray-600 border border-gray-200 hover:border-brand-300 hover:text-brand-600"
                       }`}
                     >
                       All
@@ -382,8 +382,8 @@ export default function K12Content() {
                         onClick={() => setSelectedGrade(grade)}
                         className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                           selectedGrade === grade
-                            ? "bg-purple-600 text-white shadow-sm"
-                            : "bg-white text-gray-600 border border-gray-200 hover:border-purple-300 hover:text-purple-600"
+                            ? "bg-brand-600 text-white shadow-sm"
+                            : "bg-white text-gray-600 border border-gray-200 hover:border-brand-300 hover:text-brand-600"
                         }`}
                       >
                         {getGradeLabel(grade)}
@@ -413,7 +413,7 @@ export default function K12Content() {
             </Badge>
           )}
           {selectedGrade && (
-            <Badge variant="secondary" className="text-xs gap-1 bg-purple-50 text-purple-700 border-purple-200">
+            <Badge variant="secondary" className="text-xs gap-1 bg-brand-50 text-brand-700 border-brand-200">
               {getGradeLabel(selectedGrade)}
               <X className="w-3 h-3 cursor-pointer hover:text-red-500" onClick={() => setSelectedGrade("")} />
             </Badge>
@@ -481,7 +481,7 @@ export default function K12Content() {
                         onClick={() => toggleChapter(chapter.id)}
                       >
                         <ChevronRight className={`w-3.5 h-3.5 text-gray-400 transition-transform ${expandedChapters.has(chapter.id) ? "rotate-90" : ""}`} />
-                        <BookOpen className="w-4 h-4 text-indigo-500" />
+                        <BookOpen className="w-4 h-4 text-brand-500" />
                         <span className="font-medium text-sm">{chapter.name}</span>
                         <span className="text-xs text-gray-400 ml-auto">{chapter.topics.length} topic{chapter.topics.length !== 1 ? "s" : ""}</span>
                       </div>

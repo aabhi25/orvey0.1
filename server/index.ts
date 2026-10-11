@@ -198,7 +198,7 @@ const BOOTED_AT = new Date().toISOString();
 // Sentry `release`: APP_VERSION when set by the deploy, else the commit.
 if (!process.env.APP_VERSION && BUILD_COMMIT !== 'unknown') process.env.APP_VERSION = BUILD_COMMIT;
 console.log(`[Boot] Error reporting: ${getErrorReporter().enabled ? 'Sentry enabled' : 'disabled (SENTRY_DSN not set)'}`);
-console.log(`[Boot] AI Chroney server starting — commit=${BUILD_COMMIT} bootedAt=${BOOTED_AT} nodeEnv=${process.env.NODE_ENV || 'development'} verificationDebugBiz=${process.env.VERIFICATION_DEBUG_BIZ_ID || 'off'}`);
+console.log(`[Boot] Orvey server starting — commit=${BUILD_COMMIT} bootedAt=${BOOTED_AT} nodeEnv=${process.env.NODE_ENV || 'development'} verificationDebugBiz=${process.env.VERIFICATION_DEBUG_BIZ_ID || 'off'}`);
 
 (async () => {
   // CRITICAL: Validate encryption key is configured for secure credential storage

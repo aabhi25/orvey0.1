@@ -22,8 +22,8 @@ const NEUTRAL_BG_HOVER = "#f9fafb";
 export function QuickBrowseButtons({ 
   buttons, 
   onSelect,
-  chatColor = "#9333ea",
-  chatColorEnd = "#3b82f6",
+  chatColor = "#1f4596",
+  chatColorEnd = "#0a1530",
   collapsible = false,
   collapsedCount = 2
 }: QuickBrowseButtonsProps) {

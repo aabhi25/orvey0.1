@@ -282,7 +282,7 @@ export default function ChannelCommentSettings({ channel, embedded = false }: { 
         <Card>
           <CardHeader>
             <div className="flex items-center gap-2">
-              <Send className="w-5 h-5 text-purple-600" />
+              <Send className="w-5 h-5 text-brand-600" />
               <div>
                 <CardTitle>Auto-DM Commenters</CardTitle>
                 <CardDescription>

@@ -468,7 +468,7 @@ export default function WhatsAppTemplates() {
             <DialogTitle>{editing ? "Edit template" : "Add a template"}</DialogTitle>
             <DialogDescription>
               {editing
-                ? "Changes here update Chroney's copy. The name and language must match the template approved on your WhatsApp account."
+                ? "Changes here update Orvey's copy. The name and language must match the template approved on your WhatsApp account."
                 : "Enter a template exactly as it was approved on your WhatsApp account. It starts as “Not verified” until its approval is confirmed."}
             </DialogDescription>
           </DialogHeader>
@@ -476,11 +476,11 @@ export default function WhatsAppTemplates() {
           <div className="space-y-4">
             <Collapsible open={helpOpen} onOpenChange={setHelpOpen}>
               <CollapsibleTrigger asChild>
-                <Button type="button" variant="outline" size="sm" className="border-violet-200 text-violet-700 hover:bg-violet-50" data-testid="button-help-me-write">
+                <Button type="button" variant="outline" size="sm" className="border-brand-200 text-brand-700 hover:bg-brand-50" data-testid="button-help-me-write">
                   <Wand2 className="h-4 w-4 mr-1" /> Help me write
                 </Button>
               </CollapsibleTrigger>
-              <CollapsibleContent className="mt-3 rounded-lg border border-violet-100 bg-violet-50/40 p-3 space-y-2">
+              <CollapsibleContent className="mt-3 rounded-lg border border-brand-100 bg-brand-50/40 p-3 space-y-2">
                 <Label className="text-sm">What is this message for?</Label>
                 <Textarea
                   value={goal}
@@ -591,7 +591,7 @@ export default function WhatsAppTemplates() {
                   <p className="text-xs text-gray-500 mt-1">Shown as “namespace” in your provider's template details. Most businesses can keep the pre-filled value.</p>
                   {namespaceMissing && <p className="text-xs text-red-600 mt-1">An account code is needed to send this template.</p>}
                   {!namespaceMissing && form.namespace !== DEFAULT_NAMESPACE && !editing && (
-                    <button type="button" className="text-xs text-violet-700 underline mt-1" onClick={() => setForm({ ...form, namespace: DEFAULT_NAMESPACE })}>Use the standard code</button>
+                    <button type="button" className="text-xs text-brand-700 underline mt-1" onClick={() => setForm({ ...form, namespace: DEFAULT_NAMESPACE })}>Use the standard code</button>
                   )}
                 </div>
                 <div>
@@ -639,7 +639,7 @@ export default function WhatsAppTemplates() {
           <AlertDialogHeader>
             <AlertDialogTitle>Delete template?</AlertDialogTitle>
             <AlertDialogDescription>
-              <strong>{deleteTarget?.name}</strong> will be removed from Chroney and won't come back on future imports. Past campaign history is kept. It isn't deleted from your WhatsApp account.
+              <strong>{deleteTarget?.name}</strong> will be removed from Orvey and won't come back on future imports. Past campaign history is kept. It isn't deleted from your WhatsApp account.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

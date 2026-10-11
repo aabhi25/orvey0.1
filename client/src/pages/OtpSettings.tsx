@@ -183,7 +183,7 @@ export default function OtpSettings({ embedded = false }: { embedded?: boolean }
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => setLocation("/train-chroney")}
+            onClick={() => setLocation("/train-orvey")}
             data-testid="button-back"
           >
             <ArrowLeft className="w-4 h-4 mr-1" /> Back
@@ -250,7 +250,7 @@ export default function OtpSettings({ embedded = false }: { embedded?: boolean }
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg">
-                <Send className="w-5 h-5 text-indigo-600" />
+                <Send className="w-5 h-5 text-brand-600" />
                 Delivery channel
               </CardTitle>
               <CardDescription>
@@ -285,7 +285,7 @@ export default function OtpSettings({ embedded = false }: { embedded?: boolean }
                     htmlFor={id}
                     className={`flex items-start gap-3 rounded-lg border p-3 cursor-pointer transition-colors ${
                       channelPreference === opt
-                        ? "border-indigo-400 bg-indigo-50/60 dark:border-indigo-700 dark:bg-indigo-950/20"
+                        ? "border-brand-400 bg-brand-50/60 dark:border-brand-700 dark:bg-brand-950/20"
                         : "border-gray-200 dark:border-gray-800 hover:border-gray-300"
                     } ${disabledReason ? "opacity-60 cursor-not-allowed" : ""}`}
                   >
@@ -316,7 +316,7 @@ export default function OtpSettings({ embedded = false }: { embedded?: boolean }
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg">
-                <KeyRound className="w-5 h-5 text-purple-600" />
+                <KeyRound className="w-5 h-5 text-brand-600" />
                 MSG91 credentials
               </CardTitle>
               <CardDescription>

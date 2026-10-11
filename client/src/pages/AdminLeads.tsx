@@ -700,7 +700,7 @@ export default function AdminLeads() {
     const funnel = row.channel === 'whatsapp' ? 'Via WhatsApp' : row.detail?.flowSessionId ? 'Via Flow' : 'Via DM';
     const initials = (row.name || '?').split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
     return (
-      <TableRow key={row.key} className="group hover:bg-purple-50/50 transition-colors cursor-pointer" onClick={() => setChannelDetailsRow(row)} data-testid={`row-lead-${row.channel}`}>
+      <TableRow key={row.key} className="group hover:bg-brand-50/50 transition-colors cursor-pointer" onClick={() => setChannelDetailsRow(row)} data-testid={`row-lead-${row.channel}`}>
         {isSuperAdminImpersonating && <TableCell className="px-3" />}
         <TableCell className="font-medium px-4 py-3">
           <div className="flex flex-col gap-1">
@@ -762,7 +762,7 @@ export default function AdminLeads() {
               </DropdownMenuItem>
               {CHANNEL_META[row.channel].page && (
                 <DropdownMenuItem onClick={() => setLocation(CHANNEL_META[row.channel].page!)} className="cursor-pointer">
-                  <Eye className="h-4 w-4 mr-2 text-purple-600" />
+                  <Eye className="h-4 w-4 mr-2 text-brand-600" />
                   Open in {CHANNEL_META[row.channel].label}
                 </DropdownMenuItem>
               )}
@@ -795,7 +795,7 @@ export default function AdminLeads() {
           <div className="flex items-center justify-between">
             <div>
               <CardTitle className="text-2xl flex items-center gap-2">
-                <Contact className="w-6 h-6 text-purple-600" />
+                <Contact className="w-6 h-6 text-brand-600" />
                 Leads Management
               </CardTitle>
               <CardDescription>
@@ -822,7 +822,7 @@ export default function AdminLeads() {
                   </Button>
                 )}
                 {canExportAllLeads && (
-                  <Button onClick={handleExport} disabled={(data?.total || 0) === 0} data-testid="button-export-leads" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+                  <Button onClick={handleExport} disabled={(data?.total || 0) === 0} data-testid="button-export-leads" className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700">
                     <Download className="h-4 w-4 mr-2" />
                     Export All ({data?.total || 0})
                   </Button>
@@ -895,7 +895,7 @@ export default function AdminLeads() {
                   variant={datePreset === 'all' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setDatePreset('all')}
-                  className={datePreset === 'all' ? 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700' : ''}
+                  className={datePreset === 'all' ? 'bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700' : ''}
                 >
                   All Time
                 </Button>
@@ -903,7 +903,7 @@ export default function AdminLeads() {
                   variant={datePreset === 'today' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setDatePreset('today')}
-                  className={datePreset === 'today' ? 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700' : ''}
+                  className={datePreset === 'today' ? 'bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700' : ''}
                 >
                   Today
                 </Button>
@@ -911,7 +911,7 @@ export default function AdminLeads() {
                   variant={datePreset === 'last7' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setDatePreset('last7')}
-                  className={datePreset === 'last7' ? 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700' : ''}
+                  className={datePreset === 'last7' ? 'bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700' : ''}
                 >
                   Last 7 Days
                 </Button>
@@ -919,7 +919,7 @@ export default function AdminLeads() {
                   variant={datePreset === 'last30' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setDatePreset('last30')}
-                  className={datePreset === 'last30' ? 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700' : ''}
+                  className={datePreset === 'last30' ? 'bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700' : ''}
                 >
                   Last 30 Days
                 </Button>
@@ -930,7 +930,7 @@ export default function AdminLeads() {
                     <Button
                       variant={datePreset === 'custom' ? 'default' : 'outline'}
                       size="sm"
-                      className={datePreset === 'custom' ? 'bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700' : ''}
+                      className={datePreset === 'custom' ? 'bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700' : ''}
                     >
                       <Calendar className="h-4 w-4 mr-2" />
                       Custom Range
@@ -1032,8 +1032,8 @@ export default function AdminLeads() {
             </div>
           ) : rows.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 text-center">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center mb-4">
-                <Contact className="w-10 h-10 text-purple-600" />
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-brand-100 to-ink-100 flex items-center justify-center mb-4">
+                <Contact className="w-10 h-10 text-brand-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">No leads yet</h3>
               <p className="text-sm text-muted-foreground max-w-md">
@@ -1046,7 +1046,7 @@ export default function AdminLeads() {
             <div className="rounded-xl border border-gray-200 overflow-hidden">
               <Table>
                 <TableHeader>
-                  <TableRow className="bg-gradient-to-r from-purple-50 to-blue-50 hover:from-purple-50 hover:to-blue-50">
+                  <TableRow className="bg-gradient-to-r from-brand-50 to-ink-50 hover:from-brand-50 hover:to-ink-50">
                     {isSuperAdminImpersonating && (
                       <TableHead className="w-[44px] px-3">
                         <Checkbox
@@ -1058,7 +1058,7 @@ export default function AdminLeads() {
                     )}
                     <TableHead className="font-semibold text-gray-900 w-[180px] px-4 py-3">
                       <div className="flex items-center gap-2">
-                        <User className="h-4 w-4 text-purple-600" />
+                        <User className="h-4 w-4 text-brand-600" />
                         Name
                       </div>
                     </TableHead>
@@ -1085,13 +1085,13 @@ export default function AdminLeads() {
                     </TableHead>
                     <TableHead className="font-semibold text-gray-900 w-[180px] px-4 py-3">
                       <div className="flex items-center gap-2">
-                        <MessageSquare className="h-4 w-4 text-purple-600" />
+                        <MessageSquare className="h-4 w-4 text-brand-600" />
                         Topics of Interest
                       </div>
                     </TableHead>
                     <TableHead className="font-semibold text-gray-900 w-[120px] px-4 py-3">
                       <div className="flex items-center gap-2">
-                        <Filter className="h-4 w-4 text-indigo-600" />
+                        <Filter className="h-4 w-4 text-brand-600" />
                         Funnel
                       </div>
                     </TableHead>
@@ -1121,19 +1121,19 @@ export default function AdminLeads() {
                     const getAvatarColor = (name: string | null) => {
                       if (!name) return "bg-gray-500";
                       const colors = [
-                        "bg-gradient-to-br from-purple-500 to-purple-600",
+                        "bg-gradient-to-br from-brand-500 to-ink-600",
                         "bg-gradient-to-br from-blue-500 to-blue-600",
                         "bg-gradient-to-br from-green-500 to-green-600",
                         "bg-gradient-to-br from-orange-500 to-orange-600",
                         "bg-gradient-to-br from-pink-500 to-pink-600",
-                        "bg-gradient-to-br from-indigo-500 to-indigo-600",
+                        "bg-gradient-to-br from-brand-500 to-ink-600",
                       ];
                       const index = name.charCodeAt(0) % colors.length;
                       return colors[index];
                     };
 
                     return (
-                      <TableRow key={lead.id} className="group hover:bg-purple-50/50 transition-colors">
+                      <TableRow key={lead.id} className="group hover:bg-brand-50/50 transition-colors">
                         {isSuperAdminImpersonating && (
                           <TableCell className="px-3">
                             <Checkbox
@@ -1207,7 +1207,7 @@ export default function AdminLeads() {
                               : [];
                             if (topics.length > 0) {
                               const colors = [
-                                'bg-purple-100 text-purple-700',
+                                'bg-brand-100 text-brand-700',
                                 'bg-blue-100 text-blue-700',
                                 'bg-green-100 text-green-700',
                                 'bg-orange-100 text-orange-700'
@@ -1332,7 +1332,7 @@ export default function AdminLeads() {
                                       onClick={() => handleViewConversation(lead.conversationId!)}
                                       className="cursor-pointer"
                                     >
-                                      <Eye className="h-4 w-4 mr-2 text-purple-600" />
+                                      <Eye className="h-4 w-4 mr-2 text-brand-600" />
                                       View Chat
                                     </DropdownMenuItem>
                                   );
@@ -1757,7 +1757,7 @@ export default function AdminLeads() {
         <DialogContent className="max-w-2xl w-full max-h-[85vh] flex flex-col p-0 gap-0">
           <DialogHeader className="px-5 pt-5 pb-3 border-b border-gray-100 flex-shrink-0">
             <DialogTitle className="flex items-center gap-2 text-base">
-              <Bot className="w-4 h-4 text-purple-600" />
+              <Bot className="w-4 h-4 text-brand-600" />
               {loadingChatDialogConversation ? (
                 <span className="text-gray-400">Loading conversation...</span>
               ) : chatDialogConversation ? (
@@ -1776,14 +1776,14 @@ export default function AdminLeads() {
           <div className="flex-1 overflow-y-auto min-h-0">
             {(loadingChatDialogConversation || loadingChatDialogMessages) ? (
               <div className="flex justify-center items-center py-16">
-                <div className="w-7 h-7 border-2 border-purple-600 border-t-transparent rounded-full animate-spin" />
+                <div className="w-7 h-7 border-2 border-brand-600 border-t-transparent rounded-full animate-spin" />
               </div>
             ) : (
               <>
                 {chatDialogConversation?.summary && (
-                  <div className="bg-gradient-to-r from-purple-50 to-blue-50 border-b border-purple-100 px-5 py-4">
+                  <div className="bg-gradient-to-r from-brand-50 to-ink-50 border-b border-brand-100 px-5 py-4">
                     <div className="flex items-start gap-2">
-                      <Sparkles className="w-4 h-4 text-purple-500 mt-0.5 flex-shrink-0" />
+                      <Sparkles className="w-4 h-4 text-brand-500 mt-0.5 flex-shrink-0" />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm text-gray-700 leading-relaxed">{chatDialogConversation.summary}</p>
                         {chatDialogConversation.topicKeywords && (() => {
@@ -1793,7 +1793,7 @@ export default function AdminLeads() {
                               return (
                                 <div className="mt-2 flex flex-wrap gap-1.5">
                                   {keywords.map((kw: string, i: number) => (
-                                    <span key={i} className="px-2 py-0.5 text-xs font-medium rounded-full bg-white text-purple-700 border border-purple-200">
+                                    <span key={i} className="px-2 py-0.5 text-xs font-medium rounded-full bg-white text-brand-700 border border-brand-200">
                                       {kw}
                                     </span>
                                   ))}
@@ -1816,7 +1816,7 @@ export default function AdminLeads() {
                       <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                         {message.role === 'assistant' && (
                           <div className="flex items-start gap-3 max-w-[85%]">
-                            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                            <div className="w-8 h-8 bg-gradient-to-br from-brand-500 to-ink-600 rounded-full flex items-center justify-center flex-shrink-0">
                               <Bot className="w-5 h-5 text-white" />
                             </div>
                             <div>

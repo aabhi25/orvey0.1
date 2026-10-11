@@ -55,7 +55,7 @@ export function ProductCarousel({
   title = "Featured Products",
   currencySymbol = "$",
   onProductClick,
-  chatColor = "#9333ea",
+  chatColor = "#1f4596",
   whatsappNumber,
   whatsappMessage = "Hi, I'm interested in ordering {product_name} ({product_price})",
   pagination,
@@ -127,9 +127,9 @@ export function ProductCarousel({
           <div
             key={product.id}
             onClick={() => onProductClick?.(product)}
-            className="group relative flex-shrink-0 w-[140px] bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md hover:border-purple-300 dark:hover:border-purple-700 transition-all duration-200 snap-start cursor-pointer"
+            className="group relative flex-shrink-0 w-[140px] bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-md hover:border-brand-300 dark:hover:border-brand-700 transition-all duration-200 snap-start cursor-pointer"
           >
-            <div className="relative w-full h-[100px] bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20">
+            <div className="relative w-full h-[100px] bg-gradient-to-br from-brand-50 to-ink-50 dark:from-brand-950/20 dark:to-ink-950/20">
               {product.imageUrl ? (
                 <img
                   src={product.imageUrl}
@@ -138,7 +138,7 @@ export function ProductCarousel({
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
-                  <ShoppingBag className="w-8 h-8 text-purple-300 dark:text-purple-700" />
+                  <ShoppingBag className="w-8 h-8 text-brand-300 dark:text-brand-700" />
                 </div>
               )}
             </div>
@@ -185,7 +185,7 @@ export function ProductCarousel({
             className={`flex-shrink-0 w-[100px] h-[156px] bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center gap-2 snap-start transition-all duration-200 ${
               isLoadingMore 
                 ? 'opacity-60 cursor-wait' 
-                : 'cursor-pointer hover:shadow-md hover:border-purple-300 dark:hover:border-purple-600'
+                : 'cursor-pointer hover:shadow-md hover:border-brand-300 dark:hover:border-brand-600'
             }`}
           >
             {isLoadingMore ? (

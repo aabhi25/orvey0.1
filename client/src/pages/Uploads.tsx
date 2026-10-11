@@ -94,7 +94,7 @@ function ImageCarousel({ originalUrl, processedImages, altText }: { originalUrl:
               className="w-full h-full object-contain bg-[#f5f5f5] dark:bg-[#1a1a1a]"
               loading="lazy"
             />
-            <span className="absolute bottom-2 left-2 px-2 py-1 text-[10px] font-medium bg-violet-600 text-white rounded-full">
+            <span className="absolute bottom-2 left-2 px-2 py-1 text-[10px] font-medium bg-brand-600 text-white rounded-full">
               {processed.label}
             </span>
           </div>
@@ -128,7 +128,7 @@ function ImageCarousel({ originalUrl, processedImages, altText }: { originalUrl:
             onClick={(e) => goToSlide(idx, e)}
             className={`w-2 h-2 rounded-full transition-colors ${
               currentSlide === idx 
-                ? (idx === 0 ? 'bg-white' : 'bg-violet-500') 
+                ? (idx === 0 ? 'bg-white' : 'bg-brand-500') 
                 : 'bg-white/50'
             }`}
             aria-label={idx === 0 ? 'Original image' : `Processed image ${idx}`}
@@ -350,7 +350,7 @@ export default function Uploads() {
     <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
       <div className="flex items-center justify-between gap-4 pb-4 border-b border-border/50">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600">
+          <div className="p-2 rounded-lg bg-gradient-to-br from-brand-500 to-ink-600">
             <ImageIcon className="h-5 w-5 text-white" />
           </div>
           <div>
@@ -418,9 +418,9 @@ export default function Uploads() {
       {!isLoading && allImages.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 px-6">
           <div className="relative">
-            <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-violet-400/20 to-purple-400/20 rounded-full" />
-            <div className="relative p-6 rounded-2xl bg-gradient-to-br from-violet-100 to-purple-100 dark:from-violet-900/30 dark:to-purple-900/30">
-              <Sparkles className="h-12 w-12 text-violet-500" />
+            <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-brand-400/20 to-ink-400/20 rounded-full" />
+            <div className="relative p-6 rounded-2xl bg-gradient-to-br from-brand-100 to-ink-100 dark:from-brand-900/30 dark:to-ink-900/30">
+              <Sparkles className="h-12 w-12 text-brand-500" />
             </div>
           </div>
           <h3 className="mt-6 text-lg font-semibold text-foreground">No images uploaded yet</h3>
@@ -435,12 +435,12 @@ export default function Uploads() {
             return (
               <div 
                 key={image.id} 
-                className={`group relative bg-card rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-xl hover:shadow-violet-500/10 ${
+                className={`group relative bg-card rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-xl hover:shadow-brand-500/10 ${
                   selectionMode 
                     ? isSelected 
-                      ? 'border-violet-500 ring-2 ring-violet-500/30' 
-                      : 'border-border/50 hover:border-violet-300 dark:hover:border-violet-700 cursor-pointer'
-                    : 'border-border/50 hover:border-violet-300 dark:hover:border-violet-700'
+                      ? 'border-brand-500 ring-2 ring-brand-500/30' 
+                      : 'border-border/50 hover:border-brand-300 dark:hover:border-brand-700 cursor-pointer'
+                    : 'border-border/50 hover:border-brand-300 dark:hover:border-brand-700'
                 }`}
                 style={{ animationDelay: `${index * 50}ms` }}
                 onClick={selectionMode ? () => toggleImageSelection(image.id) : undefined}
@@ -485,7 +485,7 @@ export default function Uploads() {
                       <Checkbox
                         checked={isSelected}
                         onCheckedChange={() => toggleImageSelection(image.id)}
-                        className="h-6 w-6 rounded-md border-2 border-white bg-white/90 data-[state=checked]:bg-violet-500 data-[state=checked]:border-violet-500 shadow-lg"
+                        className="h-6 w-6 rounded-md border-2 border-white bg-white/90 data-[state=checked]:bg-brand-500 data-[state=checked]:border-brand-500 shadow-lg"
                       />
                     </div>
                   )}
@@ -502,7 +502,7 @@ export default function Uploads() {
                   )}
 
                   {image.source === 'visual_search' && !selectionMode && (
-                    <Badge className="absolute top-3 left-3 bg-violet-500/90 hover:bg-violet-500 text-white border-0 backdrop-blur-sm">
+                    <Badge className="absolute top-3 left-3 bg-brand-500/90 hover:bg-brand-500 text-white border-0 backdrop-blur-sm">
                       Visual Search
                     </Badge>
                   )}
@@ -524,7 +524,7 @@ export default function Uploads() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="w-full h-8 text-xs font-medium border-violet-200 dark:border-violet-800 text-violet-600 dark:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-950"
+                      className="w-full h-8 text-xs font-medium border-brand-200 dark:border-brand-800 text-brand-600 dark:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-950"
                       onClick={() => handleViewSimilar(image)}
                     >
                       <Search className="h-3 w-3 mr-1.5" />

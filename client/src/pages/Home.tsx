@@ -141,9 +141,9 @@ export default function Home() {
   });
 
   // Use actual settings values (no defaults to prevent flash)
-  const chatColor = settings?.chatColor || "#9333ea";
-  const chatColorEnd = settings?.chatColorEnd || "#3b82f6";
-  const widgetHeaderText = settings?.widgetHeaderText || "Hi Chroney";
+  const chatColor = settings?.chatColor || "#1f4596";
+  const chatColorEnd = settings?.chatColorEnd || "#0a1530";
+  const widgetHeaderText = settings?.widgetHeaderText || "Orvey";
   const currency = settings?.currency || "USD";
   const voiceModeStyle = settings?.voiceModeStyle || "circular";
   
@@ -203,7 +203,7 @@ export default function Home() {
       setMessages([{
         id: '1',
         role: 'assistant',
-        content: "⚠️ Chroney is currently offline. Please configure your OpenAI API key in Settings to enable the chat functionality.",
+        content: "⚠️ Orvey is currently offline. Please configure your OpenAI API key in Settings to enable the chat functionality.",
         timestamp: new Date()
       }]);
       setIsOnline(false);
@@ -254,7 +254,7 @@ export default function Home() {
         setMessages([{
           id: '1',
           role: 'assistant',
-          content: "Sup, human? Chroney reporting for duty 🤖. Tell me what you want—products, FAQs, or capture a lead—I'm here to help!",
+          content: "Sup, human? Orvey reporting for duty 🤖. Tell me what you want—products, FAQs, or capture a lead—I'm here to help!",
           timestamp: new Date()
         }]);
       }
@@ -264,7 +264,7 @@ export default function Home() {
       setMessages([{
         id: '1',
         role: 'assistant',
-        content: "Sup, human? Chroney reporting for duty 🤖. Tell me what you want—products, FAQs, or capture a lead—I'm here to help!",
+        content: "Sup, human? Orvey reporting for duty 🤖. Tell me what you want—products, FAQs, or capture a lead—I'm here to help!",
         timestamp: new Date()
       }]);
     }
@@ -670,7 +670,7 @@ export default function Home() {
     return (
       <div className="flex-1 flex items-center justify-center bg-gray-50">
         <div className="flex flex-col items-center gap-3">
-          <Loader2 className="w-8 h-8 animate-spin text-purple-600" />
+          <Loader2 className="w-8 h-8 animate-spin text-brand-600" />
           <p className="text-sm text-gray-500">Loading chat...</p>
         </div>
       </div>
@@ -994,7 +994,7 @@ export default function Home() {
             {!activeFormStep && (
             <div className="border-t border-gray-200 p-4 bg-white flex-shrink-0">
               <div className="flex items-center gap-3">
-                <div className="text-purple-600 flex-shrink-0 p-2">
+                <div className="text-brand-600 flex-shrink-0 p-2">
                   <Zap className="w-5 h-5" />
                 </div>
                 <Input
@@ -1006,7 +1006,7 @@ export default function Home() {
                   onKeyPress={handleKeyPress}
                   readOnly={isLoading}
                   disabled={!isChatAvailable}
-                  className="flex-1 h-12 rounded-xl border-gray-300 focus:border-purple-500 focus:ring-purple-500"
+                  className="flex-1 h-12 rounded-xl border-gray-300 focus:border-brand-500 focus:ring-brand-500"
                 />
                 <Button
                   size="icon"

@@ -1,5 +1,5 @@
 /**
- * Train Chroney → Language: which languages the AI replies in (website, voice, WhatsApp,
+ * Train Orvey → Language: which languages the AI replies in (website, voice, WhatsApp,
  * Instagram, Facebook), plus the K-12 / TopScholar "follow the student's medium" options.
  * Reads / saves GET/PUT /api/ai-language-settings (server/routes/aiLanguage.ts).
  */
@@ -56,7 +56,7 @@ function LanguagePicker({ value, onChange, testId }: { value: string[]; onChange
         return (
           <label
             key={l.code}
-            className={`flex items-center gap-2 rounded-md border px-2.5 py-2 text-sm cursor-pointer transition-colors ${checked ? "border-purple-400 bg-purple-50 dark:bg-purple-950/30" : "border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900"}`}
+            className={`flex items-center gap-2 rounded-md border px-2.5 py-2 text-sm cursor-pointer transition-colors ${checked ? "border-brand-400 bg-brand-50 dark:bg-brand-950/30" : "border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900"}`}
           >
             <Checkbox checked={checked} onCheckedChange={(v) => toggle(l.code, v === true)} data-testid={`${testId}-${l.code}`} />
             <span className="truncate">{nativeLabel(l.code)}</span>
@@ -125,7 +125,7 @@ export default function AiLanguageSettingsPanel({ businessAccountId }: { busines
     mutationFn: () => apiRequest<{ settings: AiLanguageSettings }>("PUT", url, { settings: toSave }),
     onSuccess: (res) => {
       queryClient.setQueryData(businessAccountId ? [...QUERY_KEY, businessAccountId] : QUERY_KEY, res);
-      toast({ title: "Language settings saved", description: "Chroney uses them from the next message." });
+      toast({ title: "Language settings saved", description: "Orvey uses them from the next message." });
     },
     onError: (error: Error) => {
       toast({ title: "Couldn't save language settings", description: error.message || "Please try again.", variant: "destructive" });
@@ -160,9 +160,9 @@ export default function AiLanguageSettingsPanel({ businessAccountId }: { busines
     <div className="space-y-6" data-testid="ai-language-settings">
       <Card className="shadow-sm">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-lg"><Globe2 className="w-5 h-5 text-purple-600" /> Reply language</CardTitle>
+          <CardTitle className="flex items-center gap-2 text-lg"><Globe2 className="w-5 h-5 text-brand-600" /> Reply language</CardTitle>
           <CardDescription>
-            Choose which languages Chroney replies in. This applies to your website chat, voice and video calls, WhatsApp,
+            Choose which languages Orvey replies in. This applies to your website chat, voice and video calls, WhatsApp,
             Instagram and Facebook.
           </CardDescription>
         </CardHeader>
@@ -172,14 +172,14 @@ export default function AiLanguageSettingsPanel({ businessAccountId }: { busines
               <RadioGroupItem value="any" id="lang-mode-any" className="mt-0.5" data-testid="lang-mode-any" />
               <div>
                 <div className="font-medium text-sm">Any language</div>
-                <div className="text-xs text-gray-500">Chroney replies in the language your customer writes in (how it works today).</div>
+                <div className="text-xs text-gray-500">Orvey replies in the language your customer writes in (how it works today).</div>
               </div>
             </label>
             <label className="flex items-start gap-3 rounded-lg border p-3 cursor-pointer">
               <RadioGroupItem value="restricted" id="lang-mode-restricted" className="mt-0.5" data-testid="lang-mode-restricted" />
               <div>
                 <div className="font-medium text-sm">Only these languages</div>
-                <div className="text-xs text-gray-500">Chroney replies only in the languages you pick below, even if the customer writes in another one.</div>
+                <div className="text-xs text-gray-500">Orvey replies only in the languages you pick below, even if the customer writes in another one.</div>
               </div>
             </label>
           </RadioGroup>
@@ -187,7 +187,7 @@ export default function AiLanguageSettingsPanel({ businessAccountId }: { busines
           {restricted && (
             <div className="space-y-6">
               <div className="space-y-2">
-                <Label className="text-sm font-medium">Languages Chroney may reply in</Label>
+                <Label className="text-sm font-medium">Languages Orvey may reply in</Label>
                 <LanguagePicker value={draft.allowed} onChange={setAllowed} testId="lang-allowed" />
                 {draft.allowed.length === 0 && <p className="text-xs text-red-600">Pick at least one language.</p>}
               </div>
@@ -214,7 +214,7 @@ export default function AiLanguageSettingsPanel({ businessAccountId }: { busines
                 <RadioGroup value={draft.unsupportedBehaviour} onValueChange={(v) => set({ unsupportedBehaviour: v as AiLanguageSettings["unsupportedBehaviour"] })} className="space-y-1">
                   <label className="flex items-start gap-2 text-sm cursor-pointer">
                     <RadioGroupItem value="default_with_note" className="mt-0.5" />
-                    <span>Answer in the default language, and say once which languages Chroney can help in <span className="text-gray-500">(recommended)</span></span>
+                    <span>Answer in the default language, and say once which languages Orvey can help in <span className="text-gray-500">(recommended)</span></span>
                   </label>
                   <label className="flex items-start gap-2 text-sm cursor-pointer">
                     <RadioGroupItem value="ask_to_switch" className="mt-0.5" />
@@ -294,7 +294,7 @@ export default function AiLanguageSettingsPanel({ businessAccountId }: { busines
           <CardHeader className="pb-3">
             <CollapsibleTrigger asChild>
               <button type="button" className="text-left w-full" data-testid="lang-k12-toggle">
-                <CardTitle className="text-base flex items-center gap-2"><GraduationCap className="w-4 h-4 text-purple-600" /> K-12 / TopScholar {showK12 ? "▴" : "▾"}</CardTitle>
+                <CardTitle className="text-base flex items-center gap-2"><GraduationCap className="w-4 h-4 text-brand-600" /> K-12 / TopScholar {showK12 ? "▴" : "▾"}</CardTitle>
                 <CardDescription>For schools: start each student in their medium's language (Hindi medium → Hindi).</CardDescription>
               </button>
             </CollapsibleTrigger>

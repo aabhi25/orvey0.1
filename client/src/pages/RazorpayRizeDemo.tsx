@@ -132,7 +132,7 @@ export default function RazorpayRizeDemo() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/20 to-indigo-50/30 flex justify-start">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/20 to-brand-50/30 flex justify-start">
       <div className="w-full max-w-xl p-8 lg:p-12 flex flex-col justify-center">
         <button
           onClick={handleBack}
@@ -144,7 +144,7 @@ export default function RazorpayRizeDemo() {
         </button>
 
         <div className="flex items-center justify-start gap-2.5 mb-10">
-          <div className="w-7 h-7 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center shadow-sm">
+          <div className="w-7 h-7 bg-gradient-to-br from-blue-600 to-brand-600 rounded-lg flex items-center justify-center shadow-sm">
             <span className="text-white text-xs font-bold">R</span>
           </div>
           <span className="text-slate-700 font-semibold tracking-tight">Rize Incorporation</span>

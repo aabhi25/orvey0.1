@@ -3,7 +3,7 @@ import { Brain, Route, HelpCircle, Building2, FileText, Globe, GraduationCap, Za
 
 const tabs = [
   { label: "Training", path: "/admin/training", icon: GraduationCap },
-  { label: "Train Chroney", path: "/train-chroney", icon: Brain },
+  { label: "Train Orvey", path: "/train-orvey", icon: Brain },
   { label: "Journeys", path: "/conversation-journeys", icon: Route },
   { label: "FAQs", path: "/admin/faqs", icon: HelpCircle },
   { label: "Website Scan", path: "/admin/about", icon: Building2 },
@@ -26,11 +26,11 @@ export default function TrainingNavTabs() {
             onClick={() => setLocation(tab.path)}
             className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
               isActive
-                ? "bg-purple-50 text-purple-700 shadow-sm"
+                ? "bg-brand-50 text-brand-700 shadow-sm"
                 : "text-gray-500 hover:text-gray-700 hover:bg-gray-50"
             }`}
           >
-            <Icon className={`w-4 h-4 ${isActive ? "text-purple-600" : "text-gray-400"}`} />
+            <Icon className={`w-4 h-4 ${isActive ? "text-brand-600" : "text-gray-400"}`} />
             {tab.label}
           </button>
         );

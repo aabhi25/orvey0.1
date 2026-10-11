@@ -249,7 +249,7 @@ export async function isOtpEffectivelyEnabled(businessAccountId: string, leadTra
     if (result.reason === 'no_channel') {
       if (!warnedOtpNoChannel.has(businessAccountId)) {
         warnedOtpNoChannel.add(businessAccountId);
-        console.warn(`[OTP] OTP is ON for business ${businessAccountId} but no SMS/WhatsApp sender is configured and Sample OTP is off — treating OTP as OFF so phone leads are not blocked. Fix it in Train Chroney → Smart Lead Training or OTP settings.`);
+        console.warn(`[OTP] OTP is ON for business ${businessAccountId} but no SMS/WhatsApp sender is configured and Sample OTP is off — treating OTP as OFF so phone leads are not blocked. Fix it in Train Orvey → Smart Lead Training or OTP settings.`);
       }
     } else {
       warnedOtpNoChannel.delete(businessAccountId);

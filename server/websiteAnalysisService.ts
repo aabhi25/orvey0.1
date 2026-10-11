@@ -812,7 +812,7 @@ CRITICAL: Do NOT remove any existing data. Only add to it and update when necess
     try {
       const response = await fetch(validatedUrl.href, {
         headers: {
-          'User-Agent': 'Mozilla/5.0 (compatible; ChroneyBot/1.0; +https://portal.aichroney.com)',
+          'User-Agent': 'Mozilla/5.0 (compatible; OrveyBot/1.0; +https://portal.aichroney.com)',
         },
         signal: controller.signal,
         redirect: 'manual',
@@ -980,7 +980,7 @@ CRITICAL: Do NOT remove any existing data. Only add to it and update when necess
     try {
       const response = await fetch(validatedUrl.href, {
         headers: {
-          'User-Agent': 'Mozilla/5.0 (compatible; ChroneyBot/1.0; +https://portal.aichroney.com)',
+          'User-Agent': 'Mozilla/5.0 (compatible; OrveyBot/1.0; +https://portal.aichroney.com)',
         },
         signal: controller.signal,
         redirect: 'manual',
@@ -1170,7 +1170,7 @@ CRITICAL: Do NOT remove any existing data. Only add to it and update when necess
     try {
       const response = await fetch(validatedUrl.href, {
         headers: {
-          'User-Agent': 'Mozilla/5.0 (compatible; ChroneyBot/1.0; +https://portal.aichroney.com)',
+          'User-Agent': 'Mozilla/5.0 (compatible; OrveyBot/1.0; +https://portal.aichroney.com)',
         },
         signal: controller.signal,
         redirect: 'manual', // Disable automatic redirects to prevent redirect-based SSRF bypass

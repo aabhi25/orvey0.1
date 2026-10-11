@@ -1,8 +1,8 @@
-# AI Chroney — Full-Stack Chat & Business Platform
+# Orvey — Full-Stack Chat & Business Platform
 
 ## Overview
 
-AI Chroney is a full-stack Express + React application providing:
+Orvey is a full-stack Express + React application providing:
 - AI-powered chat interface (streaming, voice, markdown)
 - Business account management with WhatsApp & CRM integrations
 - Shopify product sync and lead capture widget

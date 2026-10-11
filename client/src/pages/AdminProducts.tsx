@@ -516,26 +516,26 @@ export default function AdminProducts() {
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl flex items-center gap-2">
-            <Package className="w-6 h-6 text-purple-600" />
+            <Package className="w-6 h-6 text-brand-600" />
             Product Catalog Management
           </CardTitle>
           <CardDescription>Manage your products, categories, and tags</CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-3 bg-gradient-to-r from-purple-50 to-white backdrop-blur-sm shadow-md h-auto p-1 rounded-xl">
-              <TabsTrigger value="products" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+            <TabsList className="grid w-full grid-cols-3 bg-gradient-to-r from-brand-50 to-white backdrop-blur-sm shadow-md h-auto p-1 rounded-xl">
+              <TabsTrigger value="products" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
                 <ShoppingBag className="w-4 h-4 mr-2" />
                 Products
                 {(productsData?.pagination?.total ?? allProducts.length) > 0 && (
-                  <span className="ml-2 text-xs font-semibold text-purple-600 data-[state=active]:text-purple-900">({productsData?.pagination?.total ?? allProducts.length})</span>
+                  <span className="ml-2 text-xs font-semibold text-brand-600 data-[state=active]:text-brand-900">({productsData?.pagination?.total ?? allProducts.length})</span>
                 )}
               </TabsTrigger>
-              <TabsTrigger value="categories" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+              <TabsTrigger value="categories" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
                 <FolderTree className="w-4 h-4 mr-2" />
                 Categories
               </TabsTrigger>
-              <TabsTrigger value="tags" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+              <TabsTrigger value="tags" className="rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
                 <TagsIcon className="w-4 h-4 mr-2" />
                 Tags
               </TabsTrigger>
@@ -561,7 +561,7 @@ export default function AdminProducts() {
                           variant="outline"
                           size="sm"
                           onClick={selectedProductIds.size === manualProducts.length ? deselectAllProducts : selectAllProducts}
-                          className="border-purple-200"
+                          className="border-brand-200"
                         >
                           {selectedProductIds.size === manualProducts.length ? (
                             <>
@@ -592,7 +592,7 @@ export default function AdminProducts() {
                           variant="outline"
                           size="sm"
                           onClick={() => setSelectionMode(true)}
-                          className="border-purple-200"
+                          className="border-brand-200"
                         >
                           <CheckSquare className="h-4 w-4 mr-2" />
                           Select
@@ -606,7 +606,7 @@ export default function AdminProducts() {
                         <Button 
                           variant="outline"
                           disabled={isImporting}
-                          className="border-purple-200 dark:border-purple-800"
+                          className="border-brand-200 dark:border-brand-800"
                         >
                           <Upload className="h-4 w-4 mr-2" />
                           {isImporting ? "Importing..." : "Import"}
@@ -624,7 +624,7 @@ export default function AdminProducts() {
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
-                    <Button onClick={handleAddNew} data-testid="button-add-product" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+                    <Button onClick={handleAddNew} data-testid="button-add-product" className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700">
                       <Plus className="h-4 w-4 mr-2" />
                       Add Product
                     </Button>
@@ -634,7 +634,7 @@ export default function AdminProducts() {
 
               <Dialog open={showForm} onOpenChange={setShowForm}>
                 <DialogContent className="sm:max-w-[800px] max-h-[90vh] flex flex-col p-0 gap-0 overflow-hidden">
-                  <DialogHeader className="relative bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-4 shrink-0">
+                  <DialogHeader className="relative bg-gradient-to-r from-brand-600 to-ink-600 text-white px-6 py-4 shrink-0">
                     <div className="flex items-center justify-between">
                       <DialogTitle className="text-lg font-medium flex items-center gap-2.5">
                         <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
@@ -673,7 +673,7 @@ export default function AdminProducts() {
                                   style={{ display: 'none' }}
                                 >
                                   <div className="text-center p-4">
-                                    <ShoppingBag className="w-12 h-12 text-purple-300 mx-auto mb-2" />
+                                    <ShoppingBag className="w-12 h-12 text-brand-300 mx-auto mb-2" />
                                     <p className="text-xs text-muted-foreground">Image failed to load</p>
                                   </div>
                                 </div>
@@ -687,8 +687,8 @@ export default function AdminProducts() {
                               </>
                             ) : (
                               <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center">
-                                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900/50 dark:to-blue-900/50 flex items-center justify-center mb-4">
-                                  <Upload className="w-7 h-7 text-purple-500" />
+                                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-brand-100 to-ink-100 dark:from-brand-900/50 dark:to-ink-900/50 flex items-center justify-center mb-4">
+                                  <Upload className="w-7 h-7 text-brand-500" />
                                 </div>
                                 <p className="text-sm font-medium text-gray-600 dark:text-gray-300 mb-1">Product Image</p>
                                 <p className="text-xs text-muted-foreground">Upload or enter URL below</p>
@@ -703,7 +703,7 @@ export default function AdminProducts() {
                                 accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
                                 onChange={handleImageUpload}
                                 disabled={uploadingImage}
-                                className="cursor-pointer text-sm border-2 border-gray-300 dark:border-gray-600 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-purple-600 file:text-white hover:file:bg-purple-700"
+                                className="cursor-pointer text-sm border-2 border-gray-300 dark:border-gray-600 file:mr-3 file:py-1.5 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-brand-600 file:text-white hover:file:bg-brand-700"
                               />
                               <div className="flex items-center gap-3">
                                 <div className="flex-1 h-px bg-gray-300 dark:bg-gray-600"></div>
@@ -715,14 +715,14 @@ export default function AdminProducts() {
                                 placeholder="Paste image URL here"
                                 value={formData.imageUrl || ""}
                                 onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                                className="text-sm border-2 border-gray-300 dark:border-gray-600 focus:border-purple-500 focus:ring-purple-500"
+                                className="text-sm border-2 border-gray-300 dark:border-gray-600 focus:border-brand-500 focus:ring-brand-500"
                               />
                             </div>
                           )}
 
                           {uploadingImage && (
-                            <div className="flex items-center justify-center gap-2 py-2 text-sm text-purple-600">
-                              <div className="w-4 h-4 border-2 border-purple-600 border-t-transparent rounded-full animate-spin"></div>
+                            <div className="flex items-center justify-center gap-2 py-2 text-sm text-brand-600">
+                              <div className="w-4 h-4 border-2 border-brand-600 border-t-transparent rounded-full animate-spin"></div>
                               <span>Uploading...</span>
                             </div>
                           )}
@@ -740,7 +740,7 @@ export default function AdminProducts() {
                               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                               placeholder="e.g., Diamond Solitaire Ring"
                               data-testid="input-product-name"
-                              className="h-11 text-sm border-2 border-gray-300 dark:border-gray-600 focus:border-purple-500 focus:ring-purple-500"
+                              className="h-11 text-sm border-2 border-gray-300 dark:border-gray-600 focus:border-brand-500 focus:ring-brand-500"
                             />
                           </div>
 
@@ -756,7 +756,7 @@ export default function AdminProducts() {
                               placeholder="Describe your product's features, materials, and unique qualities..."
                               rows={4}
                               data-testid="input-product-description"
-                              className="text-sm border-2 border-gray-300 dark:border-gray-600 focus:border-purple-500 focus:ring-purple-500 resize-none"
+                              className="text-sm border-2 border-gray-300 dark:border-gray-600 focus:border-brand-500 focus:ring-brand-500 resize-none"
                             />
                           </div>
 
@@ -775,7 +775,7 @@ export default function AdminProducts() {
                                 onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                                 placeholder="0.00"
                                 data-testid="input-product-price"
-                                className="h-11 text-sm pl-8 border-2 border-gray-300 dark:border-gray-600 focus:border-purple-500 focus:ring-purple-500"
+                                className="h-11 text-sm pl-8 border-2 border-gray-300 dark:border-gray-600 focus:border-brand-500 focus:ring-brand-500"
                               />
                             </div>
                           </div>
@@ -790,7 +790,7 @@ export default function AdminProducts() {
                                       <span className="text-[10px] text-muted-foreground font-normal ml-2">Optional</span>
                                     </Label>
                                     {selectedCategoryIds.length > 0 && (
-                                      <span className="text-[10px] text-purple-600 font-medium">{selectedCategoryIds.length} selected</span>
+                                      <span className="text-[10px] text-brand-600 font-medium">{selectedCategoryIds.length} selected</span>
                                     )}
                                   </div>
                                   <div className="max-h-[100px] overflow-y-auto rounded-lg border border-gray-200 dark:border-gray-700 p-2">
@@ -810,8 +810,8 @@ export default function AdminProducts() {
                                             }}
                                             className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-medium transition-all ${
                                               isSelected
-                                                ? "bg-purple-600 text-white shadow-sm"
-                                                : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-950"
+                                                ? "bg-brand-600 text-white shadow-sm"
+                                                : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-brand-50 dark:hover:bg-brand-950"
                                             }`}
                                           >
                                             <FolderTree className="w-2.5 h-2.5" />
@@ -832,7 +832,7 @@ export default function AdminProducts() {
                                       <span className="text-[10px] text-muted-foreground font-normal ml-2">Optional</span>
                                     </Label>
                                     {selectedTagIds.length > 0 && (
-                                      <span className="text-[10px] text-purple-600 font-medium">{selectedTagIds.length} selected</span>
+                                      <span className="text-[10px] text-brand-600 font-medium">{selectedTagIds.length} selected</span>
                                     )}
                                   </div>
                                   <div className="max-h-[100px] overflow-y-auto rounded-lg border border-gray-200 dark:border-gray-700 p-2">
@@ -895,7 +895,7 @@ export default function AdminProducts() {
                         onClick={handleSubmit}
                         disabled={!formData.name || !formData.description || isSubmitting}
                         data-testid="button-submit-product"
-                        className="h-9 px-6 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                        className="h-9 px-6 bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                       >
                         {isSubmitting ? (
                           <>
@@ -917,8 +917,8 @@ export default function AdminProducts() {
             </div>
           ) : !isLoading && manualProducts.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 px-4">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 flex items-center justify-center mb-4">
-                <Package className="w-10 h-10 text-purple-600 dark:text-purple-400" />
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-brand-100 to-ink-100 dark:from-brand-900/30 dark:to-ink-900/30 flex items-center justify-center mb-4">
+                <Package className="w-10 h-10 text-brand-600 dark:text-brand-400" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
                 Add your first product
@@ -931,7 +931,7 @@ export default function AdminProducts() {
                   resetForm();
                   setShowForm(true);
                 }}
-                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Add Product
@@ -944,8 +944,8 @@ export default function AdminProducts() {
                   key={product.id}
                   className={`group relative bg-card rounded-2xl overflow-hidden border shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer ${
                     selectionMode && selectedProductIds.has(product.id) 
-                      ? 'border-purple-500 ring-2 ring-purple-500/50' 
-                      : 'border-border/50 hover:border-purple-200 dark:hover:border-purple-800'
+                      ? 'border-brand-500 ring-2 ring-brand-500/50' 
+                      : 'border-border/50 hover:border-brand-200 dark:hover:border-brand-800'
                   }`}
                   onClick={() => {
                     if (selectionMode) {
@@ -973,7 +973,7 @@ export default function AdminProducts() {
                           style={{ display: 'none' }}
                         >
                           <div className="text-center">
-                            <ShoppingBag className="w-16 h-16 text-purple-300 dark:text-purple-700 mx-auto" />
+                            <ShoppingBag className="w-16 h-16 text-brand-300 dark:text-brand-700 mx-auto" />
                             <p className="text-xs text-muted-foreground mt-2">Image unavailable</p>
                           </div>
                         </div>
@@ -981,8 +981,8 @@ export default function AdminProducts() {
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
                         <div className="text-center">
-                          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900/50 dark:to-blue-900/50 flex items-center justify-center mx-auto">
-                            <ShoppingBag className="w-10 h-10 text-purple-400 dark:text-purple-500" />
+                          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-brand-100 to-ink-100 dark:from-brand-900/50 dark:to-ink-900/50 flex items-center justify-center mx-auto">
+                            <ShoppingBag className="w-10 h-10 text-brand-400 dark:text-brand-500" />
                           </div>
                           <p className="text-xs text-muted-foreground mt-3">No image</p>
                         </div>
@@ -994,7 +994,7 @@ export default function AdminProducts() {
                         <div 
                           className={`w-6 h-6 rounded-md flex items-center justify-center transition-colors ${
                             selectedProductIds.has(product.id) 
-                              ? 'bg-purple-600 text-white' 
+                              ? 'bg-brand-600 text-white' 
                               : 'bg-white/90 dark:bg-gray-800/90 border border-gray-300 dark:border-gray-600'
                           }`}
                           onClick={(e) => {
@@ -1049,7 +1049,7 @@ export default function AdminProducts() {
                   
                   <div className="p-4 space-y-3">
                     <div>
-                      <h3 className="font-semibold text-sm leading-tight line-clamp-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                      <h3 className="font-semibold text-sm leading-tight line-clamp-2 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
                         {product.name}
                       </h3>
                     </div>
@@ -1060,7 +1060,7 @@ export default function AdminProducts() {
                           <Badge 
                             key={category.id} 
                             variant="outline" 
-                            className="text-[10px] px-2 py-0.5 bg-purple-50/50 text-purple-600 border-purple-200/50 dark:bg-purple-950/30 dark:text-purple-300 dark:border-purple-800/50"
+                            className="text-[10px] px-2 py-0.5 bg-brand-50/50 text-brand-600 border-brand-200/50 dark:bg-brand-950/30 dark:text-brand-300 dark:border-brand-800/50"
                           >
                             {category.name}
                           </Badge>
@@ -1095,7 +1095,7 @@ export default function AdminProducts() {
                     )}
                     
                     <div className="pt-2 border-t border-border/50">
-                      <p className="font-bold text-lg bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                      <p className="font-bold text-lg bg-gradient-to-r from-brand-600 to-ink-600 bg-clip-text text-transparent">
                         {product.price ? `${currencySymbol}${parseFloat(product.price).toLocaleString()}` : (
                           <span className="text-sm font-normal text-muted-foreground italic">Price on request</span>
                         )}
@@ -1190,7 +1190,7 @@ export default function AdminProducts() {
         <DialogContent className="sm:max-w-[600px] max-h-[85vh] flex flex-col">
           <DialogHeader>
             <DialogTitle className="text-xl flex items-center gap-2">
-              <Package className="w-5 h-5 text-purple-600" />
+              <Package className="w-5 h-5 text-brand-600" />
               Product Details
             </DialogTitle>
             <DialogDescription>
@@ -1213,13 +1213,13 @@ export default function AdminProducts() {
                           if (fallback) fallback.style.display = 'flex';
                         }}
                       />
-                      <div className="w-48 h-48 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/30 dark:to-blue-950/30 rounded-lg border border-purple-200 dark:border-purple-800 items-center justify-center" style={{ display: 'none' }}>
-                        <ShoppingBag className="w-20 h-20 text-purple-500" />
+                      <div className="w-48 h-48 bg-gradient-to-br from-brand-50 to-ink-50 dark:from-brand-950/30 dark:to-ink-950/30 rounded-lg border border-brand-200 dark:border-brand-800 items-center justify-center" style={{ display: 'none' }}>
+                        <ShoppingBag className="w-20 h-20 text-brand-500" />
                       </div>
                     </>
                   ) : (
-                    <div className="w-48 h-48 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/30 dark:to-blue-950/30 rounded-lg border border-purple-200 dark:border-purple-800 flex items-center justify-center">
-                      <ShoppingBag className="w-20 h-20 text-purple-500" />
+                    <div className="w-48 h-48 bg-gradient-to-br from-brand-50 to-ink-50 dark:from-brand-950/30 dark:to-ink-950/30 rounded-lg border border-brand-200 dark:border-brand-800 flex items-center justify-center">
+                      <ShoppingBag className="w-20 h-20 text-brand-500" />
                     </div>
                   )}
                 </div>
@@ -1251,7 +1251,7 @@ export default function AdminProducts() {
                   handleEdit(viewingProduct);
                 }
               }}
-              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+              className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
             >
               <Pencil className="h-4 w-4 mr-2" />
               Edit

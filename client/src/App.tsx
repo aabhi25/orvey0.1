@@ -226,7 +226,7 @@ function AppContent({ currentUser }: { currentUser: MeResponseDto | null }) {
         <header className="flex h-14 shrink-0 items-center gap-2 border-b bg-background px-4 lg:hidden sticky top-0 z-10">
           <SidebarTrigger className="-ml-1" />
           <div className="flex items-center gap-2">
-            <h1 className="text-lg font-semibold">AI Chroney</h1>
+            <h1 className="text-lg font-semibold">Orvey</h1>
           </div>
         </header>
         <div className="flex-1 overflow-auto">
@@ -321,7 +321,8 @@ function AppContent({ currentUser }: { currentUser: MeResponseDto | null }) {
                 </Route>
                 <Route path="/ai-insights" component={AIInsights} />
                 <Route path="/conversations" component={Conversations} />
-                <Route path="/train-chroney" component={TrainChroney} />
+                <Route path="/train-orvey" component={TrainChroney} />
+                <Route path="/train-chroney">{() => <Redirect to="/train-orvey" />}</Route>
                 <Route path="/admin/k12/content">
                   {() => isTopScholarAccount ? <Redirect to="/admin/topscholar/content" /> : <K12Content />}
                 </Route>
@@ -494,7 +495,7 @@ function AppWithProviders() {
     return (
       <div className="flex items-center justify-center h-screen w-screen bg-background">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <div className="w-12 h-12 border-4 border-brand-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-base text-gray-600">Loading...</p>
         </div>
       </div>

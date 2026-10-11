@@ -376,7 +376,7 @@ export default function About() {
       setPageToDelete(null);
       toast({
         title: "Page Deleted",
-        description: "Analyzed page removed successfully. Chroney will no longer use this content.",
+        description: "Analyzed page removed successfully. Orvey will no longer use this content.",
       });
     },
     onError: (error) => {
@@ -505,9 +505,9 @@ export default function About() {
 
   if (isLoading) {
     return (
-      <div className="flex-1 overflow-auto bg-gradient-to-br from-gray-50 via-purple-50/30 to-blue-50/30 flex items-center justify-center">
+      <div className="flex-1 overflow-auto bg-gradient-to-br from-gray-50 via-brand-50/30 to-blue-50/30 flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="w-8 h-8 animate-spin text-purple-600 mx-auto mb-3" />
+          <Loader2 className="w-8 h-8 animate-spin text-brand-600 mx-auto mb-3" />
           <p className="text-sm text-gray-600">Loading analysis...</p>
         </div>
       </div>
@@ -527,7 +527,7 @@ export default function About() {
     const configs = {
       not_started: { icon: Info, label: 'Not Started', className: 'bg-gray-100 text-gray-700 border-gray-300' },
       pending: { icon: Clock, label: 'Pending', className: 'bg-blue-100 text-blue-700 border-blue-300' },
-      analyzing: { icon: Loader2, label: 'Analyzing', className: 'bg-purple-100 text-purple-700 border-purple-300' },
+      analyzing: { icon: Loader2, label: 'Analyzing', className: 'bg-brand-100 text-brand-700 border-brand-300' },
       completed: { icon: CheckCircle2, label: 'Completed', className: 'bg-green-100 text-green-700 border-green-300' },
       failed: { icon: AlertCircle, label: 'Failed', className: 'bg-red-100 text-red-700 border-red-300' },
     };
@@ -544,19 +544,19 @@ export default function About() {
   };
 
   return (
-    <div className="flex-1 overflow-auto bg-gradient-to-br from-gray-50 via-purple-50/30 to-blue-50/30">
+    <div className="flex-1 overflow-auto bg-gradient-to-br from-gray-50 via-brand-50/30 to-blue-50/30">
       <TrainingNavTabs />
       <div className="container mx-auto p-4 md:p-6 max-w-[1400px]">
         {/* Hero Section */}
         <div className="mb-6">
-          <div className="bg-gradient-to-br from-[#0B0F1A] via-[#1e3a8a] to-[#7c3aed] rounded-2xl shadow-xl p-5 text-white">
+          <div className="bg-gradient-to-br from-[#0B0F1A] via-[#1e3a8a] to-[#1a3878] rounded-2xl shadow-xl p-5 text-white">
             <div className="mb-4">
               <h1 className="text-2xl font-bold flex items-center gap-2 mb-1">
                 <Globe className="w-6 h-6" />
                 Website Analysis
               </h1>
-              <p className="text-purple-100 text-xs max-w-2xl">
-                Empower Chroney AI to understand your business deeply and provide intelligent, context-aware responses
+              <p className="text-brand-100 text-xs max-w-2xl">
+                Empower Orvey AI to understand your business deeply and provide intelligent, context-aware responses
               </p>
             </div>
 
@@ -589,7 +589,7 @@ export default function About() {
                   <Button
                     onClick={handleAnalyze}
                     disabled={!websiteUrl || analyzeMutation.isPending || isProcessing}
-                    className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 shadow-lg text-white px-5 py-2 text-sm rounded-lg"
+                    className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700 shadow-lg text-white px-5 py-2 text-sm rounded-lg"
                   >
                     {analyzeMutation.isPending || isProcessing ? (
                       <>
@@ -611,19 +611,19 @@ export default function About() {
 
         {/* Main Content Tabs */}
         <Tabs defaultValue="overview" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 bg-gradient-to-r from-purple-50 to-white backdrop-blur-sm shadow-md h-auto p-1 rounded-xl">
-            <TabsTrigger value="overview" className="flex items-center gap-2 py-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+          <TabsList className="grid w-full grid-cols-3 bg-gradient-to-r from-brand-50 to-white backdrop-blur-sm shadow-md h-auto p-1 rounded-xl">
+            <TabsTrigger value="overview" className="flex items-center gap-2 py-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
               <Zap className="w-4 h-4" />
               <span className="hidden sm:inline">Overview</span>
             </TabsTrigger>
-            <TabsTrigger value="pages" className="flex items-center gap-2 py-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+            <TabsTrigger value="pages" className="flex items-center gap-2 py-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
               <FileText className="w-4 h-4" />
               <span className="hidden sm:inline">Analyzed Pages</span>
               {analyzedPagesData && analyzedPagesData.length > 0 && (
                 <Badge variant="secondary" className="ml-1">{analyzedPagesData.length}</Badge>
               )}
             </TabsTrigger>
-            <TabsTrigger value="profile" className="flex items-center gap-2 py-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-200 data-[state=active]:to-blue-100 data-[state=active]:text-purple-900 data-[state=active]:font-semibold">
+            <TabsTrigger value="profile" className="flex items-center gap-2 py-2 rounded-lg data-[state=active]:bg-gradient-to-r data-[state=active]:from-brand-200 data-[state=active]:to-blue-100 data-[state=active]:text-brand-900 data-[state=active]:font-semibold">
               <Building2 className="w-4 h-4" />
               <span className="hidden sm:inline">Business Profile</span>
             </TabsTrigger>
@@ -634,9 +634,9 @@ export default function About() {
             {/* Want More Details Section */}
             {websiteUrl && status === 'completed' && (
               <Card className="shadow-md border-gray-200/60 bg-white/80 backdrop-blur-sm">
-                <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-blue-50/50">
+                <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <Plus className="w-5 h-5 text-purple-600" />
+                    <Plus className="w-5 h-5 text-brand-600" />
                     Want More Details?
                   </CardTitle>
                   <CardDescription>
@@ -657,7 +657,7 @@ export default function About() {
                       onClick={handleAddPage}
                       disabled={!newPageUrl.trim() || isProcessing}
                       variant="outline"
-                      className="border-purple-300 text-purple-700 hover:bg-purple-50"
+                      className="border-brand-300 text-brand-700 hover:bg-brand-50"
                     >
                       <Plus className="w-4 h-4 mr-1" />
                       Add Page
@@ -668,8 +668,8 @@ export default function About() {
                     <div className="space-y-3">
                       <div className="space-y-2">
                         {additionalPages.map((page, index) => (
-                          <div key={index} className="flex items-center gap-2 p-3 bg-purple-50 rounded-lg border border-purple-200">
-                            <FileText className="w-4 h-4 text-purple-600 flex-shrink-0" />
+                          <div key={index} className="flex items-center gap-2 p-3 bg-brand-50 rounded-lg border border-brand-200">
+                            <FileText className="w-4 h-4 text-brand-600 flex-shrink-0" />
                             <span className="flex-1 text-sm truncate font-medium">{page}</span>
                             <Button
                               onClick={() => handleRemovePage(index)}
@@ -728,7 +728,7 @@ export default function About() {
             </Card>
 
             {/* How It Works */}
-            <Card className="shadow-md border-blue-200 bg-gradient-to-br from-blue-50 to-purple-50">
+            <Card className="shadow-md border-blue-200 bg-gradient-to-br from-blue-50 to-brand-50">
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm flex items-center gap-2 text-blue-900">
                   <Sparkles className="w-4 h-4" />
@@ -744,10 +744,10 @@ export default function About() {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs font-bold">2</div>
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-600 text-white flex items-center justify-center text-xs font-bold">2</div>
                   <div>
-                    <p className="text-xs font-semibold text-purple-900">Chroney Gets Smarter</p>
-                    <p className="text-xs text-purple-700">Uses extracted data to provide context-aware, accurate responses</p>
+                    <p className="text-xs font-semibold text-brand-900">Orvey Gets Smarter</p>
+                    <p className="text-xs text-brand-700">Uses extracted data to provide context-aware, accurate responses</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
@@ -764,11 +764,11 @@ export default function About() {
           {/* Analyzed Pages Tab */}
           <TabsContent value="pages" className="mt-6">
             <Card className="shadow-md border-gray-200/60 bg-white/80 backdrop-blur-sm">
-              <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-blue-50/50">
+              <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <CardTitle className="text-lg flex items-center gap-2">
-                      <FileText className="w-5 h-5 text-purple-600" />
+                      <FileText className="w-5 h-5 text-brand-600" />
                       Analyzed Pages Timeline
                     </CardTitle>
                     <CardDescription>
@@ -811,8 +811,8 @@ export default function About() {
                           >
                             <AccordionTrigger className="px-4 py-3 hover:no-underline">
                               <div className="flex items-center gap-3 w-full">
-                                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-r from-purple-100 to-blue-100 flex items-center justify-center">
-                                  <span className="text-sm font-bold text-purple-600">{index + 1}</span>
+                                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-r from-brand-100 to-ink-100 flex items-center justify-center">
+                                  <span className="text-sm font-bold text-brand-600">{index + 1}</span>
                                 </div>
                                 <div className="flex-1 text-left">
                                   <p className="font-semibold text-gray-900 capitalize">
@@ -844,7 +844,7 @@ export default function About() {
                                     onClick={() => setSelectedPageContent({ url: page.pageUrl, content: page.extractedContent || null })}
                                     variant="outline"
                                     size="sm"
-                                    className="border-purple-300 text-purple-700 hover:bg-purple-50"
+                                    className="border-brand-300 text-brand-700 hover:bg-brand-50"
                                   >
                                     <FileText className="w-3 h-3 mr-1" />
                                     View Content
@@ -883,7 +883,7 @@ export default function About() {
                     <Button
                       onClick={handleAnalyze}
                       disabled={!websiteUrl || analyzeMutation.isPending || isProcessing}
-                      className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                      className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                     >
                       <Sparkles className="w-4 h-4 mr-2" />
                       Analyze Now
@@ -911,7 +911,7 @@ export default function About() {
                     </>
                   ) : (
                     <>
-                      <Button onClick={handleStartEdit} variant="outline" size="sm" className="border-purple-300 text-purple-700 hover:bg-purple-50">
+                      <Button onClick={handleStartEdit} variant="outline" size="sm" className="border-brand-300 text-brand-700 hover:bg-brand-50">
                         <Edit className="w-4 h-4 mr-1" />
                         Edit
                       </Button>
@@ -926,9 +926,9 @@ export default function About() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Identity Card */}
                 <Card className="shadow-md border-gray-200/60 bg-white/80 backdrop-blur-sm lg:col-span-2">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-blue-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg flex items-center gap-2">
-                      <Building2 className="w-5 h-5 text-purple-600" />
+                      <Building2 className="w-5 h-5 text-brand-600" />
                       Business Identity
                     </CardTitle>
                   </CardHeader>
@@ -967,7 +967,7 @@ export default function About() {
                         {content.businessName && (
                           <div>
                             <h3 className="font-semibold text-gray-700 text-sm mb-2 flex items-center gap-2">
-                              <Building2 className="w-4 h-4 text-purple-600" />
+                              <Building2 className="w-4 h-4 text-brand-600" />
                               Business Name
                             </h3>
                             <p className="text-gray-900 font-medium text-lg">{content.businessName}</p>
@@ -998,9 +998,9 @@ export default function About() {
 
                 {/* Offerings Card */}
                 <Card className="shadow-md border-gray-200/60 bg-white/80 backdrop-blur-sm">
-                  <CardHeader className="border-b bg-gradient-to-r from-purple-50/50 to-pink-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-brand-50/50 to-ink-50/50">
                     <CardTitle className="text-lg flex items-center gap-2">
-                      <Package className="w-5 h-5 text-purple-600" />
+                      <Package className="w-5 h-5 text-brand-600" />
                       Products & Services
                     </CardTitle>
                   </CardHeader>
@@ -1045,7 +1045,7 @@ export default function About() {
                                   className={`px-3 py-1.5 ${
                                     newlyAddedItems.products.has(product) 
                                       ? 'bg-green-100 text-green-800 border-green-300 border-2' 
-                                      : 'bg-purple-100 text-purple-800'
+                                      : 'bg-brand-100 text-brand-800'
                                   }`}
                                 >
                                   {newlyAddedItems.products.has(product) && '✨ '}
@@ -1087,7 +1087,7 @@ export default function About() {
 
                 {/* Key Details Card */}
                 <Card className="shadow-md border-gray-200/60 bg-white/80 backdrop-blur-sm">
-                  <CardHeader className="border-b bg-gradient-to-r from-blue-50/50 to-purple-50/50">
+                  <CardHeader className="border-b bg-gradient-to-r from-blue-50/50 to-brand-50/50">
                     <CardTitle className="text-lg flex items-center gap-2">
                       <Star className="w-5 h-5 text-blue-600" />
                       Features & USPs
@@ -1159,7 +1159,7 @@ export default function About() {
                                       : 'bg-gray-50'
                                   }`}
                                 >
-                                  <Award className="w-4 h-4 text-purple-600 flex-shrink-0 mt-0.5" />
+                                  <Award className="w-4 h-4 text-brand-600 flex-shrink-0 mt-0.5" />
                                   <span className="text-sm text-gray-700">
                                     {newlyAddedItems.usps.has(usp) && '✨ '}
                                     {usp}
@@ -1279,7 +1279,7 @@ export default function About() {
                         )}
                         {content.businessHours && (
                           <div className="flex items-start gap-3">
-                            <Calendar className="w-5 h-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                            <Calendar className="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5" />
                             <div>
                               <p className="text-xs text-gray-500 font-semibold mb-1">Business Hours</p>
                               <p className="text-gray-900">{content.businessHours}</p>
@@ -1355,7 +1355,7 @@ export default function About() {
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Analyzed Page</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete this analyzed page? Chroney will no longer use this content. This action cannot be undone.
+              Are you sure you want to delete this analyzed page? Orvey will no longer use this content. This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -1380,7 +1380,7 @@ export default function About() {
         <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <FileText className="w-5 h-5 text-purple-600" />
+              <FileText className="w-5 h-5 text-brand-600" />
               Extracted Content
             </DialogTitle>
             <DialogDescription className="text-sm break-all">

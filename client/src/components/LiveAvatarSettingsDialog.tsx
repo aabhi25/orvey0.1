@@ -86,7 +86,7 @@ function ProviderKeyRow({ businessAccountId, provider, label, status, prominent 
   });
 
   return (
-    <div className={`rounded-lg border p-3 ${prominent ? "border-purple-300 bg-purple-50/40" : "border-gray-200"}`} data-testid={`avatar-key-${provider}`}>
+    <div className={`rounded-lg border p-3 ${prominent ? "border-brand-300 bg-brand-50/40" : "border-gray-200"}`} data-testid={`avatar-key-${provider}`}>
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2 min-w-0">
           <KeyRound className="h-4 w-4 text-gray-500 flex-shrink-0" />
@@ -217,7 +217,7 @@ export function LiveAvatarSettingsDialog({ businessAccountId, businessName, open
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[680px]">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2"><Video className="h-5 w-5 text-purple-600" />Live AI avatar — {businessName}</DialogTitle>
+          <DialogTitle className="flex items-center gap-2"><Video className="h-5 w-5 text-brand-600" />Live AI avatar — {businessName}</DialogTitle>
           <DialogDescription>
             Commercial add-on. Choose the provider this account signed for, its avatar and limits. The avatar only renders our own
             voice answers (our brain and ElevenLabs voice) and starts only when a visitor taps it.

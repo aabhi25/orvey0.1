@@ -152,7 +152,7 @@ export default function SuperAdminCosts() {
       case "website_analysis":
         return "text-green-600 bg-green-50";
       case "document_analysis":
-        return "text-purple-600 bg-purple-50";
+        return "text-brand-600 bg-brand-50";
       case "image_search":
         return "text-orange-600 bg-orange-50";
       case "voice_mode":
@@ -241,7 +241,7 @@ export default function SuperAdminCosts() {
 
   return (
     <div className="flex flex-col flex-1 h-screen">
-      <header className="flex items-center justify-between h-[56px] px-6 bg-gradient-to-r from-red-500 via-purple-600 to-blue-600 shadow-sm">
+      <header className="flex items-center justify-between h-[56px] px-6 bg-gradient-to-r from-brand-800 via-ink-700 to-ink-900 shadow-sm">
         <div className="flex items-center gap-3">
           <SidebarTrigger data-testid="button-sidebar-toggle" className="text-white hover:bg-white/10 rounded-md" />
           <div className="flex items-center gap-2.5">
@@ -249,7 +249,7 @@ export default function SuperAdminCosts() {
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h1 className="text-[15px] font-semibold text-white leading-tight">AI Chroney</h1>
+              <h1 className="text-[15px] font-semibold text-white leading-tight">Orvey</h1>
               <p className="text-[11px] text-white/90 leading-tight mt-0.5">Super Admin Cost Analytics</p>
             </div>
           </div>
@@ -262,7 +262,7 @@ export default function SuperAdminCosts() {
             <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
               <div>
                 <div className="flex items-center gap-2">
-                  <DollarSign className="w-6 h-6 text-purple-600" />
+                  <DollarSign className="w-6 h-6 text-brand-600" />
                   <h2 className="text-2xl font-bold text-gray-900">Cost Analytics</h2>
                 </div>
                 <p className="text-muted-foreground mt-1">
@@ -446,7 +446,7 @@ export default function SuperAdminCosts() {
 
           {isLoading && (
             <div className="text-center py-16 mb-6">
-              <div className="inline-block w-12 h-12 border-4 border-purple-600 border-t-transparent rounded-full animate-spin mb-4"></div>
+              <div className="inline-block w-12 h-12 border-4 border-brand-600 border-t-transparent rounded-full animate-spin mb-4"></div>
               <p className="text-lg font-medium text-gray-900 mb-2">Loading Cost Analytics</p>
               <p className="text-sm text-gray-600">Gathering cost data from all business accounts...</p>
             </div>
@@ -461,13 +461,13 @@ export default function SuperAdminCosts() {
                     <CardHeader className="pb-2">
                       <CardTitle className="text-sm font-medium text-gray-600">
                         <div className="flex items-center gap-2">
-                          <DollarSign className="w-4 h-4 text-purple-600" />
+                          <DollarSign className="w-4 h-4 text-brand-600" />
                           <span>Total Cost</span>
                         </div>
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="text-2xl font-bold text-purple-900">{aggregatedData.totalCost}</div>
+                      <div className="text-2xl font-bold text-brand-900">{aggregatedData.totalCost}</div>
                     </CardContent>
                   </Card>
 
@@ -583,7 +583,7 @@ export default function SuperAdminCosts() {
                                     <TableCell className="font-medium">
                                       {business.businessName || businessAccount?.name || "Unknown"}
                                     </TableCell>
-                                    <TableCell className="text-right font-semibold text-purple-900">
+                                    <TableCell className="text-right font-semibold text-brand-900">
                                       {formatCost(business.totalCost)}
                                     </TableCell>
                                     <TableCell className="text-right">{business.eventCount.toLocaleString()}</TableCell>

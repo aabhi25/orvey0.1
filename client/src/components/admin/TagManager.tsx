@@ -132,7 +132,7 @@ export default function TagManager() {
   return (
     <div>
       <div className="flex justify-end mb-4">
-        <Button onClick={handleAddNew} className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+        <Button onClick={handleAddNew} className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700">
           <Plus className="h-4 w-4 mr-2" />
           Add Tag
         </Button>
@@ -226,7 +226,7 @@ export default function TagManager() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <TagsIcon className="w-5 h-5 text-purple-600" />
+              <TagsIcon className="w-5 h-5 text-brand-600" />
               {editingTag ? "Edit Tag" : "Add Tag"}
             </DialogTitle>
             <DialogDescription>

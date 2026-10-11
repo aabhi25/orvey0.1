@@ -2529,7 +2529,7 @@ export class DatabaseStorage implements IStorage {
         .insert(widgetSettings)
         .values({
           businessAccountId,
-          chatColor: settingsData.chatColor || "#9333ea",
+          chatColor: settingsData.chatColor || "#1f4596",
           welcomeMessageType: settingsData.welcomeMessageType || "custom",
           welcomeMessage: settingsData.welcomeMessage || "Hi! How can I help you today?",
           currency: settingsData.currency || "INR",
@@ -5328,8 +5328,8 @@ export class DatabaseStorage implements IStorage {
       { leadsquaredField: 'Mx_Business_Account', sourceType: 'dynamic' as const, sourceField: 'business.name', displayName: 'Business Account Name', sortOrder: 6 },
       { leadsquaredField: 'Mx_Website_Campaign', sourceType: 'dynamic' as const, sourceField: 'lead.sourceUrl', displayName: 'Page URL (Where Lead Was Captured)', sortOrder: 7 },
       { leadsquaredField: 'mx_Source_Campaign', sourceType: 'dynamic' as const, sourceField: 'session.utmCampaign', fallbackValue: 'Website', displayName: 'Source Campaign (utm_campaign from URL)', sortOrder: 8 },
-      { sourceType: 'custom' as const, leadsquaredField: 'Source', customValue: 'AI Chroney', displayName: 'Source', sortOrder: 9 },
-      { sourceType: 'custom' as const, leadsquaredField: 'mx_Secondary_Lead_Source', customValue: 'AI Chroney', displayName: 'Secondary Lead Source', sortOrder: 10 },
+      { sourceType: 'custom' as const, leadsquaredField: 'Source', customValue: 'Orvey', displayName: 'Source', sortOrder: 9 },
+      { sourceType: 'custom' as const, leadsquaredField: 'mx_Secondary_Lead_Source', customValue: 'Orvey', displayName: 'Secondary Lead Source', sortOrder: 10 },
     ];
 
     for (const mapping of defaults) {
@@ -6337,8 +6337,8 @@ export class DatabaseStorage implements IStorage {
       { businessAccountId, leadsquaredField: 'Mx_Business_Account', sourceType: 'dynamic', sourceField: 'business.name', displayName: 'Business Account Name', sortOrder: 6 },
       { businessAccountId, leadsquaredField: 'Mx_Website_Campaign', sourceType: 'dynamic', sourceField: 'lead.sourceUrl', displayName: 'Page URL (Where Lead Was Captured)', sortOrder: 7 },
       { businessAccountId, leadsquaredField: 'mx_Source_Campaign', sourceType: 'dynamic', sourceField: 'session.utmCampaign', fallbackValue: 'Website', displayName: 'Source Campaign (utm_campaign from URL)', sortOrder: 8 },
-      { businessAccountId, leadsquaredField: 'Source', sourceType: 'custom', customValue: 'AI Chroney', displayName: 'Source', sortOrder: 9 },
-      { businessAccountId, leadsquaredField: 'mx_Secondary_Lead_Source', sourceType: 'custom', customValue: 'AI Chroney', displayName: 'Secondary Lead Source', sortOrder: 10 },
+      { businessAccountId, leadsquaredField: 'Source', sourceType: 'custom', customValue: 'Orvey', displayName: 'Source', sortOrder: 9 },
+      { businessAccountId, leadsquaredField: 'mx_Secondary_Lead_Source', sourceType: 'custom', customValue: 'Orvey', displayName: 'Secondary Lead Source', sortOrder: 10 },
     ];
 
     for (const mapping of defaults) {

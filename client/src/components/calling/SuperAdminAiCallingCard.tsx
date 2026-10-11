@@ -46,7 +46,7 @@ export function SuperAdminAiCallingCard({ businessAccountId, initialEnabled }: {
 
   return (
     <div className="flex items-start gap-4 p-4 border rounded-lg hover:bg-gray-50 transition-colors" data-testid="card-super-admin-ai-calling">
-      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-sky-500 to-indigo-600 flex items-center justify-center flex-shrink-0">
+      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-sky-500 to-brand-600 flex items-center justify-center flex-shrink-0">
         <Phone className="h-5 w-5 text-white" />
       </div>
       <div className="flex-1 min-w-0">

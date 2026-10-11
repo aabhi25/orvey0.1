@@ -40,7 +40,7 @@ interface ImageUploadProgressProps {
   chatColor?: string;
 }
 
-export function ImageUploadProgress({ stage, chatColor = '#9333ea' }: ImageUploadProgressProps) {
+export function ImageUploadProgress({ stage, chatColor = '#1f4596' }: ImageUploadProgressProps) {
   const [displayIndex, setDisplayIndex] = useState(0);
   const [fadeIn, setFadeIn] = useState(true);
   const lastTransitionRef = useRef(Date.now());

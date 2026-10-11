@@ -3,7 +3,7 @@
  *
  *  - knowledge comes from the website's retrieval (compact profile + relevant excerpts), not a dump
  *    of every page / document (prompt size measured before / after); keyword path without embeddings
- *  - Train Chroney instructions parsed like the website (always / conditional / fallback)
+ *  - Train Orvey instructions parsed like the website (always / conditional / fallback)
  *  - model from Master AI Settings (else gpt-4o-mini); ~20-message history window
  *  - appointment booking (slots as a numbered list → booking end-to-end) and order tracking only
  *    when the account has them, never inside a guided flow session
@@ -274,15 +274,15 @@ async function main() {
   {
     await setWa(NW.accountId, { useMasterTraining: "false" });
     let r = await reply(NW.accountId, newPhone(), "can I get a refund?");
-    expect(r.main && !r.main.allSystem.includes(`Team Northwind ${tag}`) && !r.main.allSystem.includes("080-1234"), "useMasterTraining off → no Train Chroney instructions (incl. fallback)", r.main?.allSystem.slice(0, 1500));
+    expect(r.main && !r.main.allSystem.includes(`Team Northwind ${tag}`) && !r.main.allSystem.includes("080-1234"), "useMasterTraining off → no Train Orvey instructions (incl. fallback)", r.main?.allSystem.slice(0, 1500));
     await setWa(NW.accountId, { useMasterTraining: "true", customPrompt: `You are Priya ${tag}, a warm membership advisor for Northwind.`, instructionsMode: "add" });
     r = await reply(NW.accountId, newPhone(), "can I get a refund?");
     const s = r.main?.system || "";
-    expect(/AI AGENT PERSONA/.test(s) && s.includes(`You are Priya ${tag}`) && /SECONDARY CUSTOM BUSINESS INSTRUCTIONS[\s\S]*Team Northwind/.test(s), "mode 'add': persona + Train Chroney instructions both apply", s.slice(0, 2500));
+    expect(/AI AGENT PERSONA/.test(s) && s.includes(`You are Priya ${tag}`) && /SECONDARY CUSTOM BUSINESS INSTRUCTIONS[\s\S]*Team Northwind/.test(s), "mode 'add': persona + Train Orvey instructions both apply", s.slice(0, 2500));
     expect((s.match(new RegExp(`You are Priya ${tag}`, "g")) || []).length === 1, "persona text no longer duplicated inside the secondary block");
     await setWa(NW.accountId, { instructionsMode: "replace" });
     r = await reply(NW.accountId, newPhone(), "can I get a refund?");
-    expect(r.main && r.main.system.includes(`You are Priya ${tag}`) && !r.main.allSystem.includes(`Team Northwind ${tag}`), "mode 'replace': persona only, Train Chroney instructions not applied", r.main?.allSystem.slice(0, 2000));
+    expect(r.main && r.main.system.includes(`You are Priya ${tag}`) && !r.main.allSystem.includes(`Team Northwind ${tag}`), "mode 'replace': persona only, Train Orvey instructions not applied", r.main?.allSystem.slice(0, 2000));
     await setWa(NW.accountId, { instructionsMode: "add", customPrompt: null });
     // Settings API helper keeps the two switches in sync.
     expect(JSON.stringify(phase2SettingsUpdate({ instructionsMode: "replace" })) === JSON.stringify({ instructionsMode: "replace", useMasterTraining: "false" }), "PUT instructionsMode=replace also turns useMasterTraining off");

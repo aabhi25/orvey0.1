@@ -357,7 +357,7 @@ export default function VisualSearchSettings({ embedded = false }: { embedded?: 
           </Button>
         )}
         <h1 className="text-2xl font-bold flex items-center gap-2">
-          <SlidersHorizontal className="w-6 h-6 text-purple-600" />
+          <SlidersHorizontal className="w-6 h-6 text-brand-600" />
           Visual Search Settings
         </h1>
         <p className="text-muted-foreground mt-1">
@@ -372,9 +372,9 @@ export default function VisualSearchSettings({ embedded = false }: { embedded?: 
       ) : (
         <div className="space-y-6">
           <Card className="shadow-lg border-gray-200">
-            <CardHeader className="border-b bg-gradient-to-r from-purple-50 to-pink-50 py-4">
+            <CardHeader className="border-b bg-gradient-to-r from-brand-50 to-ink-50 py-4">
               <CardTitle className="text-base flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-purple-600" />
+                <Sparkles className="w-4 h-4 text-brand-600" />
                 Match Quality Labels
               </CardTitle>
               <CardDescription className="mt-1">
@@ -393,12 +393,12 @@ export default function VisualSearchSettings({ embedded = false }: { embedded?: 
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className={`text-xs ${!showMatchPercentage ? 'font-semibold text-purple-600' : 'text-gray-500'}`}>Labels</span>
+                    <span className={`text-xs ${!showMatchPercentage ? 'font-semibold text-brand-600' : 'text-gray-500'}`}>Labels</span>
                     <Switch
                       checked={showMatchPercentage}
                       onCheckedChange={setShowMatchPercentage}
                     />
-                    <span className={`text-xs ${showMatchPercentage ? 'font-semibold text-purple-600' : 'text-gray-500'}`}>Percentage</span>
+                    <span className={`text-xs ${showMatchPercentage ? 'font-semibold text-brand-600' : 'text-gray-500'}`}>Percentage</span>
                   </div>
                 </div>
 
@@ -427,9 +427,9 @@ export default function VisualSearchSettings({ embedded = false }: { embedded?: 
                 <div>
                   <div className="flex justify-between items-center mb-2">
                     <Label className="text-sm flex items-center gap-2">
-                      <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-purple-100 text-purple-700">Very Similar</span>
+                      <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-brand-100 text-brand-700">Very Similar</span>
                     </Label>
-                    <span className="text-sm font-semibold text-purple-600">{verySimilarThreshold}% - {perfectMatchThreshold - 1}%</span>
+                    <span className="text-sm font-semibold text-brand-600">{verySimilarThreshold}% - {perfectMatchThreshold - 1}%</span>
                   </div>
                   <Slider
                     value={[verySimilarThreshold]}

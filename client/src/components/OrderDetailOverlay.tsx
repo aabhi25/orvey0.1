@@ -15,7 +15,7 @@ interface OrderDetailOverlayProps {
 export function OrderDetailOverlay({
   order,
   onClose,
-  chatColor = "#9333ea",
+  chatColor = "#1f4596",
 }: OrderDetailOverlayProps) {
   const isCancelled = order?.status === "cancelled";
   const isReturnRequested = order?.status === "return_requested";

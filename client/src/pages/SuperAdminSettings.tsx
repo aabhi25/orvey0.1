@@ -647,7 +647,7 @@ export default function SuperAdminSettings() {
   return (
     <div className="flex flex-col flex-1 h-screen">
       {/* Header */}
-      <header className="flex items-center justify-between h-[56px] px-6 bg-gradient-to-r from-red-500 via-purple-600 to-blue-600 shadow-sm">
+      <header className="flex items-center justify-between h-[56px] px-6 bg-gradient-to-r from-brand-800 via-ink-700 to-ink-900 shadow-sm">
         <div className="flex items-center gap-3">
           <SidebarTrigger data-testid="button-sidebar-toggle" className="text-white hover:bg-white/10 rounded-md" />
           <div className="flex items-center gap-2.5">
@@ -655,7 +655,7 @@ export default function SuperAdminSettings() {
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h1 className="text-[15px] font-semibold text-white leading-tight">AI Chroney</h1>
+              <h1 className="text-[15px] font-semibold text-white leading-tight">Orvey</h1>
               <p className="text-[11px] text-white/90 leading-tight mt-0.5">Super Admin Settings</p>
             </div>
           </div>
@@ -668,7 +668,7 @@ export default function SuperAdminSettings() {
           {/* Page Header */}
           <div className="mb-2">
             <h2 className="text-2xl font-bold flex items-center gap-2 text-gray-900">
-              <Settings2 className="w-6 h-6 text-purple-600" />
+              <Settings2 className="w-6 h-6 text-brand-600" />
               Settings
             </h2>
             <p className="text-muted-foreground mt-1">
@@ -683,7 +683,7 @@ export default function SuperAdminSettings() {
           <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
-                <Lock className="w-5 h-5 text-purple-600" />
+                <Lock className="w-5 h-5 text-brand-600" />
                 Change Password
               </CardTitle>
               <CardDescription>Update your account password</CardDescription>
@@ -742,7 +742,7 @@ export default function SuperAdminSettings() {
                   <Button
                     type="submit"
                     disabled={changePasswordMutation.isPending}
-                    className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                    className="w-full bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                   >
                     {changePasswordMutation.isPending ? "Changing Password..." : "Change Password"}
                   </Button>
@@ -758,7 +758,7 @@ export default function SuperAdminSettings() {
           <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
-                <Database className="w-5 h-5 text-purple-600" />
+                <Database className="w-5 h-5 text-brand-600" />
                 Database Backup
               </CardTitle>
               <CardDescription>
@@ -796,7 +796,7 @@ export default function SuperAdminSettings() {
           <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
-                <Cloud className="w-5 h-5 text-purple-600" />
+                <Cloud className="w-5 h-5 text-brand-600" />
                 Automated Cloud Backups
               </CardTitle>
               <CardDescription>
@@ -820,11 +820,11 @@ export default function SuperAdminSettings() {
                     </p>
                     <p className="text-xs text-muted-foreground">Total Size</p>
                   </div>
-                  <div className="bg-gradient-to-br from-violet-50 to-purple-50 rounded-xl p-4 border border-violet-100">
+                  <div className="bg-gradient-to-br from-brand-50 to-ink-50 rounded-xl p-4 border border-brand-100">
                     <div className="flex gap-1">
-                      <span className="text-sm font-bold text-violet-600">{backupStats?.byType.daily || 0}D</span>
-                      <span className="text-sm font-bold text-indigo-600">{backupStats?.byType.weekly || 0}W</span>
-                      <span className="text-sm font-bold text-purple-600">{backupStats?.byType.monthly || 0}M</span>
+                      <span className="text-sm font-bold text-brand-600">{backupStats?.byType.daily || 0}D</span>
+                      <span className="text-sm font-bold text-brand-600">{backupStats?.byType.weekly || 0}W</span>
+                      <span className="text-sm font-bold text-brand-600">{backupStats?.byType.monthly || 0}M</span>
                     </div>
                     <p className="text-xs text-muted-foreground">By Type</p>
                   </div>
@@ -989,8 +989,8 @@ export default function SuperAdminSettings() {
                             </div>
                             <div className="flex items-center gap-2 pl-5">
                               <Badge variant="outline" className={
-                                backup.type === 'monthly' ? 'bg-purple-50 text-purple-700 border-purple-200' :
-                                backup.type === 'weekly' ? 'bg-indigo-50 text-indigo-700 border-indigo-200' :
+                                backup.type === 'monthly' ? 'bg-brand-50 text-brand-700 border-brand-200' :
+                                backup.type === 'weekly' ? 'bg-brand-50 text-brand-700 border-brand-200' :
                                 backup.type === 'manual' ? 'bg-orange-50 text-orange-700 border-orange-200' :
                                 'bg-blue-50 text-blue-700 border-blue-200'
                               }>
@@ -1043,7 +1043,7 @@ export default function SuperAdminSettings() {
                       ? 'bg-gradient-to-r from-red-50 to-pink-50 border-red-200' 
                       : restoreProgress.stage === 'completed'
                         ? 'bg-gradient-to-r from-green-50 to-emerald-50 border-green-200'
-                        : 'bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200'
+                        : 'bg-gradient-to-r from-blue-50 to-brand-50 border-blue-200'
                   }`}>
                     <div className="flex items-center gap-2 mb-3">
                       {restoreProgress.stage === 'failed' ? (
@@ -1157,8 +1157,8 @@ export default function SuperAdminSettings() {
                               {restore.backupDate}
                             </span>
                             <Badge variant="outline" className={
-                              restore.backupType === 'monthly' ? 'bg-purple-50 text-purple-700 border-purple-200' :
-                              restore.backupType === 'weekly' ? 'bg-indigo-50 text-indigo-700 border-indigo-200' :
+                              restore.backupType === 'monthly' ? 'bg-brand-50 text-brand-700 border-brand-200' :
+                              restore.backupType === 'weekly' ? 'bg-brand-50 text-brand-700 border-brand-200' :
                               'bg-blue-50 text-blue-700 border-blue-200'
                             }>
                               {restore.backupType}
@@ -1271,7 +1271,7 @@ export default function SuperAdminSettings() {
           <Card>
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
-                <Brain className="w-5 h-5 text-purple-600" />
+                <Brain className="w-5 h-5 text-brand-600" />
                 FAQ Embedding Migration
               </CardTitle>
               <CardDescription>
@@ -1282,8 +1282,8 @@ export default function SuperAdminSettings() {
 
                 {/* Stats Display */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                  <div className="bg-gradient-to-br from-violet-50 to-purple-50 rounded-xl p-4 border border-violet-100">
-                    <p className="text-2xl font-bold text-violet-600">
+                  <div className="bg-gradient-to-br from-brand-50 to-ink-50 rounded-xl p-4 border border-brand-100">
+                    <p className="text-2xl font-bold text-brand-600">
                       {statsLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : faqStats?.totalFAQs || 0}
                     </p>
                     <p className="text-xs text-muted-foreground">Total FAQs</p>
@@ -1312,7 +1312,7 @@ export default function SuperAdminSettings() {
                   <Button
                     onClick={() => batchEmbedMutation.mutate()}
                     disabled={batchEmbedMutation.isPending || (faqStats?.missingEmbeddings === 0)}
-                    className="bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700"
+                    className="bg-gradient-to-r from-brand-600 to-ink-600 hover:from-brand-700 hover:to-ink-700"
                   >
                     {batchEmbedMutation.isPending ? (
                       <>

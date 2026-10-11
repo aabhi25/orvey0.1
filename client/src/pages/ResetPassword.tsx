@@ -80,7 +80,7 @@ export default function ResetPassword() {
 
   if (isSuccess) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 p-8">
+      <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-blue-50 via-brand-50 to-pink-50 p-8">
         <div className="w-full max-w-md mx-auto">
           <div className="bg-white rounded-2xl shadow-lg p-8 space-y-6 text-center">
             <div className="flex justify-center">
@@ -101,21 +101,21 @@ export default function ResetPassword() {
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 p-8">
+    <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-blue-50 via-brand-50 to-pink-50 p-8">
       <div className="w-full max-w-md mx-auto">
         <div className="bg-white rounded-2xl shadow-lg p-8 space-y-6">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 via-pink-600 to-purple-700 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-600 via-ink-600 to-ink-700 flex items-center justify-center">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
-            <h2 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-              Hi Chroney
+            <h2 className="text-xl font-bold bg-gradient-to-r from-brand-600 to-ink-600 bg-clip-text text-transparent">
+              Orvey
             </h2>
           </div>
 
           <div>
             <h1 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-              <Lock className="w-6 h-6 text-purple-600" />
+              <Lock className="w-6 h-6 text-brand-600" />
               Create New Password
             </h1>
             <p className="mt-1 text-sm text-gray-600">
@@ -159,7 +159,7 @@ export default function ResetPassword() {
 
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600 hover:from-purple-700 hover:via-purple-800 hover:to-pink-700 text-white border-0 shadow-md h-11 text-base font-medium mt-6"
+              className="w-full bg-gradient-to-r from-brand-600 via-ink-700 to-ink-600 hover:from-brand-700 hover:via-ink-800 hover:to-ink-700 text-white border-0 shadow-md h-11 text-base font-medium mt-6"
               disabled={resetPasswordMutation.isPending}
             >
               {resetPasswordMutation.isPending ? (
@@ -180,7 +180,7 @@ export default function ResetPassword() {
             <button
               type="button"
               onClick={() => setLocation("/login")}
-              className="text-sm text-purple-600 hover:text-purple-700 font-medium hover:underline"
+              className="text-sm text-brand-600 hover:text-brand-700 font-medium hover:underline"
             >
               Back to Login
             </button>

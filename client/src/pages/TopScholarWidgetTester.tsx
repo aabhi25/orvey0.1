@@ -385,7 +385,7 @@ export default function TopScholarWidgetTester() {
   // data-business-id is required by widget-loader.js; the scope attributes narrow
   // answers to this student's grade and chosen subject (all required).
   const embedSnippet = hasFullSelection
-    ? `<!-- AI Chroney Widget (subject-scoped) -->
+    ? `<!-- Orvey Widget (subject-scoped) -->
 <!-- data-student-id + data-name attribute chats to the student (history across -->
 <!-- devices, per-student reports). Have your portal fill these for each student. -->
 <script src="${WIDGET_DOMAIN}/widget-loader.js" data-business-id="${businessAccountId}"

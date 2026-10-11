@@ -34,12 +34,12 @@ export function WhatsAppNavSections({
               aria-label={`${section.label} section`}
               className={`group/nav transition-all duration-200 ${
                 isActive
-                  ? "text-purple-700 font-medium bg-purple-50/50"
-                  : "hover:bg-gray-50/80"
+                  ? "text-white font-medium bg-white/[0.08]"
+                  : "text-ink-200 hover:bg-white/[0.06] hover:text-white"
               }`}
             >
-              <ChevronRight className="w-3.5 h-3.5 shrink-0 text-gray-400" />
-              <span className="text-[13px] font-medium uppercase tracking-wide text-gray-600">
+              <ChevronRight className="w-3.5 h-3.5 shrink-0 text-ink-300" />
+              <span className="text-[13px] font-medium uppercase tracking-wide text-current">
                 {section.label}
               </span>
             </SidebarMenuButton>

@@ -244,7 +244,7 @@ export default function GuidanceCampaignSettings() {
           
           <div className="space-y-3">
             <div className="flex items-center gap-3 px-1">
-              <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-purple-500/10 text-purple-600">
+              <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-brand-500/10 text-brand-600">
                 <Maximize2 className="w-4 h-4" />
               </div>
               <div>

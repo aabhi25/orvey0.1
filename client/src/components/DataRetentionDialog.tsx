@@ -305,7 +305,7 @@ export function DataRetentionDialog({ open, onOpenChange, scopeType, scopeId, sc
       <Dialog open={open && !confirmOpen} onOpenChange={onOpenChange}>
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2"><Timer className="w-5 h-5 text-purple-600" /> Auto-delete (data retention)</DialogTitle>
+            <DialogTitle className="flex items-center gap-2"><Timer className="w-5 h-5 text-brand-600" /> Auto-delete (data retention)</DialogTitle>
             <DialogDescription>
               {scopeType === 'group'
                 ? `${scopeName} — applies to all ${data?.memberCount ?? ''} member accounts${data?.overriddenAccounts ? ` (${data.overriddenAccounts} with their own override)` : ''}.`
@@ -331,7 +331,7 @@ export function DataRetentionDialog({ open, onOpenChange, scopeType, scopeId, sc
                           key={String(o.v)}
                           type="button"
                           onClick={() => setUseGroupPolicy(o.v)}
-                          className={`rounded-lg border p-2.5 text-sm text-left ${useGroupPolicy === o.v ? "border-purple-500 bg-purple-50 ring-1 ring-purple-500" : "hover:bg-muted/50"}`}
+                          className={`rounded-lg border p-2.5 text-sm text-left ${useGroupPolicy === o.v ? "border-brand-500 bg-brand-50 ring-1 ring-brand-500" : "hover:bg-muted/50"}`}
                         >
                           {o.t}
                         </button>
@@ -366,7 +366,7 @@ export function DataRetentionDialog({ open, onOpenChange, scopeType, scopeId, sc
                             key={v}
                             type="button"
                             onClick={() => set('mode', v)}
-                            className={`rounded-lg border p-2.5 text-left ${settings.mode === v ? (v === 'live' ? "border-red-500 bg-red-50 ring-1 ring-red-500" : "border-purple-500 bg-purple-50 ring-1 ring-purple-500") : "hover:bg-muted/50"}`}
+                            className={`rounded-lg border p-2.5 text-left ${settings.mode === v ? (v === 'live' ? "border-red-500 bg-red-50 ring-1 ring-red-500" : "border-brand-500 bg-brand-50 ring-1 ring-brand-500") : "hover:bg-muted/50"}`}
                           >
                             <div className="text-sm font-medium">{t}</div>
                             <div className="text-[11px] text-muted-foreground">{d}</div>

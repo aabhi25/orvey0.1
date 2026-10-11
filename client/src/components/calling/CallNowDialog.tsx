@@ -98,7 +98,7 @@ export function CallTargetPicker({ onChange, showNote = true }: { onChange: (t: 
                     key={l.id}
                     type="button"
                     onClick={() => setLead(selected ? null : l)}
-                    className={`flex w-full items-center gap-3 px-3 py-2 text-left text-sm hover:bg-gray-50 ${selected ? "bg-purple-50" : ""}`}
+                    className={`flex w-full items-center gap-3 px-3 py-2 text-left text-sm hover:bg-gray-50 ${selected ? "bg-brand-50" : ""}`}
                     data-testid={`option-call-lead-${l.id}`}
                   >
                     <UserRound className="h-4 w-4 shrink-0 text-gray-400" />
@@ -106,7 +106,7 @@ export function CallTargetPicker({ onChange, showNote = true }: { onChange: (t: 
                       <span className="block truncate font-medium">{l.name || "Unnamed lead"}</span>
                       <span className="block truncate text-xs text-gray-500">{l.phone}</span>
                     </span>
-                    {selected && <Check className="h-4 w-4 text-purple-600" />}
+                    {selected && <Check className="h-4 w-4 text-brand-600" />}
                   </button>
                 );
               })
@@ -173,7 +173,7 @@ export function CallNowDialog({ open, onOpenChange }: { open: boolean; onOpenCha
     <Dialog open={open} onOpenChange={o => { if (!create.isPending) onOpenChange(o); }}>
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2"><Phone className="h-5 w-5 text-purple-600" /> Call someone now</DialogTitle>
+          <DialogTitle className="flex items-center gap-2"><Phone className="h-5 w-5 text-brand-600" /> Call someone now</DialogTitle>
           <DialogDescription>The AI phones them straight away (within your calling hours) and talks about your business.</DialogDescription>
         </DialogHeader>
         {/* Kept mounted while confirming so "Back" returns to the same choice. */}
@@ -187,7 +187,7 @@ export function CallNowDialog({ open, onOpenChange }: { open: boolean; onOpenCha
           </>
         ) : (
           <>
-            <div className="rounded-lg border bg-purple-50/60 p-4 text-sm">
+            <div className="rounded-lg border bg-brand-50/60 p-4 text-sm">
               <p className="font-medium text-gray-900">
                 The AI will call {target?.displayName}
                 {target?.displayPhone && target.displayPhone !== target.displayName ? ` on ${target.displayPhone}` : ""} now.

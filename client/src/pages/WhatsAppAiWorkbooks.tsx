@@ -246,7 +246,7 @@ function WorkbooksList() {
             <ArrowLeft className="h-4 w-4 mr-1" /> Campaigns
           </Button>
           <h1 className="text-2xl font-bold flex items-center gap-2">
-            <FileSpreadsheet className="h-6 w-6 text-violet-600" /> AI Workbooks
+            <FileSpreadsheet className="h-6 w-6 text-brand-600" /> AI Workbooks
           </h1>
           <p className="text-sm text-gray-600 mt-1">Spreadsheets that fill in campaign replies and AI results for you.</p>
         </div>
@@ -261,7 +261,7 @@ function WorkbooksList() {
       ) : workbooks.length === 0 ? (
         <Card className="border-dashed">
           <CardContent className="py-16 text-center">
-            <FileSpreadsheet className="h-10 w-10 mx-auto text-violet-300 mb-3" />
+            <FileSpreadsheet className="h-10 w-10 mx-auto text-brand-300 mb-3" />
             <h2 className="font-semibold text-lg">No AI workbooks yet</h2>
             <p className="text-sm text-gray-500 mt-1 mb-4">Create one to keep campaign replies, outcomes, follow-ups and team notes together in one sheet.</p>
             <Button onClick={openCreate}><Plus className="h-4 w-4 mr-1" /> Create workbook</Button>
@@ -840,7 +840,7 @@ function WorkbookEditor({ id }: { id: string }) {
             <Button
               variant="ghost"
               size="icon"
-              className="h-8 w-8 shrink-0 text-slate-400 hover:bg-violet-50 hover:text-violet-700"
+              className="h-8 w-8 shrink-0 text-slate-400 hover:bg-brand-50 hover:text-brand-700"
               title="Rename workbook"
               aria-label="Rename workbook"
               onClick={() => {
@@ -1018,7 +1018,7 @@ function WorkbookEditor({ id }: { id: string }) {
                   type="button"
                   onClick={() => setLinkMode("full")}
                   data-testid="button-link-mode-full"
-                  className={`w-full text-left rounded-lg border px-3 py-2 transition-colors ${linkMode === "full" ? "border-violet-400 bg-violet-50/60" : "border-slate-200 hover:bg-slate-50"}`}
+                  className={`w-full text-left rounded-lg border px-3 py-2 transition-colors ${linkMode === "full" ? "border-brand-400 bg-brand-50/60" : "border-slate-200 hover:bg-slate-50"}`}
                 >
                   <div className="text-sm font-medium text-slate-700">All columns as configured</div>
                   <div className="text-xs text-slate-500">Pull in every system and AI column the campaign defines.</div>
@@ -1027,7 +1027,7 @@ function WorkbookEditor({ id }: { id: string }) {
                   type="button"
                   onClick={() => setLinkMode("custom")}
                   data-testid="button-link-mode-custom"
-                  className={`w-full text-left rounded-lg border px-3 py-2 transition-colors ${linkMode === "custom" ? "border-violet-400 bg-violet-50/60" : "border-slate-200 hover:bg-slate-50"}`}
+                  className={`w-full text-left rounded-lg border px-3 py-2 transition-colors ${linkMode === "custom" ? "border-brand-400 bg-brand-50/60" : "border-slate-200 hover:bg-slate-50"}`}
                 >
                   <div className="text-sm font-medium text-slate-700">Custom columns</div>
                   <div className="text-xs text-slate-500">Only Name and Phone are pulled in. Add your own columns and choose what campaign data feeds them.</div>
@@ -1227,7 +1227,7 @@ function WorkbookEditor({ id }: { id: string }) {
                     type="button"
                     onClick={() => setPreviewVersionId(version.id)}
                     className={`w-full text-left p-3 border-b last:border-b-0 hover:bg-slate-50 ${
-                      previewVersionId === version.id ? "bg-violet-50 ring-1 ring-inset ring-violet-200" : ""
+                      previewVersionId === version.id ? "bg-brand-50 ring-1 ring-inset ring-brand-200" : ""
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2">
@@ -1284,9 +1284,9 @@ function WorkbookEditor({ id }: { id: string }) {
         </DialogContent>
       </Dialog>
 
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-violet-100 bg-white p-4 shadow-sm">
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-brand-100 bg-white p-4 shadow-sm">
         <div className="flex items-start gap-3">
-          <div className="mt-0.5 rounded-lg bg-violet-50 p-2"><Megaphone className="h-4 w-4 text-violet-600" /></div>
+          <div className="mt-0.5 rounded-lg bg-brand-50 p-2"><Megaphone className="h-4 w-4 text-brand-600" /></div>
           <div>
           <div className="font-semibold text-slate-900">Send a campaign to these people</div>
           <p className="text-xs text-slate-500 mt-0.5">
@@ -1294,7 +1294,7 @@ function WorkbookEditor({ id }: { id: string }) {
               ? `Creates an audience from the ${selectedRows.size.toLocaleString()} selected rows, then opens a new campaign for it.`
               : `Creates an audience from the ${filteredRows.length.toLocaleString()} rows shown (use search or filters to narrow them), then opens a new campaign for it.`}
           </p>
-          <p className="text-xs text-violet-700 mt-1">
+          <p className="text-xs text-brand-700 mt-1">
             {resultMappings.length
               ? `${resultMappings.length} campaign result ${resultMappings.length === 1 ? "column" : "columns"} ready to sync back.`
               : "Optional: map campaign results back into this sheet before creating the audience."}
@@ -1306,7 +1306,7 @@ function WorkbookEditor({ id }: { id: string }) {
             <Wand2 className="h-4 w-4 mr-1" /> Map results
           </Button>
           <Button
-            className="bg-violet-600 hover:bg-violet-700 text-white"
+            className="bg-brand-600 hover:bg-brand-700 text-white"
             onClick={() => createAudience.mutate()}
             disabled={dirty || createAudience.isPending || (selectedRows.size === 0 && filteredRows.length === 0) || resultMappings.some(mapping => mapping.source === "capture:")}
             title={dirty ? "Save your changes first" : undefined}
