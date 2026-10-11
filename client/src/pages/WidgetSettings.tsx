@@ -1228,16 +1228,16 @@ export default function WidgetSettings() {
 <script src="${widgetDomain}/widget-loader.js" data-business-id="${businessId}"></script>`;
 
   const triggerCode = `<!-- Add this to any button or link on the same page as the widget -->
- <button type="button" data-chroney-open-chat>Talk to a Counsellor</button>
+ <button type="button" data-orvey-open-chat>Talk to a Counsellor</button>
 
  <!-- Links work too; the chat opens instead of following the href -->
- <a href="/contact" data-chroney-open-chat>Chat with us</a>`;
+ <a href="/contact" data-orvey-open-chat>Chat with us</a>`;
 
   const apiCode = `<!-- Use this when triggering chat from your own JavaScript -->
  <button id="counsellor-button" type="button">Talk to a Counsellor</button>
  <script>
    document.getElementById("counsellor-button").addEventListener("click", function () {
-     window.HiChroneyWidget.open();
+     window.OrveyWidget.open();
    });
  </script>`;
 
@@ -5222,7 +5222,7 @@ export default function WidgetSettings() {
                          </Label>
                          <p className="text-xs text-gray-500 mt-1">
                            First add the embed code above once. Then add
-                           <code className="mx-1 px-1 py-0.5 bg-gray-100 rounded">data-chroney-open-chat</code>
+                           <code className="mx-1 px-1 py-0.5 bg-gray-100 rounded">data-orvey-open-chat</code>
                            to any button or link on the same page. Clicking it opens this chat instead of navigating away.
                          </p>
                        </div>

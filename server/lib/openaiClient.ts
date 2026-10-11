@@ -230,7 +230,7 @@ interface ExtractedUsage {
   tokensOutputAudio: number;
 }
 
-const INSTRUMENTED = Symbol.for("chroney.openaiUsageTracked");
+const INSTRUMENTED = Symbol.for("orvey.openaiUsageTracked");
 
 /** Exported for tests: instruments an existing client instance in place. */
 export function instrumentClient(client: OpenAI, cfg: InstrumentConfig): OpenAI {

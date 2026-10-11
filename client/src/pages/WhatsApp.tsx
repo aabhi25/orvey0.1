@@ -428,7 +428,7 @@ export default function WhatsApp({ embeddedPage }: { embeddedPage?: "config" | "
   const isSingleProduct = useMemo(() => {
     const ba = currentUser?.businessAccount;
     if (!ba) return false;
-    const count = [ba.chroneyEnabled, ba.whatsappEnabled, ba.instagramEnabled, ba.facebookEnabled].filter(Boolean).length;
+    const count = [ba.orveyEnabled, ba.whatsappEnabled, ba.instagramEnabled, ba.facebookEnabled].filter(Boolean).length;
     return count === 1;
   }, [currentUser]);
 

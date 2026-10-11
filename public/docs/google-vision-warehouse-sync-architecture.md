@@ -2,7 +2,7 @@
 
 **Version:** 1.0  
 **Last Updated:** January 2026  
-**Platform:** Hi Chroney AI Business Chatbot Platform
+**Platform:** Hi Orvey AI Business Chatbot Platform
 
 ---
 

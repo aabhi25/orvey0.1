@@ -756,7 +756,7 @@ export default function EmbedChat() {
     // Prefer the full scope key when all four parts (board/medium/grade/subject)
     // are present in the URL (grade-scoped embed without a signed token).
     if (isSubjectScopedEmbed()) {
-      return `chroney_conversation_${businessAccountId}__scope_${getScopeKeyPart()}`;
+      return `orvey_conversation_${businessAccountId}__scope_${getScopeKeyPart()}`;
     }
     // Doubt-scoped (signed token): decode the doubtId from the token payload and
     // use it as the localStorage key discriminator. This prevents different doubt
@@ -767,20 +767,20 @@ export default function EmbedChat() {
     if (topscholarTokenRef.current) {
       const doubtId = getDoubtIdFromToken(topscholarTokenRef.current);
       if (doubtId) {
-        return `chroney_conversation_${businessAccountId}__doubt_${doubtId}`;
+        return `orvey_conversation_${businessAccountId}__doubt_${doubtId}`;
       }
     }
-    return `chroney_conversation_${businessAccountId}`;
+    return `orvey_conversation_${businessAccountId}`;
   };
   const getConvCreatedKey = () => {
     if (isSubjectScopedEmbed()) {
-      return `chroney_ts_created_${businessAccountId}__scope_${getScopeKeyPart()}`;
+      return `orvey_ts_created_${businessAccountId}__scope_${getScopeKeyPart()}`;
     }
     // Doubt-scoped: per-doubt creation timestamp for 24h expiry tracking.
     if (topscholarTokenRef.current) {
       const doubtId = getDoubtIdFromToken(topscholarTokenRef.current);
       if (doubtId) {
-        return `chroney_ts_created_${businessAccountId}__doubt_${doubtId}`;
+        return `orvey_ts_created_${businessAccountId}__doubt_${doubtId}`;
       }
     }
     return '';
@@ -816,7 +816,7 @@ export default function EmbedChat() {
         // Use visualViewport if available (better for keyboard handling)
         const height = window.visualViewport?.height ?? window.innerHeight;
         const vh = height * 0.01;
-        document.documentElement.style.setProperty('--hichroney-vh', `${vh}px`);
+        document.documentElement.style.setProperty('--orvey-vh', `${vh}px`);
       }
     }
 
@@ -981,8 +981,8 @@ export default function EmbedChat() {
   useEffect(() => {
     if (!businessAccountId) return;
     if (visitorSessionTokenRef.current) return;
-    const perBusinessKey = `chroney_visitor_${businessAccountId}`;
-    const globalKey = 'chroney_visitor_token';
+    const perBusinessKey = `orvey_visitor_${businessAccountId}`;
+    const globalKey = 'orvey_visitor_token';
     let token = localStorage.getItem(perBusinessKey) || localStorage.getItem(globalKey);
     if (!token) {
       token = crypto.randomUUID();
@@ -1255,7 +1255,7 @@ export default function EmbedChat() {
     if (!id || id.startsWith('temp_') || id === postedConversationRef.current) return;
     postedConversationRef.current = id;
     try {
-      window.parent.postMessage({ type: 'CHRONEY_CONVERSATION', conversationId: id, visitorToken: visitorSessionTokenRef.current || null }, '*');
+      window.parent.postMessage({ type: 'ORVEY_CONVERSATION', conversationId: id, visitorToken: visitorSessionTokenRef.current || null }, '*');
     } catch { /* ignore */ }
   }, [messages.length]);
 
@@ -1263,9 +1263,9 @@ export default function EmbedChat() {
   useEffect(() => {
     if (!businessAccountId) return;
     
-    const sessionStorageKey = `chroney_session_${businessAccountId}`;
+    const sessionStorageKey = `orvey_session_${businessAccountId}`;
     const conversationStorageKey = getConvKey();
-    const lastActivityKey = `chroney_last_activity_${businessAccountId}`;
+    const lastActivityKey = `orvey_last_activity_${businessAccountId}`;
     
     let storedSessionId = localStorage.getItem(sessionStorageKey);
     let storedConversationId = localStorage.getItem(conversationStorageKey);
@@ -1679,7 +1679,7 @@ export default function EmbedChat() {
     setHasConversation(false);
     
     // Update localStorage
-    localStorage.setItem(`chroney_session_${businessAccountId}`, newSessionId);
+    localStorage.setItem(`orvey_session_${businessAccountId}`, newSessionId);
     localStorage.removeItem(getConvKey());
     // Task #14: reset the per-subject 24h creation window when starting a new chat.
     const _ck = getConvCreatedKey();
@@ -2174,7 +2174,7 @@ export default function EmbedChat() {
       }
       
       // Handle discount trigger from exit intent or idle timeout
-      if (event.data && event.data.type === 'HICHRONEY_DISCOUNT_TRIGGER') {
+      if (event.data && event.data.type === 'ORVEY_DISCOUNT_TRIGGER') {
         const { message: discountMessage, triggerType, discountPercentage, expiryMinutes } = event.data;
         console.log('[EmbedChat] ========== DISCOUNT TRIGGER RECEIVED ==========');
         console.log('[EmbedChat] Trigger type:', triggerType);
@@ -3101,7 +3101,7 @@ export default function EmbedChat() {
       if (e.origin !== window.location.origin) return;
       if (e.source !== window.parent) return;
       const data = e.data;
-      if (data && typeof data === 'object' && data.type === 'aichroney:preview-doubt-show') {
+      if (data && typeof data === 'object' && data.type === 'orvey:preview-doubt-show') {
         doubtAnsweredRef.current = false;
         if (doubtPromptTimerRef.current) {
           clearTimeout(doubtPromptTimerRef.current);
@@ -3155,7 +3155,7 @@ export default function EmbedChat() {
     
     // Update last activity time for welcome back tracking
     if (businessAccountId) {
-      localStorage.setItem(`chroney_last_activity_${businessAccountId}`, Date.now().toString());
+      localStorage.setItem(`orvey_last_activity_${businessAccountId}`, Date.now().toString());
     }
     
     // Check this message for purchase intent (urgency offer)
@@ -3583,7 +3583,7 @@ export default function EmbedChat() {
       
       // Update last activity time when AI responds (for welcome back tracking)
       if (businessAccountId) {
-        localStorage.setItem(`chroney_last_activity_${businessAccountId}`, Date.now().toString());
+        localStorage.setItem(`orvey_last_activity_${businessAccountId}`, Date.now().toString());
       }
     }
   };
@@ -6108,7 +6108,7 @@ export default function EmbedChat() {
                       answer: value, 
                       businessAccountId,
                       journeyId: activeJourneyId,
-                      visitorToken: visitorSessionTokenRef.current || localStorage.getItem('chroney_visitor_token'),
+                      visitorToken: visitorSessionTokenRef.current || localStorage.getItem('orvey_visitor_token'),
                       pageUrl: parentPageUrl || (window.parent !== window ? document.referrer : window.location.href) || undefined
                     })
                   });

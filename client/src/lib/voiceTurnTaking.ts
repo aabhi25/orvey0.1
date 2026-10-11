@@ -21,7 +21,7 @@ export const DUCK_GAIN = 0.25;
 export const LOCAL_DUCK_RELEASE_MS = 2_000;
 export const DIDNT_CATCH_THAT = "Sorry, I didn't catch that — please try again.";
 
-const STORAGE_KEY = 'chroney_voice_input_mode';
+const STORAGE_KEY = 'orvey_voice_input_mode';
 
 export function readStoredInputMode(): EffectiveVoiceInputMode | null {
   try {

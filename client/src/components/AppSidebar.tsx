@@ -79,13 +79,13 @@ export function AppSidebar({ user }: AppSidebarProps) {
   const isGroupAdmin = user?.role === "account_group_admin";
   const showBusinessNav = (!isSuperAdmin && !isGroupAdmin) || isSuperAdminImpersonating;
   
-  const productTier = user?.businessAccount?.productTier || 'chroney';
-  const hasChroneyAccess = user?.businessAccount?.chroneyEnabled === true;
+  const productTier = user?.businessAccount?.productTier || 'orvey';
+  const hasOrveyAccess = user?.businessAccount?.orveyEnabled === true;
   const isTopscholar = user?.businessAccount?.isTopscholar === true;
-  const hasJewelryAccess = productTier === 'jewelry_showcase' || productTier === 'jewelry_showcase_chroney';
+  const hasJewelryAccess = productTier === 'jewelry_showcase' || productTier === 'jewelry_showcase_orvey';
   
   const hasShopifyEnabled = user?.businessAccount?.shopifyEnabled === true;
-  const hasAppointmentsEnabled = user?.businessAccount?.appointmentsEnabled === true && hasChroneyAccess;
+  const hasAppointmentsEnabled = user?.businessAccount?.appointmentsEnabled === true && hasOrveyAccess;
   const hasSupportTicketsEnabled = user?.businessAccount?.supportTicketsEnabled === true;
   const hasJewelryShowcaseEnabled = hasJewelryAccess && (
     productTier === 'jewelry_showcase' || 
@@ -98,9 +98,9 @@ export function AppSidebar({ user }: AppSidebarProps) {
   // AI Calling (C): "Phone calls" agent, only when the super admin switched it on.
   const { enabled: hasAiCallingEnabled } = useAiCallingAvailability(showBusinessNav ? user : null);
   
-  const hasTrainingAccess = hasChroneyAccess || hasWhatsappEnabled || hasInstagramEnabled || hasFacebookEnabled;
-  const hasProductsAccess = hasChroneyAccess || hasWhatsappEnabled || hasJewelryAccess;
-  const hasMoreFeaturesAccess = hasChroneyAccess || hasWhatsappEnabled;
+  const hasTrainingAccess = hasOrveyAccess || hasWhatsappEnabled || hasInstagramEnabled || hasFacebookEnabled;
+  const hasProductsAccess = hasOrveyAccess || hasWhatsappEnabled || hasJewelryAccess;
+  const hasMoreFeaturesAccess = hasOrveyAccess || hasWhatsappEnabled;
   
   const systemMode = user?.businessAccount?.systemMode || 'full';
   const showFullFeatures = isSuperAdminImpersonating || systemMode === 'full';
@@ -112,9 +112,9 @@ export function AppSidebar({ user }: AppSidebarProps) {
   // collapse the navigation out from under whichever screen they are looking at.
   const [whatsappNavOpen, setWhatsappNavOpen] = useState(() => isWhatsappLocation(location));
 
-  const enabledAgentCount = [hasChroneyAccess, hasWhatsappEnabled, hasInstagramEnabled, hasFacebookEnabled, hasAiCallingEnabled].filter(Boolean).length;
+  const enabledAgentCount = [hasOrveyAccess, hasWhatsappEnabled, hasInstagramEnabled, hasFacebookEnabled, hasAiCallingEnabled].filter(Boolean).length;
   const isSingleProduct = enabledAgentCount === 1;
-  const hasAnyAgent = hasChroneyAccess || hasWhatsappEnabled || hasInstagramEnabled || hasFacebookEnabled || hasAiCallingEnabled;
+  const hasAnyAgent = hasOrveyAccess || hasWhatsappEnabled || hasInstagramEnabled || hasFacebookEnabled || hasAiCallingEnabled;
   const hasWorkspaceItems = (hasTrainingAccess && showFullFeatures) || hasProductsAccess || hasAppointmentsEnabled || hasJewelryShowcaseEnabled;
 
   const { data: ticketStats } = useQuery<{ open: number }>({
@@ -317,7 +317,7 @@ export function AppSidebar({ user }: AppSidebarProps) {
               </>
             ) : (
             <>
-            {hasChroneyAccess && (
+            {hasOrveyAccess && (
               <SidebarGroup>
                 <SidebarGroupContent>
                   <SidebarMenu className="space-y-0.5">
@@ -361,7 +361,7 @@ export function AppSidebar({ user }: AppSidebarProps) {
                 <SidebarGroupLabel className="text-[10px] uppercase tracking-widest text-ink-300/70 font-semibold px-3 mb-1">AI Agents</SidebarGroupLabel>
                 <SidebarGroupContent>
                   <SidebarMenu className="space-y-0.5">
-                    {hasChroneyAccess && (
+                    {hasOrveyAccess && (
                       <NavItem
                         icon={Globe}
                         label="Website"
@@ -440,7 +440,7 @@ export function AppSidebar({ user }: AppSidebarProps) {
               </SidebarGroup>
             )}
 
-            {isSingleProduct && hasChroneyAccess && (
+            {isSingleProduct && hasOrveyAccess && (
               <SidebarGroup>
                 <SidebarGroupContent>
                   <SidebarMenu className="space-y-0.5">

@@ -173,7 +173,7 @@
     function removeWidget() {
       if (widgetScript) { widgetScript.remove(); widgetScript = null; }
       // Remove everything the widget injected
-      document.querySelectorAll('script[src$="/widget.js"], [id*="chroney"], [class*="chroney"], iframe[src*="/embed/chat"], iframe[src*="/widget/chat"]').forEach(function(el){ el.remove(); });
+      document.querySelectorAll('script[src$="/widget.js"], [id*="orvey"], [class*="orvey"], iframe[src*="/embed/chat"], iframe[src*="/widget/chat"]').forEach(function(el){ el.remove(); });
     }
 
     function launchWidget() {

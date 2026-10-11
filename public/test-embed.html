@@ -165,7 +165,7 @@
     &nbsp;|&nbsp;
     Business ID: <strong>729c4c3d-c748-4f91-b7eb-d1d4232d25d2</strong>
     &nbsp;|&nbsp;
-    <code>window.__chroneyBaseUrl</code>: <span id="base-url-display">waiting…</span>
+    <code>window.__orveyBaseUrl</code>: <span id="base-url-display">waiting…</span>
   </div>
 
   <header>
@@ -182,7 +182,7 @@
     <h1>Natural Diamond Jewellery</h1>
     <p>For Everyday Luxury — Crafted with Precision, Worn with Pride</p>
     <a href="#" class="hero-cta">Explore Collections</a>
-    <button type="button" data-chroney-open-chat style="margin-top:16px;background:#fff;color:#1a1a1a;border:0;padding:14px 24px;border-radius:2px;cursor:pointer;font-size:13px;letter-spacing:.08em;text-transform:uppercase;">
+    <button type="button" data-orvey-open-chat style="margin-top:16px;background:#fff;color:#1a1a1a;border:0;padding:14px 24px;border-radius:2px;cursor:pointer;font-size:13px;letter-spacing:.08em;text-transform:uppercase;">
       Talk to a Counsellor
     </button>
   </section>
@@ -247,9 +247,9 @@
     setTimeout(function() {
       var el = document.getElementById('base-url-display');
       if (el) {
-        var base = window.__chroneyBaseUrl || '(not set — fallback to origin)';
+        var base = window.__orveyBaseUrl || '(not set — fallback to origin)';
         el.textContent = base;
-        el.style.color = window.__chroneyBaseUrl ? '#a8e6a3' : '#f5a623';
+        el.style.color = window.__orveyBaseUrl ? '#a8e6a3' : '#f5a623';
       }
     }, 500);
   </script>

@@ -15,7 +15,7 @@ const features = [
     iconColor: "text-brand-600",
   },
   {
-    id: "chroney-iq",
+    id: "orvey-iq",
     title: "Orvey IQ",
     description: "AI-powered insights and analytics for your conversations",
     icon: Sparkles,
@@ -65,7 +65,7 @@ export default function MoreFeatures({ user }: { user: MeResponseDto | null }) {
   const [, setLocation] = useLocation();
   const isWhatsappOnly =
     user?.businessAccount?.whatsappEnabled === true &&
-    user?.businessAccount?.chroneyEnabled !== true;
+    user?.businessAccount?.orveyEnabled !== true;
   const visibleFeatures = isWhatsappOnly
     ? features.filter((feature) => feature.id === "crm")
     : features;

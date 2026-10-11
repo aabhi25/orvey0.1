@@ -372,11 +372,11 @@
       }
 
       // Remove any previously loaded widget
-      const existingContainer = document.getElementById('hichroney-widget-container');
+      const existingContainer = document.getElementById('orvey-widget-container');
       if (existingContainer) existingContainer.remove();
       const existingScript = document.querySelector('script[src*="widget.js"]');
       if (existingScript) existingScript.remove();
-      if (window.HiChroneyWidget) delete window.HiChroneyWidget;
+      if (window.OrveyWidget) delete window.OrveyWidget;
 
       setStatus('widget-status', 'Loading widget...', 'info');
       logDebug('Loading widget for business: ' + businessId, 'sys');
@@ -384,13 +384,13 @@
       const script = document.createElement('script');
       script.src = '/widget.js';
       script.onload = function() {
-        if (window.HiChroneyWidget) {
-          window.HiChroneyWidget.init({ businessAccountId: businessId });
+        if (window.OrveyWidget) {
+          window.OrveyWidget.init({ businessAccountId: businessId });
           setStatus('widget-status', 'Widget loaded. Look for the chat icon in the bottom-right corner.', 'success');
-          logDebug('HiChroneyWidget.init() called — widget ready.', 'sys');
+          logDebug('OrveyWidget.init() called — widget ready.', 'sys');
         } else {
-          setStatus('widget-status', 'Widget script loaded but HiChroneyWidget not found. Check the business ID.', 'error');
-          logDebug('ERROR: HiChroneyWidget not defined after script load.', 'sys');
+          setStatus('widget-status', 'Widget script loaded but OrveyWidget not found. Check the business ID.', 'error');
+          logDebug('ERROR: OrveyWidget not defined after script load.', 'sys');
         }
       };
       script.onerror = function() {
@@ -419,8 +419,8 @@
     }
 
     function findWidgetIframe() {
-      // widget.js sets id="hichroney-widget-iframe"; fallback to src pattern for /embed/chat
-      return document.getElementById('hichroney-widget-iframe') ||
+      // widget.js sets id="orvey-widget-iframe"; fallback to src pattern for /embed/chat
+      return document.getElementById('orvey-widget-iframe') ||
              document.querySelector('iframe[src*="embed/chat"]') ||
              document.querySelector('iframe[src*="widget/chat"]');
     }

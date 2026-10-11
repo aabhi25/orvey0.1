@@ -139,7 +139,7 @@ export default function GuidanceChat() {
   
   // Initialize visitor token on first render
   if (!visitorTokenRef.current) {
-    const key = 'chroney_visitor_token';
+    const key = 'orvey_visitor_token';
     let token = localStorage.getItem(key);
     if (!token) {
       token = crypto.randomUUID();

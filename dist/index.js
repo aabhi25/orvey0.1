@@ -506,8 +506,8 @@ var init_schema = __esm({
       // Business-specific Jina AI API key for CLIP image embeddings
       status: text("status").notNull().default("active"),
       // 'active' | 'suspended'
-      productTier: text("product_tier").notNull().default("chroney"),
-      // 'chroney' | 'jewelry_showcase' | 'jewelry_showcase_chroney'
+      productTier: text("product_tier").notNull().default("orvey"),
+      // 'orvey' | 'jewelry_showcase' | 'jewelry_showcase_orvey'
       shopifyAutoSyncEnabled: text("shopify_auto_sync_enabled").notNull().default("false"),
       // 'true' | 'false'
       shopifySyncFrequency: numeric("shopify_sync_frequency", { precision: 5, scale: 0 }).default("24"),
@@ -536,7 +536,7 @@ var init_schema = __esm({
       // 'true' | 'false' - SuperAdmin toggle for Instagram AI Agent feature (default OFF)
       facebookEnabled: text("facebook_enabled").notNull().default("false"),
       // 'true' | 'false' - SuperAdmin toggle for Facebook AI Agent feature (default OFF)
-      chroneyEnabled: text("chroney_enabled").notNull().default("true"),
+      orveyEnabled: text("orvey_enabled").notNull().default("true"),
       // 'true' | 'false' - SuperAdmin toggle for Orvey Chat feature (default ON)
       k12EducationEnabled: text("k12_education_enabled").notNull().default("false"),
       // 'true' | 'false' - SuperAdmin toggle for K12 Education feature (default OFF)
@@ -7075,7 +7075,7 @@ var init_openaiClient = __esm({
       optedOut: 0,
       errors: 0
     };
-    INSTRUMENTED = Symbol.for("chroney.openaiUsageTracked");
+    INSTRUMENTED = Symbol.for("orvey.openaiUsageTracked");
   }
 });
 
@@ -10908,7 +10908,7 @@ var init_errorReporter = __esm({
           timestamp: this.now() / 1e3,
           platform: "node",
           level: ctx.level || "error",
-          logger: "chroney",
+          logger: "orvey",
           environment: this.environment,
           ...this.release ? { release: this.release } : {},
           exception: {
@@ -17059,7 +17059,7 @@ var init_llamaService = __esm({
         const personalityTraits = this.getPersonalityTraits(personality);
         const responseLengthInstruction = this.getResponseLengthInstruction(responseLength);
         const estimatedMessageCount = Math.floor(conversationHistory.length / 2) + 1;
-        const systemPrompt = `YOU ARE AI CHRONEY \u2014 AN AUTONOMOUS SALES AGENT FOR THIS BUSINESS
+        const systemPrompt = `YOU ARE AN AUTONOMOUS AI SALES AGENT FOR THIS BUSINESS
 ${this.getAutonomousAgentInstructions(estimatedMessageCount)}
 ==============================
 LAYER 0: RESPONSE LENGTH (ALWAYS FOLLOW)
@@ -81629,7 +81629,7 @@ function toMeResponseDto(user, businessAccount, activeBusinessAccountId, isTopsc
         whatsappEnabled: businessAccount.whatsappEnabled,
         instagramEnabled: businessAccount.instagramEnabled,
         facebookEnabled: businessAccount.facebookEnabled,
-        chroneyEnabled: businessAccount.chroneyEnabled,
+        orveyEnabled: businessAccount.orveyEnabled,
         k12EducationEnabled: businessAccount.k12EducationEnabled,
         k12ImageUploadEnabled: businessAccount.k12ImageUploadEnabled,
         k12ContentOnlyMode: businessAccount.k12ContentOnlyMode,
@@ -81674,7 +81674,7 @@ function toBusinessAccountDto(account) {
     whatsappEnabled: account.whatsappEnabled === "true",
     instagramEnabled: account.instagramEnabled === "true",
     facebookEnabled: account.facebookEnabled === "true",
-    chroneyEnabled: account.chroneyEnabled === "true",
+    orveyEnabled: account.orveyEnabled === "true",
     k12EducationEnabled: account.k12EducationEnabled === "true",
     k12ImageUploadEnabled: account.k12ImageUploadEnabled === "true",
     k12ContentOnlyMode: account.k12ContentOnlyMode === "true",
@@ -81685,7 +81685,7 @@ function toBusinessAccountDto(account) {
     leadsExportEnabled: account.leadsExportEnabled === "true",
     leadPhoneMaskingEnabled: account.leadPhoneMaskingEnabled === "true",
     aiCallingEnabled: account.aiCallingEnabled === "true",
-    productTier: account.productTier || "chroney",
+    productTier: account.productTier || "orvey",
     systemMode: account.systemMode || "full"
   };
 }
@@ -81701,7 +81701,7 @@ function fromBusinessAccountDto(dto) {
     whatsappEnabled: dto.whatsappEnabled ? "true" : "false",
     instagramEnabled: dto.instagramEnabled ? "true" : "false",
     facebookEnabled: dto.facebookEnabled ? "true" : "false",
-    chroneyEnabled: dto.chroneyEnabled ? "true" : "false",
+    orveyEnabled: dto.orveyEnabled ? "true" : "false",
     k12EducationEnabled: dto.k12EducationEnabled ? "true" : "false",
     k12ImageUploadEnabled: dto.k12ImageUploadEnabled ? "true" : "false",
     k12ContentOnlyMode: dto.k12ContentOnlyMode ? "true" : "false",
@@ -108772,7 +108772,7 @@ ${instruction}`
   });
   app2.post("/api/business-accounts", requireAuth, requireRole("super_admin"), async (req, res) => {
     try {
-      const { name, website, username, productTier, chroneyEnabled, whatsappEnabled, instagramEnabled, facebookEnabled } = req.body;
+      const { name, website, username, productTier, orveyEnabled, whatsappEnabled, instagramEnabled, facebookEnabled } = req.body;
       if (!name) {
         return res.status(400).json({ error: "Business name required" });
       }
@@ -108791,14 +108791,14 @@ ${instruction}`
       if (!emailRegex.test(username)) {
         return res.status(400).json({ error: "Username must be a valid email address" });
       }
-      const validTiers = ["chroney", "jewelry_showcase", "jewelry_showcase_chroney"];
-      const tier = productTier && validTiers.includes(productTier) ? productTier : "chroney";
+      const validTiers = ["orvey", "jewelry_showcase", "jewelry_showcase_orvey"];
+      const tier = productTier && validTiers.includes(productTier) ? productTier : "orvey";
       const businessAccount = await storage.createBusinessAccount({
         name,
         website,
         status: "active",
         productTier: tier,
-        chroneyEnabled: chroneyEnabled === true ? "true" : chroneyEnabled === false ? "false" : "true",
+        orveyEnabled: orveyEnabled === true ? "true" : orveyEnabled === false ? "false" : "true",
         whatsappEnabled: whatsappEnabled === true ? "true" : "false",
         instagramEnabled: instagramEnabled === true ? "true" : "false",
         facebookEnabled: facebookEnabled === true ? "true" : "false"
@@ -108858,7 +108858,7 @@ ${instruction}`
   app2.put("/api/business-accounts/:id", requireAuth, requireRole("super_admin"), async (req, res) => {
     try {
       const { id } = req.params;
-      const { name, website, productTier, chroneyEnabled, whatsappEnabled, instagramEnabled, facebookEnabled, k12EducationEnabled, jobPortalEnabled } = req.body;
+      const { name, website, productTier, orveyEnabled, whatsappEnabled, instagramEnabled, facebookEnabled, k12EducationEnabled, jobPortalEnabled } = req.body;
       if (!name) {
         return res.status(400).json({ error: "Business name required" });
       }
@@ -108870,13 +108870,13 @@ ${instruction}`
       } catch {
         return res.status(400).json({ error: "Invalid website URL format" });
       }
-      const validTiers = ["chroney", "jewelry_showcase", "jewelry_showcase_chroney"];
+      const validTiers = ["orvey", "jewelry_showcase", "jewelry_showcase_orvey"];
       const updates = { name, website };
       if (productTier && validTiers.includes(productTier)) {
         updates.productTier = productTier;
       }
-      if (typeof chroneyEnabled === "boolean") {
-        updates.chroneyEnabled = chroneyEnabled ? "true" : "false";
+      if (typeof orveyEnabled === "boolean") {
+        updates.orveyEnabled = orveyEnabled ? "true" : "false";
       }
       if (typeof whatsappEnabled === "boolean") {
         updates.whatsappEnabled = whatsappEnabled ? "true" : "false";
@@ -108945,7 +108945,7 @@ ${instruction}`
   app2.patch("/api/business-accounts/:id/features", requireAuth, requireRole("super_admin"), async (req, res) => {
     try {
       const { id } = req.params;
-      const { shopifyEnabled, appointmentsEnabled, voiceModeEnabled, visualSearchEnabled, jewelryShowcaseEnabled, supportTicketsEnabled, whatsappEnabled, instagramEnabled, facebookEnabled, chroneyEnabled, k12EducationEnabled, jobPortalEnabled, demoOrdersEnabled, whatsappMarketingEnabled, leadsExportEnabled, leadPhoneMaskingEnabled, systemMode } = req.body;
+      const { shopifyEnabled, appointmentsEnabled, voiceModeEnabled, visualSearchEnabled, jewelryShowcaseEnabled, supportTicketsEnabled, whatsappEnabled, instagramEnabled, facebookEnabled, orveyEnabled, k12EducationEnabled, jobPortalEnabled, demoOrdersEnabled, whatsappMarketingEnabled, leadsExportEnabled, leadPhoneMaskingEnabled, systemMode } = req.body;
       const { aiCallingEnabled } = req.body;
       const updates = {};
       if (shopifyEnabled !== void 0) {
@@ -109002,11 +109002,11 @@ ${instruction}`
         }
         updates.facebookEnabled = facebookEnabled ? "true" : "false";
       }
-      if (chroneyEnabled !== void 0) {
-        if (typeof chroneyEnabled !== "boolean") {
-          return res.status(400).json({ error: "chroneyEnabled must be a boolean" });
+      if (orveyEnabled !== void 0) {
+        if (typeof orveyEnabled !== "boolean") {
+          return res.status(400).json({ error: "orveyEnabled must be a boolean" });
         }
-        updates.chroneyEnabled = chroneyEnabled ? "true" : "false";
+        updates.orveyEnabled = orveyEnabled ? "true" : "false";
       }
       if (k12EducationEnabled !== void 0) {
         if (typeof k12EducationEnabled !== "boolean") {

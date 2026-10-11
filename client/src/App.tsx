@@ -34,7 +34,7 @@ import AutomationAnalytics from "@/pages/automation-analytics";
 import About from "@/pages/About";
 import SettingsHub from "@/pages/SettingsHub";
 import { SETTINGS_PATHS, LEGACY_SETTINGS_REDIRECTS } from "@/pages/settings/settingsPaths";
-import TrainChroney from "@/pages/TrainChroney";
+import TrainOrvey from "@/pages/TrainOrvey";
 import Insights from "@/pages/Insights";
 import AIInsights from "@/pages/AIInsights";
 import Conversations from "@/pages/Conversations";
@@ -307,10 +307,10 @@ function AppContent({ currentUser }: { currentUser: MeResponseDto | null }) {
                     if (user?.businessAccount?.productTier === 'jewelry_showcase') {
                       return <Redirect to="/jewelry-showcase" />;
                     }
-                    if (user?.businessAccount?.whatsappEnabled === true && user?.businessAccount?.chroneyEnabled !== true) {
+                    if (user?.businessAccount?.whatsappEnabled === true && user?.businessAccount?.orveyEnabled !== true) {
                       return <Redirect to="/admin/whatsapp-leads" />;
                     }
-                    if (user?.businessAccount?.instagramEnabled === true && user?.businessAccount?.chroneyEnabled !== true && user?.businessAccount?.whatsappEnabled !== true) {
+                    if (user?.businessAccount?.instagramEnabled === true && user?.businessAccount?.orveyEnabled !== true && user?.businessAccount?.whatsappEnabled !== true) {
                       return <Redirect to={SETTINGS_PATHS.instagramConnection} />;
                     }
                     return <Home />;
@@ -321,8 +321,7 @@ function AppContent({ currentUser }: { currentUser: MeResponseDto | null }) {
                 </Route>
                 <Route path="/ai-insights" component={AIInsights} />
                 <Route path="/conversations" component={Conversations} />
-                <Route path="/train-orvey" component={TrainChroney} />
-                <Route path="/train-chroney">{() => <Redirect to="/train-orvey" />}</Route>
+                <Route path="/train-orvey" component={TrainOrvey} />
                 <Route path="/admin/k12/content">
                   {() => isTopScholarAccount ? <Redirect to="/admin/topscholar/content" /> : <K12Content />}
                 </Route>

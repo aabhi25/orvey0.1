@@ -481,7 +481,7 @@ export default function OtpSettings({ embedded = false }: { embedded?: boolean }
                   data-testid="input-whatsapp-template-name"
                   value={whatsappTemplateName}
                   onChange={(e) => setWhatsappTemplateName(e.target.value)}
-                  placeholder="e.g. chroney_otp_v1"
+                  placeholder="e.g. orvey_otp_v1"
                   maxLength={200}
                 />
                 <p className="text-xs text-muted-foreground">

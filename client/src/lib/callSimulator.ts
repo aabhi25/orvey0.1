@@ -393,7 +393,7 @@ export interface CallSimulatorOptions {
 }
 
 const CAPTURE_WORKLET = `
-class ChroneyCallCapture extends AudioWorkletProcessor {
+class OrveyCallCapture extends AudioWorkletProcessor {
   constructor() { super(); this.buf = new Float32Array(1024); this.n = 0; }
   process(inputs) {
     const ch = inputs[0] && inputs[0][0];
@@ -406,7 +406,7 @@ class ChroneyCallCapture extends AudioWorkletProcessor {
     return true;
   }
 }
-registerProcessor('chroney-call-capture', ChroneyCallCapture);
+registerProcessor('orvey-call-capture', OrveyCallCapture);
 `;
 
 const USER_SPEAKING_RMS = 0.02;
@@ -521,7 +521,7 @@ export class CallSimulator {
       try {
         url = URL.createObjectURL(new Blob([CAPTURE_WORKLET], { type: "application/javascript" }));
         await ctx.audioWorklet.addModule(url);
-        const w = new AudioWorkletNode(ctx, "chroney-call-capture");
+        const w = new AudioWorkletNode(ctx, "orvey-call-capture");
         w.port.onmessage = e => this.onMicBlock(e.data as Float32Array);
         node = w;
       } catch {

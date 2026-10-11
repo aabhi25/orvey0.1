@@ -43,7 +43,7 @@ export const businessAccounts = pgTable("business_accounts", {
   elevenlabsApiKey: text("elevenlabs_api_key"), // Business-specific ElevenLabs API key for TTS voices
   jinaApiKey: text("jina_api_key"), // Business-specific Jina AI API key for CLIP image embeddings
   status: text("status").notNull().default("active"), // 'active' | 'suspended'
-  productTier: text("product_tier").notNull().default("chroney"), // 'chroney' | 'jewelry_showcase' | 'jewelry_showcase_chroney'
+  productTier: text("product_tier").notNull().default("orvey"), // 'orvey' | 'jewelry_showcase' | 'jewelry_showcase_orvey'
   shopifyAutoSyncEnabled: text("shopify_auto_sync_enabled").notNull().default("false"), // 'true' | 'false'
   shopifySyncFrequency: numeric("shopify_sync_frequency", { precision: 5, scale: 0 }).default("24"), // Sync frequency in hours (6, 12, 24, 48)
   shopifyLastSyncedAt: timestamp("shopify_last_synced_at"), // When products were last synced from Shopify
@@ -58,7 +58,7 @@ export const businessAccounts = pgTable("business_accounts", {
   whatsappEnabled: text("whatsapp_enabled").notNull().default("false"), // 'true' | 'false' - SuperAdmin toggle for WhatsApp AI Agent feature (default OFF)
   instagramEnabled: text("instagram_enabled").notNull().default("false"), // 'true' | 'false' - SuperAdmin toggle for Instagram AI Agent feature (default OFF)
   facebookEnabled: text("facebook_enabled").notNull().default("false"), // 'true' | 'false' - SuperAdmin toggle for Facebook AI Agent feature (default OFF)
-  chroneyEnabled: text("chroney_enabled").notNull().default("true"), // 'true' | 'false' - SuperAdmin toggle for Orvey Chat feature (default ON)
+  orveyEnabled: text("orvey_enabled").notNull().default("true"), // 'true' | 'false' - SuperAdmin toggle for Orvey Chat feature (default ON)
   k12EducationEnabled: text("k12_education_enabled").notNull().default("false"), // 'true' | 'false' - SuperAdmin toggle for K12 Education feature (default OFF)
   k12ImageUploadEnabled: text("k12_image_upload_enabled").notNull().default("false"), // 'true' | 'false' - Business user toggle for K12 photo-upload-a-question feature (default OFF)
   k12ContentOnlyMode: text("k12_content_only_mode").notNull().default("false"), // 'true' | 'false' - When ON, AI answers only from uploaded content (FAQs, docs, K12 topics) and refuses to use general knowledge

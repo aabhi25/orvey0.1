@@ -14,13 +14,13 @@
   var config = { businessAccountId: businessAccountId };
   var pendingOpenChat = false;
 
-  // A client can put data-chroney-open-chat on any of its own buttons or
+  // A client can put data-orvey-open-chat on any of its own buttons or
   // links. Capture the click before host-page handlers navigate away, then
   // hand the request to the widget's public API once it is available.
   function findOpenChatTrigger(target) {
     var element = target;
     while (element && element !== document) {
-      if (element.nodeType === 1 && element.hasAttribute && element.hasAttribute('data-chroney-open-chat')) {
+      if (element.nodeType === 1 && element.hasAttribute && element.hasAttribute('data-orvey-open-chat')) {
         return element;
       }
       element = element.parentElement;
@@ -38,8 +38,8 @@
     if (!trigger) return;
 
     event.preventDefault();
-    if (window.HiChroneyWidget && typeof window.HiChroneyWidget.open === 'function') {
-      window.HiChroneyWidget.open();
+    if (window.OrveyWidget && typeof window.OrveyWidget.open === 'function') {
+      window.OrveyWidget.open();
     } else {
       pendingOpenChat = true;
     }
@@ -47,15 +47,15 @@
 
   // Install this before the loader's async settings/proactive-guidance checks,
   // so a trigger is reliable even while widget.js is still downloading.
-  if (!window.__chroneyOpenTriggerBound) {
-    window.__chroneyOpenTriggerBound = true;
+  if (!window.__orveyOpenTriggerBound) {
+    window.__orveyOpenTriggerBound = true;
     document.addEventListener('click', handleOpenChatClick, true);
   }
 
   // This bridge lets custom client JavaScript call open() immediately after
   // the loader tag, before the dynamically loaded widget.js replaces it.
-  if (!window.HiChroneyWidget) {
-    window.HiChroneyWidget = {
+  if (!window.OrveyWidget) {
+    window.OrveyWidget = {
       open: function() {
         pendingOpenChat = true;
         return false;
@@ -115,7 +115,7 @@
     console.warn('[Orvey Widget] data-subject is required for grade-scoped embeds; the tutor will refuse to answer until a subject is provided.');
   }
   
-  var VISITOR_KEY = 'chroney_visitor_' + config.businessAccountId;
+  var VISITOR_KEY = 'orvey_visitor_' + config.businessAccountId;
   var visitorToken = localStorage.getItem(VISITOR_KEY);
   if (!visitorToken) {
     visitorToken = 'v_' + Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
@@ -187,17 +187,17 @@
       var headings = document.querySelectorAll('h1, h2, h3');
       headings.forEach(function(h, i) {
         var parent = h.parentElement;
-        if (parent && !parent.hasAttribute('data-chroney-section')) {
-          parent.setAttribute('data-chroney-section', i);
+        if (parent && !parent.hasAttribute('data-orvey-section')) {
+          parent.setAttribute('data-orvey-section', i);
         }
       });
-      sections = document.querySelectorAll('[data-chroney-section]');
+      sections = document.querySelectorAll('[data-orvey-section]');
     }
     
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         var el = entry.target;
-        var sectionId = el.id || el.getAttribute('data-section') || el.getAttribute('data-chroney-section') || ('section-' + Array.from(el.parentElement.children).indexOf(el));
+        var sectionId = el.id || el.getAttribute('data-section') || el.getAttribute('data-orvey-section') || ('section-' + Array.from(el.parentElement.children).indexOf(el));
         var sectionName = el.getAttribute('aria-label') || (el.querySelector('h1, h2, h3') ? el.querySelector('h1, h2, h3').textContent.substring(0, 50) : sectionId);
         var sectionType = el.tagName.toLowerCase();
         
@@ -332,16 +332,16 @@
     // Expose the base URL globally so widget.js can reliably derive it without
     // scanning script tags (which breaks on Shopify and other platforms that
     // proxy or rewrite external script URLs).
-    window.__chroneyBaseUrl = apiBase;
+    window.__orveyBaseUrl = apiBase;
 
     var script = document.createElement('script');
     script.src = apiBase + '/widget.js';
     script.onload = function() {
-      if (window.HiChroneyWidget) {
-        window.HiChroneyWidget.init(config);
-        if (pendingOpenChat && typeof window.HiChroneyWidget.open === 'function') {
+      if (window.OrveyWidget) {
+        window.OrveyWidget.init(config);
+        if (pendingOpenChat && typeof window.OrveyWidget.open === 'function') {
           pendingOpenChat = false;
-          window.HiChroneyWidget.open();
+          window.OrveyWidget.open();
         }
       }
     };

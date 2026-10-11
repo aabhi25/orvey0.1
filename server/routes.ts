@@ -9697,7 +9697,7 @@ Return ONLY the refined instruction, nothing else.`
   // SuperAdmin: Create business account (with user)
   app.post("/api/business-accounts", requireAuth, requireRole("super_admin"), async (req, res) => {
     try {
-      const { name, website, username, productTier, chroneyEnabled, whatsappEnabled, instagramEnabled, facebookEnabled } = req.body;
+      const { name, website, username, productTier, orveyEnabled, whatsappEnabled, instagramEnabled, facebookEnabled } = req.body;
       if (!name) {
         return res.status(400).json({ error: "Business name required" });
       }
@@ -9722,8 +9722,8 @@ Return ONLY the refined instruction, nothing else.`
       }
       
       // Validate product tier
-      const validTiers = ['chroney', 'jewelry_showcase', 'jewelry_showcase_chroney'];
-      const tier = productTier && validTiers.includes(productTier) ? productTier : 'chroney';
+      const validTiers = ['orvey', 'jewelry_showcase', 'jewelry_showcase_orvey'];
+      const tier = productTier && validTiers.includes(productTier) ? productTier : 'orvey';
       
       // Create business account with feature flags
       const businessAccount = await storage.createBusinessAccount({ 
@@ -9731,7 +9731,7 @@ Return ONLY the refined instruction, nothing else.`
         website, 
         status: "active", 
         productTier: tier,
-        chroneyEnabled: chroneyEnabled === true ? "true" : chroneyEnabled === false ? "false" : "true",
+        orveyEnabled: orveyEnabled === true ? "true" : orveyEnabled === false ? "false" : "true",
         whatsappEnabled: whatsappEnabled === true ? "true" : "false",
         instagramEnabled: instagramEnabled === true ? "true" : "false",
         facebookEnabled: facebookEnabled === true ? "true" : "false",
@@ -9809,7 +9809,7 @@ Return ONLY the refined instruction, nothing else.`
   app.put("/api/business-accounts/:id", requireAuth, requireRole("super_admin"), async (req, res) => {
     try {
       const { id } = req.params;
-      const { name, website, productTier, chroneyEnabled, whatsappEnabled, instagramEnabled, facebookEnabled, k12EducationEnabled, jobPortalEnabled } = req.body;
+      const { name, website, productTier, orveyEnabled, whatsappEnabled, instagramEnabled, facebookEnabled, k12EducationEnabled, jobPortalEnabled } = req.body;
       
       if (!name) {
         return res.status(400).json({ error: "Business name required" });
@@ -9826,13 +9826,13 @@ Return ONLY the refined instruction, nothing else.`
       }
       
       // Validate product tier if provided
-      const validTiers = ['chroney', 'jewelry_showcase', 'jewelry_showcase_chroney'];
-      const updates: { name: string; website: string; productTier?: string; chroneyEnabled?: string; whatsappEnabled?: string; instagramEnabled?: string; facebookEnabled?: string; k12EducationEnabled?: string; jobPortalEnabled?: string } = { name, website };
+      const validTiers = ['orvey', 'jewelry_showcase', 'jewelry_showcase_orvey'];
+      const updates: { name: string; website: string; productTier?: string; orveyEnabled?: string; whatsappEnabled?: string; instagramEnabled?: string; facebookEnabled?: string; k12EducationEnabled?: string; jobPortalEnabled?: string } = { name, website };
       if (productTier && validTiers.includes(productTier)) {
         updates.productTier = productTier;
       }
-      if (typeof chroneyEnabled === 'boolean') {
-        updates.chroneyEnabled = chroneyEnabled ? "true" : "false";
+      if (typeof orveyEnabled === 'boolean') {
+        updates.orveyEnabled = orveyEnabled ? "true" : "false";
       }
       if (typeof whatsappEnabled === 'boolean') {
         updates.whatsappEnabled = whatsappEnabled ? "true" : "false";
@@ -9919,7 +9919,7 @@ Return ONLY the refined instruction, nothing else.`
   app.patch("/api/business-accounts/:id/features", requireAuth, requireRole("super_admin"), async (req, res) => {
     try {
       const { id } = req.params;
-      const { shopifyEnabled, appointmentsEnabled, voiceModeEnabled, visualSearchEnabled, jewelryShowcaseEnabled, supportTicketsEnabled, whatsappEnabled, instagramEnabled, facebookEnabled, chroneyEnabled, k12EducationEnabled, jobPortalEnabled, demoOrdersEnabled, whatsappMarketingEnabled, leadsExportEnabled, leadPhoneMaskingEnabled, systemMode } = req.body;
+      const { shopifyEnabled, appointmentsEnabled, voiceModeEnabled, visualSearchEnabled, jewelryShowcaseEnabled, supportTicketsEnabled, whatsappEnabled, instagramEnabled, facebookEnabled, orveyEnabled, k12EducationEnabled, jobPortalEnabled, demoOrdersEnabled, whatsappMarketingEnabled, leadsExportEnabled, leadPhoneMaskingEnabled, systemMode } = req.body;
       const { aiCallingEnabled } = req.body; // AI Calling (B)
 
       const updates: any = {};
@@ -9987,11 +9987,11 @@ Return ONLY the refined instruction, nothing else.`
         updates.facebookEnabled = facebookEnabled ? "true" : "false";
       }
       
-      if (chroneyEnabled !== undefined) {
-        if (typeof chroneyEnabled !== "boolean") {
-          return res.status(400).json({ error: "chroneyEnabled must be a boolean" });
+      if (orveyEnabled !== undefined) {
+        if (typeof orveyEnabled !== "boolean") {
+          return res.status(400).json({ error: "orveyEnabled must be a boolean" });
         }
-        updates.chroneyEnabled = chroneyEnabled ? "true" : "false";
+        updates.orveyEnabled = orveyEnabled ? "true" : "false";
       }
       
       if (k12EducationEnabled !== undefined) {

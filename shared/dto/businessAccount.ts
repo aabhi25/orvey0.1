@@ -1,13 +1,13 @@
 import type { BusinessAccount } from "../schema";
 
 // Product tier type
-export type ProductTier = 'chroney' | 'jewelry_showcase' | 'jewelry_showcase_chroney';
+export type ProductTier = 'orvey' | 'jewelry_showcase' | 'jewelry_showcase_orvey';
 
 // System mode type - controls visible features for business users
 export type SystemMode = 'full' | 'essential';
 
 // BusinessAccountDto with normalized boolean feature flags for API/client
-export type BusinessAccountDto = Omit<BusinessAccount, "shopifyEnabled" | "appointmentsEnabled" | "voiceModeEnabled" | "visualSearchEnabled" | "jewelryShowcaseEnabled" | "supportTicketsEnabled" | "whatsappEnabled" | "instagramEnabled" | "facebookEnabled" | "chroneyEnabled" | "k12EducationEnabled" | "k12ImageUploadEnabled" | "k12ContentOnlyMode" | "k12VerbatimContentMode" | "jobPortalEnabled" | "demoOrdersEnabled" | "whatsappMarketingEnabled" | "leadsExportEnabled" | "leadPhoneMaskingEnabled" | "aiCallingEnabled" | "systemMode"> & {
+export type BusinessAccountDto = Omit<BusinessAccount, "shopifyEnabled" | "appointmentsEnabled" | "voiceModeEnabled" | "visualSearchEnabled" | "jewelryShowcaseEnabled" | "supportTicketsEnabled" | "whatsappEnabled" | "instagramEnabled" | "facebookEnabled" | "orveyEnabled" | "k12EducationEnabled" | "k12ImageUploadEnabled" | "k12ContentOnlyMode" | "k12VerbatimContentMode" | "jobPortalEnabled" | "demoOrdersEnabled" | "whatsappMarketingEnabled" | "leadsExportEnabled" | "leadPhoneMaskingEnabled" | "aiCallingEnabled" | "systemMode"> & {
   shopifyEnabled: boolean;
   appointmentsEnabled: boolean;
   voiceModeEnabled: boolean;
@@ -17,7 +17,7 @@ export type BusinessAccountDto = Omit<BusinessAccount, "shopifyEnabled" | "appoi
   whatsappEnabled: boolean;
   instagramEnabled: boolean;
   facebookEnabled: boolean;
-  chroneyEnabled: boolean;
+  orveyEnabled: boolean;
   k12EducationEnabled: boolean;
   k12ImageUploadEnabled: boolean;
   k12ContentOnlyMode: boolean;
@@ -46,7 +46,7 @@ export function toBusinessAccountDto(account: BusinessAccount): BusinessAccountD
     whatsappEnabled: account.whatsappEnabled === "true",
     instagramEnabled: account.instagramEnabled === "true",
     facebookEnabled: account.facebookEnabled === "true",
-    chroneyEnabled: account.chroneyEnabled === "true",
+    orveyEnabled: account.orveyEnabled === "true",
     k12EducationEnabled: account.k12EducationEnabled === "true",
     k12ImageUploadEnabled: account.k12ImageUploadEnabled === "true",
     k12ContentOnlyMode: account.k12ContentOnlyMode === "true",
@@ -57,7 +57,7 @@ export function toBusinessAccountDto(account: BusinessAccount): BusinessAccountD
     leadsExportEnabled: account.leadsExportEnabled === "true",
     leadPhoneMaskingEnabled: account.leadPhoneMaskingEnabled === "true",
     aiCallingEnabled: account.aiCallingEnabled === "true",
-    productTier: (account.productTier || 'chroney') as ProductTier,
+    productTier: (account.productTier || 'orvey') as ProductTier,
     systemMode: (account.systemMode || 'full') as SystemMode,
   };
 }
@@ -75,7 +75,7 @@ export function fromBusinessAccountDto(dto: BusinessAccountDto): BusinessAccount
     whatsappEnabled: dto.whatsappEnabled ? "true" : "false",
     instagramEnabled: dto.instagramEnabled ? "true" : "false",
     facebookEnabled: dto.facebookEnabled ? "true" : "false",
-    chroneyEnabled: dto.chroneyEnabled ? "true" : "false",
+    orveyEnabled: dto.orveyEnabled ? "true" : "false",
     k12EducationEnabled: dto.k12EducationEnabled ? "true" : "false",
     k12ImageUploadEnabled: dto.k12ImageUploadEnabled ? "true" : "false",
     k12ContentOnlyMode: dto.k12ContentOnlyMode ? "true" : "false",

@@ -56,17 +56,17 @@ export default function PublicDemo() {
       if (testDiscountMessage) {
         // Wait for iframe to be ready, then trigger the discount
         setTimeout(() => {
-          const iframe = document.getElementById('hichroney-widget-iframe') as HTMLIFrameElement;
+          const iframe = document.getElementById('orvey-widget-iframe') as HTMLIFrameElement;
           if (iframe && iframe.contentWindow) {
             // First open the chat by clicking the widget button
-            const widgetButton = document.getElementById('hichroney-widget-button') as HTMLElement;
+            const widgetButton = document.getElementById('orvey-widget-button') as HTMLElement;
             if (widgetButton) {
               widgetButton.click();
             }
             // Then send the discount message after chat opens
             setTimeout(() => {
               iframe.contentWindow?.postMessage({
-                type: 'HICHRONEY_DISCOUNT_TRIGGER',
+                type: 'ORVEY_DISCOUNT_TRIGGER',
                 triggerType: 'idle_timeout_test',
                 message: testDiscountMessage,
                 discountPercentage: discountPct,
@@ -85,7 +85,7 @@ export default function PublicDemo() {
     //
     // Load it from THIS page's own origin rather than a hardcoded host. widget-loader.js
     // derives its entire API base from its own script URL (and publishes it as
-    // window.__chroneyBaseUrl, which widget.js reads first), so the host we load it from
+    // window.__orveyBaseUrl, which widget.js reads first), so the host we load it from
     // decides where conversations, messages and tracking are written. Hardcoding the
     // production host meant a demo opened on any other environment still wrote its chats
     // to production, and they never appeared in that environment's Conversations list.
@@ -106,10 +106,10 @@ export default function PublicDemo() {
       if (document.body.contains(script)) {
         document.body.removeChild(script);
       }
-      const widgetContainer = document.getElementById('hichroney-widget-container');
-      const widgetIframe = document.getElementById('hichroney-widget-iframe');
-      const widgetButton = document.getElementById('hichroney-widget-button');
-      const chatOverlay = document.getElementById('hichroney-chat-overlay');
+      const widgetContainer = document.getElementById('orvey-widget-container');
+      const widgetIframe = document.getElementById('orvey-widget-iframe');
+      const widgetButton = document.getElementById('orvey-widget-button');
+      const chatOverlay = document.getElementById('orvey-chat-overlay');
       if (widgetContainer && document.body.contains(widgetContainer)) {
         document.body.removeChild(widgetContainer);
       }

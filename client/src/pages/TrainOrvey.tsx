@@ -134,7 +134,7 @@ function withChannels(instr: Instruction, channels: readonly string[] | null | u
   return clean ? { ...rest, channels: clean } : rest;
 }
 
-export default function TrainChroney() {
+export default function TrainOrvey() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [instructions, setInstructions] = useState<Instruction[]>([]);

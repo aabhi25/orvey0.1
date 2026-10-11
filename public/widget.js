@@ -315,10 +315,10 @@
   
   // Get or create persistent visitor token for unique visitor tracking
   function getVisitorToken() {
-    var bid = window.chroneyConfig && window.chroneyConfig.businessAccountId;
-    var perBusinessKey = bid ? 'chroney_visitor_' + bid : null;
-    var globalKey = 'chroney_visitor_token';
-    var legacyKey = 'chroney_page_visitor_token';
+    var bid = window.orveyConfig && window.orveyConfig.businessAccountId;
+    var perBusinessKey = bid ? 'orvey_visitor_' + bid : null;
+    var globalKey = 'orvey_visitor_token';
+    var legacyKey = 'orvey_page_visitor_token';
     var token = (perBusinessKey && localStorage.getItem(perBusinessKey)) || localStorage.getItem(globalKey) || localStorage.getItem(legacyKey);
     if (!token) {
       token = crypto.randomUUID ? crypto.randomUUID() : 'v_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
@@ -646,7 +646,7 @@
     }
   };
   
-  const HiChroneyWidget = {
+  const OrveyWidget = {
     visitorToken: null,
     _iframeReady: false,
     _sendMessageToIframe: null,
@@ -934,8 +934,8 @@
       // relying on script-tag scanning, which breaks on Shopify and other
       // platforms that proxy or rewrite external script URLs (causing the
       // iframe to fall back to window.location.origin and 404).
-      if (window.__chroneyBaseUrl) {
-        return window.__chroneyBaseUrl;
+      if (window.__orveyBaseUrl) {
+        return window.__orveyBaseUrl;
       }
       const scripts = document.getElementsByTagName('script');
       for (let i = 0; i < scripts.length; i++) {
@@ -997,9 +997,9 @@
       
       // Add styles for the product AI card
       const cardStyles = document.createElement('style');
-      cardStyles.id = 'hichroney-product-ai-styles';
+      cardStyles.id = 'orvey-product-ai-styles';
       cardStyles.textContent = `
-        #hichroney-product-ai-card {
+        #orvey-product-ai-card {
           position: fixed;
           ${horizontalPos === 'left' ? 'left: ' + sideOff + 'px' : 'right: ' + sideOff + 'px'};
           ${verticalPos === 'top' ? 'top: ' + bottomOff + 'px' : 'bottom: ' + (bottomOff + 70) + 'px'};
@@ -1016,21 +1016,21 @@
           opacity: 0;
         }
         
-        #hichroney-product-ai-card.visible {
+        #orvey-product-ai-card.visible {
           transform: translateY(0);
           opacity: 1;
         }
         
-        #hichroney-product-ai-card.minimized {
+        #orvey-product-ai-card.minimized {
           width: auto;
           min-width: 200px;
         }
         
-        #hichroney-product-ai-card.hidden {
+        #orvey-product-ai-card.hidden {
           display: none;
         }
         
-        .hichroney-ai-card-header {
+        .orvey-ai-card-header {
           background: linear-gradient(135deg, ${config.chatColor || '#1f4596'}, ${config.chatColorEnd || '#0a1530'});
           padding: 12px 16px;
           display: flex;
@@ -1039,13 +1039,13 @@
           color: white;
         }
         
-        .hichroney-ai-card-header-left {
+        .orvey-ai-card-header-left {
           display: flex;
           align-items: center;
           gap: 10px;
         }
         
-        .hichroney-ai-card-avatar {
+        .orvey-ai-card-avatar {
           width: 32px;
           height: 32px;
           border-radius: 50%;
@@ -1055,17 +1055,17 @@
           justify-content: center;
         }
         
-        .hichroney-ai-card-title {
+        .orvey-ai-card-title {
           font-size: 14px;
           font-weight: 600;
         }
         
-        .hichroney-ai-card-actions {
+        .orvey-ai-card-actions {
           display: flex;
           gap: 8px;
         }
         
-        .hichroney-ai-card-btn {
+        .orvey-ai-card-btn {
           background: none;
           border: none;
           color: white;
@@ -1078,22 +1078,22 @@
           justify-content: center;
         }
         
-        .hichroney-ai-card-btn:hover {
+        .orvey-ai-card-btn:hover {
           background: rgba(255,255,255,0.2);
         }
         
-        .hichroney-ai-card-content {
+        .orvey-ai-card-content {
           padding: 16px;
         }
         
-        .hichroney-ai-card-content.loading {
+        .orvey-ai-card-content.loading {
           display: flex;
           align-items: center;
           justify-content: center;
           min-height: 100px;
         }
         
-        .hichroney-ai-trivia {
+        .orvey-ai-trivia {
           background: linear-gradient(135deg, ${config.chatColor || '#1f4596'}15, ${config.chatColorEnd || '#0a1530'}15);
           border-radius: 12px;
           padding: 12px;
@@ -1103,7 +1103,7 @@
           color: #333;
         }
         
-        .hichroney-ai-trivia-icon {
+        .orvey-ai-trivia-icon {
           display: inline-flex;
           align-items: center;
           gap: 6px;
@@ -1115,11 +1115,11 @@
           margin-bottom: 8px;
         }
         
-        .hichroney-ai-questions {
+        .orvey-ai-questions {
           margin-bottom: 12px;
         }
         
-        .hichroney-ai-questions-label {
+        .orvey-ai-questions-label {
           font-size: 11px;
           color: #666;
           text-transform: uppercase;
@@ -1128,7 +1128,7 @@
           font-weight: 600;
         }
         
-        .hichroney-ai-question-btn {
+        .orvey-ai-question-btn {
           display: block;
           width: 100%;
           text-align: left;
@@ -1143,23 +1143,23 @@
           transition: all 0.2s;
         }
         
-        .hichroney-ai-question-btn:hover {
+        .orvey-ai-question-btn:hover {
           background: linear-gradient(135deg, ${config.chatColor || '#1f4596'}20, ${config.chatColorEnd || '#0a1530'}20);
           color: ${config.chatColor || '#1f4596'};
         }
         
-        .hichroney-ai-question-btn:last-child {
+        .orvey-ai-question-btn:last-child {
           margin-bottom: 0;
         }
         
-        .hichroney-ai-review-summary {
+        .orvey-ai-review-summary {
           background: #f8f9fa;
           border-radius: 12px;
           padding: 12px;
           margin-bottom: 12px;
         }
         
-        .hichroney-ai-review-header {
+        .orvey-ai-review-header {
           display: flex;
           align-items: center;
           gap: 6px;
@@ -1171,7 +1171,7 @@
           margin-bottom: 8px;
         }
         
-        .hichroney-ai-rating {
+        .orvey-ai-rating {
           background: #f59e0b;
           color: white;
           padding: 2px 6px;
@@ -1180,13 +1180,13 @@
           margin-left: auto;
         }
         
-        .hichroney-ai-review-text {
+        .orvey-ai-review-text {
           font-size: 13px;
           line-height: 1.5;
           color: #333;
         }
         
-        .hichroney-ai-ask-input {
+        .orvey-ai-ask-input {
           display: flex;
           gap: 8px;
           margin-top: 12px;
@@ -1194,7 +1194,7 @@
           border-top: 1px solid #eee;
         }
         
-        .hichroney-ai-ask-input input {
+        .orvey-ai-ask-input input {
           flex: 1;
           padding: 10px 12px;
           border: 1px solid #e0e0e0;
@@ -1204,11 +1204,11 @@
           transition: border-color 0.2s;
         }
         
-        .hichroney-ai-ask-input input:focus {
+        .orvey-ai-ask-input input:focus {
           border-color: ${config.chatColor || '#1f4596'};
         }
         
-        .hichroney-ai-ask-input button {
+        .orvey-ai-ask-input button {
           background: linear-gradient(135deg, ${config.chatColor || '#1f4596'}, ${config.chatColorEnd || '#0a1530'});
           color: white;
           border: none;
@@ -1222,34 +1222,34 @@
           transition: transform 0.2s, box-shadow 0.2s;
         }
         
-        .hichroney-ai-ask-input button:hover {
+        .orvey-ai-ask-input button:hover {
           transform: scale(1.05);
           box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         
-        .hichroney-loading-dots {
+        .orvey-loading-dots {
           display: flex;
           gap: 4px;
         }
         
-        .hichroney-loading-dots span {
+        .orvey-loading-dots span {
           width: 8px;
           height: 8px;
           border-radius: 50%;
           background: ${config.chatColor || '#1f4596'};
-          animation: hichroney-dot-bounce 1.4s infinite ease-in-out both;
+          animation: orvey-dot-bounce 1.4s infinite ease-in-out both;
         }
         
-        .hichroney-loading-dots span:nth-child(1) { animation-delay: -0.32s; }
-        .hichroney-loading-dots span:nth-child(2) { animation-delay: -0.16s; }
+        .orvey-loading-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .orvey-loading-dots span:nth-child(2) { animation-delay: -0.16s; }
         
-        @keyframes hichroney-dot-bounce {
+        @keyframes orvey-dot-bounce {
           0%, 80%, 100% { transform: scale(0); }
           40% { transform: scale(1); }
         }
         
         @media (max-width: 480px) {
-          #hichroney-product-ai-card {
+          #orvey-product-ai-card {
             width: calc(100vw - 20px);
             ${horizontalPos === 'left' ? 'left: 10px' : 'right: 10px'};
             bottom: 80px;
@@ -1260,14 +1260,14 @@
       
       // Create the card element
       const card = document.createElement('div');
-      card.id = 'hichroney-product-ai-card';
+      card.id = 'orvey-product-ai-card';
       
       // Create header
       const header = document.createElement('div');
-      header.className = 'hichroney-ai-card-header';
+      header.className = 'orvey-ai-card-header';
       header.innerHTML = `
-        <div class="hichroney-ai-card-header-left">
-          <div class="hichroney-ai-card-avatar">
+        <div class="orvey-ai-card-header-left">
+          <div class="orvey-ai-card-avatar">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"></path>
               <circle cx="9" cy="13" r="1"></circle>
@@ -1275,15 +1275,15 @@
               <path d="M9 17h6"></path>
             </svg>
           </div>
-          <span class="hichroney-ai-card-title">AI Assistant</span>
+          <span class="orvey-ai-card-title">AI Assistant</span>
         </div>
-        <div class="hichroney-ai-card-actions">
-          <button class="hichroney-ai-card-btn" id="hichroney-ai-minimize" title="Minimize">
+        <div class="orvey-ai-card-actions">
+          <button class="orvey-ai-card-btn" id="orvey-ai-minimize" title="Minimize">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14"></path>
             </svg>
           </button>
-          <button class="hichroney-ai-card-btn" id="hichroney-ai-close" title="Close">
+          <button class="orvey-ai-card-btn" id="orvey-ai-close" title="Close">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M18 6L6 18M6 6l12 12"></path>
             </svg>
@@ -1294,9 +1294,9 @@
       
       // Create content area with loading state
       const content = document.createElement('div');
-      content.className = 'hichroney-ai-card-content loading';
+      content.className = 'orvey-ai-card-content loading';
       content.innerHTML = `
-        <div class="hichroney-loading-dots">
+        <div class="orvey-loading-dots">
           <span></span>
           <span></span>
           <span></span>
@@ -1310,18 +1310,18 @@
       setTimeout(() => card.classList.add('visible'), 100);
       
       // Add event listeners
-      document.getElementById('hichroney-ai-minimize').addEventListener('click', () => {
+      document.getElementById('orvey-ai-minimize').addEventListener('click', () => {
         card.classList.toggle('minimized');
       });
       
-      document.getElementById('hichroney-ai-close').addEventListener('click', () => {
+      document.getElementById('orvey-ai-close').addEventListener('click', () => {
         card.classList.add('hidden');
         // Store preference for this session
-        sessionStorage.setItem('hichroney_ai_card_closed', 'true');
+        sessionStorage.setItem('orvey_ai_card_closed', 'true');
       });
       
       // Check if user already closed the card this session
-      if (sessionStorage.getItem('hichroney_ai_card_closed') === 'true') {
+      if (sessionStorage.getItem('orvey_ai_card_closed') === 'true') {
         card.classList.add('hidden');
         return;
       }
@@ -1386,8 +1386,8 @@
       
       if (triviaResult.trivia) {
         contentHtml += `
-          <div class="hichroney-ai-trivia">
-            <div class="hichroney-ai-trivia-icon">
+          <div class="orvey-ai-trivia">
+            <div class="orvey-ai-trivia-icon">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
               </svg>
@@ -1400,32 +1400,32 @@
       
       if (questionsResult.questions && questionsResult.questions.length > 0) {
         contentHtml += `
-          <div class="hichroney-ai-questions">
-            <div class="hichroney-ai-questions-label">Quick Questions</div>
-            ${questionsResult.questions.map(q => `<button class="hichroney-ai-question-btn">${q}</button>`).join('')}
+          <div class="orvey-ai-questions">
+            <div class="orvey-ai-questions-label">Quick Questions</div>
+            ${questionsResult.questions.map(q => `<button class="orvey-ai-question-btn">${q}</button>`).join('')}
           </div>
         `;
       }
       
       if (reviewResult.summary) {
         contentHtml += `
-          <div class="hichroney-ai-review-summary">
-            <div class="hichroney-ai-review-header">
+          <div class="orvey-ai-review-summary">
+            <div class="orvey-ai-review-header">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
               </svg>
               <span>Review Summary</span>
-              ${reviewResult.averageRating ? `<span class="hichroney-ai-rating">${reviewResult.averageRating}/5</span>` : ''}
+              ${reviewResult.averageRating ? `<span class="orvey-ai-rating">${reviewResult.averageRating}/5</span>` : ''}
             </div>
-            <div class="hichroney-ai-review-text">${reviewResult.summary}</div>
+            <div class="orvey-ai-review-text">${reviewResult.summary}</div>
           </div>
         `;
       }
       
       contentHtml += `
-        <div class="hichroney-ai-ask-input">
-          <input type="text" placeholder="Ask about ${productData.name?.substring(0, 30) || 'this product'}..." id="hichroney-ai-input" />
-          <button id="hichroney-ai-send">
+        <div class="orvey-ai-ask-input">
+          <input type="text" placeholder="Ask about ${productData.name?.substring(0, 30) || 'this product'}..." id="orvey-ai-input" />
+          <button id="orvey-ai-send">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path>
             </svg>
@@ -1433,11 +1433,11 @@
         </div>
       `;
       
-      content.className = 'hichroney-ai-card-content';
+      content.className = 'orvey-ai-card-content';
       content.innerHTML = contentHtml;
       
       // Add click handlers for questions
-      content.querySelectorAll('.hichroney-ai-question-btn').forEach(btn => {
+      content.querySelectorAll('.orvey-ai-question-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           const question = btn.textContent;
           this.openChatWithProductContext(question, productData);
@@ -1445,8 +1445,8 @@
       });
       
       // Add send button handler
-      const inputEl = document.getElementById('hichroney-ai-input');
-      const sendBtn = document.getElementById('hichroney-ai-send');
+      const inputEl = document.getElementById('orvey-ai-input');
+      const sendBtn = document.getElementById('orvey-ai-send');
       
       const sendMessage = () => {
         const message = inputEl.value.trim();
@@ -1464,8 +1464,8 @@
     
     openChatWithProductContext: function(message, productData) {
       // Find and click the widget button to open chat
-      const widgetButton = document.getElementById('hichroney-widget-button');
-      const iframe = document.getElementById('hichroney-widget-iframe');
+      const widgetButton = document.getElementById('orvey-widget-button');
+      const iframe = document.getElementById('orvey-widget-iframe');
       
       if (widgetButton && iframe) {
         // Open the chat if not already open
@@ -1509,7 +1509,7 @@
       }
       
       // Hide the AI card after sending
-      const card = document.getElementById('hichroney-product-ai-card');
+      const card = document.getElementById('orvey-product-ai-card');
       if (card) {
         card.classList.add('hidden');
       }
@@ -1525,43 +1525,43 @@
       const voiceStyle = this.config.voiceModeStyle || 'circular';
       
       // Define animations based on voice mode style (combined to avoid transform conflicts)
-      let orbAnimation = 'hichroney-style-circular 3s ease-in-out infinite';
+      let orbAnimation = 'orvey-style-circular 3s ease-in-out infinite';
       let orbBorderRadius = '50%';
       let clipPath = 'none';
       let orbOverflow = 'hidden';
       
       if (voiceStyle === 'morphing') {
-        orbAnimation = 'hichroney-style-morphing 3s ease-in-out infinite';
+        orbAnimation = 'orvey-style-morphing 3s ease-in-out infinite';
       } else if (voiceStyle === 'distorted') {
-        orbAnimation = 'hichroney-style-distorted 4s ease-in-out infinite';
+        orbAnimation = 'orvey-style-distorted 4s ease-in-out infinite';
       } else if (voiceStyle === 'angular') {
         orbBorderRadius = '20%';
-        orbAnimation = 'hichroney-style-angular 8s linear infinite';
+        orbAnimation = 'orvey-style-angular 8s linear infinite';
       } else if (voiceStyle === 'ocean-wave' || voiceStyle === 'ocean_wave') {
-        orbAnimation = 'hichroney-style-ocean 3s ease-in-out infinite';
+        orbAnimation = 'orvey-style-ocean 3s ease-in-out infinite';
       } else if (voiceStyle === 'triangle') {
         clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
         orbBorderRadius = '0';
-        orbAnimation = 'hichroney-style-triangle 4s ease-in-out infinite';
+        orbAnimation = 'orvey-style-triangle 4s ease-in-out infinite';
       } else if (voiceStyle === 'hexagon') {
         clipPath = 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)';
         orbBorderRadius = '0';
-        orbAnimation = 'hichroney-style-hexagon 6s linear infinite';
+        orbAnimation = 'orvey-style-hexagon 6s linear infinite';
       } else if (voiceStyle === 'diamond') {
         clipPath = 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)';
         orbBorderRadius = '0';
-        orbAnimation = 'hichroney-style-diamond 3s ease-in-out infinite';
+        orbAnimation = 'orvey-style-diamond 3s ease-in-out infinite';
       } else if (voiceStyle === 'infinity') {
         // Figure-8 using pseudo-elements for two overlapping circles
         orbBorderRadius = '50%';
         orbOverflow = 'visible'; // Allow pseudo-elements to extend beyond orb
-        orbAnimation = 'hichroney-style-infinity 8s ease-in-out infinite';
+        orbAnimation = 'orvey-style-infinity 8s ease-in-out infinite';
       }
       
       // Add styles for voice-only orb with responsive sizing
       const voiceStyles = document.createElement('style');
       voiceStyles.textContent = `
-        #hichroney-voice-orb-container {
+        #orvey-voice-orb-container {
           position: fixed;
           ${verticalPos === 'top' ? 'top: ' + (parseInt(this.config.pillBottomOffset, 10) || 20) + 'px;' : 'bottom: ' + (parseInt(this.config.pillBottomOffset, 10) || 20) + 'px;'}
           ${horizontalPos === 'right' ? 'right: ' + (parseInt(this.config.pillSideOffset, 10) || 20) + 'px;' : 'left: ' + (parseInt(this.config.pillSideOffset, 10) || 20) + 'px;'}
@@ -1570,7 +1570,7 @@
           z-index: 999999;
         }
         
-        #hichroney-voice-orb {
+        #orvey-voice-orb {
           width: 100%;
           height: 100%;
           border-radius: ${orbBorderRadius};
@@ -1587,17 +1587,17 @@
           animation: ${orbAnimation};
         }
         
-        #hichroney-voice-orb:hover {
+        #orvey-voice-orb:hover {
           transform: scale(1.05);
         }
         
-        #hichroney-voice-orb:active {
+        #orvey-voice-orb:active {
           transform: scale(0.95);
         }
         
         /* Infinity figure-8 pseudo-elements - only apply for infinity style */
-        #hichroney-voice-orb::before,
-        #hichroney-voice-orb::after {
+        #orvey-voice-orb::before,
+        #orvey-voice-orb::after {
           ${voiceStyle === 'infinity' ? `
           content: '';
           position: absolute;
@@ -1609,14 +1609,14 @@
           ` : ''}
         }
         
-        #hichroney-voice-orb::before {
+        #orvey-voice-orb::before {
           ${voiceStyle === 'infinity' ? `
           left: -30%;
           transform: translateY(-50%);
           ` : ''}
         }
         
-        #hichroney-voice-orb::after {
+        #orvey-voice-orb::after {
           ${voiceStyle === 'infinity' ? `
           right: -30%;
           transform: translateY(-50%);
@@ -1625,47 +1625,47 @@
         
         /* Responsive sizing overrides */
         @media (max-width: 480px) {
-          #hichroney-voice-orb-container {
+          #orvey-voice-orb-container {
             width: 56px;
             height: 56px;
           }
         }
         
         @media (min-width: 481px) and (max-width: 1024px) {
-          #hichroney-voice-orb-container {
+          #orvey-voice-orb-container {
             width: 72px;
             height: 72px;
           }
         }
         
         @media (min-width: 1025px) {
-          #hichroney-voice-orb-container {
+          #orvey-voice-orb-container {
             width: 88px;
             height: 88px;
           }
         }
         
-        .hichroney-pulse-ring {
+        .orvey-pulse-ring {
           position: absolute;
           width: 100%;
           height: 100%;
           border-radius: 50%;
           border: 2px solid ${this.config.chatColor}66;
-          animation: hichroney-pulse-expand 2.5s ease-out infinite;
+          animation: orvey-pulse-expand 2.5s ease-out infinite;
         }
         
-        .hichroney-pulse-ring:nth-child(2) {
+        .orvey-pulse-ring:nth-child(2) {
           animation-delay: 1.25s;
         }
         
-        .hichroney-cloud-blob {
+        .orvey-cloud-blob {
           position: absolute;
           border-radius: 50%;
           background: rgba(255, 255, 255, 0.2);
           filter: blur(10px);
         }
         
-        .hichroney-inner-glow {
+        .orvey-inner-glow {
           position: absolute;
           top: 0;
           left: 0;
@@ -1674,10 +1674,10 @@
           border-radius: 50%;
           background: radial-gradient(circle, ${this.config.chatColor}80, transparent);
           filter: blur(20px);
-          animation: hichroney-glow-pulse 2.5s ease-in-out infinite;
+          animation: orvey-glow-pulse 2.5s ease-in-out infinite;
         }
         
-        .hichroney-avatar-wrapper {
+        .orvey-avatar-wrapper {
           position: relative;
           z-index: 20;
           width: 64%;
@@ -1688,7 +1688,7 @@
           box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         }
         
-        .hichroney-avatar-wrapper img {
+        .orvey-avatar-wrapper img {
           width: 100%;
           height: 100%;
           object-fit: cover;
@@ -1696,33 +1696,33 @@
         
         /* Responsive avatar sizing */
         @media (max-width: 480px) {
-          .hichroney-avatar-wrapper {
+          .orvey-avatar-wrapper {
             width: 36px;
             height: 36px;
           }
         }
         
         @media (min-width: 481px) and (max-width: 1024px) {
-          .hichroney-avatar-wrapper {
+          .orvey-avatar-wrapper {
             width: 46px;
             height: 46px;
           }
         }
         
         @media (min-width: 1025px) {
-          .hichroney-avatar-wrapper {
+          .orvey-avatar-wrapper {
             width: 56px;
             height: 56px;
           }
         }
         
         /* Combined animations - pulse + style-specific effects */
-        @keyframes hichroney-style-circular {
+        @keyframes orvey-style-circular {
           0%, 100% { transform: scale(1); }
           50% { transform: scale(1.02); }
         }
         
-        @keyframes hichroney-style-morphing {
+        @keyframes orvey-style-morphing {
           0%, 100% { 
             transform: scale(1);
             border-radius: 50%; 
@@ -1741,7 +1741,7 @@
           }
         }
         
-        @keyframes hichroney-style-distorted {
+        @keyframes orvey-style-distorted {
           0%, 100% { 
             border-radius: 50% 45% 48% 52%; 
             transform: scale(1) rotate(0deg); 
@@ -1760,13 +1760,13 @@
           }
         }
         
-        @keyframes hichroney-style-angular {
+        @keyframes orvey-style-angular {
           from { transform: scale(1) rotate(0deg); }
           50% { transform: scale(1.02) rotate(180deg); }
           to { transform: scale(1) rotate(360deg); }
         }
         
-        @keyframes hichroney-style-ocean {
+        @keyframes orvey-style-ocean {
           0%, 100% { 
             border-radius: 50% 48% 52% 50%;
             transform: scale(1) translateY(0);
@@ -1781,7 +1781,7 @@
           }
         }
         
-        @keyframes hichroney-style-triangle {
+        @keyframes orvey-style-triangle {
           0%, 100% { 
             transform: scale(1) rotate(0deg);
           }
@@ -1796,7 +1796,7 @@
           }
         }
         
-        @keyframes hichroney-style-hexagon {
+        @keyframes orvey-style-hexagon {
           from { 
             transform: scale(1) rotate(0deg);
           }
@@ -1808,7 +1808,7 @@
           }
         }
         
-        @keyframes hichroney-style-diamond {
+        @keyframes orvey-style-diamond {
           0%, 100% { 
             transform: scale(1) rotate(0deg);
           }
@@ -1823,7 +1823,7 @@
           }
         }
         
-        @keyframes hichroney-style-infinity {
+        @keyframes orvey-style-infinity {
           0%, 100% { 
             transform: scale(1) rotate(0deg);
             border-radius: 50% 40% 50% 40%;
@@ -1858,28 +1858,28 @@
           }
         }
         
-        @keyframes hichroney-pulse-expand {
+        @keyframes orvey-pulse-expand {
           0% { transform: scale(1); opacity: 0.6; }
           50% { transform: scale(1.5); opacity: 0; }
           100% { transform: scale(1); opacity: 0.6; }
         }
         
-        @keyframes hichroney-glow-pulse {
+        @keyframes orvey-glow-pulse {
           0%, 100% { opacity: 0.4; }
           50% { opacity: 0.6; }
         }
         
-        @keyframes hichroney-blob-float-1 {
+        @keyframes orvey-blob-float-1 {
           0%, 100% { transform: translate(0, 0) scale(1); }
           50% { transform: translate(10px, -10px) scale(1.1); }
         }
         
-        @keyframes hichroney-blob-float-2 {
+        @keyframes orvey-blob-float-2 {
           0%, 100% { transform: translate(0, 0) scale(1); }
           50% { transform: translate(-15px, 5px) scale(0.9); }
         }
         
-        @keyframes hichroney-blob-float-3 {
+        @keyframes orvey-blob-float-3 {
           0%, 100% { transform: translate(0, 0) scale(1); }
           50% { transform: translate(5px, 15px) scale(1.05); }
         }
@@ -1888,33 +1888,33 @@
       
       // Create orb container
       const container = document.createElement('div');
-      container.id = 'hichroney-voice-orb-container';
+      container.id = 'orvey-voice-orb-container';
       
       // Add pulse rings
       const pulseRing1 = document.createElement('div');
-      pulseRing1.className = 'hichroney-pulse-ring';
+      pulseRing1.className = 'orvey-pulse-ring';
       const pulseRing2 = document.createElement('div');
-      pulseRing2.className = 'hichroney-pulse-ring';
+      pulseRing2.className = 'orvey-pulse-ring';
       container.appendChild(pulseRing1);
       container.appendChild(pulseRing2);
       
       // Create orb button
       const orb = document.createElement('button');
-      orb.id = 'hichroney-voice-orb';
+      orb.id = 'orvey-voice-orb';
       orb.setAttribute('aria-label', 'Start voice chat');
       
       // Add cloud blobs
       const blob1 = document.createElement('div');
-      blob1.className = 'hichroney-cloud-blob';
-      blob1.style.cssText = 'width: 72px; height: 72px; top: 10%; left: 15%; animation: hichroney-blob-float-1 5s ease-in-out infinite;';
+      blob1.className = 'orvey-cloud-blob';
+      blob1.style.cssText = 'width: 72px; height: 72px; top: 10%; left: 15%; animation: orvey-blob-float-1 5s ease-in-out infinite;';
       
       const blob2 = document.createElement('div');
-      blob2.className = 'hichroney-cloud-blob';
-      blob2.style.cssText = 'width: 60px; height: 60px; bottom: 15%; right: 10%; animation: hichroney-blob-float-2 6s ease-in-out infinite;';
+      blob2.className = 'orvey-cloud-blob';
+      blob2.style.cssText = 'width: 60px; height: 60px; bottom: 15%; right: 10%; animation: orvey-blob-float-2 6s ease-in-out infinite;';
       
       const blob3 = document.createElement('div');
-      blob3.className = 'hichroney-cloud-blob';
-      blob3.style.cssText = 'width: 66px; height: 66px; top: 40%; left: 5%; animation: hichroney-blob-float-3 6.5s ease-in-out infinite 1.5s;';
+      blob3.className = 'orvey-cloud-blob';
+      blob3.style.cssText = 'width: 66px; height: 66px; top: 40%; left: 5%; animation: orvey-blob-float-3 6.5s ease-in-out infinite 1.5s;';
       
       orb.appendChild(blob1);
       orb.appendChild(blob2);
@@ -1922,13 +1922,13 @@
       
       // Add inner glow
       const glow = document.createElement('div');
-      glow.className = 'hichroney-inner-glow';
+      glow.className = 'orvey-inner-glow';
       orb.appendChild(glow);
       
       // Add avatar or mic icon
       if (this.config.avatarType && this.config.avatarType !== 'none') {
         const avatarWrapper = document.createElement('div');
-        avatarWrapper.className = 'hichroney-avatar-wrapper';
+        avatarWrapper.className = 'orvey-avatar-wrapper';
         const avatarImg = document.createElement('img');
         avatarImg.src = this.config.avatarType === 'custom' ? 
           this.config.avatarUrl : 
@@ -1973,7 +1973,7 @@
         console.log('[Orvey] Opening voice mode');
         // Create fullscreen iframe for voice mode
         const iframe = document.createElement('iframe');
-        iframe.id = 'hichroney-voice-iframe';
+        iframe.id = 'orvey-voice-iframe';
         iframe.setAttribute('allow', 'microphone; autoplay');
         
         const iframeUrl = new URL(`${baseUrl}/embed/chat`);
@@ -2040,7 +2040,7 @@
         + '</svg>';
 
       const el = document.createElement('a');
-      el.id = 'hichroney-whatsapp-launcher';
+      el.id = 'orvey-whatsapp-launcher';
       el.href = waUrl;
       el.target = '_blank';
       el.rel = 'noopener noreferrer';
@@ -2146,7 +2146,7 @@
       const responsiveStyles = document.createElement('style');
       responsiveStyles.textContent = `
         /* Futuristic chat opening animation */
-        @keyframes hichroney-chat-open {
+        @keyframes orvey-chat-open {
           0% {
             opacity: 0;
             transform: scale(0.8) translateY(20px);
@@ -2164,7 +2164,7 @@
           }
         }
         
-        @keyframes hichroney-glow-pulse {
+        @keyframes orvey-glow-pulse {
           0%, 100% {
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 0 30px rgba(147, 51, 234, 0.3);
           }
@@ -2173,7 +2173,7 @@
           }
         }
         
-        @keyframes hichroney-scan-line {
+        @keyframes orvey-scan-line {
           0% {
             transform: translateY(-100%);
             opacity: 1;
@@ -2185,7 +2185,7 @@
         }
         
         /* Dark overlay when chat is open */
-        #hichroney-chat-overlay {
+        #orvey-chat-overlay {
           position: fixed;
           top: 0;
           left: 0;
@@ -2201,24 +2201,24 @@
           -webkit-backdrop-filter: blur(2px);
         }
         
-        #hichroney-chat-overlay.overlay-visible {
+        #orvey-chat-overlay.overlay-visible {
           opacity: 1;
           visibility: visible;
           pointer-events: auto;
         }
         
         /* Chat opening animation class */
-        #hichroney-widget-iframe.chat-opening {
-          animation: hichroney-chat-open 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        #orvey-widget-iframe.chat-opening {
+          animation: orvey-chat-open 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
         
         /* Glow effect after opening */
-        #hichroney-widget-iframe.chat-open-glow {
-          animation: hichroney-glow-pulse 2s ease-in-out 1;
+        #orvey-widget-iframe.chat-open-glow {
+          animation: orvey-glow-pulse 2s ease-in-out 1;
         }
         
         /* Desktop styles */
-        #hichroney-widget-container {
+        #orvey-widget-container {
           position: fixed;
           ${positionStyles.vertical}
           ${positionStyles.horizontal}
@@ -2226,7 +2226,7 @@
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
         
-        #hichroney-widget-iframe {
+        #orvey-widget-iframe {
           display: none;
           position: fixed;
           ${positionStyles.iframeVertical}
@@ -2242,14 +2242,14 @@
         }
         
         /* Partial mode - compact height showing header + first message + input */
-        #hichroney-widget-iframe.partial-mode {
+        #orvey-widget-iframe.partial-mode {
           height: 360px !important;
           max-height: 360px !important;
         }
         
         /* Tablet styles - respect configured size with responsive constraints */
         @media (max-width: 768px) {
-          #hichroney-widget-iframe {
+          #orvey-widget-iframe {
             width: min(${this.config.widgetWidth}px, calc(100vw - 20px));
             max-width: calc(100vw - 20px);
             max-height: calc(100vh - 60px);
@@ -2257,7 +2257,7 @@
             ${verticalPos === 'bottom' ? 'bottom: ' + Math.max(bottomOffset, 10) + 'px;' : 'top: ' + Math.max(bottomOffset, 10) + 'px;'}
           }
           
-          #hichroney-widget-container {
+          #orvey-widget-container {
             ${horizontalPos === 'right' ? 'right: ' + Math.max(sideOffset, 10) + 'px;' : 'left: ' + Math.max(sideOffset, 10) + 'px;'}
             ${verticalPos === 'bottom' ? 'bottom: ' + Math.max(bottomOffset, 10) + 'px;' : 'top: ' + Math.max(bottomOffset, 10) + 'px;'}
           }
@@ -2266,7 +2266,7 @@
         /* Mobile styles - compact floating window by default, fullscreen only with .mobile-open */
         @media (max-width: 480px) {
           /* Default compact floating window on mobile (for auto-open partial mode) */
-          #hichroney-widget-iframe {
+          #orvey-widget-iframe {
             width: min(${this.config.widgetWidth}px, calc(100vw - 20px)) !important;
             height: 280px !important;
             max-height: 280px !important;
@@ -2279,7 +2279,7 @@
           }
           
           /* When auto-opened on mobile: position at bottom edge and hide button */
-          #hichroney-widget-iframe.mobile-partial-open {
+          #orvey-widget-iframe.mobile-partial-open {
             /* Position above the browser's bottom bar with safe area */
             bottom: calc(env(safe-area-inset-bottom, 0px) + 60px) !important;
             left: 5px !important;
@@ -2293,12 +2293,12 @@
           }
           
           /* Hide pill button when chat is auto-opened in partial mode */
-          #hichroney-widget-container.mobile-partial-hidden {
+          #orvey-widget-container.mobile-partial-hidden {
             display: none !important;
           }
           
           /* Bottom sheet mode - 80% height with rounded top corners */
-          #hichroney-widget-iframe.mobile-open {
+          #orvey-widget-iframe.mobile-open {
             display: block !important;
             width: 100vw !important;
             /* 80% of viewport height for partial overlay */
@@ -2326,30 +2326,30 @@
           }
           
           /* Hide widget button when chat is fullscreen on mobile */
-          #hichroney-widget-iframe.mobile-open ~ #hichroney-widget-container {
+          #orvey-widget-iframe.mobile-open ~ #orvey-widget-container {
             display: none !important;
           }
           
-          #hichroney-widget-container {
+          #orvey-widget-container {
             ${horizontalPos === 'right' ? 'right: ' + Math.max(sideOffset, 10) + 'px !important;' : 'left: ' + Math.max(sideOffset, 10) + 'px !important;'}
             ${verticalPos === 'bottom' ? 'bottom: ' + bottomOffset + 'px !important;' : 'top: ' + bottomOffset + 'px !important;'}
             z-index: 2147483647 !important;
             position: fixed !important;
           }
           
-          #hichroney-widget-button {
+          #orvey-widget-button {
             width: 56px !important;
             height: 56px !important;
           }
           
-          #hichroney-widget-button.pill-style:not(.pill-expanded) {
+          #orvey-widget-button.pill-style:not(.pill-expanded) {
             width: 260px !important;
             max-width: calc(100vw - 40px) !important;
             height: 56px !important;
             transition: width 0.3s ease !important;
           }
           
-          #hichroney-widget-button.pill-style {
+          #orvey-widget-button.pill-style {
             display: flex !important;
             align-items: center !important;
             /* CRITICAL: Disable transforms on mobile to prevent touch target misalignment */
@@ -2357,7 +2357,7 @@
             -webkit-transform: none !important;
           }
           
-          #hichroney-widget-button.pill-style.pill-expanded {
+          #orvey-widget-button.pill-style.pill-expanded {
             width: calc(100vw - 20px) !important;
             max-width: calc(100vw - 20px) !important;
             height: 56px !important;
@@ -2367,12 +2367,12 @@
           }
           
           /* When expanded on mobile, maximize input field space */
-          #hichroney-widget-button.pill-style.pill-expanded {
+          #orvey-widget-button.pill-style.pill-expanded {
             justify-content: flex-start !important; /* Force left alignment */
             padding: 0 4px !important; /* Minimal outer padding - reduced from 6px */
           }
           
-          #hichroney-widget-button.pill-style.pill-expanded .pill-wrapper {
+          #orvey-widget-button.pill-style.pill-expanded .pill-wrapper {
             flex: 1 !important;
             padding: 0 !important;
             gap: 4px !important; /* Reduced from 6px */
@@ -2380,13 +2380,13 @@
             width: 100% !important; /* Ensure wrapper fills button */
           }
           
-          #hichroney-widget-button.pill-style.pill-expanded .pill-avatar {
+          #orvey-widget-button.pill-style.pill-expanded .pill-avatar {
             margin: 0 !important;
             flex-shrink: 0 !important;
             flex-grow: 0 !important;
           }
           
-          #hichroney-widget-button.pill-style.pill-expanded .pill-input-container {
+          #orvey-widget-button.pill-style.pill-expanded .pill-input-container {
             flex: 1 1 0px !important; /* flex-basis: 0 forces it to ignore intrinsic width */
             min-width: 0 !important;
             max-width: none !important;
@@ -2396,80 +2396,80 @@
             margin: 0 !important;
           }
           
-          #hichroney-widget-button.pill-style.pill-expanded #hichroney-pill-input {
+          #orvey-widget-button.pill-style.pill-expanded #orvey-pill-input {
             flex: 1 1 0px !important; /* flex-basis: 0 */
             width: auto !important;
             min-width: 0 !important;
           }
           
-          #hichroney-widget-button.pill-style.pill-expanded #hichroney-pill-send-btn {
+          #orvey-widget-button.pill-style.pill-expanded #orvey-pill-send-btn {
             flex: 0 0 auto !important; /* Don't grow or shrink */
           }
           
-          #hichroney-widget-button.pill-style.pill-expanded .pill-arrow-button,
-          #hichroney-widget-button.pill-style.pill-expanded #hichroney-pill-send-btn {
+          #orvey-widget-button.pill-style.pill-expanded .pill-arrow-button,
+          #orvey-widget-button.pill-style.pill-expanded #orvey-pill-send-btn {
             margin: 0 !important;
           }
           
           /* Default collapsed state spacing (only when NOT expanded) */
-          #hichroney-widget-button.pill-style:not(.pill-expanded) .pill-wrapper {
+          #orvey-widget-button.pill-style:not(.pill-expanded) .pill-wrapper {
             padding: 0 10px !important;
             gap: 8px !important;
           }
           
-          #hichroney-widget-button.pill-style:not(.pill-expanded) .pill-input-container {
+          #orvey-widget-button.pill-style:not(.pill-expanded) .pill-input-container {
             padding: 8px 12px !important;
             gap: 6px !important;
           }
           
-          #hichroney-widget-button.pill-style .pill-avatar {
+          #orvey-widget-button.pill-style .pill-avatar {
             width: 36px !important;
             height: 36px !important;
             flex-shrink: 0 !important;
           }
           
-          #hichroney-widget-button.pill-style .pill-avatar img,
-          #hichroney-widget-button.pill-style .pill-avatar svg {
+          #orvey-widget-button.pill-style .pill-avatar img,
+          #orvey-widget-button.pill-style .pill-avatar svg {
             width: 36px !important;
             height: 36px !important;
           }
           
           /* Fix close button avatar on mobile */
-          #hichroney-widget-button.pill-style img[style*="width: 48px"],
-          #hichroney-widget-button.pill-style svg[style*="width: 48px"] {
+          #orvey-widget-button.pill-style img[style*="width: 48px"],
+          #orvey-widget-button.pill-style svg[style*="width: 48px"] {
             width: 36px !important;
             height: 36px !important;
           }
           
           /* Removed duplicate - defined above */
           
-          #hichroney-widget-button.pill-style #hichroney-pill-input {
+          #orvey-widget-button.pill-style #orvey-pill-input {
             font-size: 14px !important;
           }
           
-          #hichroney-widget-button.pill-style #hichroney-pill-send-btn {
+          #orvey-widget-button.pill-style #orvey-pill-send-btn {
             width: 32px !important;
             height: 32px !important;
           }
           
-          #hichroney-widget-button.pill-style #hichroney-pill-send-btn svg {
+          #orvey-widget-button.pill-style #orvey-pill-send-btn svg {
             width: 14px !important;
             height: 14px !important;
           }
           
-          #hichroney-widget-button.pill-style svg,
-          #hichroney-widget-button.pill-style img {
+          #orvey-widget-button.pill-style svg,
+          #orvey-widget-button.pill-style img {
             width: 20px !important;
             height: 20px !important;
           }
           
-          #hichroney-widget-button.pill-style span {
+          #orvey-widget-button.pill-style span {
             font-size: 13px !important;
           }
         }
         
         /* Pill state management with smooth transitions (global - applies to all screen sizes) */
-        #hichroney-widget-button.pill-style.pill--hidden {
+        #orvey-widget-button.pill-style.pill--hidden {
           display: none !important;
           opacity: 0 !important;
           pointer-events: none !important;
@@ -2477,33 +2477,33 @@
           visibility: hidden !important;
         }
         
-        #hichroney-widget-button.pill-style.pill--visible {
+        #orvey-widget-button.pill-style.pill--visible {
           opacity: 1 !important;
           pointer-events: auto !important;
           transform: translateY(0) !important;
           transition: opacity 180ms ease, transform 180ms ease !important;
         }
         
-        #hichroney-widget-button.pill-style.pill--input .pill-state--close,
-        #hichroney-widget-button.pill-style.pill--close .pill-state--input {
+        #orvey-widget-button.pill-style.pill--input .pill-state--close,
+        #orvey-widget-button.pill-style.pill--close .pill-state--input {
           display: none !important;
         }
         
         /* Default desktop pill layout and spacing */
-        #hichroney-widget-button.pill-style {
+        #orvey-widget-button.pill-style {
           display: flex !important;
           align-items: center !important;
           justify-content: flex-start !important; /* Left-align content */
         }
         
         /* Desktop wrapper spacing - DO NOT apply when expanded on mobile */
-        #hichroney-widget-button.pill-style:not(.pill-expanded) .pill-wrapper {
+        #orvey-widget-button.pill-style:not(.pill-expanded) .pill-wrapper {
           padding: 0 10px;
           gap: 8px;
         }
         
         /* Base wrapper styles for all states */
-        #hichroney-widget-button.pill-style .pill-wrapper {
+        #orvey-widget-button.pill-style .pill-wrapper {
           display: flex !important;
           align-items: center !important; /* Center-align avatar and content */
           width: 100% !important;
@@ -2511,12 +2511,12 @@
           box-sizing: border-box !important;
         }
         
-        #hichroney-widget-button.pill-style .pill-avatar {
+        #orvey-widget-button.pill-style .pill-avatar {
           flex-shrink: 0 !important;
         }
         
         /* Desktop/collapsed state only - DO NOT apply when expanded */
-        #hichroney-widget-button.pill-style:not(.pill-expanded) .pill-input-container {
+        #orvey-widget-button.pill-style:not(.pill-expanded) .pill-input-container {
           flex: 1 !important;
           min-width: 0 !important;
           background: white !important;
@@ -2529,7 +2529,7 @@
         }
         
         /* Base styles shared by both states */
-        #hichroney-widget-button.pill-style .pill-input-container {
+        #orvey-widget-button.pill-style .pill-input-container {
           background: white !important;
           border-radius: 24px !important;
           display: flex !important;
@@ -2538,14 +2538,14 @@
         }
         
         /* Textarea field styling (auto-expanding) - DO NOT apply flex/width when expanded on mobile */
-        #hichroney-widget-button.pill-style:not(.pill-expanded) #hichroney-pill-input {
+        #orvey-widget-button.pill-style:not(.pill-expanded) #orvey-pill-input {
           flex: 1 !important;
           min-width: 0 !important;
           width: 100% !important;
         }
         
         /* Base textarea styles for all states */
-        #hichroney-pill-input {
+        #orvey-pill-input {
           min-height: 20px !important;
           max-height: 48px !important; /* ~2 lines max before scrolling */
           font-size: 15px !important;
@@ -2564,7 +2564,7 @@
         }
         
         /* Send button styling */
-        #hichroney-pill-send-btn {
+        #orvey-pill-send-btn {
           flex-shrink: 0 !important;
           width: 36px !important;
           height: 36px !important;
@@ -2581,18 +2581,18 @@
         
         /* Hide conversation starters on mobile to prevent screen coverage */
         @media (max-width: 480px) {
-          #hichroney-starters-container {
+          #orvey-starters-container {
             display: none !important;
           }
           
           /* CRITICAL: Disable ALL transform-based animations on mobile */
           /* CSS transforms cause touch target misalignment on mobile browsers */
-          #hichroney-widget-button,
-          #hichroney-widget-container,
+          #orvey-widget-button,
+          #orvey-widget-container,
           .pill-wrapper,
           .pill-input-container,
-          #hichroney-pill-input,
-          #hichroney-pill-send-btn {
+          #orvey-pill-input,
+          #orvey-pill-send-btn {
             transform: none !important;
             -webkit-transform: none !important;
             animation: none !important;
@@ -2602,7 +2602,7 @@
         
         /* Animations - only apply on devices with hover (not touch) */
         @media (hover: hover) {
-          @keyframes hichroney-bounce {
+          @keyframes orvey-bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
           }
@@ -2610,18 +2610,18 @@
         
         /* Fallback for devices without hover capability */
         @media (hover: none) {
-          @keyframes hichroney-bounce {
+          @keyframes orvey-bounce {
             0%, 100% { transform: none; }
           }
         }
         
         /* Original animation definition for backward compatibility */
-        @keyframes hichroney-bounce {
+        @keyframes orvey-bounce {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-10px); }
         }
         
-        @keyframes hichroney-avatar-pulse {
+        @keyframes orvey-avatar-pulse {
           0%, 100% { 
             box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7),
                         0 0 20px rgba(255, 255, 255, 0.3);
@@ -2635,11 +2635,11 @@
         }
         
         /* Pill button arrow hover effect */
-        #hichroney-widget-button:hover .pill-arrow-button {
+        #orvey-widget-button:hover .pill-arrow-button {
           background: #222 !important;
         }
         
-        #hichroney-widget-button:active .pill-arrow-button {
+        #orvey-widget-button:active .pill-arrow-button {
           background: #111 !important;
         }
         
@@ -2650,11 +2650,11 @@
         }
         
         /* Pill input field styling */
-        #hichroney-pill-input::placeholder {
+        #orvey-pill-input::placeholder {
           color: transparent;
         }
         
-        #hichroney-pill-input:focus::placeholder {
+        #orvey-pill-input:focus::placeholder {
           color: transparent;
         }
         
@@ -2699,7 +2699,7 @@
            ============================================================ */
         @media (max-width: 480px) {
           /* Button expands to near full width */
-          #hichroney-widget-button.pill-style.pill-expanded {
+          #orvey-widget-button.pill-style.pill-expanded {
             width: calc(100vw - 20px) !important;
             max-width: calc(100vw - 20px) !important;
             height: auto !important;
@@ -2709,7 +2709,7 @@
           }
           
           /* STATE WRAPPER must fill entire button width */
-          #hichroney-widget-button.pill-style.pill-expanded .pill-state--input {
+          #orvey-widget-button.pill-style.pill-expanded .pill-state--input {
             display: block !important;
             width: 100% !important;
             max-width: 100% !important;
@@ -2719,7 +2719,7 @@
           }
           
           /* Wrapper fills the button and uses flex layout */
-          #hichroney-widget-button.pill-style.pill-expanded .pill-wrapper {
+          #orvey-widget-button.pill-style.pill-expanded .pill-wrapper {
             display: flex !important;
             flex: 1 1 auto !important;
             width: 100% !important;
@@ -2731,7 +2731,7 @@
           }
           
           /* Avatar stays fixed size on the left */
-          #hichroney-widget-button.pill-style.pill-expanded .pill-avatar {
+          #orvey-widget-button.pill-style.pill-expanded .pill-avatar {
             flex: 0 0 36px !important;
             width: 36px !important;
             height: 36px !important;
@@ -2739,7 +2739,7 @@
           }
           
           /* Input container MUST expand to fill remaining space */
-          #hichroney-widget-button.pill-style.pill-expanded .pill-input-container {
+          #orvey-widget-button.pill-style.pill-expanded .pill-input-container {
             flex: 1 1 auto !important;
             min-width: 0 !important;
             max-width: none !important;
@@ -2755,7 +2755,7 @@
           }
           
           /* Textarea MUST expand within the container */
-          #hichroney-widget-button.pill-style.pill-expanded #hichroney-pill-input {
+          #orvey-widget-button.pill-style.pill-expanded #orvey-pill-input {
             flex: 1 1 auto !important;
             min-width: 0 !important;
             max-width: none !important;
@@ -2763,7 +2763,7 @@
           }
           
           /* Send button stays fixed size */
-          #hichroney-widget-button.pill-style.pill-expanded #hichroney-pill-send-btn {
+          #orvey-widget-button.pill-style.pill-expanded #orvey-pill-send-btn {
             flex: 0 0 32px !important;
             width: 32px !important;
             height: 32px !important;
@@ -2775,11 +2775,11 @@
       
       // Create container
       const container = document.createElement('div');
-      container.id = 'hichroney-widget-container';
+      container.id = 'orvey-widget-container';
 
       // Create dark overlay for when chat is open
       const chatOverlay = document.createElement('div');
-      chatOverlay.id = 'hichroney-chat-overlay';
+      chatOverlay.id = 'orvey-chat-overlay';
       document.body.appendChild(chatOverlay);
       
       // Helper functions to show/hide overlay
@@ -2795,7 +2795,7 @@
       chatOverlay.addEventListener('click', () => {
         if (isOpen) {
           // For proactive guidance pages, don't close on overlay click
-          if (HiChroneyWidget.config.proactiveGuidanceActive === true) {
+          if (OrveyWidget.config.proactiveGuidanceActive === true) {
             console.log('[Orvey] Proactive guidance active - ignoring overlay click');
             return;
           }
@@ -2816,7 +2816,7 @@
       // ────────────────────────────────────────────────────────────────────────
       // Create iframe for the chat widget
       const iframe = document.createElement('iframe');
-      iframe.id = 'hichroney-widget-iframe';
+      iframe.id = 'orvey-widget-iframe';
       
       // Grant microphone and autoplay permissions for voice mode
       iframe.setAttribute('allow', 'microphone; autoplay');
@@ -2848,8 +2848,8 @@
         }
 
         // The chat tells us its conversation so the WhatsApp launcher can hand the visitor over with the topic.
-        if (event.data && event.data.type === 'CHRONEY_CONVERSATION' && event.data.conversationId) {
-          HiChroneyWidget._chatConversation = {
+        if (event.data && event.data.type === 'ORVEY_CONVERSATION' && event.data.conversationId) {
+          OrveyWidget._chatConversation = {
             conversationId: String(event.data.conversationId),
             visitorToken: event.data.visitorToken ? String(event.data.visitorToken) : null
           };
@@ -2859,7 +2859,7 @@
         if (event.data && event.data.type === 'EMBED_READY') {
           console.log('[Orvey Widget] ✅ Iframe is ready to receive messages');
           isIframeReady = true;
-          HiChroneyWidget._iframeReady = true;
+          OrveyWidget._iframeReady = true;
           
           if (window.VisitorSession && window.VisitorSession.sessionId) {
             console.log('[Orvey Widget] Sending visitor session ID to iframe:', window.VisitorSession.sessionId);
@@ -2887,7 +2887,7 @@
           
           // Process proactive guidance rules (use prefetched if available, otherwise fetch)
           const currentUrl = window.location.pathname + window.location.search;
-          const businessAccountId = HiChroneyWidget.config.businessAccountId;
+          const businessAccountId = OrveyWidget.config.businessAccountId;
           
           const processGuidanceRules = function(rules) {
             console.log('[Orvey Widget] Processing', rules?.length || 0, 'guidance rules');
@@ -2928,7 +2928,7 @@
               
               // CRITICAL: Set proactiveGuidanceActive flag when rule matches
               // This enables assistant mode: no overlay, prevents closing
-              HiChroneyWidget.config.proactiveGuidanceActive = true;
+              OrveyWidget.config.proactiveGuidanceActive = true;
               console.log('[Orvey Widget] ✅ Proactive guidance mode ACTIVATED');
               
               // Hide any existing overlay for assistant mode (no blocking overlay)
@@ -2974,7 +2974,7 @@
           
           // Fetch guidance rules and process
           console.log('[Orvey Widget] Fetching proactive guidance rules for URL:', currentUrl);
-          fetch(HiChroneyWidget.getBaseUrl() + '/api/public/proactive-guidance-rules/' + encodeURIComponent(businessAccountId))
+          fetch(OrveyWidget.getBaseUrl() + '/api/public/proactive-guidance-rules/' + encodeURIComponent(businessAccountId))
             .then(function(r) { return r.json(); })
             .then(processGuidanceRules)
             .catch(function(err) {
@@ -3028,9 +3028,9 @@
         const containerId = this.config.container || 'ai-tutor';
         const host = document.getElementById(containerId);
         if (host) {
-          // Distinct id so NONE of the #hichroney-widget-iframe float/mobile rules
+          // Distinct id so NONE of the #orvey-widget-iframe float/mobile rules
           // (including the mobile !important overrides) apply — we own the styling.
-          iframe.id = 'hichroney-inline-iframe';
+          iframe.id = 'orvey-inline-iframe';
           iframe.style.cssText = [
             'display: block',
             'width: 100%',
@@ -3047,7 +3047,7 @@
           host.appendChild(iframe);
 
           // Minimal messaging shim so any caller of _sendMessageToIframe is safe.
-          HiChroneyWidget._sendMessageToIframe = (messageData) => {
+          OrveyWidget._sendMessageToIframe = (messageData) => {
             if (isIframeReady && iframe.contentWindow) {
               iframe.contentWindow.postMessage(messageData, '*');
             } else {
@@ -3078,7 +3078,7 @@
       };
       
       // Expose sendMessageToIframe for Product Page AI Mode
-      HiChroneyWidget._sendMessageToIframe = sendMessageToIframe;
+      OrveyWidget._sendMessageToIframe = sendMessageToIframe;
 
       // Normalize settings to lowercase to handle case sensitivity from API
       // MUST come before button creation since we use buttonStyle in createElement
@@ -3089,7 +3089,7 @@
 
       // Create chat button (or input container for pill style)
       const button = document.createElement(buttonStyle === 'pill' ? 'div' : 'button');
-      button.id = 'hichroney-widget-button';
+      button.id = 'orvey-widget-button';
       
       // Helper function to get avatar HTML or fallback icon
       const getAvatarOrIcon = (size = 24, addAnimation = false) => {
@@ -3143,7 +3143,7 @@
       let transitionStyle = 'transition: transform 0.2s, box-shadow 0.2s;';
       switch (buttonAnimation) {
         case 'bounce':
-          animationStyle = 'animation: hichroney-bounce 2s ease-in-out infinite;';
+          animationStyle = 'animation: orvey-bounce 2s ease-in-out infinite;';
           break;
         case 'none':
         default:
@@ -3196,16 +3196,16 @@
                 ${getAvatarOrIcon(pillAvatarSize, true)}
               </div>
               <div class="pill-input-container" style="position: relative;">
-                <span id="hichroney-animated-placeholder" class="pill-animated-placeholder">
+                <span id="orvey-animated-placeholder" class="pill-animated-placeholder">
                   <span class="placeholder-text"></span><span class="typing-cursor"></span>
                 </span>
                 <textarea 
-                  id="hichroney-pill-input"
+                  id="orvey-pill-input"
                   placeholder=""
                   rows="1"
                 ></textarea>
                 <button 
-                  id="hichroney-pill-send-btn"
+                  id="orvey-pill-send-btn"
                   class="pill-arrow-button"
                   aria-label="Send message"
                 >
@@ -3273,7 +3273,7 @@
       const handlePillSendMessage = () => {
         console.log('[Orvey Pill] Button clicked! isOpen:', isOpen);
         
-        const pillInput = document.getElementById('hichroney-pill-input');
+        const pillInput = document.getElementById('orvey-pill-input');
         if (!pillInput) {
           console.log('[Orvey Pill] No input found!');
           return;
@@ -3289,18 +3289,18 @@
           iframe.style.display = 'block';
           
           // Play AI activation sound if enabled
-          if (HiChroneyWidget.config.openingSoundEnabled !== 'false') {
-            playOpeningSound(HiChroneyWidget.config.openingSoundStyle || 'chime');
+          if (OrveyWidget.config.openingSoundEnabled !== 'false') {
+            playOpeningSound(OrveyWidget.config.openingSoundStyle || 'chime');
           }
           
           // Track chat opened event (fire-and-forget)
-          if (HiChroneyWidget.visitorToken) {
-            fetch(`${HiChroneyWidget.getBaseUrl()}/api/widget/chat-opened`, {
+          if (OrveyWidget.visitorToken) {
+            fetch(`${OrveyWidget.getBaseUrl()}/api/widget/chat-opened`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
-                businessAccountId: HiChroneyWidget.config.businessAccountId,
-                visitorToken: HiChroneyWidget.visitorToken
+                businessAccountId: OrveyWidget.config.businessAccountId,
+                visitorToken: OrveyWidget.visitorToken
               })
             }).catch(() => {});
           }
@@ -3401,9 +3401,9 @@
         let isDeleting = false;
         let animationTimer = null;
         
-        const placeholderEl = document.getElementById('hichroney-animated-placeholder');
+        const placeholderEl = document.getElementById('orvey-animated-placeholder');
         const textEl = placeholderEl?.querySelector('.placeholder-text');
-        const inputEl = document.getElementById('hichroney-pill-input');
+        const inputEl = document.getElementById('orvey-pill-input');
         
         if (!placeholderEl || !textEl || !inputEl) {
           // Retry after a short delay if elements aren't ready
@@ -3457,7 +3457,7 @@
         typeAnimation();
         
         // Store cleanup function
-        window.hichroneyPlaceholderCleanup = () => {
+        window.orveyPlaceholderCleanup = () => {
           if (animationTimer) clearTimeout(animationTimer);
         };
       };
@@ -3471,14 +3471,14 @@
         // Users can still click to open the chat but can't type
         const checkFormJourneyAndDisableInput = async () => {
           try {
-            const baseUrl = HiChroneyWidget.getBaseUrl();
-            const businessAccountId = HiChroneyWidget.config.businessAccountId;
+            const baseUrl = OrveyWidget.getBaseUrl();
+            const businessAccountId = OrveyWidget.config.businessAccountId;
             const response = await fetch(`${baseUrl}/api/chat/widget/intro?businessAccountId=${businessAccountId}`);
             if (response.ok) {
               const data = await response.json();
               if (data.formStep) {
                 // Form journey is active - disable the input field
-                const pillInput = document.getElementById('hichroney-pill-input');
+                const pillInput = document.getElementById('orvey-pill-input');
                 if (pillInput) {
                   pillInput.disabled = true;
                   pillInput.style.cursor = 'pointer';
@@ -3487,21 +3487,21 @@
                   console.log('[Orvey Pill] Form journey active - input disabled');
                   
                   // Hide the send button since input is disabled
-                  const sendBtn = document.getElementById('hichroney-pill-send-btn');
+                  const sendBtn = document.getElementById('orvey-pill-send-btn');
                   if (sendBtn) {
                     sendBtn.style.display = 'none';
                   }
                   
                   // Update placeholder to indicate click to open
-                  const placeholderEl = document.getElementById('hichroney-animated-placeholder');
+                  const placeholderEl = document.getElementById('orvey-animated-placeholder');
                   if (placeholderEl) {
                     const textEl = placeholderEl.querySelector('.placeholder-text');
                     if (textEl) {
                       textEl.textContent = 'Click to get started';
                     }
                     // Stop animation
-                    if (window.hichroneyPlaceholderCleanup) {
-                      window.hichroneyPlaceholderCleanup();
+                    if (window.orveyPlaceholderCleanup) {
+                      window.orveyPlaceholderCleanup();
                     }
                   }
                 }
@@ -3524,9 +3524,9 @@
           
           // Check if click is on send button or its children (SVG/path)
           const target = e.target;
-          const sendBtn = target.closest('#hichroney-pill-send-btn');
+          const sendBtn = target.closest('#orvey-pill-send-btn');
           
-          if (sendBtn || target.id === 'hichroney-pill-send-btn') {
+          if (sendBtn || target.id === 'orvey-pill-send-btn') {
             console.log('[Orvey] Send button detected!');
             e.stopPropagation();
             e.preventDefault();
@@ -3535,9 +3535,9 @@
           }
           
           // Prevent clicks on input from bubbling (unless form journey is active - then let it open chat)
-          const input = target.closest('#hichroney-pill-input');
-          if (input || target.id === 'hichroney-pill-input') {
-            const pillInput = document.getElementById('hichroney-pill-input');
+          const input = target.closest('#orvey-pill-input');
+          if (input || target.id === 'orvey-pill-input') {
+            const pillInput = document.getElementById('orvey-pill-input');
             // If form journey is active, don't stop propagation - let click open the chat
             if (pillInput && pillInput.dataset.formJourneyActive === 'true') {
               console.log('[Orvey] Form journey active - letting click open chat');
@@ -3553,9 +3553,9 @@
         // Handle Enter key (submit) vs Shift+Enter (new line)
         button.addEventListener('keydown', (e) => {
           const target = e.target;
-          const input = target.closest('#hichroney-pill-input');
+          const input = target.closest('#orvey-pill-input');
           
-          if ((input || target.id === 'hichroney-pill-input') && e.key === 'Enter') {
+          if ((input || target.id === 'orvey-pill-input') && e.key === 'Enter') {
             if (e.shiftKey) {
               // Shift+Enter: Allow new line (default textarea behavior)
               return;
@@ -3572,18 +3572,18 @@
         // Auto-resize textarea on input
         button.addEventListener('input', (e) => {
           const target = e.target;
-          if (target.id === 'hichroney-pill-input') {
+          if (target.id === 'orvey-pill-input') {
             autosizeTextarea(target);
           }
         }, true);
         
         // Mobile: Hide nudge and expand button on touch/focus for better UX
         button.addEventListener('touchstart', (e) => {
-          const input = e.target.closest('#hichroney-pill-input');
+          const input = e.target.closest('#orvey-pill-input');
           const inputContainer = e.target.closest('.pill-input-container');
-          if (input || e.target.id === 'hichroney-pill-input' || inputContainer) {
+          if (input || e.target.id === 'orvey-pill-input' || inputContainer) {
             // Hide proactive nudge immediately on touch to prevent blocking
-            const nudge = document.getElementById('hichroney-proactive-nudge');
+            const nudge = document.getElementById('orvey-proactive-nudge');
             if (nudge && nudge.parentNode) {
               nudge.parentNode.removeChild(nudge);
             }
@@ -3592,13 +3592,13 @@
         
         // Mobile: Expand button on input focus for better UX
         button.addEventListener('focus', (e) => {
-          const input = e.target.closest('#hichroney-pill-input');
-          if (input || e.target.id === 'hichroney-pill-input') {
+          const input = e.target.closest('#orvey-pill-input');
+          if (input || e.target.id === 'orvey-pill-input') {
             const isMobile = window.innerWidth <= 480;
             if (isMobile) {
               button.classList.add('pill-expanded');
               // Hide proactive nudge immediately when input is focused on mobile
-              const nudge = document.getElementById('hichroney-proactive-nudge');
+              const nudge = document.getElementById('orvey-proactive-nudge');
               if (nudge && nudge.parentNode) {
                 nudge.parentNode.removeChild(nudge);
               }
@@ -3608,14 +3608,14 @@
         
         // Mobile: Collapse button on input blur
         button.addEventListener('blur', (e) => {
-          const input = e.target.closest('#hichroney-pill-input');
-          if (input || e.target.id === 'hichroney-pill-input') {
+          const input = e.target.closest('#orvey-pill-input');
+          if (input || e.target.id === 'orvey-pill-input') {
             const isMobile = window.innerWidth <= 480;
             if (isMobile) {
               // Add delay to prevent blur from interfering with send button click
               setTimeout(() => {
                 // Only collapse if send button wasn't clicked
-                const sendBtn = document.getElementById('hichroney-pill-send-btn');
+                const sendBtn = document.getElementById('orvey-pill-send-btn');
                 if (sendBtn && !sendBtn.matches(':active')) {
                   button.classList.remove('pill-expanded');
                 }
@@ -3670,8 +3670,8 @@
       };
 
       // Toggle widget - Handle auto-open setting and remember user preference
-      const closedSessionKey = `hichroney-chat-closed-${this.config.businessAccountId}`;
-      const openedOnceKey = `hichroney-chat-opened-once-${this.config.businessAccountId}`;
+      const closedSessionKey = `orvey-chat-closed-${this.config.businessAccountId}`;
+      const openedOnceKey = `orvey-chat-opened-once-${this.config.businessAccountId}`;
       
       // Check if user closed the chat in this session
       const wasClosed = sessionStorage.getItem(closedSessionKey) === 'true';
@@ -3798,13 +3798,13 @@
         }
         
         // Track chat opened event (fire-and-forget)
-        if (HiChroneyWidget.visitorToken) {
-          fetch(`${HiChroneyWidget.getBaseUrl()}/api/widget/chat-opened`, {
+        if (OrveyWidget.visitorToken) {
+          fetch(`${OrveyWidget.getBaseUrl()}/api/widget/chat-opened`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              businessAccountId: HiChroneyWidget.config.businessAccountId,
-              visitorToken: HiChroneyWidget.visitorToken
+              businessAccountId: OrveyWidget.config.businessAccountId,
+              visitorToken: OrveyWidget.visitorToken
             })
           }).catch(() => {});
         }
@@ -3874,7 +3874,7 @@
           // Only handle close action for pill style
           if (isOpen) {
             // For proactive guidance pages, don't allow closing via button
-            if (HiChroneyWidget.config.proactiveGuidanceActive === true) {
+            if (OrveyWidget.config.proactiveGuidanceActive === true) {
               console.log('[Orvey] Proactive guidance active - ignoring button close');
               return;
             }
@@ -3910,7 +3910,7 @@
             }
           } else {
             // Pill is closed - check if form journey is active
-            const pillInput = document.getElementById('hichroney-pill-input');
+            const pillInput = document.getElementById('orvey-pill-input');
             if (pillInput && pillInput.dataset.formJourneyActive === 'true') {
               // Form journey active - open chat on any click
               console.log('[Orvey Pill] Form journey active - opening chat on click');
@@ -3923,7 +3923,7 @@
         
         // For non-pill styles, keep original toggle behavior
         // But for proactive guidance, prevent closing (only allow opening)
-        if (isOpen && HiChroneyWidget.config.proactiveGuidanceActive === true) {
+        if (isOpen && OrveyWidget.config.proactiveGuidanceActive === true) {
           console.log('[Orvey] Proactive guidance active - ignoring button close');
           return;
         }
@@ -4100,7 +4100,7 @@
           lastUrl = currentUrl;
           
           // Fetch proactive guidance rules and find matching rule
-          fetch(`${HiChroneyWidget.getBaseUrl()}/api/public/proactive-guidance-rules/${encodeURIComponent(businessAccountId)}`)
+          fetch(`${OrveyWidget.getBaseUrl()}/api/public/proactive-guidance-rules/${encodeURIComponent(businessAccountId)}`)
             .then(r => r.json())
             .then(rules => {
               console.log('[Orvey] Fetched', rules?.length || 0, 'guidance rules for URL:', currentUrl);
@@ -4143,7 +4143,7 @@
                 
                 // CRITICAL: Set proactiveGuidanceActive flag when rule matches
                 // This enables assistant mode: no overlay, prevents closing
-                HiChroneyWidget.config.proactiveGuidanceActive = true;
+                OrveyWidget.config.proactiveGuidanceActive = true;
                 console.log('[Orvey] ✅ Proactive guidance mode ACTIVATED for URL change');
                 
                 // Hide any existing overlay for assistant mode (no blocking overlay)
@@ -4183,8 +4183,8 @@
                 console.log('[Orvey] Sent PROACTIVE_GUIDANCE message');
               } else {
                 // If no rule matches on new URL, deactivate proactive guidance mode
-                if (HiChroneyWidget.config.proactiveGuidanceActive) {
-                  HiChroneyWidget.config.proactiveGuidanceActive = false;
+                if (OrveyWidget.config.proactiveGuidanceActive) {
+                  OrveyWidget.config.proactiveGuidanceActive = false;
                   console.log('[Orvey] Proactive guidance mode deactivated - no matching rule');
                 }
                 console.log('[Orvey] No matching guidance rule found for URL:', currentUrl);
@@ -4220,7 +4220,7 @@
           Array.isArray(this.config.conversationStarters) && 
           this.config.conversationStarters.length > 0) {
         widgetStartersContainer = document.createElement('div');
-        widgetStartersContainer.id = 'hichroney-starters-container';
+        widgetStartersContainer.id = 'orvey-starters-container';
         
         // Calculate position based on widget position
         const startersGap = 10; // Gap between button and starters
@@ -4322,7 +4322,7 @@
       let currentMessageIndex = 0;
       let closedMessageIndices = new Set(); // Track which messages have been closed by user
       let nudgeSequenceStopped = false; // Stop entire sequence when user engages with chat
-      const proactiveNudgeSessionKey = `hichroney-nudge-shown-${this.config.businessAccountId}`;
+      const proactiveNudgeSessionKey = `orvey-nudge-shown-${this.config.businessAccountId}`;
       const shouldRepeatNudge = this.config.proactiveNudgeRepeat === 'true';
       
       // Build full message sequence: first message + additional messages
@@ -4375,7 +4375,7 @@
         
         // Create nudge popup
         proactiveNudgePopup = document.createElement('div');
-        proactiveNudgePopup.id = 'hichroney-proactive-nudge';
+        proactiveNudgePopup.id = 'orvey-proactive-nudge';
         
         // Calculate position based on widget position
         const isMobileNudge = window.innerWidth <= 480;
@@ -4421,7 +4421,7 @@
         `;
         
         proactiveNudgePopup.innerHTML = `
-          <button id="hichroney-nudge-close" style="
+          <button id="orvey-nudge-close" style="
             position: absolute;
             top: 8px;
             right: 8px;
@@ -4451,7 +4451,7 @@
               background: linear-gradient(135deg, ${chatColor}, ${chatColorEnd});
               flex-shrink: 0;
               margin-top: 6px;
-              animation: hichroney-pulse 2s infinite;
+              animation: orvey-pulse 2s infinite;
             "></div>
             <span>${parseBoldMarkdown(messageText)}</span>
           </div>
@@ -4460,7 +4460,7 @@
         // Add pulse animation
         const styleEl = document.createElement('style');
         styleEl.textContent = `
-          @keyframes hichroney-pulse {
+          @keyframes orvey-pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.6; transform: scale(1.2); }
           }
@@ -4476,7 +4476,7 @@
         }, 50);
         
         // Close button handler - marks message as closed, allows other messages to show
-        const closeBtn = proactiveNudgePopup.querySelector('#hichroney-nudge-close');
+        const closeBtn = proactiveNudgePopup.querySelector('#orvey-nudge-close');
         closeBtn.addEventListener('mouseenter', () => {
           closeBtn.style.background = '#f3f4f6';
           closeBtn.style.color = '#374151';
@@ -4636,7 +4636,7 @@
       // ============================================================
       let centerBannerPopup = null;
       let centerBannerShown = false;
-      const centerBannerSessionKey = `hichroney-center-banner-${this.config.businessAccountId}`;
+      const centerBannerSessionKey = `orvey-center-banner-${this.config.businessAccountId}`;
       const centerBannerEnabled = this.config.centerBannerEnabled === 'true';
       const centerBannerShowOnce = this.config.centerBannerShowOnce !== 'false'; // Default true
       const centerBannerDelay = parseInt(this.config.centerBannerDelay) || 10;
@@ -4688,7 +4688,7 @@
         
         // Create overlay
         const overlay = document.createElement('div');
-        overlay.id = 'hichroney-center-banner-overlay';
+        overlay.id = 'orvey-center-banner-overlay';
         overlay.style.cssText = `
           position: fixed;
           inset: 0;
@@ -4702,7 +4702,7 @@
         
         // Create banner
         centerBannerPopup = document.createElement('div');
-        centerBannerPopup.id = 'hichroney-center-banner';
+        centerBannerPopup.id = 'orvey-center-banner';
         
         // Determine background style
         let backgroundCSS = '';
@@ -4746,7 +4746,7 @@
         
         centerBannerPopup.innerHTML = `
           ${overlayDiv}
-          <button id="hichroney-banner-close" style="
+          <button id="orvey-banner-close" style="
             position: absolute;
             top: 16px;
             right: 16px;
@@ -4782,7 +4782,7 @@
                 inset: -8px;
                 border-radius: 50%;
                 background: ${centerBannerTextColor === 'black' ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.3)'};
-                animation: hichroney-banner-glow 2s ease-in-out infinite;
+                animation: orvey-banner-glow 2s ease-in-out infinite;
               "></div>
               <!-- Outer sparkle ring -->
               <div style="
@@ -4790,7 +4790,7 @@
                 inset: -4px;
                 border-radius: 50%;
                 background: ${centerBannerTextColor === 'black' ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.2)'};
-                animation: hichroney-banner-sparkle 3s ease-in-out infinite;
+                animation: orvey-banner-sparkle 3s ease-in-out infinite;
               "></div>
               <!-- Avatar container -->
               <div style="
@@ -4801,7 +4801,7 @@
                 overflow: hidden;
                 box-shadow: 0 8px 32px rgba(0,0,0,0.2);
                 border: 4px solid ${centerBannerTextColor === 'black' ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.4)'};
-                animation: hichroney-banner-float 3s ease-in-out infinite;
+                animation: orvey-banner-float 3s ease-in-out infinite;
               ">
                 ${avatarType && avatarType !== 'none' ? `
                   <img 
@@ -4839,7 +4839,7 @@
               margin: 0 0 24px;
               line-height: 1.5;
             ">${centerBannerDescription}</p>
-            <button id="hichroney-banner-cta" style="
+            <button id="orvey-banner-cta" style="
               background: white;
               color: ${chatColor};
               border: none;
@@ -4858,19 +4858,19 @@
         // Add animation styles
         const styleEl = document.createElement('style');
         styleEl.textContent = `
-          @keyframes hichroney-banner-pulse {
+          @keyframes orvey-banner-pulse {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.05); opacity: 0.9; }
           }
-          @keyframes hichroney-banner-float {
+          @keyframes orvey-banner-float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-8px); }
           }
-          @keyframes hichroney-banner-glow {
+          @keyframes orvey-banner-glow {
             0%, 100% { opacity: 0.3; transform: scale(1); }
             50% { opacity: 0.6; transform: scale(1.15); }
           }
-          @keyframes hichroney-banner-sparkle {
+          @keyframes orvey-banner-sparkle {
             0%, 100% { opacity: 0.4; transform: scale(1) rotate(0deg); }
             50% { opacity: 0.8; transform: scale(1.1) rotate(180deg); }
           }
@@ -4914,7 +4914,7 @@
         };
         
         // Close button handler
-        const closeBtn = centerBannerPopup.querySelector('#hichroney-banner-close');
+        const closeBtn = centerBannerPopup.querySelector('#orvey-banner-close');
         closeBtn.addEventListener('mouseenter', () => {
           closeBtn.style.background = closeBtnHoverBg;
           closeBtn.style.transform = 'scale(1.1)';
@@ -4936,7 +4936,7 @@
         });
         
         // CTA button opens chat
-        const ctaBtn = centerBannerPopup.querySelector('#hichroney-banner-cta');
+        const ctaBtn = centerBannerPopup.querySelector('#orvey-banner-cta');
         ctaBtn.addEventListener('mouseenter', () => {
           ctaBtn.style.transform = 'scale(1.05)';
           ctaBtn.style.boxShadow = '0 6px 24px rgba(0, 0, 0, 0.2)';
@@ -4962,8 +4962,8 @@
             isPartialMode = false;
             
             // Play AI activation sound if enabled
-            if (HiChroneyWidget.config.openingSoundEnabled !== 'false') {
-              playOpeningSound(HiChroneyWidget.config.openingSoundStyle || 'chime');
+            if (OrveyWidget.config.openingSoundEnabled !== 'false') {
+              playOpeningSound(OrveyWidget.config.openingSoundStyle || 'chime');
             }
             
             // On mobile, go fullscreen (same as clicking chat bubble)
@@ -5006,7 +5006,7 @@
         
         // Create overlay
         const reOverlay = document.createElement('div');
-        reOverlay.id = 'hichroney-reengagement-overlay';
+        reOverlay.id = 'orvey-reengagement-overlay';
         reOverlay.style.cssText = `
           position: fixed;
           top: 0;
@@ -5023,7 +5023,7 @@
         
         // Create popup
         let rePopup = document.createElement('div');
-        rePopup.id = 'hichroney-reengagement-popup';
+        rePopup.id = 'orvey-reengagement-popup';
         rePopup.innerHTML = `
           <div style="
             position: fixed;
@@ -5047,7 +5047,7 @@
           ">
             ${centerBannerBackgroundStyle === 'image' ? '<div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); border-radius: 20px;"></div>' : ''}
             <div style="position: relative; z-index: 1;">
-              <button id="hichroney-reengagement-close" style="
+              <button id="orvey-reengagement-close" style="
                 position: absolute;
                 top: -25px;
                 right: -15px;
@@ -5074,7 +5074,7 @@
                 overflow: hidden;
                 box-shadow: 0 8px 32px rgba(0,0,0,0.2);
                 border: 4px solid ${centerBannerTextColor === 'black' ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.4)'};
-                animation: hichroney-banner-float 3s ease-in-out infinite;
+                animation: orvey-banner-float 3s ease-in-out infinite;
               ">
                 ${avatarType && avatarType !== 'none' ? `
                   <img 
@@ -5113,7 +5113,7 @@
                 line-height: 1.5;
               ">${reengagementBannerDescription}</p>
               
-              <button id="hichroney-reengagement-cta" style="
+              <button id="orvey-reengagement-cta" style="
                 background: white;
                 color: ${chatColor};
                 border: none;
@@ -5158,7 +5158,7 @@
         };
         
         // Close button
-        const reCloseBtn = rePopup.querySelector('#hichroney-reengagement-close');
+        const reCloseBtn = rePopup.querySelector('#orvey-reengagement-close');
         reCloseBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           console.log('[Orvey] Re-engagement banner closed');
@@ -5172,7 +5172,7 @@
         });
         
         // CTA button
-        const reCtaBtn = rePopup.querySelector('#hichroney-reengagement-cta');
+        const reCtaBtn = rePopup.querySelector('#orvey-reengagement-cta');
         reCtaBtn.addEventListener('mouseenter', () => {
           reCtaBtn.style.transform = 'scale(1.05)';
           reCtaBtn.style.boxShadow = '0 6px 24px rgba(0, 0, 0, 0.2)';
@@ -5192,8 +5192,8 @@
             isPartialMode = false;
             
             // Play AI activation sound if enabled
-            if (HiChroneyWidget.config.openingSoundEnabled !== 'false') {
-              playOpeningSound(HiChroneyWidget.config.openingSoundStyle || 'chime');
+            if (OrveyWidget.config.openingSoundEnabled !== 'false') {
+              playOpeningSound(OrveyWidget.config.openingSoundStyle || 'chime');
             }
             
             // On mobile, go fullscreen (same as clicking chat bubble)
@@ -5288,7 +5288,7 @@
     // Only run on mobile devices
     if (window.innerWidth <= 480) {
       const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--hichroney-vh', `${vh}px`);
+      document.documentElement.style.setProperty('--orvey-vh', `${vh}px`);
     }
   }
 
@@ -5311,7 +5311,7 @@
     sessionId: null,
 
     init() {
-      const STORAGE_KEY = 'hichroney_visitor_session';
+      const STORAGE_KEY = 'orvey_visitor_session';
       const SESSION_DURATION = 30 * 60 * 1000;
       
       try {
@@ -5417,13 +5417,13 @@
       // 2. Back button detection (Android) - push state and intercept popstate
       try {
         // Push a dummy state to enable back button interception
-        history.pushState({ hichroneyExitIntent: true }, '', location.href);
+        history.pushState({ orveyExitIntent: true }, '', location.href);
         
         window.addEventListener('popstate', (event) => {
           if (!this.hasTriggered) {
             console.log('[Exit Intent] Mobile: Back button pressed');
             // Re-push state to keep user on page while showing discount
-            history.pushState({ hichroneyExitIntent: true }, '', location.href);
+            history.pushState({ orveyExitIntent: true }, '', location.href);
             this.triggerExitIntent();
           }
         });
@@ -5448,8 +5448,8 @@
       if (this.hasTriggered) return;
       
       // Check cooldown and max uses with localStorage fallback
-      const cooldownKey = `hichroney_exit_intent_cooldown_${this.config.businessId}`;
-      const usesKey = `hichroney_exit_intent_uses_${this.config.businessId}`;
+      const cooldownKey = `orvey_exit_intent_cooldown_${this.config.businessId}`;
+      const usesKey = `orvey_exit_intent_uses_${this.config.businessId}`;
       let lastTrigger = null;
       let uses = 0;
       
@@ -5550,10 +5550,10 @@
       console.log('[Exit Intent] ========== OPEN CHAT WITH MESSAGE ==========');
       
       const sendDiscountMessage = () => {
-        const iframe = document.getElementById('hichroney-widget-iframe');
-        if (iframe && iframe.contentWindow && HiChroneyWidget._iframeReady) {
+        const iframe = document.getElementById('orvey-widget-iframe');
+        if (iframe && iframe.contentWindow && OrveyWidget._iframeReady) {
           iframe.contentWindow.postMessage({
-            type: 'HICHRONEY_DISCOUNT_TRIGGER',
+            type: 'ORVEY_DISCOUNT_TRIGGER',
             triggerType: triggerType,
             message: message,
             discountPercentage: this.settings.discountPercentage,
@@ -5566,14 +5566,14 @@
       };
       
       // First, open the chat widget if closed (check 'open' class to avoid toggling it closed)
-      const widgetButton = document.getElementById('hichroney-widget-button');
+      const widgetButton = document.getElementById('orvey-widget-button');
       if (widgetButton && !widgetButton.classList.contains('open')) {
         widgetButton.click();
         console.log('[Exit Intent] Clicked widget button to open chat');
       } else if (widgetButton) {
         console.log('[Exit Intent] Widget already open, skipping click');
       } else {
-        const pill = document.querySelector('.hichroney-pill');
+        const pill = document.querySelector('.orvey-pill');
         if (pill && !pill.classList.contains('pill--hidden')) {
           pill.click();
         }
@@ -5657,8 +5657,8 @@
       }
       
       // Check localStorage state
-      const cooldownKey = `hichroney_idle_timeout_cooldown_${this.config.businessId}`;
-      const usesKey = `hichroney_idle_timeout_uses_${this.config.businessId}`;
+      const cooldownKey = `orvey_idle_timeout_cooldown_${this.config.businessId}`;
+      const usesKey = `orvey_idle_timeout_uses_${this.config.businessId}`;
       try {
         const lastTrigger = localStorage.getItem(cooldownKey);
         const uses = localStorage.getItem(usesKey);
@@ -5704,8 +5704,8 @@
       }
       
       // Check cooldown and max uses with localStorage fallback
-      const cooldownKey = `hichroney_idle_timeout_cooldown_${this.config.businessId}`;
-      const usesKey = `hichroney_idle_timeout_uses_${this.config.businessId}`;
+      const cooldownKey = `orvey_idle_timeout_cooldown_${this.config.businessId}`;
+      const usesKey = `orvey_idle_timeout_uses_${this.config.businessId}`;
       let lastTrigger = null;
       let uses = 0;
       
@@ -5776,14 +5776,14 @@
       console.log('[Idle Timeout] Trigger type:', triggerType);
       
       const sendDiscountMessage = () => {
-        const iframe = document.getElementById('hichroney-widget-iframe');
+        const iframe = document.getElementById('orvey-widget-iframe');
         console.log('[Idle Timeout] Found iframe:', !!iframe);
-        console.log('[Idle Timeout] Iframe ready:', HiChroneyWidget._iframeReady);
+        console.log('[Idle Timeout] Iframe ready:', OrveyWidget._iframeReady);
         
-        if (iframe && iframe.contentWindow && HiChroneyWidget._iframeReady) {
+        if (iframe && iframe.contentWindow && OrveyWidget._iframeReady) {
           console.log('[Idle Timeout] Sending postMessage to iframe...');
           iframe.contentWindow.postMessage({
-            type: 'HICHRONEY_DISCOUNT_TRIGGER',
+            type: 'ORVEY_DISCOUNT_TRIGGER',
             triggerType: triggerType,
             message: message,
             discountPercentage: this.settings.discountPercentage,
@@ -5796,7 +5796,7 @@
       };
       
       // First, open the chat widget if closed (check 'open' class to avoid toggling it closed)
-      const widgetButton = document.getElementById('hichroney-widget-button');
+      const widgetButton = document.getElementById('orvey-widget-button');
       console.log('[Idle Timeout] Found widget button:', !!widgetButton);
       if (widgetButton && !widgetButton.classList.contains('open')) {
         widgetButton.click();
@@ -5804,7 +5804,7 @@
       } else if (widgetButton) {
         console.log('[Idle Timeout] Widget already open, skipping click');
       } else {
-        const pill = document.querySelector('.hichroney-pill');
+        const pill = document.querySelector('.orvey-pill');
         if (pill && !pill.classList.contains('pill--hidden')) {
           pill.click();
           console.log('[Idle Timeout] Clicked pill to open chat');
@@ -6147,7 +6147,7 @@
     if (script) {
       try {
         const config = JSON.parse(script.getAttribute('data-config'));
-        HiChroneyWidget.init(config);
+        OrveyWidget.init(config);
       } catch (e) {
         console.error('[Orvey] Failed to parse widget config:', e);
       }
@@ -6155,5 +6155,5 @@
   });
 
   // Expose to global scope
-  window.HiChroneyWidget = HiChroneyWidget;
+  window.OrveyWidget = OrveyWidget;
 })();

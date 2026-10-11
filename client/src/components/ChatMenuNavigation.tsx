@@ -430,8 +430,8 @@ export function ChatMenuNavigation({
     setLeadFormSubmitting(true);
     try {
       const visitorToken = (() => {
-        const perBusinessKey = `chroney_visitor_${businessAccountId}`;
-        return localStorage.getItem(perBusinessKey) || localStorage.getItem('chroney_visitor_token') || null;
+        const perBusinessKey = `orvey_visitor_${businessAccountId}`;
+        return localStorage.getItem(perBusinessKey) || localStorage.getItem('orvey_visitor_token') || null;
       })();
       const response = await fetch('/api/chat/widget/capture-lead', {
         method: 'POST',

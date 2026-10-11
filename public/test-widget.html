@@ -229,7 +229,7 @@
     function updateWidget() {
       const businessId = document.getElementById('businessSelect').value;
       
-      const existingWidget = document.getElementById('hichroney-widget-container');
+      const existingWidget = document.getElementById('orvey-widget-container');
       if (existingWidget) {
         existingWidget.remove();
       }
@@ -238,15 +238,15 @@
         existingScript.remove();
       }
       
-      if (window.HiChroneyWidget) {
-        delete window.HiChroneyWidget;
+      if (window.OrveyWidget) {
+        delete window.OrveyWidget;
       }
       
       const script = document.createElement('script');
       script.src = '/widget.js';
       script.onload = function() {
-        if (window.HiChroneyWidget) {
-          window.HiChroneyWidget.init({
+        if (window.OrveyWidget) {
+          window.OrveyWidget.init({
             businessAccountId: businessId
           });
         }

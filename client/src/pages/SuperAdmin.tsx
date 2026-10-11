@@ -60,8 +60,8 @@ export default function SuperAdmin() {
   const [newBusinessName, setNewBusinessName] = useState("");
   const [newBusinessWebsite, setNewBusinessWebsite] = useState("");
   const [newUsername, setNewUsername] = useState("");
-  const [newProductTier, setNewProductTier] = useState<ProductTier>("chroney");
-  const [newChroneyEnabled, setNewChroneyEnabled] = useState(true);
+  const [newProductTier, setNewProductTier] = useState<ProductTier>("orvey");
+  const [newOrveyEnabled, setNewOrveyEnabled] = useState(true);
   const [newWhatsappEnabled, setNewWhatsappEnabled] = useState(false);
   const [newJewelryEnabled, setNewJewelryEnabled] = useState(false);
   const [isBusinessDialogOpen, setIsBusinessDialogOpen] = useState(false);
@@ -69,8 +69,8 @@ export default function SuperAdmin() {
   const [editingBusiness, setEditingBusiness] = useState<BusinessAccountDto | null>(null);
   const [editBusinessName, setEditBusinessName] = useState("");
   const [editBusinessWebsite, setEditBusinessWebsite] = useState("");
-  const [editProductTier, setEditProductTier] = useState<ProductTier>("chroney");
-  const [editChroneyEnabled, setEditChroneyEnabled] = useState(true);
+  const [editProductTier, setEditProductTier] = useState<ProductTier>("orvey");
+  const [editOrveyEnabled, setEditOrveyEnabled] = useState(true);
   const [editWhatsappEnabled, setEditWhatsappEnabled] = useState(false);
   const [editJewelryEnabled, setEditJewelryEnabled] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
@@ -94,8 +94,8 @@ export default function SuperAdmin() {
   
   const [tierDialogOpen, setTierDialogOpen] = useState(false);
   const [tierBusiness, setTierBusiness] = useState<BusinessAccountDto | null>(null);
-  const [selectedTier, setSelectedTier] = useState<ProductTier>("chroney");
-  const [tierChroneyEnabled, setTierChroneyEnabled] = useState(true);
+  const [selectedTier, setSelectedTier] = useState<ProductTier>("orvey");
+  const [tierOrveyEnabled, setTierOrveyEnabled] = useState(true);
   const [tierWhatsappEnabled, setTierWhatsappEnabled] = useState(false);
   const [tierInstagramEnabled, setTierInstagramEnabled] = useState(false);
   const [tierFacebookEnabled, setTierFacebookEnabled] = useState(false);
@@ -180,7 +180,7 @@ export default function SuperAdmin() {
 
   // Create business account mutation
   const createBusinessMutation = useMutation({
-    mutationFn: async (data: { name: string; website: string; username: string; productTier: ProductTier; chroneyEnabled: boolean; whatsappEnabled: boolean }) => {
+    mutationFn: async (data: { name: string; website: string; username: string; productTier: ProductTier; orveyEnabled: boolean; whatsappEnabled: boolean }) => {
       return await apiRequest<{ businessAccount: BusinessAccountDto; user: any; credentials: { username: string; tempPassword: string } }>("POST", "/api/business-accounts", data);
     },
     onSuccess: (data) => {
@@ -188,8 +188,8 @@ export default function SuperAdmin() {
       setNewBusinessName("");
       setNewBusinessWebsite("");
       setNewUsername("");
-      setNewProductTier("chroney");
-      setNewChroneyEnabled(true);
+      setNewProductTier("orvey");
+      setNewOrveyEnabled(true);
       setNewWhatsappEnabled(false);
       setNewJewelryEnabled(false);
       setIsBusinessDialogOpen(false);
@@ -209,13 +209,13 @@ export default function SuperAdmin() {
     e.preventDefault();
     if (newBusinessName.trim() && newBusinessWebsite.trim() && newUsername.trim()) {
       // Derive productTier from checkbox selections
-      let productTier: ProductTier = "chroney";
-      if (newChroneyEnabled && newJewelryEnabled) {
-        productTier = "jewelry_showcase_chroney";
+      let productTier: ProductTier = "orvey";
+      if (newOrveyEnabled && newJewelryEnabled) {
+        productTier = "jewelry_showcase_orvey";
       } else if (newJewelryEnabled) {
         productTier = "jewelry_showcase";
       } else {
-        productTier = "chroney";
+        productTier = "orvey";
       }
       
       createBusinessMutation.mutate({ 
@@ -223,7 +223,7 @@ export default function SuperAdmin() {
         website: newBusinessWebsite.trim(),
         username: newUsername.trim(),
         productTier,
-        chroneyEnabled: newChroneyEnabled,
+        orveyEnabled: newOrveyEnabled,
         whatsappEnabled: newWhatsappEnabled,
       });
     }
@@ -231,12 +231,12 @@ export default function SuperAdmin() {
 
   // Update business account mutation
   const updateBusinessMutation = useMutation({
-    mutationFn: async (data: { id: string; name: string; website: string; productTier: ProductTier; chroneyEnabled: boolean; whatsappEnabled: boolean }) => {
+    mutationFn: async (data: { id: string; name: string; website: string; productTier: ProductTier; orveyEnabled: boolean; whatsappEnabled: boolean }) => {
       return await apiRequest<BusinessAccountDto>("PUT", `/api/business-accounts/${data.id}`, {
         name: data.name,
         website: data.website,
         productTier: data.productTier,
-        chroneyEnabled: data.chroneyEnabled,
+        orveyEnabled: data.orveyEnabled,
         whatsappEnabled: data.whatsappEnabled,
       });
     },
@@ -262,10 +262,10 @@ export default function SuperAdmin() {
     setEditingBusiness(business);
     setEditBusinessName(business.name);
     setEditBusinessWebsite(business.website || "");
-    setEditProductTier(business.productTier || "chroney");
+    setEditProductTier(business.productTier || "orvey");
     // Set checkbox values based on feature flags
-    setEditChroneyEnabled(business.chroneyEnabled ?? true);
-    setEditJewelryEnabled(business.productTier === "jewelry_showcase" || business.productTier === "jewelry_showcase_chroney");
+    setEditOrveyEnabled(business.orveyEnabled ?? true);
+    setEditJewelryEnabled(business.productTier === "jewelry_showcase" || business.productTier === "jewelry_showcase_orvey");
     setEditWhatsappEnabled(business.whatsappEnabled || false);
     setIsEditDialogOpen(true);
   };
@@ -274,13 +274,13 @@ export default function SuperAdmin() {
     e.preventDefault();
     if (editingBusiness && editBusinessName.trim() && editBusinessWebsite.trim()) {
       // Derive productTier from checkbox selections
-      let productTier: ProductTier = "chroney";
-      if (editChroneyEnabled && editJewelryEnabled) {
-        productTier = "jewelry_showcase_chroney";
+      let productTier: ProductTier = "orvey";
+      if (editOrveyEnabled && editJewelryEnabled) {
+        productTier = "jewelry_showcase_orvey";
       } else if (editJewelryEnabled) {
         productTier = "jewelry_showcase";
       } else {
-        productTier = "chroney";
+        productTier = "orvey";
       }
       
       updateBusinessMutation.mutate({
@@ -288,7 +288,7 @@ export default function SuperAdmin() {
         name: editBusinessName.trim(),
         website: editBusinessWebsite.trim(),
         productTier,
-        chroneyEnabled: editChroneyEnabled,
+        orveyEnabled: editOrveyEnabled,
         whatsappEnabled: editWhatsappEnabled,
       });
     }
@@ -719,10 +719,10 @@ export default function SuperAdmin() {
 
   const handleChangeTier = (business: BusinessAccountDto) => {
     setTierBusiness(business);
-    setSelectedTier(business.productTier || "chroney");
+    setSelectedTier(business.productTier || "orvey");
     // Set checkbox values based on feature flags
-    setTierChroneyEnabled(business.chroneyEnabled ?? true);
-    setTierJewelryEnabled(business.productTier === "jewelry_showcase" || business.productTier === "jewelry_showcase_chroney");
+    setTierOrveyEnabled(business.orveyEnabled ?? true);
+    setTierJewelryEnabled(business.productTier === "jewelry_showcase" || business.productTier === "jewelry_showcase_orvey");
     setTierWhatsappEnabled(business.whatsappEnabled || false);
     setTierInstagramEnabled(business.instagramEnabled || false);
     setTierFacebookEnabled(business.facebookEnabled || false);
@@ -737,7 +737,7 @@ export default function SuperAdmin() {
       productTier: ProductTier; 
       name: string; 
       website: string;
-      chroneyEnabled: boolean;
+      orveyEnabled: boolean;
       whatsappEnabled: boolean;
       instagramEnabled: boolean;
       facebookEnabled: boolean;
@@ -748,7 +748,7 @@ export default function SuperAdmin() {
         name: data.name, 
         website: data.website, 
         productTier: data.productTier,
-        chroneyEnabled: data.chroneyEnabled,
+        orveyEnabled: data.orveyEnabled,
         whatsappEnabled: data.whatsappEnabled,
         instagramEnabled: data.instagramEnabled,
         facebookEnabled: data.facebookEnabled,
@@ -778,13 +778,13 @@ export default function SuperAdmin() {
   const handleSaveTier = () => {
     if (tierBusiness) {
       // Derive productTier from checkbox selections
-      let productTier: ProductTier = "chroney";
-      if (tierChroneyEnabled && tierJewelryEnabled) {
-        productTier = "jewelry_showcase_chroney";
+      let productTier: ProductTier = "orvey";
+      if (tierOrveyEnabled && tierJewelryEnabled) {
+        productTier = "jewelry_showcase_orvey";
       } else if (tierJewelryEnabled) {
         productTier = "jewelry_showcase";
       } else {
-        productTier = "chroney";
+        productTier = "orvey";
       }
       
       updateTierMutation.mutate({ 
@@ -792,7 +792,7 @@ export default function SuperAdmin() {
         productTier,
         name: tierBusiness.name,
         website: tierBusiness.website || "",
-        chroneyEnabled: tierChroneyEnabled,
+        orveyEnabled: tierOrveyEnabled,
         whatsappEnabled: tierWhatsappEnabled,
         instagramEnabled: tierInstagramEnabled,
         facebookEnabled: tierFacebookEnabled,
@@ -1036,8 +1036,8 @@ export default function SuperAdmin() {
                           <span className="text-sm font-medium">Orvey Chat</span>
                         </div>
                         <Switch
-                          checked={newChroneyEnabled}
-                          onCheckedChange={setNewChroneyEnabled}
+                          checked={newOrveyEnabled}
+                          onCheckedChange={setNewOrveyEnabled}
                         />
                       </div>
                       <div className="flex items-center justify-between p-2 border rounded-lg">
@@ -1138,8 +1138,8 @@ export default function SuperAdmin() {
                         <span className="text-sm font-medium">Orvey Chat</span>
                       </div>
                       <Switch
-                        checked={editChroneyEnabled}
-                        onCheckedChange={setEditChroneyEnabled}
+                        checked={editOrveyEnabled}
+                        onCheckedChange={setEditOrveyEnabled}
                       />
                     </div>
                     <div className="flex items-center justify-between p-2 border rounded-lg">
@@ -1341,7 +1341,7 @@ export default function SuperAdmin() {
                 </div>
 
                 {/* Show Orvey modules only when Orvey Chat is enabled */}
-                {selectedBusiness?.chroneyEnabled && (
+                {selectedBusiness?.orveyEnabled && (
                   <>
                     {/* Shopify Module */}
                     <div className="flex items-start gap-4 p-4 border rounded-lg hover:bg-gray-50 transition-colors">
@@ -1474,8 +1474,8 @@ export default function SuperAdmin() {
                   </>
                 )}
 
-                {/* Show Jewelry Showcase module only for 'jewelry_showcase' or 'jewelry_showcase_chroney' tiers */}
-                {(selectedBusiness?.productTier === 'jewelry_showcase' || selectedBusiness?.productTier === 'jewelry_showcase_chroney') && (
+                {/* Show Jewelry Showcase module only for 'jewelry_showcase' or 'jewelry_showcase_orvey' tiers */}
+                {(selectedBusiness?.productTier === 'jewelry_showcase' || selectedBusiness?.productTier === 'jewelry_showcase_orvey') && (
                   <div className="flex items-start gap-4 p-4 border rounded-lg hover:bg-gray-50 transition-colors">
                     <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center flex-shrink-0">
                       <Gem className="h-5 w-5 text-white" />
@@ -1701,8 +1701,8 @@ export default function SuperAdmin() {
                       </div>
                     </div>
                     <Switch
-                      checked={tierChroneyEnabled}
-                      onCheckedChange={setTierChroneyEnabled}
+                      checked={tierOrveyEnabled}
+                      onCheckedChange={setTierOrveyEnabled}
                     />
                   </div>
 
@@ -1809,7 +1809,7 @@ export default function SuperAdmin() {
                   </div>
                 </div>
 
-                {!tierChroneyEnabled && !tierWhatsappEnabled && !tierInstagramEnabled && !tierFacebookEnabled && !tierJewelryEnabled && !tierK12EducationEnabled && !tierJobPortalEnabled && (
+                {!tierOrveyEnabled && !tierWhatsappEnabled && !tierInstagramEnabled && !tierFacebookEnabled && !tierJewelryEnabled && !tierK12EducationEnabled && !tierJobPortalEnabled && (
                   <p className="text-sm text-amber-600 bg-amber-50 p-2 rounded">
                     At least one product should be enabled.
                   </p>
@@ -1828,7 +1828,7 @@ export default function SuperAdmin() {
                 </Button>
                 <Button
                   onClick={handleSaveTier}
-                  disabled={updateTierMutation.isPending || (!tierChroneyEnabled && !tierWhatsappEnabled && !tierInstagramEnabled && !tierFacebookEnabled && !tierJewelryEnabled && !tierK12EducationEnabled && !tierJobPortalEnabled)}
+                  disabled={updateTierMutation.isPending || (!tierOrveyEnabled && !tierWhatsappEnabled && !tierInstagramEnabled && !tierFacebookEnabled && !tierJewelryEnabled && !tierK12EducationEnabled && !tierJobPortalEnabled)}
                   className="bg-gradient-to-r from-brand-600 to-ink-600"
                 >
                   {updateTierMutation.isPending ? "Saving..." : "Save Changes"}
@@ -2113,7 +2113,7 @@ export default function SuperAdmin() {
                             onClick={() => handleChangeTier(business)}
                             className="flex flex-wrap gap-1 cursor-pointer hover:opacity-80 transition-opacity"
                           >
-                            {business.chroneyEnabled && (
+                            {business.orveyEnabled && (
                               <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
                                 Chat
                               </span>
@@ -2133,7 +2133,7 @@ export default function SuperAdmin() {
                                 Facebook
                               </span>
                             )}
-                            {(business.productTier === 'jewelry_showcase' || business.productTier === 'jewelry_showcase_chroney') && (
+                            {(business.productTier === 'jewelry_showcase' || business.productTier === 'jewelry_showcase_orvey') && (
                               <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-700">
                                 Jewelry
                               </span>

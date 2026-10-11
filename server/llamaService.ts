@@ -647,7 +647,7 @@ export class LlamaService {
     const responseLengthInstruction = this.getResponseLengthInstruction(responseLength);
 
     const estimatedMessageCount = Math.floor(conversationHistory.length / 2) + 1;
-    const systemPrompt = `YOU ARE AI CHRONEY — AN AUTONOMOUS SALES AGENT FOR THIS BUSINESS
+    const systemPrompt = `YOU ARE AN AUTONOMOUS AI SALES AGENT FOR THIS BUSINESS
 ${this.getAutonomousAgentInstructions(estimatedMessageCount)}
 ==============================
 LAYER 0: RESPONSE LENGTH (ALWAYS FOLLOW)

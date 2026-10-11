@@ -1,10 +1,10 @@
 /*
  * ============================================================
- * AI Chroney — India Relay Server
+ * AI Orvey — India Relay Server
  * ============================================================
  *
  * PURPOSE
- *   Forwards CRM sync requests from AI Chroney (US server) to
+ *   Forwards CRM sync requests from AI Orvey (US server) to
  *   Caprion LOS or any other CRM that only accepts requests
  *   from Indian IP addresses.
  *
@@ -13,7 +13,7 @@
  * 1. Launch a t3.micro EC2 in ap-south-1 (Mumbai)
  *    - OS: Ubuntu 22.04 LTS
  *    - Security group: allow inbound TCP port 3000 from your
- *      AI Chroney server IP (or 0.0.0.0/0 if using RELAY_SECRET)
+ *      AI Orvey server IP (or 0.0.0.0/0 if using RELAY_SECRET)
  *
  * 2. Install Node.js on the server:
  *      curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
@@ -36,17 +36,17 @@
  *      RELAY_SECRET=your-strong-random-secret pm2 start relay-server.js
  *      pm2 save && pm2 startup
  *
- * 7. Set the Relay URL in AI Chroney:
+ * 7. Set the Relay URL in AI Orvey:
  *      CRM → Connection Settings → Relay URL
  *      Value: http://<ec2-public-ip>:3000
  *
  * ENVIRONMENT VARIABLES
  *   RELAY_SECRET  — Required. A shared secret set on THIS relay server.
- *                   Every request from AI Chroney must carry the header:
+ *                   Every request from AI Orvey must carry the header:
  *                     Authorization: Bearer <RELAY_SECRET>
  *
- *   CUSTOM_CRM_RELAY_SECRET — Set this SAME value in your main AI Chroney
- *                   app environment (Replit Secrets). AI Chroney automatically
+ *   CUSTOM_CRM_RELAY_SECRET — Set this SAME value in your main AI Orvey
+ *                   app environment (Replit Secrets). AI Orvey automatically
  *                   reads it and sends it as the Authorization header when
  *                   calling the relay. The two values must match exactly.
  *
@@ -72,7 +72,7 @@ const RELAY_SECRET = process.env.RELAY_SECRET || '';
 const PORT = parseInt(process.env.PORT || '3000', 10);
 
 app.get('/health', (_req, res) => {
-  res.json({ status: 'ok', relay: 'AI Chroney India Relay', time: new Date().toISOString() });
+  res.json({ status: 'ok', relay: 'AI Orvey India Relay', time: new Date().toISOString() });
 });
 
 app.post('/relay', async (req, res) => {
@@ -167,14 +167,14 @@ app.post('/relay', async (req, res) => {
     const responseText = await upstream.text();
     // Caprion's UploadDocument echoes 'document_password' in the response body. Mask it before
     // logging so plaintext bank-statement passwords never reach relay logs. The response body
-    // forwarded to AI Chroney below is unmodified — only the local log line is sanitized.
+    // forwarded to AI Orvey below is unmodified — only the local log line is sanitized.
     const safeResponseText = responseText.replace(
       /"document_password"\s*:\s*"[^"]*"/g,
       '"document_password":"***"'
     );
     console.log(`[Relay] Upstream responded ${upstream.status} — ${safeResponseText.slice(0, 200)}`);
 
-    // Mirror upstream status and body back to AI Chroney
+    // Mirror upstream status and body back to AI Orvey
     res.status(upstream.status);
     upstream.headers.forEach((value, key) => {
       if (['content-type', 'content-length'].includes(key.toLowerCase())) {
@@ -200,7 +200,7 @@ if (!RELAY_SECRET) {
 }
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`[Relay] AI Chroney India Relay running on port ${PORT}`);
+  console.log(`[Relay] AI Orvey India Relay running on port ${PORT}`);
   if (RELAY_SECRET) {
     console.log('[Relay] RELAY_SECRET is configured — requests require Authorization: Bearer header.');
   }

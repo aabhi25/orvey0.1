@@ -21,7 +21,7 @@ export type MeResponseDto = SafeUser & {
     whatsappEnabled: boolean;
     instagramEnabled: boolean;
     facebookEnabled: boolean;
-    chroneyEnabled: boolean;
+    orveyEnabled: boolean;
     k12EducationEnabled: boolean;
     k12ImageUploadEnabled: boolean;
     k12ContentOnlyMode: boolean;
@@ -62,7 +62,7 @@ export function toMeResponseDto(
         whatsappEnabled: businessAccount.whatsappEnabled,
         instagramEnabled: businessAccount.instagramEnabled,
         facebookEnabled: businessAccount.facebookEnabled,
-        chroneyEnabled: businessAccount.chroneyEnabled,
+        orveyEnabled: businessAccount.orveyEnabled,
         k12EducationEnabled: businessAccount.k12EducationEnabled,
         k12ImageUploadEnabled: businessAccount.k12ImageUploadEnabled,
         k12ContentOnlyMode: businessAccount.k12ContentOnlyMode,

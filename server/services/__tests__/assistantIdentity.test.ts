@@ -80,7 +80,7 @@ async function main() {
   // The main prompt no longer claims to be Orvey.
   const { readFileSync } = await import('fs');
   const llama = readFileSync(new URL('../../llamaService.ts', import.meta.url), 'utf8');
-  expect(!/You are Orvey/.test(llama), 'llamaService prompts never say "You are Orvey"');
+  expect(!/You are (AI )?Orvey/i.test(llama), 'llamaService prompts never say "You are Orvey" (any case)');
   const routes = readFileSync(new URL('../../routes.ts', import.meta.url), 'utf8');
   expect(!/I'm Orvey|Orvey here|Orvey reporting/.test(routes), 'default visitor intros never say "I\'m Orvey"');
 

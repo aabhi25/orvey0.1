@@ -60,27 +60,27 @@ export function getSettingsAccess(user: MeResponseDto | null) {
   const isBusinessView = (!isSuperAdmin && !isGroupAdmin) || isSuperAdminImpersonating;
 
   const ba = user?.businessAccount;
-  const productTier = ba?.productTier || "chroney";
-  const hasChroney = ba?.chroneyEnabled === true;
+  const productTier = ba?.productTier || "orvey";
+  const hasOrvey = ba?.orveyEnabled === true;
   const hasWhatsapp = ba?.whatsappEnabled === true;
   const hasInstagram = ba?.instagramEnabled === true;
   const hasFacebook = ba?.facebookEnabled === true;
-  const hasJewelry = productTier === "jewelry_showcase" || productTier === "jewelry_showcase_chroney";
+  const hasJewelry = productTier === "jewelry_showcase" || productTier === "jewelry_showcase_orvey";
   const isK12 = ba?.k12EducationEnabled === true;
   const isJobPortal = ba?.jobPortalEnabled === true;
-  const hasProductsAccess = hasChroney || hasWhatsapp || hasJewelry;
+  const hasProductsAccess = hasOrvey || hasWhatsapp || hasJewelry;
   // The website widget is what the Website agent, K12 and job-portal layouts all expose.
-  const hasWebsiteChat = hasChroney || isK12 || isJobPortal;
+  const hasWebsiteChat = hasOrvey || isK12 || isJobPortal;
 
   const integrations: IntegrationsAccess = {
-    crm: hasChroney || hasWhatsapp || hasInstagram || hasFacebook || isK12 || isJobPortal,
+    crm: hasOrvey || hasWhatsapp || hasInstagram || hasFacebook || isK12 || isJobPortal,
     shopify: ba?.shopifyEnabled === true && hasProductsAccess,
     erp: hasJewelry,
   };
 
   return {
     isSuperAdminImpersonating, isGroupAdmin, isBusinessView,
-    hasChroney, hasWhatsapp, hasInstagram, hasFacebook, hasJewelry, hasWebsiteChat, integrations,
+    hasOrvey, hasWhatsapp, hasInstagram, hasFacebook, hasJewelry, hasWebsiteChat, integrations,
   };
 }
 

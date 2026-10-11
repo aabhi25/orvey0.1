@@ -68,7 +68,7 @@ export default function RazorpayRizeDemo() {
   const PRODUCTION_URL = 'https://aiorvey.com';
   
   useEffect(() => {
-    const scriptId = 'hichroney-guidance-widget-script';
+    const scriptId = 'orvey-guidance-widget-script';
     
     if (!document.getElementById(scriptId)) {
       const script = document.createElement('script');
@@ -84,11 +84,11 @@ export default function RazorpayRizeDemo() {
       if (existingScript) {
         existingScript.remove();
       }
-      const existingIframe = document.getElementById('hichroney-guidance-widget-iframe');
+      const existingIframe = document.getElementById('orvey-guidance-widget-iframe');
       if (existingIframe) {
         existingIframe.remove();
       }
-      const existingLauncher = document.getElementById('hichroney-guidance-widget-launcher');
+      const existingLauncher = document.getElementById('orvey-guidance-widget-launcher');
       if (existingLauncher) {
         existingLauncher.remove();
       }
@@ -96,7 +96,7 @@ export default function RazorpayRizeDemo() {
   }, []);
   
   useEffect(() => {
-    const iframe = document.getElementById('hichroney-guidance-widget-iframe') as HTMLIFrameElement | null;
+    const iframe = document.getElementById('orvey-guidance-widget-iframe') as HTMLIFrameElement | null;
     if (iframe) {
       const sourceUrl = encodeURIComponent(window.location.pathname + window.location.search);
       iframe.src = `${PRODUCTION_URL}/embed/guidance?businessAccountId=${RAZORPAY_RIZE_BUSINESS_ID}&campaignId=${CAMPAIGN_ID}&sourceUrl=${sourceUrl}`;

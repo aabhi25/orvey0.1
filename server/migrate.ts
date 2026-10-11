@@ -18,7 +18,7 @@ import path from "node:path";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 import { db, pool } from "./db";
 
-const LOCK_KEY = 72_901_512; // arbitrary, fixed: "chroney migrations"
+const LOCK_KEY = 72_901_512; // arbitrary, fixed: "orvey migrations"
 const BASELINE_TAG = "0000_baseline";
 
 export function migrationsFolder(): string {

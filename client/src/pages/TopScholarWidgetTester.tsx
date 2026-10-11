@@ -98,7 +98,7 @@ export default function TopScholarWidgetTester() {
     script.src = `${WIDGET_DOMAIN}/widget-loader.js`;
     script.setAttribute("data-business-id", businessAccountId || "1e80bae7-e219-4769-824d-ee027770cd7d");
     script.setAttribute("data-token", rawToken.trim());
-    script.setAttribute("data-aichroney-tester", "1");
+    script.setAttribute("data-orvey-tester", "1");
     document.body.appendChild(script);
     widgetScriptRef.current = script;
     setWidgetInjected(true);
@@ -111,7 +111,7 @@ export default function TopScholarWidgetTester() {
     }
     // Remove any elements widget.js injected into the page
     document.querySelectorAll(
-      '[id^="aichroney-"], [class*="aichroney-widget"], [data-aichroney-tester]'
+      '[id^="orvey-"], [class*="orvey-widget"], [data-orvey-tester]'
     ).forEach((el) => el.remove());
     setWidgetInjected(false);
   };
@@ -375,7 +375,7 @@ export default function TopScholarWidgetTester() {
   // immediately (bypassing the cooldown). Only meaningful while simulating.
   const handleShowDoubtPromptNow = () => {
     previewIframeRef.current?.contentWindow?.postMessage(
-      { type: "aichroney:preview-doubt-show" },
+      { type: "orvey:preview-doubt-show" },
       window.location.origin,
     );
   };

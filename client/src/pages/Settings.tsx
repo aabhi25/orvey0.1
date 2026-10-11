@@ -77,8 +77,8 @@ export default function Settings({ section, embedded = false }: { section?: "acc
   });
   
 
-  const productTier = user?.businessAccount?.productTier || 'chroney';
-  const hasJewelryAccess = productTier === 'jewelry_showcase' || productTier === 'jewelry_showcase_chroney';
+  const productTier = user?.businessAccount?.productTier || 'orvey';
+  const hasJewelryAccess = productTier === 'jewelry_showcase' || productTier === 'jewelry_showcase_orvey';
   const isK12Education = user?.businessAccount?.k12EducationEnabled === true;
   const canManageTopScholarContent = isTopScholarSuperAdminView(user);
   const isSuperAdminImpersonating = user?.role === "super_admin" && !!user.activeBusinessAccountId;

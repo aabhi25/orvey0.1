@@ -178,7 +178,7 @@ export class ErrorReporter {
       timestamp: this.now() / 1000,
       platform: "node",
       level: ctx.level || "error",
-      logger: "chroney",
+      logger: "orvey",
       environment: this.environment,
       ...(this.release ? { release: this.release } : {}),
       exception: {

@@ -113,7 +113,7 @@ export default function SuperAdminR2Settings() {
 
   const handleFillDefaults = () => {
     setAccountId("9f8d08f5ad09debb50ba5b0593424999");
-    setBucketName("chroneylive");
+    setBucketName("orveylive");
     setAccessKeyId("df1e32533a54f74f972ec36ab65ca715");
     setSecretAccessKey("9f0340125a8909c23bfa9c107c7e28942ae5389ddac9257d93386ecbf1e8d0be");
     setPublicUrl("https://pub-1fde9645751a4887b618ddaf30e8c546.r2.dev");

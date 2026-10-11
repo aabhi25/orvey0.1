@@ -58,13 +58,13 @@ export default function GuidanceCampaignSettings() {
   
   const isVoiceModeAvailable = widgetSettings?.voiceModeEnabled === true || widgetSettings?.voiceModeEnabled === 'true';
   
-  const hiChroneyDomain = getPublicWidgetOrigin();
+  const orveyDomain = getPublicWidgetOrigin();
   
   const campaignEmbedCode = useMemo(() => {
     if (!campaign?.businessAccountId) return '';
     
     return `<!-- Guidance Chatbot Widget - ${campaign.name || ''} -->
-<script src="${hiChroneyDomain}/guidance-widget.js" data-business-id="${campaign.businessAccountId}" data-campaign-id="${campaignId}"></script>`;
+<script src="${orveyDomain}/guidance-widget.js" data-business-id="${campaign.businessAccountId}" data-campaign-id="${campaignId}"></script>`;
   }, [campaign?.businessAccountId, campaign?.name, campaignId]);
 
   useEffect(() => {
