@@ -16569,7 +16569,7 @@ Format your response as JSON with this structure:
       const link = await storage.getOrCreatePublicChatLink(businessAccountId);
       
       // Return the link with the full URL using production domain
-      const baseUrl = 'https://portal.aichroney.com';
+      const baseUrl = 'https://aiorvey.com';
       
       res.json({
         ...link,
@@ -16588,7 +16588,7 @@ Format your response as JSON with this structure:
 
       const link = await storage.togglePublicChatLinkStatus(businessAccountId);
       
-      const baseUrl = 'https://portal.aichroney.com';
+      const baseUrl = 'https://aiorvey.com';
       
       res.json({
         ...link,
@@ -16610,7 +16610,7 @@ Format your response as JSON with this structure:
       
       const link = await storage.regeneratePublicChatLinkToken(businessAccountId, newToken);
       
-      const baseUrl = 'https://portal.aichroney.com';
+      const baseUrl = 'https://aiorvey.com';
       
       res.json({
         ...link,
@@ -16631,7 +16631,7 @@ Format your response as JSON with this structure:
       // Password can be null/empty to remove protection, or a string to set it
       const updatedLink = await storage.updatePublicChatLinkPassword(businessAccountId, password || null);
       
-      const baseUrl = 'https://portal.aichroney.com';
+      const baseUrl = 'https://aiorvey.com';
       
       res.json({
         ...updatedLink,
@@ -30260,7 +30260,7 @@ Be constructive and helpful. Return ONLY valid JSON.`;
 
       // Build the Shopify OAuth authorization URL
       // Always use production domain for OAuth since Shopify requires whitelisted redirect URIs
-      const baseUrl = 'https://portal.aichroney.com';
+      const baseUrl = 'https://aiorvey.com';
       const redirectUri = `${baseUrl}/api/shopify/auth/callback`;
       const scopes = 'read_products,read_inventory';
       

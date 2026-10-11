@@ -65,7 +65,7 @@ export default function RazorpayRizeDemo() {
 
   const CAMPAIGN_ID = '4a619d45-e590-4cc6-a44c-a9f0bb04fbdc';
   
-  const PRODUCTION_URL = 'https://portal.aichroney.com';
+  const PRODUCTION_URL = 'https://aiorvey.com';
   
   useEffect(() => {
     const scriptId = 'hichroney-guidance-widget-script';

@@ -6662,7 +6662,7 @@ export default function EmbedChat() {
                 <span>
                   Powered by{' '}
                   <a
-                    href="https://aichroney.com"
+                    href="https://aiorvey.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: '#1f4596', textDecoration: 'none', fontWeight: 500 }}

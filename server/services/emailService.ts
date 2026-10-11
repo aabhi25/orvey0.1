@@ -16,7 +16,7 @@ interface SendEmailParams {
 
 export class EmailService {
   private sendGridApiKey: string | null = null;
-  private fromEmail: string = 'support@chroney.ai'; // Default from email
+  private fromEmail: string = 'support@aiorvey.com'; // Default from email
   private isConfigured: boolean = false;
 
   constructor() {

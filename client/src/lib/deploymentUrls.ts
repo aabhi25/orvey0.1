@@ -3,7 +3,7 @@
  *
  * Each deployment can set VITE_PUBLIC_WIDGET_URL explicitly. When it is not
  * set, the current app origin is the safest default: Replit staging produces
- * demo.aichroney.com snippets and AWS production produces portal.aichroney.com
+ * demo.aiorvey.com snippets and AWS production produces aiorvey.com
  * snippets without changing source code between builds.
  */
 export function getPublicWidgetOrigin(): string {
@@ -16,7 +16,7 @@ export function getPublicWidgetOrigin(): string {
     return window.location.origin;
   }
 
-  return "https://portal.aichroney.com";
+  return "https://aiorvey.com";
 }
 
 export function getPublicDeploymentName(): "staging" | "production" {
@@ -25,7 +25,7 @@ export function getPublicDeploymentName(): "staging" | "production" {
     return configured;
   }
 
-  return getPublicWidgetOrigin() === "https://demo.aichroney.com"
+  return getPublicWidgetOrigin() === "https://demo.aiorvey.com"
     ? "staging"
     : "production";
 }

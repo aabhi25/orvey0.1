@@ -1,7 +1,7 @@
 // pm2 process file for production (EC2). See docs/deploy-pm2.md.
 //
 //   pm2 start ecosystem.config.cjs --env production
-//   pm2 reload chroney --update-env
+//   pm2 reload orvey --update-env
 //
 // Single instance in fork mode: background schedulers (campaigns, backups,
 // CRM retries, TopScholar pollers...) run in-process and must not run twice,
@@ -14,12 +14,12 @@ const LOG_DIR = process.env.PM2_LOG_DIR || path.join(os.homedir(), ".pm2", "logs
 // Optional: load secrets from a dotenv-style file via Node's --env-file
 // (Node >= 20.6). Otherwise the app inherits the environment of the shell that
 // runs `pm2 start` / `pm2 reload --update-env`.
-const envFile = process.env.CHRONEY_ENV_FILE;
+const envFile = process.env.ORVEY_ENV_FILE;
 
 module.exports = {
   apps: [
     {
-      name: "chroney",
+      name: "orvey",
       cwd: __dirname,
       script: "dist/index.js",
       node_args: envFile ? [`--env-file=${envFile}`] : [],
@@ -39,8 +39,8 @@ module.exports = {
       // (33s). Give it a little more before pm2 escalates to SIGKILL.
       kill_timeout: 35000,
 
-      out_file: path.join(LOG_DIR, "chroney-out.log"),
-      error_file: path.join(LOG_DIR, "chroney-error.log"),
+      out_file: path.join(LOG_DIR, "orvey-out.log"),
+      error_file: path.join(LOG_DIR, "orvey-error.log"),
       merge_logs: true,
       time: true,
 

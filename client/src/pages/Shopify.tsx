@@ -799,14 +799,14 @@ export default function Shopify() {
                       <span className="text-xs font-medium text-gray-500 dark:text-gray-400">App URL:</span>
                       <div className="flex items-center gap-2 mt-1">
                         <code className="flex-1 text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded font-mono">
-                          https://portal.aichroney.com
+                          https://aiorvey.com
                         </code>
                         <Button
                           size="sm"
                           variant="ghost"
                           className="h-7 px-2"
                           onClick={() => {
-                            navigator.clipboard.writeText("https://portal.aichroney.com");
+                            navigator.clipboard.writeText("https://aiorvey.com");
                             toast({ title: "Copied!", description: "App URL copied to clipboard" });
                           }}
                         >
@@ -818,14 +818,14 @@ export default function Shopify() {
                       <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Allowed redirection URL:</span>
                       <div className="flex items-center gap-2 mt-1">
                         <code className="flex-1 text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded font-mono break-all">
-                          https://portal.aichroney.com/api/shopify/auth/callback
+                          https://aiorvey.com/api/shopify/auth/callback
                         </code>
                         <Button
                           size="sm"
                           variant="ghost"
                           className="h-7 px-2"
                           onClick={() => {
-                            navigator.clipboard.writeText("https://portal.aichroney.com/api/shopify/auth/callback");
+                            navigator.clipboard.writeText("https://aiorvey.com/api/shopify/auth/callback");
                             toast({ title: "Copied!", description: "Callback URL copied to clipboard" });
                           }}
                         >

@@ -1,4 +1,4 @@
-# Running AI Chroney on EC2 with pm2
+# Running Orvey on EC2 with pm2
 
 The server is one Node process (`dist/index.js`). pm2 keeps it running:
 it restarts it after a crash, restarts it if memory grows too large, starts it
@@ -32,9 +32,9 @@ The app reads its configuration (`DATABASE_URL`, `ENCRYPTION_KEY`, `COOKIE_SECRE
 
 - **Option A: env file (recommended).** Put the variables in `<ENV_FILE>` (keep it outside the
   repo and `chmod 600` it). Every `pm2 start` / `pm2 reload` must then run with
-  `CHRONEY_ENV_FILE=<ENV_FILE>` set, as in the commands below. The app loads the file through Node's `--env-file`.
+  `ORVEY_ENV_FILE=<ENV_FILE>` set, as in the commands below. The app loads the file through Node's `--env-file`.
 - **Option B: shell environment.** Export the variables in the shell before running `pm2 start`.
-  pm2 remembers them. After changing a variable, run `pm2 reload chroney --update-env`.
+  pm2 remembers them. After changing a variable, run `pm2 reload orvey --update-env`.
 
 Optional tuning variables (the defaults are fine):
 
@@ -54,10 +54,10 @@ cd <APP_DIR>
 # Stop the old nohup process first (find it with: pgrep -af "dist/index.js"), then:
 npm ci
 npm run build
-CHRONEY_ENV_FILE=<ENV_FILE> pm2 start ecosystem.config.cjs --env production
-# (Option B: leave out the CHRONEY_ENV_FILE=... prefix)
+ORVEY_ENV_FILE=<ENV_FILE> pm2 start ecosystem.config.cjs --env production
+# (Option B: leave out the ORVEY_ENV_FILE=... prefix)
 
-pm2 status                        # "chroney" should be "online"
+pm2 status                        # "orvey" should be "online"
 curl -s localhost:<PORT>/health/ready   # {"status":"ok",... "database":{"ok":true}...}
 ```
 
@@ -78,7 +78,7 @@ cd <APP_DIR>
 git pull
 npm ci
 npm run build
-CHRONEY_ENV_FILE=<ENV_FILE> pm2 reload chroney --update-env
+ORVEY_ENV_FILE=<ENV_FILE> pm2 reload orvey --update-env
 curl -s localhost:<PORT>/health/ready
 ```
 
@@ -91,22 +91,22 @@ cluster mode: the schedulers (campaigns, backups, CRM retries, TopScholar poller
 If you edited `ecosystem.config.cjs` itself, apply it with:
 
 ```bash
-pm2 delete chroney && CHRONEY_ENV_FILE=<ENV_FILE> pm2 start ecosystem.config.cjs --env production && pm2 save
+pm2 delete orvey && ORVEY_ENV_FILE=<ENV_FILE> pm2 start ecosystem.config.cjs --env production && pm2 save
 ```
 
 ## 5. Logs and status
 
 ```bash
-pm2 logs chroney                  # follow the live output (stdout + stderr)
-pm2 logs chroney --lines 500      # show the last 500 lines
-pm2 logs chroney --err            # errors only
+pm2 logs orvey                  # follow the live output (stdout + stderr)
+pm2 logs orvey --lines 500      # show the last 500 lines
+pm2 logs orvey --err            # errors only
 pm2 monit                         # CPU / memory dashboard
-pm2 describe chroney              # restarts, uptime, log file paths
-ls ~/.pm2/logs/                   # chroney-out.log, chroney-error.log (rotated by pm2-logrotate)
+pm2 describe orvey              # restarts, uptime, log file paths
+ls ~/.pm2/logs/                   # orvey-out.log, orvey-error.log (rotated by pm2-logrotate)
 ```
 
 To find crashes and restarts, search the logs for `[Process] Uncaught exception`,
-`[Shutdown]` and `[Boot] AI Chroney server starting`. `pm2 describe chroney` shows the restart count.
+`[Shutdown]` and `[Boot] Orvey server starting`. `pm2 describe orvey` shows the restart count.
 
 ## 6. Health checks
 
@@ -117,7 +117,7 @@ To find crashes and restarts, search the logs for `[Process] Uncaught exception`
 ## 7. Stop or restart manually
 
 ```bash
-pm2 restart chroney               # graceful: SIGINT first, then SIGKILL after 35 s if it still hasn't exited
-pm2 stop chroney
-pm2 start chroney
+pm2 restart orvey               # graceful: SIGINT first, then SIGKILL after 35 s if it still hasn't exited
+pm2 stop orvey
+pm2 start orvey
 ```
